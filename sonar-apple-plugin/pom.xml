@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    sonar-apple-plugin - Enables analysis of Swift and Objective-C projects into SonarQube.
+    Copyright © 2022 inside|app (${email})
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <artifactId>sonar-apple</artifactId>
+        <groupId>fr.insideapp.sonarqube</groupId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sonar-apple-plugin</artifactId>
+
+    <packaging>sonar-plugin</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>fr.insideapp.sonarqube</groupId>
+            <artifactId>swift-lang</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.21.0.505</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <pluginKey>sonar-apple</pluginKey>
+                    <pluginClass>fr.insideapp.sonaqube.apple.ApplePlugin</pluginClass>
+                    <pluginName>Swift/Objective-C Code Quality and Security</pluginName>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>deploy</id>
+                        <phase>install</phase>
+                        <configuration>
+                            <target>
+                                <ant antfile="ant.xml" target="deploy"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
+
+    </build>
+
+</project>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Apple SonarQube Plugin - Enables analysis of Swift and Objective-C projects into SonarQube.
+    Copyright © 2022 inside|app (${email})
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.insideapp.sonarqube</groupId>
+    <artifactId>sonar-apple</artifactId>
+    <version>0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>Apple SonarQube Plugin</name>
+    <description>Enables analysis of Swift and Objective-C projects into SonarQube.</description>
+    <url>https://github.com/insideapp-oss/sonar-apple</url>
+
+    <modules>
+        <module>swift-lang</module>
+        <module>sonar-apple-plugin</module>
+    </modules>
+
+    <inceptionYear>2022</inceptionYear>
+    <organization>
+        <name>inside|app</name>
+        <url>https://github.com/insideapp-oss</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>GNU LGPL 3</name>
+            <url>http://www.gnu.org/licenses/lgpl.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>JessyB</id>
+            <name>Jessy Bonnotte</name>
+            <organization>inside|app</organization>
+        </developer>
+        <developer>
+            <id>gaelfoppolo</id>
+            <name>Gaël Foppolo</name>
+            <organization>inside|app</organization>
+        </developer>
+        <developer>
+            <id>zippy1978</id>
+            <name>Gilles Grousset</name>
+            <organization>inside|app</organization>
+        </developer>
+        <developer>
+            <id>davidy4ng</id>
+            <name>David Yang</name>
+            <organization>inside|app</organization>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:insideapp-oss/sonar-apple.git</connection>
+        <developerConnection>scm:git:git@github.com:insideapp-oss/sonar-apple.git</developerConnection>
+        <url>https://github.com/insideapp-oss/sonar-apple</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <license.owner>inside|app</license.owner>
+        <license.title>SonarQube Apple Plugin</license.title>
+        <license.mailto>contact@insideapp.fr</license.mailto>
+
+        <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+        <jdk.min.version>1.8</jdk.min.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonar.apiVersion>7.9</sonar.apiVersion>
+        <sonar.sources>src/main/java,src/main/js</sonar.sources>
+
+        <apache-commons.version>2.6</apache-commons.version>
+        <junit.version>4.11</junit.version>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.apiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${apache-commons.version}</version>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-testing-harness</artifactId>
+            <version>${sonar.apiVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${jdk.min.version}</source>
+                    <target>${jdk.min.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/generated/**</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- Attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>4.1</version>
+                <configuration>
+                    <properties>
+                        <license.years>${project.inceptionYear}</license.years>
+                    </properties>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+                <configuration>
+                    <forkCount>0</forkCount>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
