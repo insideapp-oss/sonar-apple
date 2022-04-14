@@ -20,6 +20,10 @@
 package fr.insideapp.sonaqube.apple;
 
 import fr.insideapp.sonarqube.swift.lang.Swift;
+import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
+import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
+import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
+import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
 import org.sonar.api.Plugin;
 
 public class ApplePlugin implements Plugin {
@@ -28,7 +32,9 @@ public class ApplePlugin implements Plugin {
     public void define(Context context) {
 
         // Language support
-        context.addExtension(Swift.class);
+        context.addExtensions(Swift.class, SwiftSensor.class , SwiftProfile.class);
 
+        // SwiftLint
+        context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
     }
 }

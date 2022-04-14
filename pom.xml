@@ -93,7 +93,14 @@
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
 
         <apache-commons.version>2.6</apache-commons.version>
+        <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
+        <sslr.version>1.23</sslr.version>
+        <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
+        <guava.version>17.0</guava.version>
+
         <junit.version>4.11</junit.version>
+        <assertj.version>3.5.2</assertj.version>
+        <mockito.version>4.4.0</mockito.version>
 
     </properties>
 
@@ -109,6 +116,62 @@
             <artifactId>commons-lang</artifactId>
             <version>${apache-commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-analyzer-test-commons</artifactId>
+            <version>${analyzer-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-analyzer-commons</artifactId>
+            <version>${analyzer-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-xml-parsing</artifactId>
+            <version>${analyzer-commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sslr</groupId>
+            <artifactId>sslr-core</artifactId>
+            <version>${sslr.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.sslr-squid-bridge</groupId>
+            <artifactId>sslr-squid-bridge</artifactId>
+            <version>${sslr-squid-bridge.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.sonar.sslr</groupId>
+                    <artifactId>sslr-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.sonar.sslr</groupId>
+                    <artifactId>sslr-xpath</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.sonar</groupId>
+                    <artifactId>sonar-plugin-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.picocontainer</groupId>
+                    <artifactId>picocontainer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- Test dependencies -->
         <dependency>
@@ -121,6 +184,18 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
 
