@@ -15,23 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import org.sonar.api.config.Configuration;
-import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.api.internal.apachecommons.io.IOUtils;
 
-public class Swift extends AbstractLanguage {
+import java.io.IOException;
+import java.nio.charset.Charset;
 
-    public static final String KEY = "swift";
-    private final Configuration config;
+public class AntlrUtils {
 
-    public Swift(Configuration config) {
-        super(KEY, "Swift");
-        this.config = config;
+    public static AntlrContext getRequest(String text) throws IOException {
+        return AntlrContext.fromStreams(null, IOUtils.toInputStream(text, Charset.defaultCharset()),
+                IOUtils.toInputStream(text, Charset.defaultCharset()), Charset.defaultCharset());
+
     }
 
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
-    }
 }

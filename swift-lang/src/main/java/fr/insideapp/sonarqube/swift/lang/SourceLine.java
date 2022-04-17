@@ -17,21 +17,40 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
-import org.sonar.api.config.Configuration;
-import org.sonar.api.resources.AbstractLanguage;
+public final class SourceLine {
 
-public class Swift extends AbstractLanguage {
+    private final int count;
+    private final int start;
+    private final int end;
+    private final int line;
 
-    public static final String KEY = "swift";
-    private final Configuration config;
+    public SourceLine(final int line, final int count, final int start, final int end) {
+        this.line = line;
+        this.count = count;
+        this.start = start;
+        this.end = end;
 
-    public Swift(Configuration config) {
-        super(KEY, "Swift");
-        this.config = config;
     }
 
     @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+    public String toString() {
+        return "SourceLine [line=" + line + ", count=" + count + ", start=" + start + ", end=" + end + "]";
     }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
 }

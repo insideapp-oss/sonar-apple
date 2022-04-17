@@ -17,21 +17,19 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
-import org.sonar.api.config.Configuration;
-import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
-public class Swift extends AbstractLanguage {
+public class SwiftSensor implements Sensor {
 
-    public static final String KEY = "swift";
-    private final Configuration config;
+    @Override
+    public void describe(SensorDescriptor sensorDescriptor) {
 
-    public Swift(Configuration config) {
-        super(KEY, "Swift");
-        this.config = config;
     }
 
     @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+    public void execute(SensorContext sensorContext) {
+
     }
 }

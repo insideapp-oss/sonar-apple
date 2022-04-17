@@ -15,23 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import org.sonar.api.config.Configuration;
-import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
-public class Swift extends AbstractLanguage {
+public class SwiftLintSensor implements Sensor {
+    @Override
+    public void describe(SensorDescriptor sensorDescriptor) {
 
-    public static final String KEY = "swift";
-    private final Configuration config;
-
-    public Swift(Configuration config) {
-        super(KEY, "Swift");
-        this.config = config;
     }
 
     @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+    public void execute(SensorContext sensorContext) {
+
     }
 }

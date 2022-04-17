@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    swift-lang - Enables analysis of Swift and Objective-C projects into SonarQube.
-    Copyright © 2022 inside|app (${email})
+    SonarQube Apple Plugin - Enables analysis of Swift and Objective-C projects into SonarQube.
+    Copyright © 2022 inside|app (contact@insideapp.fr)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.8-1</version>
+            <version>4.10</version>
         </dependency>
     </dependencies>
 
