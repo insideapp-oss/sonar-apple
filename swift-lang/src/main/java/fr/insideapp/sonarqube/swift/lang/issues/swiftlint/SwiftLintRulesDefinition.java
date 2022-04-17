@@ -19,19 +19,16 @@ package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.swift.lang.Swift;
 
+import fr.insideapp.sonarqube.swift.lang.issues.RepositoryRule;
+import fr.insideapp.sonarqube.swift.lang.issues.RepositoryRuleParser;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonar.squidbridge.rules.SqaleXmlLoader;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONArray;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONObject;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONValue;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 public class SwiftLintRulesDefinition implements RulesDefinition {
 
@@ -40,27 +37,49 @@ public class SwiftLintRulesDefinition implements RulesDefinition {
     private static final String RULES_FILE = "/fr/insideapp/sonarqube/swift/swiftlint/rules.json";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
+    private final SonarRuntime sonarRuntime;
+
+    public SwiftLintRulesDefinition(SonarRuntime sonarRuntime) {
+        this.sonarRuntime = sonarRuntime;
+    }
+
     @Override
     public void define(Context context) {
         NewRepository repository = context.createRepository(REPOSITORY_KEY, Swift.KEY).setName(REPOSITORY_NAME);
+        RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
+        try {
+            ArrayList<RepositoryRule> repositoryRules = repositoryRuleParser.parse("/swiftlint-rules.json");
+            for (RepositoryRule r : repositoryRules) {
 
-        try(Reader reader = new InputStreamReader(getClass().getResourceAsStream(RULES_FILE), Charset.forName("UTF-8"))){
-            JSONArray slRules = (JSONArray) JSONValue.parse(reader);
-            if(slRules != null){
-                for (Object obj : slRules) {
-                    JSONObject slRule = (JSONObject) obj;
-                    repository.createRule((String) slRule.get("key"))
-                        .setName((String) slRule.get("name"))
-                        .setSeverity((String) slRule.get("severity"))
-                        // FIXME : add type from file when available !
-                        .setType(RuleType.valueOf("CODE_SMELL"))
-                        .setHtmlDescription((String) slRule.get("description"));
+                String type = r.getType();
+                if (type == null) {
+                    type = "CODE_SMELL";
+                    LOGGER.warn(String.format("Rule %s has no type, using CODE_SMELL as default", r.getKey()));
                 }
+
+                String severity = r.getSeverity();
+                if (severity == null) {
+                    severity = "MAJOR";
+                    LOGGER.warn(String.format("Rule %s has no severity, using MAJOR as default", r.getKey()));
+                }
+
+                NewRule nr = repository.createRule(r.getKey())
+                        .setName(r.getName())
+                        .setSeverity(severity)
+                        .setType(RuleType.valueOf(type))
+                        .setHtmlDescription(r.getDescription());
+
+                if (r.getDebt() != null) {
+                    nr.setDebtRemediationFunction(nr.debtRemediationFunctions().constantPerIssue(r.getDebt().getOffset()));
+                } else {
+                    LOGGER.warn(String.format("Rule %s has no debt information", r.getKey()));
+                }
+
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load SwiftLint rules", e);
         }
-        SqaleXmlLoader.load(repository, "/fr/insideapp/sonarqube/swift/swiftlint/model.xml");
+
         repository.done();
     }
 }

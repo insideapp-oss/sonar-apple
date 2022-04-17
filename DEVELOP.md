@@ -37,3 +37,19 @@ When started locally SonarQube UI is available at http://localhost:9000
 ```bash
 $ mvn package
 ```
+
+## Updating rules
+
+The plugin rules are based on external linters such as SwiftLint.
+
+When a new version of the linter (with new rules) is released, the matching repositoryRule repository must be updated as well in order to include the new rules.
+
+This update is mostly automatic with the execution of a Groovy script.
+
+### SwitLint update
+
+Use the following command to update the SwiftLint rules file:
+
+```bash
+$ mvn groovy:execute -Dsource=scripts/updateSwiftLintRules.groovy
+```
