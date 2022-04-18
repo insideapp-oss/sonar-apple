@@ -27,7 +27,6 @@ jobs:
 #        token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Analyze
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
