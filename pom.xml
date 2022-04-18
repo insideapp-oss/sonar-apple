@@ -102,6 +102,8 @@
         <assertj.version>3.5.2</assertj.version>
         <mockito.version>4.4.0</mockito.version>
 
+        <sonar.exclusions>file:**/src/main/java/**/generated/**/*.java</sonar.exclusions>
+
     </properties>
 
     <dependencies>

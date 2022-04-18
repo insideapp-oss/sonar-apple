@@ -16,14 +16,25 @@ jobs:
       with:
         java-version: 1.11
 
-    - name: Build with Maven
+    - name: Build
       run: mvn -B package --file pom.xml
 
-    - name: Upload coverage to Codecov
+# Redundant with SonarQube analysis
+#    - name: Upload coverage to Codecov
+#      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+#      uses: codecov/codecov-action@v1
+#      with:
+#        token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Analyze
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }} #required
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+        -Dsonar.login=$SONAR_TOKEN \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.organization=insideapp-oss \
+        -Dsonar.projectKey=insideapp-oss_sonar-apple
 
     - name: Read version
         shell: bash
