@@ -257,7 +257,7 @@
                     </properties>
                 </configuration>
             </plugin>
-            
+
         </plugins>
     </build>
 

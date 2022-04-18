@@ -1,3 +1,8 @@
+
+![CI](https://github.com/insideapp-oss/sonar-flutter/workflows/CI/badge.svg)
+![Coverage](https://codecov.io/gh/insideapp-oss/sonar-apple/branch/main/graph/badge.svg)
+
+
 # SonarQube plugin for Swift / Objective-C
 
 A plugin to enable analysis of Swift and Objective-C code quality and security.
