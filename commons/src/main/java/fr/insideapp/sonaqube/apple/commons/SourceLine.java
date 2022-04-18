@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonaqube.apple.commons;
 
 public final class SourceLine {
 

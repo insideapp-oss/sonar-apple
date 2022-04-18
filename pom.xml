@@ -33,6 +33,7 @@
     <url>https://github.com/insideapp-oss/sonar-apple</url>
 
     <modules>
+        <module>commons</module>
         <module>swift-lang</module>
         <module>sonar-apple-plugin</module>
     </modules>

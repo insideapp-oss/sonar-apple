@@ -23,7 +23,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SwiftProfile implements BuiltInQualityProfilesDefinition {

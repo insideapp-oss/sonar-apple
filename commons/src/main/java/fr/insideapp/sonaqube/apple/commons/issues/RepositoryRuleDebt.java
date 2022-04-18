@@ -15,27 +15,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues;
+package fr.insideapp.sonaqube.apple.commons.issues;
 
-import org.junit.Test;
+public class RepositoryRuleDebt {
 
-import static org.assertj.core.api.Assertions.assertThat;
+    private final String function;
+    private final String offset;
 
-public class ReportIssueTest {
-
-    @Test
-    public void equals() {
-        ReportIssue issue1 = new ReportIssue("1", "msg", "/test/path", 20);
-        ReportIssue issue2 = new ReportIssue("1", "msg", "/test/path", 20);
-
-        assertThat(issue1).isEqualTo(issue2);
+    public RepositoryRuleDebt(final String function, final String offset) {
+        this.function = function;
+        this.offset = offset;
     }
 
-    @Test
-    public void notEqual() {
-        ReportIssue issue1 = new ReportIssue("1", "msg", "/test/path", 20);
-        ReportIssue issue2 = new ReportIssue("2", "msg", "/test/path", 20);
+    public String getFunction() {
+        return function;
+    }
 
-        assertThat(issue1).isNotEqualTo(issue2);
+    public String getOffset() {
+        return offset;
     }
 }

@@ -15,11 +15,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
+import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRule;
+import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRuleParser;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

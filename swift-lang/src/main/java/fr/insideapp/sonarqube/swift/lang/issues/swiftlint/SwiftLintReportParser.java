@@ -19,13 +19,10 @@ package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.swift.lang.issues.ReportIssue;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class SwiftLintReportParser {
 

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues;
+package fr.insideapp.sonaqube.apple.commons.issues;
 
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class RepositoryRuleParser {
         if (is == null) {
             throw new IOException(String.format("JSON rule file not found in resources at %s", resourceName));
         }
-        Reader reader = new InputStreamReader(is, Charset.forName("UTF-8"));
+        Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
         List<RepositoryRule> repositoryRules = new ArrayList<>();
         JSONArray jsonRules = (JSONArray) JSONValue.parse(reader);
         if (jsonRules != null) {
