@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.swift.lang.issues;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +30,7 @@ public class RepositoryRuleParserTest {
     public void parse() throws Throwable {
 
         RepositoryRuleParser parser = new RepositoryRuleParser();
-        ArrayList<RepositoryRule> repositoryRules = parser.parse("/rules/rules.json");
+        List<RepositoryRule> repositoryRules = parser.parse("/rules/rules.json");
         assertThat(repositoryRules.size()).isEqualTo(2);
 
         RepositoryRule repositoryRule1 = repositoryRules.get(0);

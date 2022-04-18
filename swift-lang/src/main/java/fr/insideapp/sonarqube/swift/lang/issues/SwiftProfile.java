@@ -24,6 +24,7 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
@@ -38,7 +39,7 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
         // SwiftLint rules
         try {
             RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
-            ArrayList<RepositoryRule> rules = repositoryRuleParser.parse(SWIFTLINT_RULES_PATH);
+            List<RepositoryRule> rules = repositoryRuleParser.parse(SWIFTLINT_RULES_PATH);
             for (RepositoryRule r: rules) {
                 NewBuiltInActiveRule rule1 = profile.activateRule("SwiftLint",r.getKey());
                 rule1.overrideSeverity(r.getSeverity());

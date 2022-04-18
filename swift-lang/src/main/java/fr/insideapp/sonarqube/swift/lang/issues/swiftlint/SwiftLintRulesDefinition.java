@@ -29,12 +29,12 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SwiftLintRulesDefinition implements RulesDefinition {
 
     private static final Logger LOGGER = Loggers.get(SwiftLintRulesDefinition.class);
     public static final String REPOSITORY_KEY = "SwiftLint";
-    private static final String RULES_FILE = "/fr/insideapp/sonarqube/swift/swiftlint/rules.json";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
     private final SonarRuntime sonarRuntime;
@@ -48,7 +48,7 @@ public class SwiftLintRulesDefinition implements RulesDefinition {
         NewRepository repository = context.createRepository(REPOSITORY_KEY, Swift.KEY).setName(REPOSITORY_NAME);
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
         try {
-            ArrayList<RepositoryRule> repositoryRules = repositoryRuleParser.parse("/swiftlint-rules.json");
+            List<RepositoryRule> repositoryRules = repositoryRuleParser.parse("/swiftlint-rules.json");
             for (RepositoryRule r : repositoryRules) {
 
                 String type = r.getType();
