@@ -31,7 +31,7 @@ public class SwiftLintReportParser {
         List<ReportIssue> issues = new ArrayList<>();
 
         String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(.*.swift):(\\w+):?(\\w+)?: (warning|error): (.*) \\((\\w+)");
+        Pattern pattern = Pattern.compile("(.*.swift):(\\w+):(\\w+): (warning|error): (.*) \\((\\w+)\\)");
         for (int i = 0; i < lines.length; i++) {
             Matcher matcher = pattern.matcher(lines[i]);
             while (matcher.find()) {
