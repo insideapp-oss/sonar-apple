@@ -7,7 +7,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "array_init",
@@ -17,7 +18,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "attributes",
@@ -27,7 +29,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "block_based_kvo",
@@ -37,7 +40,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "class_delegate_protocol",
@@ -47,7 +51,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "closing_brace",
@@ -57,13 +62,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "closure_body_length",
         "name": "Closure Body Length",
         "severity": "MAJOR",
-        "description": "Closure bodies should not span too many lines."
+        "description": "Closure bodies should not span too many lines.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "10min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "closure_end_indentation",
@@ -73,7 +84,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "closure_parameter_position",
@@ -83,7 +95,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "closure_spacing",
@@ -93,13 +106,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "collection_alignment",
         "name": "Collection Element Alignment",
         "severity": "MINOR",
-        "description": "All elements in a collection literal should be vertically aligned"
+        "description": "All elements in a collection literal should be vertically aligned",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "colon",
@@ -109,7 +128,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "comma",
@@ -119,7 +139,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "compiler_protocol_init",
@@ -129,7 +150,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "conditional_returns_on_newline",
@@ -139,7 +161,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "contains_over_filter_count",
@@ -149,7 +172,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "contains_over_filter_is_empty",
@@ -159,7 +183,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "contains_over_first_not_nil",
@@ -169,7 +194,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "control_statement",
@@ -179,7 +205,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "convenience_type",
@@ -189,13 +216,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "custom_rules",
         "name": "Customs",
         "severity": "MINOR",
-        "description": "Create custom rules by providing a regex string. Optionally specify what syntax kinds to match against, the severity level, and what message to display."
+        "description": "Create custom rules by providing a regex string. Optionally specify what syntax kinds to match against, the severity level, and what message to display.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "cyclomatic_complexity",
@@ -205,13 +238,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "30min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "deployment_target",
         "name": "Deployment Target",
         "severity": "MINOR",
-        "description": "Availability checks or attributes shouldn't be using older versions that are satisfied by the deployment target."
+        "description": "Availability checks or attributes shouldn't be using older versions that are satisfied by the deployment target.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "discarded_notification_center_observer",
@@ -221,7 +260,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "discouraged_direct_init",
@@ -231,7 +271,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "discouraged_object_literal",
@@ -241,7 +282,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "discouraged_optional_boolean",
@@ -251,7 +293,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "discouraged_optional_collection",
@@ -261,7 +304,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "duplicate_enum_cases",
@@ -271,13 +315,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "duplicate_imports",
         "name": "Duplicate Imports",
         "severity": "MINOR",
-        "description": "Imports should be unique."
+        "description": "Imports should be unique.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "dynamic_inline",
@@ -287,7 +337,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "empty_collection_literal",
@@ -297,7 +348,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "empty_count",
@@ -307,7 +359,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "empty_enum_arguments",
@@ -317,7 +370,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "empty_parameters",
@@ -327,7 +381,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "empty_parentheses_with_trailing_closure",
@@ -337,7 +392,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "empty_string",
@@ -347,7 +403,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "empty_xctest_method",
@@ -357,7 +414,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "explicit_acl",
@@ -367,7 +425,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "explicit_enum_raw_value",
@@ -377,7 +436,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "explicit_init",
@@ -387,13 +447,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "explicit_self",
         "name": "Explicit Self",
         "severity": "MINOR",
-        "description": "Instance variables and functions should be explicitly accessed with 'self.'."
+        "description": "Instance variables and functions should be explicitly accessed with 'self.'.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "explicit_top_level_acl",
@@ -403,7 +469,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "explicit_type_interface",
@@ -413,7 +480,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "extension_access_modifier",
@@ -423,7 +491,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "fallthrough",
@@ -433,7 +502,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "fatal_error_message",
@@ -443,7 +513,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "file_header",
@@ -453,7 +524,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "file_length",
@@ -463,7 +535,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "30min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "file_name",
@@ -473,7 +546,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "file_types_order",
@@ -483,7 +557,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "first_where",
@@ -493,7 +568,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "for_where",
@@ -503,7 +579,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "force_cast",
@@ -513,7 +590,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "force_try",
@@ -523,7 +601,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "force_unwrapping",
@@ -533,7 +612,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "function_body_length",
@@ -543,7 +623,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "30min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "function_default_parameter_at_end",
@@ -553,7 +634,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "function_parameter_count",
@@ -563,7 +645,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "30min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "generic_type_name",
@@ -573,13 +656,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "identical_operands",
         "name": "Identical Operands",
         "severity": "MINOR",
-        "description": "Comparing two identical operands is likely a mistake."
+        "description": "Comparing two identical operands is likely a mistake.",
+        "type": "BUG",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "identifier_name",
@@ -589,7 +678,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "implicit_getter",
@@ -599,7 +689,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "implicit_return",
@@ -609,7 +700,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "implicitly_unwrapped_optional",
@@ -619,13 +711,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "inert_defer",
         "name": "Inert Defer",
         "severity": "MINOR",
-        "description": "If defer is at the end of its parent scope, it will be executed right where it is anyway."
+        "description": "If defer is at the end of its parent scope, it will be executed right where it is anyway.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "is_disjoint",
@@ -635,7 +733,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "joined_default_parameter",
@@ -645,7 +744,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "large_tuple",
@@ -655,13 +755,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "last_where",
         "name": "Last Where",
         "severity": "MINOR",
-        "description": "Prefer using `.last(where:)` over `.filter { }.last` in collections."
+        "description": "Prefer using `.last(where:)` over `.filter { }.last` in collections.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "leading_whitespace",
@@ -671,7 +777,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "legacy_cggeometry_functions",
@@ -681,7 +788,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "legacy_constant",
@@ -691,7 +799,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "legacy_constructor",
@@ -701,13 +810,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "legacy_hashing",
         "name": "Legacy Hashing",
         "severity": "MINOR",
-        "description": "Prefer using the `hash(into:)` function instead of overriding `hashValue`"
+        "description": "Prefer using the `hash(into:)` function instead of overriding `hashValue`",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "legacy_multiple",
@@ -717,7 +832,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "legacy_nsgeometry_functions",
@@ -727,13 +843,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "legacy_random",
         "name": "Legacy Random",
         "severity": "MINOR",
-        "description": "Prefer using `type.random(in:)` over legacy functions."
+        "description": "Prefer using `type.random(in:)` over legacy functions.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "let_var_whitespace",
@@ -743,7 +865,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "line_length",
@@ -753,7 +876,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "literal_expression_end_indentation",
@@ -763,7 +887,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "lower_acl_than_parent",
@@ -773,7 +898,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "mark",
@@ -783,7 +909,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "missing_docs",
@@ -793,7 +920,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "modifier_order",
@@ -803,7 +931,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "multiline_arguments",
@@ -813,13 +942,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "multiline_arguments_brackets",
         "name": "Multiline Arguments Brackets",
         "severity": "MINOR",
-        "description": "Multiline arguments should have their surrounding brackets in a new line."
+        "description": "Multiline arguments should have their surrounding brackets in a new line.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "multiline_function_chains",
@@ -829,25 +964,41 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "multiline_literal_brackets",
         "name": "Multiline Literal Brackets",
         "severity": "MINOR",
-        "description": "Multiline literals should have their surrounding brackets in a new line."
+        "description": "Multiline literals should have their surrounding brackets in a new line.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "multiline_parameters",
         "name": "Multiline Parameters",
         "severity": "MINOR",
-        "description": "Functions and methods parameters should be either on the same line, or one per line."
+        "description": "Functions and methods parameters should be either on the same line, or one per line.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "multiline_parameters_brackets",
         "name": "Multiline Parameters Brackets",
         "severity": "MINOR",
-        "description": "Multiline parameters should have their surrounding brackets in a new line."
+        "description": "Multiline parameters should have their surrounding brackets in a new line.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "multiple_closures_with_trailing_closure",
@@ -857,7 +1008,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "nesting",
@@ -867,7 +1019,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "30min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "nimble_operator",
@@ -877,7 +1030,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "no_extension_access_modifier",
@@ -887,7 +1041,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "no_fallthrough_only",
@@ -897,7 +1052,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "no_grouping_extension",
@@ -907,7 +1063,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "no_space_in_method_call",
@@ -917,7 +1074,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "notification_center_detachment",
@@ -927,13 +1085,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "nslocalizedstring_key",
         "name": "NSLocalizedString Key",
         "severity": "MINOR",
-        "description": "Static strings should be used as key in NSLocalizedString in order to genstrings work."
+        "description": "Static strings should be used as key in NSLocalizedString in order to genstrings work.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "nslocalizedstring_require_bundle",
@@ -943,7 +1107,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "nsobject_prefer_isequal",
@@ -953,7 +1118,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "number_separator",
@@ -963,7 +1129,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "object_literal",
@@ -973,7 +1140,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "opening_brace",
@@ -983,7 +1151,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "operator_usage_whitespace",
@@ -993,7 +1162,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "operator_whitespace",
@@ -1003,7 +1173,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "overridden_super_call",
@@ -1013,7 +1184,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "override_in_extension",
@@ -1023,7 +1195,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "pattern_matching_keywords",
@@ -1033,7 +1206,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "prefixed_toplevel_constant",
@@ -1043,7 +1217,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "private_action",
@@ -1053,7 +1228,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "private_outlet",
@@ -1063,7 +1239,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "private_over_fileprivate",
@@ -1073,7 +1250,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "private_unit_test",
@@ -1083,13 +1261,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "prohibited_interface_builder",
         "name": "Prohibited Interface Builder",
         "severity": "MINOR",
-        "description": "Creating views using Interface Builder should be avoided."
+        "description": "Creating views using Interface Builder should be avoided.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "15min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "prohibited_super_call",
@@ -1099,7 +1283,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "protocol_property_accessors_order",
@@ -1109,7 +1294,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "quick_discouraged_call",
@@ -1119,7 +1305,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "quick_discouraged_focused_test",
@@ -1129,7 +1316,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "quick_discouraged_pending_test",
@@ -1139,7 +1327,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "reduce_boolean",
@@ -1149,7 +1338,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "reduce_into",
@@ -1159,7 +1349,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "redundant_discardable_let",
@@ -1169,7 +1360,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "redundant_nil_coalescing",
@@ -1179,13 +1371,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "redundant_objc_attribute",
         "name": "Redundant @objc Attribute",
         "severity": "MINOR",
-        "description": "Objective-C attribute (@objc) is redundant in declaration."
+        "description": "Objective-C attribute (@objc) is redundant in declaration.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "redundant_optional_initialization",
@@ -1195,7 +1393,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "redundant_set_access_control",
@@ -1205,7 +1404,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "redundant_string_enum_value",
@@ -1215,13 +1415,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "redundant_type_annotation",
         "name": "Redundant Type Annotation",
         "severity": "MINOR",
-        "description": "Variables should not have redundant type annotation"
+        "description": "Variables should not have redundant type annotation",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "redundant_void_return",
@@ -1231,13 +1437,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "required_deinit",
         "name": "Required Deinit",
         "severity": "MINOR",
-        "description": "Classes should have an explicit deinit method."
+        "description": "Classes should have an explicit deinit method.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "required_enum_case",
@@ -1247,7 +1459,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "return_arrow_whitespace",
@@ -1257,7 +1470,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "shorthand_operator",
@@ -1267,7 +1481,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "single_test_class",
@@ -1277,7 +1492,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "sorted_first_last",
@@ -1287,7 +1503,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "sorted_imports",
@@ -1297,7 +1514,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "statement_position",
@@ -1307,13 +1525,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "static_operator",
         "name": "Static Operator",
         "severity": "MINOR",
-        "description": "Operators should be declared as static functions, not free functions."
+        "description": "Operators should be declared as static functions, not free functions.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "10min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "strict_fileprivate",
@@ -1323,13 +1547,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "strong_iboutlet",
         "name": "Strong IBOutlet",
         "severity": "MINOR",
-        "description": "@IBOutlets shouldn't be declared as weak."
+        "description": "@IBOutlets shouldn't be declared as weak.",
+        "type": "BUG",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "superfluous_disable_command",
@@ -1339,7 +1569,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "switch_case_alignment",
@@ -1349,7 +1580,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "switch_case_on_newline",
@@ -1359,7 +1591,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "syntactic_sugar",
@@ -1369,7 +1602,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "todo",
@@ -1379,13 +1613,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "toggle_bool",
         "name": "Toggle Bool",
         "severity": "MINOR",
-        "description": "Prefer `someBool.toggle()` over `someBool = !someBool`."
+        "description": "Prefer `someBool.toggle()` over `someBool = !someBool`.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "trailing_closure",
@@ -1395,7 +1635,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "trailing_comma",
@@ -1405,7 +1646,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "trailing_newline",
@@ -1415,7 +1657,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "trailing_semicolon",
@@ -1425,7 +1668,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "trailing_whitespace",
@@ -1435,7 +1679,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "type_body_length",
@@ -1445,7 +1690,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "30min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "type_contents_order",
@@ -1455,7 +1701,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "type_name",
@@ -1465,7 +1712,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unavailable_function",
@@ -1475,7 +1723,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unneeded_break_in_switch",
@@ -1485,7 +1734,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unneeded_parentheses_in_closure_argument",
@@ -1495,7 +1745,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unowned_variable_capture",
@@ -1505,7 +1756,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "untyped_error_in_catch",
@@ -1515,7 +1767,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unused_capture_list",
@@ -1525,7 +1778,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unused_closure_parameter",
@@ -1535,13 +1789,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unused_control_flow_label",
         "name": "Unused Control Flow Label",
         "severity": "MINOR",
-        "description": "Unused control flow label should be removed."
+        "description": "Unused control flow label should be removed.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "unused_declaration",
@@ -1551,7 +1811,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "unused_enumerated",
@@ -1561,13 +1822,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unused_import",
         "name": "Unused Import",
         "severity": "MINOR",
-        "description": "All imported modules should be required to make the file compile."
+        "description": "All imported modules should be required to make the file compile.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "unused_optional_binding",
@@ -1577,13 +1844,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "unused_setter_value",
         "name": "Unused Setter Value",
         "severity": "MINOR",
-        "description": "Setter value is not used."
+        "description": "Setter value is not used.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "valid_ibinspectable",
@@ -1593,7 +1866,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "vertical_parameter_alignment",
@@ -1603,13 +1877,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "vertical_parameter_alignment_on_call",
         "name": "Vertical Parameter Alignment On Call",
         "severity": "MINOR",
-        "description": "Function parameters should be aligned vertically if they're in multiple lines in a method call."
+        "description": "Function parameters should be aligned vertically if they're in multiple lines in a method call.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "vertical_whitespace",
@@ -1619,25 +1899,41 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "vertical_whitespace_between_cases",
         "name": "Vertical Whitespace Between Cases",
         "severity": "MINOR",
-        "description": "Include a single empty line between switch cases."
+        "description": "Include a single empty line between switch cases.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "vertical_whitespace_closing_braces",
         "name": "Vertical Whitespace before Closing Braces",
         "severity": "MINOR",
-        "description": "Don't include vertical whitespace (empty line) before closing braces."
+        "description": "Don't include vertical whitespace (empty line) before closing braces.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "vertical_whitespace_opening_braces",
         "name": "Vertical Whitespace after Opening Braces",
         "severity": "MINOR",
-        "description": "Don't include vertical whitespace (empty line) after opening braces."
+        "description": "Don't include vertical whitespace (empty line) after opening braces.",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "void_return",
@@ -1647,7 +1943,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "weak_delegate",
@@ -1657,13 +1954,19 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "10min"
-        }
+        },
+        "type": "BUG"
     },
     {
         "key": "xct_specific_matcher",
         "name": "XCTest Specific Matcher",
         "severity": "MINOR",
-        "description": "Prefer specific XCTest matchers over `XCTAssertEqual` and `XCTAssertNotEqual`"
+        "description": "Prefer specific XCTest matchers over `XCTAssertEqual` and `XCTAssertNotEqual`",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "xctfail_message",
@@ -1673,7 +1976,8 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
-        }
+        },
+        "type": "CODE_SMELL"
     },
     {
         "key": "yoda_condition",
@@ -1683,6 +1987,304 @@
         "debt": {
             "function": "CONSTANT_ISSUE",
             "offset": "5min"
+        },
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "anonymous_argument_in_multiline_closure",
+        "name": "Anonymous Argument in Multiline Closure",
+        "description": "Use named arguments in multiline closures",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "balanced_xctest_lifecycle",
+        "name": "Balanced XCTest life-cycle",
+        "description": "Test classes must implement balanced setUp and tearDown methods.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "capture_variable",
+        "name": "Capture Variable",
+        "description": "Non-constant variables should not be listed in a closure's capture list to avoid confusion about closures capturing variables at creation time.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "comment_spacing",
+        "name": "Comment Spacing",
+        "description": "Prefer at least one space after slashes for comments.",
+        "severity": "INFO",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "computed_accessors_order",
+        "name": "Computed Accessors Order",
+        "description": "Getter and setters in computed properties and subscripts should be in a consistent order.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "contains_over_range_nil_comparison",
+        "name": "Contains over range(of:) comparison to nil",
+        "description": "Prefer `contains` over `range(of:) != nil` and `range(of:) == nil`.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "discouraged_assert",
+        "name": "Discouraged Assert",
+        "description": "Prefer `assertionFailure()` and/or `preconditionFailure()` over `assert(false)`",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "discouraged_none_name",
+        "name": "Discouraged None Name",
+        "description": "Discourages name cases/static members `none`, which can conflict with `Optional<T>.none`.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "duplicated_key_in_dictionary_literal",
+        "name": "Duplicated Key in Dictionary Literal",
+        "description": "Dictionary literals with duplicated keys will crash in runtime.",
+        "severity": "BLOCKER",
+        "type": "BUG",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "enum_case_associated_values_count",
+        "name": "Enum Case Associated Values Count",
+        "description": "Number of associated values in an enum case should be low",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "expiring_todo",
+        "name": "ExpiringTodo",
+        "description": "TODOs and FIXMEs should be resolved prior to their expiry date.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "10min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "file_name_no_space",
+        "name": "File Name No Space",
+        "description": "File name should not contain any whitespace.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "flatmap_over_map_reduce",
+        "name": "FlatMap over map and reduce",
+        "description": "Prefer `flatMap` over `map` followed by `reduce([], +)`.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ibinspectable_in_extension",
+        "name": "IBInspectable in Extension",
+        "description": "Extensions shouldn't add @IBInspectable properties.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "inclusive_language",
+        "name": "Inclusive Language",
+        "description": "Identifiers should use inclusive language that avoids discrimination against groups of people based on race, gender, or socioeconomic status",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "indentation_width",
+        "name": "Indentation Width",
+        "description": "Indent code using either one tab or the configured amount of spaces, unindent to match previous indentations. Don't indent the first line.",
+        "severity": "INFO",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "legacy_objc_type",
+        "name": "Legacy Objective-C Reference Type",
+        "description": "Prefer Swift value types to bridged Objective-C reference types",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "optional_enum_case_matching",
+        "name": "Optional Enum Case Match",
+        "description": "Matching an enum case against an optional enum without '?' is supported on Swift 5.1 and above.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "orphaned_doc_comment",
+        "name": "Orphaned Doc Comment",
+        "description": "A doc comment should be attached to a declaration.",
+        "severity": "INFO",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "prefer_nimble",
+        "name": "Prefer Nimble",
+        "description": "Prefer Nimble matchers over XCTAssert functions.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "prefer_self_in_static_references",
+        "name": "Prefer Self in Static References",
+        "description": "Static references should be prefixed by `Self` instead of the class name.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "prefer_self_type_over_type_of_self",
+        "name": "Prefer Self Type Over Type of Self",
+        "description": "Prefer `Self` over `type(of: self)` when accessing properties or calling methods.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "prefer_zero_over_explicit_init",
+        "name": "Prefer Zero Over Explicit Init",
+        "description": "Prefer `.zero` over explicit init with zero parameters (e.g. `CGPoint(x: 0, y: 0)`)",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "private_subject",
+        "name": "Private Combine Subject",
+        "description": "Combine Subject should be private.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "raw_value_for_camel_cased_codable_enum",
+        "name": "Raw Value For Camel Cased Codable Enum",
+        "description": "Camel cased cases of Codable String enums should have raw value.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "self_in_property_initialization",
+        "name": "Self in Property Initialization",
+        "description": "`self` refers to the unapplied `NSObject.self()` method, which is likely not expected. Make the variable `lazy` to be able to refer to the current instance or use `ClassName.self`.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "test_case_accessibility",
+        "name": "Test case accessibility",
+        "description": "Test cases should only contain private non-test members.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "1min",
+            "function": "CONSTANT_ISSUE"
         }
     }
 ]
