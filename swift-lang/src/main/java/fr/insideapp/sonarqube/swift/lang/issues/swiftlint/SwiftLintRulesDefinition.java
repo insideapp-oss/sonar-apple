@@ -17,10 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
+import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRule;
+import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 
-import fr.insideapp.sonarqube.swift.lang.issues.RepositoryRule;
-import fr.insideapp.sonarqube.swift.lang.issues.RepositoryRuleParser;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;

@@ -17,8 +17,8 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
+import fr.insideapp.sonaqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.swift.lang.Swift;
-import fr.insideapp.sonarqube.swift.lang.issues.ReportIssue;
 import org.buildobjects.process.ProcBuilder;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
