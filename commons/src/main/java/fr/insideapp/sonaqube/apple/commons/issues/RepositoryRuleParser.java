@@ -27,14 +27,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RepositoryRuleParser {
-
-    private static final Logger LOGGER = Loggers.get(RepositoryRuleParser.class);
 
     public List<RepositoryRule> parse(String resourceName) throws IOException {
         InputStream is =  getClass().getResourceAsStream(resourceName);

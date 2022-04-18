@@ -32,7 +32,7 @@ public class RepositoryRuleParserTest {
 
         RepositoryRuleParser parser = new RepositoryRuleParser();
         List<RepositoryRule> repositoryRules = parser.parse("/rules/rules.json");
-        assertThat(repositoryRules.size()).isEqualTo(2);
+        assertThat(repositoryRules).hasSize(2);
 
         RepositoryRule repositoryRule1 = repositoryRules.get(0);
         assertThat(repositoryRule1.getKey()).isEqualTo("rule1");

@@ -54,7 +54,7 @@ public class SwiftLintReportParserTest {
         SwiftLintReportParser parser = new SwiftLintReportParser();
 
         List<ReportIssue> issues = parser.parse(input);
-        assertThat(issues.size()).isEqualTo(2);
+        assertThat(issues).hasSize(2);
 
         assertFilePath(issues.get(0), FILE_PATH);
         assertLineNumber(issues.get(0), 23);

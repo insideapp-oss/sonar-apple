@@ -36,10 +36,8 @@ public class SwiftLintRulesDefinition implements RulesDefinition {
     public static final String REPOSITORY_KEY = "SwiftLint";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    private final SonarRuntime sonarRuntime;
-
     public SwiftLintRulesDefinition(SonarRuntime sonarRuntime) {
-        this.sonarRuntime = sonarRuntime;
+
     }
 
     @Override

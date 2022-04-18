@@ -87,7 +87,7 @@
         <license.mailto>contact@insideapp.fr</license.mailto>
 
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-        <jdk.min.version>1.8</jdk.min.version>
+        <jdk.min.version>1.9</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <sonar.apiVersion>7.9</sonar.apiVersion>
