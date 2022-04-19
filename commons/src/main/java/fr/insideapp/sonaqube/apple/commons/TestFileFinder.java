@@ -15,20 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.tests;
+package fr.insideapp.sonaqube.apple.commons;
 
-import org.sonar.api.batch.sensor.Sensor;
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 
-public class AppleTestSensor implements Sensor {
-    @Override
-    public void describe(SensorDescriptor sensorDescriptor) {
-
-    }
-
-    @Override
-    public void execute(SensorContext sensorContext) {
-
-    }
+public interface TestFileFinder {
+    InputFile getUnitTestResource(FileSystem fileSystem, String classname);
 }

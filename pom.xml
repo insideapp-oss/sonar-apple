@@ -94,7 +94,8 @@
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
 
         <apache-commons.version>2.6</apache-commons.version>
-        <analyzer-commons.version>1.10.2.456</analyzer-commons.version>
+        <apache-commons-lang3.version>3.12.0</apache-commons-lang3.version>
+        <analyzer-commons.version>1.24.0.965</analyzer-commons.version>
         <sslr.version>1.23</sslr.version>
         <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
         <guava.version>17.0</guava.version>
@@ -116,9 +117,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${apache-commons.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache-commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>org.sonarsource.analyzer-commons</groupId>
@@ -135,6 +136,7 @@
             <artifactId>sonar-xml-parsing</artifactId>
             <version>${analyzer-commons.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.sonarsource.sslr</groupId>
             <artifactId>sslr-core</artifactId>

@@ -41,6 +41,10 @@ The plugin was tested with Xcode 13+, but should work with older versions.
 
 Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
 
+### xcpretty and slather
+
+TODO
+
 ## Installation (on the server)
 
 SonarQube 7.9+ is required.
@@ -64,6 +68,10 @@ sonar.projectVersion=1.0
 sonar.sources=iOSApp
 sonar.tests=iOSAppTests
 
+# Path to test report (junit.xml)
+# Defaults to build/reports
+#sonar.apple.surefire.junit.reportsPath=
+
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
 ```
@@ -75,6 +83,16 @@ For a complete list of available options, please refer to the [SonarQube documen
 Use the following commands from the root folder to start an analysis:
 
 ```bash
+
+# Run tests with xcpretty to generate test report in build/reports/junit.xml
+# Don't forget to add -workspace to the build command if your project is part of a workspace
+$ xcodebuild \                                                                                     SIGINT(2) ↵   10410  13:18:29 
+  -project MyApp.xcodeproj \
+  -scheme MyApp \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
+  test | xcpretty --report junit
+  
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner
 ```
