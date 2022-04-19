@@ -15,42 +15,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.swift.lang.issues.swiftlint;
 
-public final class SourceLine {
+import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
+import org.junit.Test;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
-    private final int count;
-    private final int start;
-    private final int end;
-    private final int line;
+import static org.assertj.core.api.Assertions.assertThat;
 
-    public SourceLine(final int line, final int count, final int start, final int end) {
-        this.line = line;
-        this.count = count;
-        this.start = start;
-        this.end = end;
+public class SwiftLintSensorTest {
 
+    @Test
+    public void describe() {
+        SwiftLintSensor sensor = new SwiftLintSensor();
+        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        sensor.describe(descriptor);
+        assertThat(descriptor.name()).isEqualTo("SwiftLint sensor");
     }
-
-    @Override
-    public String toString() {
-        return "SourceLine [line=" + line + ", count=" + count + ", start=" + start + ", end=" + end + "]";
-    }
-
-    public int getLine() {
-        return line;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
 }

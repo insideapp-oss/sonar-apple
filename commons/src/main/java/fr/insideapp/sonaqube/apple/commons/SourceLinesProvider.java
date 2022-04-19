@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonaqube.apple.commons;
 
 import org.sonar.api.internal.apachecommons.io.input.BOMInputStream;
 import org.sonar.api.utils.log.Logger;
@@ -57,7 +57,7 @@ public class SourceLinesProvider {
 
             }
             sourceLines.add(new SourceLine(totalLines, count, global - count, global));
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             LOGGER.warn("Error occurred reading file", e);
         }
 

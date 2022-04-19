@@ -26,21 +26,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>swift-lang</artifactId>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>fr.insideapp.sonarqube</groupId>
-            <artifactId>commons</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr4-runtime</artifactId>
-            <version>4.10</version>
-        </dependency>
-    </dependencies>
+    <artifactId>commons</artifactId>
 
 </project>

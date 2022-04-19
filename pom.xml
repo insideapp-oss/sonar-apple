@@ -33,6 +33,7 @@
     <url>https://github.com/insideapp-oss/sonar-apple</url>
 
     <modules>
+        <module>commons</module>
         <module>swift-lang</module>
         <module>sonar-apple-plugin</module>
     </modules>
@@ -86,7 +87,7 @@
         <license.mailto>contact@insideapp.fr</license.mailto>
 
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-        <jdk.min.version>1.8</jdk.min.version>
+        <jdk.min.version>1.9</jdk.min.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <sonar.apiVersion>7.9</sonar.apiVersion>
@@ -97,6 +98,7 @@
         <sslr.version>1.23</sslr.version>
         <sslr-squid-bridge.version>2.7.1.392</sslr-squid-bridge.version>
         <guava.version>17.0</guava.version>
+        <jproc.version>2.2.3</jproc.version>
 
         <junit.version>4.11</junit.version>
         <assertj.version>3.5.2</assertj.version>
@@ -144,35 +146,9 @@
             <version>${guava.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.sonarsource.sslr-squid-bridge</groupId>
-            <artifactId>sslr-squid-bridge</artifactId>
-            <version>${sslr-squid-bridge.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.sonar.sslr</groupId>
-                    <artifactId>sslr-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.sonar.sslr</groupId>
-                    <artifactId>sslr-xpath</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.sonar</groupId>
-                    <artifactId>sonar-plugin-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.picocontainer</groupId>
-                    <artifactId>picocontainer</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.buildobjects</groupId>
+            <artifactId>jproc</artifactId>
+            <version>${jproc.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -258,6 +234,27 @@
                         <project.name>SonarQube Apple Plugin</project.name>
                     </properties>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>3.0.10</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>
