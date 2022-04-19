@@ -17,19 +17,57 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
+import fr.insideapp.sonarqube.swift.lang.antlr.AntlrContext;
+import fr.insideapp.sonarqube.swift.lang.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.swift.lang.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.swift.lang.antlr.SourceLinesVisitor;
+import org.sonar.api.batch.fs.FilePredicate;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SwiftSensor implements Sensor {
 
+    private static final Logger LOGGER = Loggers.get(SwiftSensor.class);
+
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-
+        sensorDescriptor
+                .onlyOnLanguage(Swift.KEY)
+                .name("Swift Sensor")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
     public void execute(SensorContext sensorContext) {
+        FilePredicate hasSwift = sensorContext.fileSystem().predicates().hasLanguage(Swift.KEY);
+        FilePredicate isMain = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
+        FilePredicate swiftAndMain = sensorContext.fileSystem().predicates().and(hasSwift, isMain);
+        final Charset charset = sensorContext.fileSystem().encoding();
 
+        final ExecutorService executorService = Executors.newWorkStealingPool();
+
+        for(InputFile inf : sensorContext.fileSystem().inputFiles(swiftAndMain)){
+
+            executorService.execute(() -> {
+                // Visit source files
+                try {
+                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new SourceLinesVisitor());
+                    visitor.fillContext(sensorContext, antlrContext);
+                } catch (IOException e) {
+                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+                }
+            });
+
+        }
     }
 }
