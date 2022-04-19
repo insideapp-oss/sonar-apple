@@ -53,7 +53,7 @@ public class AppleSurefireSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
         SurefireReportParser surefireParser = new SurefireReportParser(context);
-        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.pathSeparator + reportPath();
+        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
         File reportsDir = new File(reportFileName);
 
         if (!reportsDir.isDirectory()) {

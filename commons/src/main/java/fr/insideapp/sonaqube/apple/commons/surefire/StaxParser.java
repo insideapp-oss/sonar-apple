@@ -30,8 +30,8 @@ import org.sonarsource.analyzer.commons.xml.SafeStaxParserFactory;
 
 public class StaxParser {
 
-    private SMInputFactory inf;
-    private SurefireStaxHandler streamHandler;
+    private final SMInputFactory inf;
+    private final SurefireStaxHandler streamHandler;
 
     public StaxParser(UnitTestIndex index) {
         this.streamHandler = new SurefireStaxHandler(index);

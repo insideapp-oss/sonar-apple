@@ -50,9 +50,8 @@ public class SwiftLintSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
 
-        List<ReportIssue> issues = null;
         try {
-            issues = runAnalysis();
+            List<ReportIssue> issues = runAnalysis();
             recordIssues(sensorContext, issues);
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
@@ -89,10 +88,13 @@ public class SwiftLintSensor implements Sensor {
                 LOGGER.warn("File not included in SonarQube {}", file.getAbsoluteFile());
             } else {
                 InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
-                NewIssueLocation nil = new DefaultIssueLocation().on(inputFile)
-                        .at(inputFile.selectLine(i.getLineNumber())).message(i.getMessage());
-                sensorContext.newIssue().forRule(RuleKey.of("SwiftLint", i.getRuleId()))
-                        .at(nil).save();
+                if (inputFile != null) {
+                    NewIssueLocation nil = new DefaultIssueLocation().on(inputFile)
+                            .at(inputFile.selectLine(i.getLineNumber())).message(i.getMessage());
+                    sensorContext.newIssue().forRule(RuleKey.of("SwiftLint", i.getRuleId()))
+                            .at(nil).save();
+                }
+
             }
         });
     }

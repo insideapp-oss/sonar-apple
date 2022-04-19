@@ -43,7 +43,10 @@ Install sonar-scanner as explained in the [official documentation]((https://docs
 
 ### xcpretty and slather
 
-TODO
+In order to generate reports from ``xcodebuild`` commands, extract command line tools are needed.
+
+- [xcpretty](https://github.com/xcpretty/xcpretty) generates test reports
+- [slather](https://github.com/SlatherOrg/slather) generates coverage reports
 
 ## Installation (on the server)
 

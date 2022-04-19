@@ -51,7 +51,7 @@ public class SurefireStaxHandler {
             if (event.compareTo(SMEvent.START_ELEMENT) == 0) {
                 String testClassName = getClassname(testCase, testSuiteClassName);
                 UnitTestClassReport classReport = index.index(testClassName);
-                parseTestCase(testCase, testSuiteClassName, classReport);
+                parseTestCase(testCase, classReport);
             }
         }
     }
@@ -67,11 +67,11 @@ public class SurefireStaxHandler {
         return StringUtils.defaultIfBlank(testClassName, defaultClassname);
     }
 
-    private static void parseTestCase(SMInputCursor testCaseCursor, String testSuiteClassName, UnitTestClassReport report) throws XMLStreamException {
-        report.add(parseTestResult(testCaseCursor, testSuiteClassName));
+    private static void parseTestCase(SMInputCursor testCaseCursor, UnitTestClassReport report) throws XMLStreamException {
+        report.add(parseTestResult(testCaseCursor));
     }
 
-    private static UnitTestResult parseTestResult(SMInputCursor testCaseCursor, String testSuiteClassName) throws XMLStreamException {
+    private static UnitTestResult parseTestResult(SMInputCursor testCaseCursor) throws XMLStreamException {
         UnitTestResult detail = new UnitTestResult();
         String name = getTestCaseName(testCaseCursor);
         detail.setName(name);
@@ -109,7 +109,7 @@ public class SurefireStaxHandler {
     private static long getTimeAttributeInMS(String value) throws XMLStreamException {
         // Hardcoded to Locale.ENGLISH see http://jira.codehaus.org/browse/SONAR-602
         try {
-            Double time = ParsingUtils.parseNumber(value, Locale.ENGLISH);
+            double time = ParsingUtils.parseNumber(value, Locale.ENGLISH);
             return !Double.isNaN(time) ? (long) ParsingUtils.scaleValue(time * 1000, 3) : 0L;
         } catch (ParseException e) {
             throw new XMLStreamException(e);

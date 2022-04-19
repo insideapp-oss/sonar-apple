@@ -23,11 +23,9 @@ import org.sonar.api.resources.AbstractLanguage;
 public class Swift extends AbstractLanguage {
 
     public static final String KEY = "swift";
-    private final Configuration config;
 
-    public Swift(Configuration config) {
+    public Swift() {
         super(KEY, "Swift");
-        this.config = config;
     }
 
     @Override

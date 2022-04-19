@@ -35,6 +35,10 @@ public class TestFileFinders {
         return instance;
     }
 
+    public void reset() {
+        finders.clear();
+    }
+
     public void addFinder(TestFileFinder finder) {
         finders.add(finder);
     }

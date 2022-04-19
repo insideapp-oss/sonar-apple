@@ -48,14 +48,18 @@ public final class UnitTestClassReport {
             return this;
         }
         results.add(result);
-        if (result.getStatus().equals(UnitTestResult.STATUS_SKIPPED)) {
-            skipped += 1;
+        switch (result.getStatus()) {
+            case UnitTestResult.STATUS_SKIPPED:
+                skipped += 1;
 
-        } else if (result.getStatus().equals(UnitTestResult.STATUS_FAILURE)) {
-            failures += 1;
+                break;
+            case UnitTestResult.STATUS_FAILURE:
+                failures += 1;
 
-        } else if (result.getStatus().equals(UnitTestResult.STATUS_ERROR)) {
-            errors += 1;
+                break;
+            case UnitTestResult.STATUS_ERROR:
+                errors += 1;
+                break;
         }
         tests += 1;
         if (result.getDurationMilliseconds() < 0) {

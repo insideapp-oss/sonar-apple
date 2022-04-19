@@ -24,12 +24,8 @@ public class TestFileFindersTest {
         DefaultInputFile testFile = new TestInputFileBuilder("", TEST_FILENAME).setLanguage("swift").build();
         fs.add(testFile);
 
-        TestFileFinders.getInstance().addFinder(new TestFileFinder() {
-            @Override
-            public InputFile getUnitTestResource(FileSystem fileSystem, String classname) {
-                return testFile;
-            }
-        });
+        TestFileFinders.getInstance().reset();
+        TestFileFinders.getInstance().addFinder((fileSystem, classname) -> testFile);
 
         InputFile found = TestFileFinders.getInstance().getUnitTestResource(fs, "test");
         assertThat(found).isNotNull();
