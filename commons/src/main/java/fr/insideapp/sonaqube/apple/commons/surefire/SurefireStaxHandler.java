@@ -71,17 +71,10 @@ public class SurefireStaxHandler {
         report.add(parseTestResult(testCaseCursor, testSuiteClassName));
     }
 
-    private static void setStackAndMessage(UnitTestResult result, SMInputCursor stackAndMessageCursor) throws XMLStreamException {
-        result.setMessage(stackAndMessageCursor.getAttrValue("message"));
-        String stack = stackAndMessageCursor.collectDescendantText();
-        result.setStackTrace(stack);
-    }
-
     private static UnitTestResult parseTestResult(SMInputCursor testCaseCursor, String testSuiteClassName) throws XMLStreamException {
         UnitTestResult detail = new UnitTestResult();
         String name = getTestCaseName(testCaseCursor);
         detail.setName(name);
-        detail.setTestSuiteClassName(testSuiteClassName);
 
         String status = UnitTestResult.STATUS_OK;
         String time = testCaseCursor.getAttrValue("time");
@@ -97,11 +90,9 @@ public class SurefireStaxHandler {
 
             } else if ("failure".equals(elementName)) {
                 status = UnitTestResult.STATUS_FAILURE;
-                setStackAndMessage(detail, childNode);
 
             } else if ("error".equals(elementName)) {
                 status = UnitTestResult.STATUS_ERROR;
-                setStackAndMessage(detail, childNode);
             }
         }
         while (childNode.getNext() != null) {

@@ -26,11 +26,9 @@ public final class UnitTestResult {
     public static final String STATUS_SKIPPED = "skipped";
 
     private String name;
-    private String testSuiteClassName;
     private String status;
-    private String stackTrace;
-    private String message;
     private long durationMilliseconds = 0L;
+    private String message;
 
     public UnitTestResult() {
         name = UUID.randomUUID().toString();
@@ -45,22 +43,21 @@ public final class UnitTestResult {
         return this;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public UnitTestResult setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
     public String getStatus() {
         return status;
     }
 
     public UnitTestResult setStatus(String status) {
         this.status = status;
-        return this;
-    }
-
-    public UnitTestResult setStackTrace(String stackTrace) {
-        this.stackTrace = stackTrace;
-        return this;
-    }
-
-    public UnitTestResult setMessage(String message) {
-        this.message = message;
         return this;
     }
 
@@ -73,9 +70,5 @@ public final class UnitTestResult {
         return this;
     }
 
-    public UnitTestResult setTestSuiteClassName(String testSuiteClassName) {
-        this.testSuiteClassName = testSuiteClassName;
-        return this;
-    }
 
 }

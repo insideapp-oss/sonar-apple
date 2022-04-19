@@ -44,13 +44,9 @@ public class SurefireReportParser {
     private static final Logger LOGGER = Loggers.get(SurefireReportParser.class);
 
     private final SensorContext context;
-    private final UnitTestIndex index;
-    private final FileSystem fileSystem;
 
-    protected SurefireReportParser(FileSystem fileSystem, SensorContext context) {
-        this.fileSystem = fileSystem;
+    public SurefireReportParser(SensorContext context) {
         this.context = context;
-        this.index = new UnitTestIndex();
     }
 
     public void collect(File reportsDir) {
@@ -131,7 +127,7 @@ public class SurefireReportParser {
 
     @CheckForNull
     private InputFile getUnitTestResource(String className) {
-        return TestFileFinders.getInstance().getUnitTestResource(fileSystem, className);
+        return TestFileFinders.getInstance().getUnitTestResource(context.fileSystem(), className);
     }
 
     private static <T extends Serializable> void saveMeasure(SensorContext context, InputFile inputFile, Metric<T> metric, T value) {

@@ -19,4 +19,8 @@ package fr.insideapp.sonaqube.apple.commons;
 
 public final class Constants {
     public static final String PROPERTY_PREFIX = "sonar.apple";
+
+    private Constants() {
+        throw new UnsupportedOperationException();
+    }
 }

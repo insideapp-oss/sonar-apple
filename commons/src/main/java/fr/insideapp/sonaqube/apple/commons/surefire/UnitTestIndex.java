@@ -40,5 +40,7 @@ public class UnitTestIndex {
         return indexByClassname;
     }
 
-
+    public int size() {
+        return indexByClassname.size();
+    }
 }

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='SQAppTests.xctest' tests='4' failures='2'>
+  <testsuite name='SQAppTests.SQAppTests' tests='4' failures='2'>
+    <testcase classname='SQAppTests.SQAppTests' name='testExample' time='0.002'/>
+    <testcase classname='SQAppTests.SQAppTests' name='testPerformanceExample' time='0.397'/>
+    <testcase classname="SQAppTests.SQAppTests" time="0" name="testError">
+      <error type="error" message="ERROR">trace</error>
+    </testcase>
+    <testcase classname="SQAppTests.SQAppTests" time="0" name="testFailure">
+      <failure type="failure" message="FAILURE">trace</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

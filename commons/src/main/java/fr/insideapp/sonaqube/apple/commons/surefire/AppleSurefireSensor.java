@@ -34,11 +34,9 @@ public class AppleSurefireSensor implements Sensor {
 
     public static final String REPORT_PATH_KEY = Constants.PROPERTY_PREFIX + ".surefire.junit.reportsPath";
 
-    private final FileSystem fileSystem;
     private final SensorContext context;
 
-    public AppleSurefireSensor(SensorContext context, FileSystem fileSystem) {
-        this.fileSystem = fileSystem;
+    public AppleSurefireSensor(SensorContext context) {
         this.context = context;
     }
 
@@ -55,7 +53,7 @@ public class AppleSurefireSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        SurefireReportParser surefireParser = new SurefireReportParser(fileSystem, context);
+        SurefireReportParser surefireParser = new SurefireReportParser(context);
         String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + "/" + reportPath();
         File reportsDir = new File(reportFileName);
 
