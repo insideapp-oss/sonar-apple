@@ -51,14 +51,14 @@ public final class UnitTestClassReport {
         switch (result.getStatus()) {
             case UnitTestResult.STATUS_SKIPPED:
                 skipped += 1;
-
                 break;
             case UnitTestResult.STATUS_FAILURE:
                 failures += 1;
-
                 break;
             case UnitTestResult.STATUS_ERROR:
                 errors += 1;
+                break;
+            default:
                 break;
         }
         tests += 1;

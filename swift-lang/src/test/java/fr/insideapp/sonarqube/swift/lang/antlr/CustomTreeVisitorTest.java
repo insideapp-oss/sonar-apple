@@ -65,7 +65,7 @@ public class CustomTreeVisitorTest {
 
             @Override
             public void fillContext(SensorContext context, AntlrContext antlrContext) {
-                assertThat(antlrContext.getTokens().length).isEqualTo(30);
+                assertThat(antlrContext.getTokens()).hasSize(30);
             }
         });
         AntlrContext antlrContext = AntlrUtils.getRequest(IOUtils.toString(Objects.requireNonNull(this.getClass().getResourceAsStream(MAIN_SRC)), StandardCharsets.UTF_8));

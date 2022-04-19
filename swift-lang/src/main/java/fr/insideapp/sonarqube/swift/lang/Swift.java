@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
-import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
 public class Swift extends AbstractLanguage {
