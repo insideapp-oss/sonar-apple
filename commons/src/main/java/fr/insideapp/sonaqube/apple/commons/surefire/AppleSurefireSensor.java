@@ -18,7 +18,6 @@
 package fr.insideapp.sonaqube.apple.commons.surefire;
 
 import fr.insideapp.sonaqube.apple.commons.Constants;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -54,7 +53,7 @@ public class AppleSurefireSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
         SurefireReportParser surefireParser = new SurefireReportParser(context);
-        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + "/" + reportPath();
+        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.pathSeparator + reportPath();
         File reportsDir = new File(reportFileName);
 
         if (!reportsDir.isDirectory()) {
