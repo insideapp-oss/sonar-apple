@@ -15,28 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
-import fr.insideapp.sonaqube.apple.commons.tests.AppleTestSensor;
-import fr.insideapp.sonarqube.swift.lang.Swift;
-import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
-import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
-import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
-import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
-import org.sonar.api.Plugin;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
-public class ApplePlugin implements Plugin {
+public class AppleTestSensor implements Sensor {
+    @Override
+    public void describe(SensorDescriptor sensorDescriptor) {
+
+    }
 
     @Override
-    public void define(Context context) {
+    public void execute(SensorContext sensorContext) {
 
-        // Language support
-        context.addExtensions(Swift.class, SwiftSensor.class , SwiftProfile.class);
-
-        // SwiftLint
-        context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
-
-        // Tests
-        context.addExtension(AppleTestSensor.class);
     }
 }
