@@ -91,7 +91,7 @@ Severity ? (1 = BLOCKER, 2 = CRITICAL, 3 = MAJOR, 4 = MINOR, 5 = INFO)
 
 The plugin comes with several issue sensor, that is a piece of code running on source files and reporting issues.
 
-For example, ``SwiftLintSenor`` is a sensor using SwiftLint tool to run.
+For example, ``SwiftLintSensor`` is a sensor using SwiftLint tool to run.
 
 A sensor requires different pieces in order to work
 - A script, to generate and update the rule repository file.

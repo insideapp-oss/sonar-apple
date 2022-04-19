@@ -23,10 +23,6 @@
 import groovy.json.JsonSlurper
 import groovy.json.JsonBuilder
 
-//print "What is your name? "
-//def name = System.in.newReader().readLine()
-//println "Your name is " + name
-
 def rulesFile = new File('swift-lang/src/main/resources/fr/insideapp/sonarqube/swift/swiftlint/rules.json')
 def sqaleFile = new File('swift-lang/src/main/resources/fr/insideapp/sonarqube/swift/swiftlint/model.xml')
 

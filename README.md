@@ -20,14 +20,14 @@ Let us know if you want to get involved.
 
 The plugin is designed to support Swift 5 syntax.
 
-| Feature             | Swift                                                 | Objective-C |
-|---------------------|-------------------------------------------------------|-------------|
-| Size                | IN PROGRESS                                           | IN PROGRESS |
-| Issues              | [SwiftLint](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
-| Tests               | IN PROGRESS                                           | IN PROGRESS |
-| Coverage            | IN PROGRESS                                           | IN PROGRESS |
-| Complexity          | IN PROGRESS                                           | IN PROGRESS |
-| Syntax highlighting | IN PROGRESS                                           | IN PROGRESS |
+| Feature             | Swift                                                        | Objective-C |
+|---------------------|--------------------------------------------------------------|-------------|
+| Size                | IN PROGRESS                                                  | IN PROGRESS |
+| Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
+| Tests               | IN PROGRESS                                                  | IN PROGRESS |
+| Coverage            | IN PROGRESS                                                  | IN PROGRESS |
+| Complexity          | IN PROGRESS                                                  | IN PROGRESS |
+| Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS |
 
 ## Requirements
 
