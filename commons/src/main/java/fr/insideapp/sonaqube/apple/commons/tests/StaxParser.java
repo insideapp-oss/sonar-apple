@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.surefire;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
 import com.ctc.wstx.api.WstxInputProperties;
 import com.ctc.wstx.stax.WstxInputFactory;
@@ -31,10 +31,10 @@ import org.sonarsource.analyzer.commons.xml.SafeStaxParserFactory;
 public class StaxParser {
 
     private final SMInputFactory inf;
-    private final SurefireStaxHandler streamHandler;
+    private final JUnitStaxHandler streamHandler;
 
     public StaxParser(UnitTestIndex index) {
-        this.streamHandler = new SurefireStaxHandler(index);
+        this.streamHandler = new JUnitStaxHandler(index);
         XMLInputFactory xmlInputFactory = SafeStaxParserFactory.createXMLInputFactory();
         if (xmlInputFactory instanceof WstxInputFactory) {
             WstxInputFactory wstxInputfactory = (WstxInputFactory) xmlInputFactory;

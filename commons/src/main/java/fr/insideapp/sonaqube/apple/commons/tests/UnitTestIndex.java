@@ -15,26 +15,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.surefire;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
-import fr.insideapp.sonaqube.apple.commons.surefire.AppleSurefireSensor;
-import org.junit.Test;
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+public class UnitTestIndex {
 
-public class AppleSurefireSensorTest {
+    private final Map<String, UnitTestClassReport> indexByClassname;
 
-    @Test
-    public void describe() {
+    public UnitTestIndex() {
+        this.indexByClassname = new HashMap<>();
+    }
 
-        SensorContext context = mock(SensorContext.class);
+    public UnitTestClassReport index(String classname) {
+        return indexByClassname.computeIfAbsent(classname, name -> new UnitTestClassReport());
+    }
 
-        AppleSurefireSensor sensor = new AppleSurefireSensor(context);
-        DefaultSensorDescriptor defaultSensorDescriptor = new DefaultSensorDescriptor();
-        sensor.describe(defaultSensorDescriptor);
-        assertThat(defaultSensorDescriptor.languages()).containsOnly("swift", "objc");
+    public UnitTestClassReport get(String classname) {
+        return indexByClassname.get(classname);
+    }
+
+    public Map<String, UnitTestClassReport> getIndexByClassname() {
+        return indexByClassname;
+    }
+
+    public int size() {
+        return indexByClassname.size();
     }
 }

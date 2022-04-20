@@ -24,7 +24,7 @@ The plugin is designed to support Swift 5 syntax.
 |---------------------|--------------------------------------------------------------|-------------|
 | Size                | IN PROGRESS                                                  | IN PROGRESS |
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
-| Tests               | IN PROGRESS                                                  | IN PROGRESS |
+| Tests               | YES                                                          | IN PROGRESS |
 | Coverage            | IN PROGRESS                                                  | IN PROGRESS |
 | Complexity          | IN PROGRESS                                                  | IN PROGRESS |
 | Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS |
@@ -73,7 +73,7 @@ sonar.tests=iOSAppTests
 
 # Path to test report (junit.xml)
 # Defaults to build/reports
-#sonar.apple.surefire.junit.reportsPath=
+#sonar.junit.reportsPaths=
 
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.surefire;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -27,11 +27,11 @@ import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.utils.ParsingUtils;
 
-public class SurefireStaxHandler {
+public class JUnitStaxHandler {
 
     private final UnitTestIndex index;
 
-    public SurefireStaxHandler(UnitTestIndex index) {
+    public JUnitStaxHandler(UnitTestIndex index) {
         this.index = index;
     }
 

@@ -15,10 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.surefire;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
 import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
@@ -39,13 +38,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SurefireReportParser {
+public class JUnitReportParser {
 
-    private static final Logger LOGGER = Loggers.get(SurefireReportParser.class);
+    private static final Logger LOGGER = Loggers.get(JUnitReportParser.class);
 
     private final SensorContext context;
 
-    public SurefireReportParser(SensorContext context) {
+    public JUnitReportParser(SensorContext context) {
         this.context = context;
     }
 

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.surefire;
+package fr.insideapp.sonarqube.swift.lang.tests;
 
 import fr.insideapp.sonaqube.apple.commons.TestFileFinder;
 

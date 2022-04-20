@@ -15,12 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons;
+package fr.insideapp.sonarqube.apple.commons.tests;
 
-public final class Constants {
-    public static final String PROPERTY_PREFIX = "sonar.apple";
+import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
+import org.junit.Test;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
-    private Constants() {
-        throw new UnsupportedOperationException();
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
+public class AppleTestsSensorTest {
+
+    @Test
+    public void describe() {
+
+        SensorContext context = mock(SensorContext.class);
+
+        AppleTestsSensor sensor = new AppleTestsSensor(context);
+        DefaultSensorDescriptor defaultSensorDescriptor = new DefaultSensorDescriptor();
+        sensor.describe(defaultSensorDescriptor);
+        assertThat(defaultSensorDescriptor.languages()).containsOnly("swift", "objc");
     }
 }

@@ -1,9 +1,6 @@
-package fr.insideapp.sonarqube.swift.lang.surefire;
+package fr.insideapp.sonarqube.swift.lang.tests;
 
-import fr.insideapp.sonaqube.apple.commons.TestFileFinder;
-import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
 import org.junit.Test;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;

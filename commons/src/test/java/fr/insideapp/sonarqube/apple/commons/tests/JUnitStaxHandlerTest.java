@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.surefire;
+package fr.insideapp.sonarqube.apple.commons.tests;
 
-import fr.insideapp.sonaqube.apple.commons.surefire.StaxParser;
-import fr.insideapp.sonaqube.apple.commons.surefire.UnitTestClassReport;
-import fr.insideapp.sonaqube.apple.commons.surefire.UnitTestIndex;
+import fr.insideapp.sonaqube.apple.commons.tests.StaxParser;
+import fr.insideapp.sonaqube.apple.commons.tests.UnitTestClassReport;
+import fr.insideapp.sonaqube.apple.commons.tests.UnitTestIndex;
 import org.junit.Test;
 
 import javax.xml.stream.XMLStreamException;
@@ -29,7 +29,7 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SurefireStaxHandlerTest {
+public class JUnitStaxHandlerTest {
 
     @Test
     public void parse() throws XMLStreamException {

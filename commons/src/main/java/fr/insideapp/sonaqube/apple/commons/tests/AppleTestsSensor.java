@@ -15,9 +15,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.surefire;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
-import fr.insideapp.sonaqube.apple.commons.Constants;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -26,16 +25,16 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
 
-public class AppleSurefireSensor implements Sensor {
+public class AppleTestsSensor implements Sensor {
 
-    private static final Logger LOGGER = Loggers.get(AppleSurefireSensor.class);
+    private static final Logger LOGGER = Loggers.get(AppleTestsSensor.class);
     private static final String DEFAULT_REPORT_PATH = "build/reports/";
 
-    public static final String REPORT_PATH_KEY = Constants.PROPERTY_PREFIX + ".surefire.junit.reportsPath";
+    public static final String REPORT_PATH_KEY = "sonar.junit.reportPaths";
 
     private final SensorContext context;
 
-    public AppleSurefireSensor(SensorContext context) {
+    public AppleTestsSensor(SensorContext context) {
         this.context = context;
     }
 
@@ -52,7 +51,7 @@ public class AppleSurefireSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        SurefireReportParser surefireParser = new SurefireReportParser(context);
+        JUnitReportParser surefireParser = new JUnitReportParser(context);
         String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
         File reportsDir = new File(reportFileName);
 

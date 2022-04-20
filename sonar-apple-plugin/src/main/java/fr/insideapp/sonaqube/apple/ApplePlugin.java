@@ -18,13 +18,13 @@
 package fr.insideapp.sonaqube.apple;
 
 import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
-import fr.insideapp.sonaqube.apple.commons.surefire.AppleSurefireSensor;
+import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
-import fr.insideapp.sonarqube.swift.lang.surefire.SwiftTestFileFinder;
+import fr.insideapp.sonarqube.swift.lang.tests.SwiftTestFileFinder;
 import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
@@ -46,7 +46,7 @@ public class ApplePlugin implements Plugin {
 
         // Tests
         context.addExtension(
-                PropertyDefinition.builder(AppleSurefireSensor.REPORT_PATH_KEY)
+                PropertyDefinition.builder(AppleTestsSensor.REPORT_PATH_KEY)
                         .name("Unit Test Report")
                         .description("Path to Apple unit test execution report file. The path may be either absolute or relative to the project base directory.")
                         .onQualifiers(Qualifiers.PROJECT)
@@ -55,6 +55,6 @@ public class ApplePlugin implements Plugin {
                         .build());
 
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
-        context.addExtension(AppleSurefireSensor.class);
+        context.addExtension(AppleTestsSensor.class);
     }
 }
