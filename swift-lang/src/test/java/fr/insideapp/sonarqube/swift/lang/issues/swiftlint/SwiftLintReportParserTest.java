@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonaqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintReportParser;

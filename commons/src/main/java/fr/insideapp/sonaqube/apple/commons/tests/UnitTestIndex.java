@@ -15,21 +15,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.swift.lang.issues.swiftlint;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
-import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
-import org.junit.Test;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class UnitTestIndex {
 
-public class SwiftLintSensorTest {
+    private final Map<String, UnitTestClassReport> indexByClassname;
 
-    @Test
-    public void describe() {
-        SwiftLintSensor sensor = new SwiftLintSensor();
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("SwiftLint sensor");
+    public UnitTestIndex() {
+        this.indexByClassname = new HashMap<>();
+    }
+
+    public UnitTestClassReport index(String classname) {
+        return indexByClassname.computeIfAbsent(classname, name -> new UnitTestClassReport());
+    }
+
+    public UnitTestClassReport get(String classname) {
+        return indexByClassname.get(classname);
+    }
+
+    public Map<String, UnitTestClassReport> getIndexByClassname() {
+        return indexByClassname;
+    }
+
+    public int size() {
+        return indexByClassname.size();
     }
 }

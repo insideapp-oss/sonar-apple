@@ -15,20 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonarqube.apple.commons.tests;
 
-import org.sonar.api.resources.AbstractLanguage;
+import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
+import org.junit.Test;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
-public class Swift extends AbstractLanguage {
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
-    public static final String KEY = "swift";
+public class AppleTestsSensorTest {
 
-    public Swift() {
-        super(KEY, "Swift");
-    }
+    @Test
+    public void describe() {
 
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+        SensorContext context = mock(SensorContext.class);
+
+        AppleTestsSensor sensor = new AppleTestsSensor(context);
+        DefaultSensorDescriptor defaultSensorDescriptor = new DefaultSensorDescriptor();
+        sensor.describe(defaultSensorDescriptor);
+        assertThat(defaultSensorDescriptor.languages()).containsOnly("swift", "objc");
     }
 }

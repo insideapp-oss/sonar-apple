@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.swift.lang.antlr;
+package fr.insideapp.sonarqube.swift.lang.antlr;
 
 import fr.insideapp.sonarqube.swift.lang.antlr.AntlrContext;
 import fr.insideapp.sonarqube.swift.lang.antlr.AntlrUtils;
@@ -65,7 +65,7 @@ public class CustomTreeVisitorTest {
 
             @Override
             public void fillContext(SensorContext context, AntlrContext antlrContext) {
-                assertThat(antlrContext.getTokens().length).isEqualTo(30);
+                assertThat(antlrContext.getTokens()).hasSize(30);
             }
         });
         AntlrContext antlrContext = AntlrUtils.getRequest(IOUtils.toString(Objects.requireNonNull(this.getClass().getResourceAsStream(MAIN_SRC)), StandardCharsets.UTF_8));

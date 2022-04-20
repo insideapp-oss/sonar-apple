@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!--
 
     SonarQube Apple Plugin - Enables analysis of Swift and Objective-C projects into SonarQube.
@@ -18,22 +18,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>sonar-apple</artifactId>
-        <groupId>fr.insideapp.sonarqube</groupId>
-        <version>0.1-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>commons</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.fasterxml.staxmate</groupId>
-            <artifactId>staxmate</artifactId>
-            <version>2.4.0</version>
-        </dependency>
-    </dependencies>
-
-</project>
+<testsuites name='SQAppTests.xctest' tests='4' failures='2'>
+  <testsuite name='SQAppTests.SQAppTests' tests='4' failures='2'>
+    <testcase classname='SQAppTests.SQAppTests' name='testExample' time='0.002'/>
+    <testcase classname='SQAppTests.SQAppTests' name='testPerformanceExample' time='0.397'/>
+    <testcase classname="SQAppTests.SQAppTests" time="0" name="testError">
+      <error type="error" message="ERROR">trace</error>
+    </testcase>
+    <testcase classname="SQAppTests.SQAppTests" time="0" name="testFailure">
+      <failure type="failure" message="FAILURE">trace</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

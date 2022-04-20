@@ -15,31 +15,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.swift.lang.antlr;
+package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrContext;
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrUtils;
-import org.antlr.v4.runtime.Token;
+import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
 import org.junit.Test;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AntlrContextTest {
-    @Test
-    public void linesDetection() throws Throwable {
-        String s = "let test = \"test\"";
-        AntlrContext result = AntlrUtils.getRequest(s);
-        for (Token t : result.getStream().getTokens()) {
-            if (t.getType() == Token.EOF) {
-                continue;
-            }
-            int[] start = result.getLineAndColumn(t.getStartIndex());
-            int[] end = result.getLineAndColumn(t.getStopIndex());
-            assertThat(start).isNotNull();
-            assertThat(end).isNotNull();
-            assertThat(t.getLine()).isEqualTo(start[0]);
-            assertThat(t.getCharPositionInLine()).isEqualTo(start[1]);
-        }
-    }
+public class SwiftLintSensorTest {
 
+    @Test
+    public void describe() {
+        SwiftLintSensor sensor = new SwiftLintSensor();
+        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        sensor.describe(descriptor);
+        assertThat(descriptor.name()).isEqualTo("SwiftLint sensor");
+    }
 }

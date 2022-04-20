@@ -24,7 +24,7 @@ The plugin is designed to support Swift 5 syntax.
 |---------------------|--------------------------------------------------------------|-------------|
 | Size                | IN PROGRESS                                                  | IN PROGRESS |
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
-| Tests               | IN PROGRESS                                                  | IN PROGRESS |
+| Tests               | YES                                                          | IN PROGRESS |
 | Coverage            | IN PROGRESS                                                  | IN PROGRESS |
 | Complexity          | IN PROGRESS                                                  | IN PROGRESS |
 | Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS |
@@ -40,6 +40,13 @@ The plugin was tested with Xcode 13+, but should work with older versions.
 ### sonar-scanner (requires Java)
 
 Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
+
+### xcpretty and slather
+
+In order to generate reports from ``xcodebuild`` commands, extract command line tools are needed.
+
+- [xcpretty](https://github.com/xcpretty/xcpretty) generates test reports
+- [slather](https://github.com/SlatherOrg/slather) generates coverage reports
 
 ## Installation (on the server)
 
@@ -64,6 +71,10 @@ sonar.projectVersion=1.0
 sonar.sources=iOSApp
 sonar.tests=iOSAppTests
 
+# Path to test report (junit.xml)
+# Defaults to build/reports
+#sonar.junit.reportsPaths=
+
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
 ```
@@ -75,6 +86,16 @@ For a complete list of available options, please refer to the [SonarQube documen
 Use the following commands from the root folder to start an analysis:
 
 ```bash
+
+# Run tests with xcpretty to generate test report in build/reports/junit.xml
+# Don't forget to add -workspace to the build command if your project is part of a workspace
+$ xcodebuild \                                                                                     SIGINT(2) ↵   10410  13:18:29 
+  -project MyApp.xcodeproj \
+  -scheme MyApp \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
+  test | xcpretty --report junit
+  
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner
 ```
