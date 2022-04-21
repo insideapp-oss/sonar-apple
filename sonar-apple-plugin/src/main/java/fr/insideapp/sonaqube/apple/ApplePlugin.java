@@ -18,6 +18,7 @@
 package fr.insideapp.sonaqube.apple;
 
 import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
+import fr.insideapp.sonaqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
@@ -56,5 +57,8 @@ public class ApplePlugin implements Plugin {
 
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
+
+        // Coverage
+        context.addExtension(AppleCoverageSensor.class);
     }
 }
