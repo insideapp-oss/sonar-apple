@@ -62,7 +62,7 @@ public class SwiftSensor implements Sensor {
             executorService.execute(() -> {
                 // Visit source files
                 try {
-                    final AntlrContext antlrContext = AntlrContext.fromStreams(inf, inf.inputStream(), inf.inputStream(), charset);
+                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
                     ParseTreeItemVisitor visitor = new CustomTreeVisitor(new SourceLinesVisitor());
                     visitor.fillContext(sensorContext, antlrContext);
                 } catch (IOException e) {

@@ -46,6 +46,10 @@ public class AntlrContext {
         this.lines = lines;
     }
 
+    public static AntlrContext fromInputFile(InputFile file, Charset charset) throws IOException {
+        return fromStreams(file, file.inputStream(), file.inputStream(), charset);
+    }
+
     public static AntlrContext fromStreams(InputFile inputFile, InputStream file, InputStream linesStream,
                                            Charset charset) throws IOException {
         final SourceLinesProvider linesProvider = new SourceLinesProvider();
