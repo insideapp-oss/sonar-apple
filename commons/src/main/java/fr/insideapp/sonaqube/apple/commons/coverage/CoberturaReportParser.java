@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonaqube.apple.commons.coverage;
 
+import fr.insideapp.sonaqube.apple.commons.FileCollector;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -61,18 +62,14 @@ public final class CoberturaReportParser {
 
     public void collect(File reportsDir) {
         List<File> xmlFiles = new ArrayList<>();
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(reportsDir.toPath(), "{cobertura}*.{xml}")) {
-            for (Path p: stream) {
-                LOGGER.info("Processing Coberture report {}", p.getFileName());
-                xmlFiles.add(p.toFile());
-            }
+        try {
+            xmlFiles = FileCollector.collect(reportsDir, "{cobertura}*.{xml}");
         } catch (IOException e) {
             LOGGER.error( "Error while finding coverage reports.", e);
         }
 
         if (!xmlFiles.isEmpty()) {
             try {
-                //parseFiles(xmlFiles);
                 for (File xmlFile: xmlFiles) {
                     parseFile(xmlFile);
                 }
