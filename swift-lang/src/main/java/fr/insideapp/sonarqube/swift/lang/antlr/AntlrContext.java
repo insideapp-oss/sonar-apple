@@ -17,8 +17,8 @@
  */
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import fr.insideapp.sonarqube.swift.lang.SourceLine;
-import fr.insideapp.sonarqube.swift.lang.SourceLinesProvider;
+import fr.insideapp.sonaqube.apple.commons.SourceLine;
+import fr.insideapp.sonaqube.apple.commons.SourceLinesProvider;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Lexer;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.CharStream;
@@ -44,10 +44,6 @@ public class AntlrContext {
         this.stream = stream;
         this.root = root;
         this.lines = lines;
-    }
-
-    public static AntlrContext fromInputFile(InputFile file, Charset charset) throws IOException {
-        return fromStreams(file, file.inputStream(), file.inputStream(), charset);
     }
 
     public static AntlrContext fromStreams(InputFile inputFile, InputStream file, InputStream linesStream,

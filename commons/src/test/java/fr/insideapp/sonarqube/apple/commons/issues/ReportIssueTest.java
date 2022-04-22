@@ -15,20 +15,28 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
-import org.sonar.api.resources.AbstractLanguage;
+import fr.insideapp.sonaqube.apple.commons.issues.ReportIssue;
+import org.junit.Test;
 
-public class Swift extends AbstractLanguage {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    public static final String KEY = "swift";
+public class ReportIssueTest {
 
-    public Swift() {
-        super(KEY, "Swift");
+    @Test
+    public void equals() {
+        ReportIssue issue1 = new ReportIssue("1", "msg", "/test/path", 20);
+        ReportIssue issue2 = new ReportIssue("1", "msg", "/test/path", 20);
+
+        assertThat(issue1).isEqualTo(issue2);
     }
 
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+    @Test
+    public void notEqual() {
+        ReportIssue issue1 = new ReportIssue("1", "msg", "/test/path", 20);
+        ReportIssue issue2 = new ReportIssue("2", "msg", "/test/path", 20);
+
+        assertThat(issue1).isNotEqualTo(issue2);
     }
 }

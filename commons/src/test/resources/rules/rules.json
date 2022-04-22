@@ -1,0 +1,22 @@
+[
+  {
+    "key": "rule1",
+    "name": "Rule 1",
+    "severity": "MINOR",
+    "description": "This is rule 1.",
+    "debt": {
+      "function": "CONSTANT_ISSUE",
+      "offset": "5min"
+    }
+  },
+  {
+    "key": "rule2",
+    "name": "Rule 2",
+    "severity": "MAJOR",
+    "description": "This is rule 2.",
+    "debt": {
+      "function": "CONSTANT_ISSUE",
+      "offset": "15min"
+    }
+  }
+]

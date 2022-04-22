@@ -15,20 +15,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonaqube.apple.commons.tests;
 
-import org.sonar.api.resources.AbstractLanguage;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Swift extends AbstractLanguage {
+public class UnitTestIndex {
 
-    public static final String KEY = "swift";
+    private final Map<String, UnitTestClassReport> indexByClassname;
 
-    public Swift() {
-        super(KEY, "Swift");
+    public UnitTestIndex() {
+        this.indexByClassname = new HashMap<>();
     }
 
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+    public UnitTestClassReport index(String classname) {
+        return indexByClassname.computeIfAbsent(classname, name -> new UnitTestClassReport());
+    }
+
+    public UnitTestClassReport get(String classname) {
+        return indexByClassname.get(classname);
+    }
+
+    public Map<String, UnitTestClassReport> getIndexByClassname() {
+        return indexByClassname;
+    }
+
+    public int size() {
+        return indexByClassname.size();
     }
 }

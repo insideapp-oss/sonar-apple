@@ -15,20 +15,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang;
+package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import org.sonar.api.resources.AbstractLanguage;
+import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
+import org.junit.Test;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
-public class Swift extends AbstractLanguage {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    public static final String KEY = "swift";
+public class SwiftLintSensorTest {
 
-    public Swift() {
-        super(KEY, "Swift");
-    }
-
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+    @Test
+    public void describe() {
+        SwiftLintSensor sensor = new SwiftLintSensor();
+        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        sensor.describe(descriptor);
+        assertThat(descriptor.name()).isEqualTo("SwiftLint sensor");
     }
 }
