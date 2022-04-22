@@ -30,13 +30,20 @@ import java.util.List;
 
 public class FileCollector {
 
-    private static final Logger LOGGER = Loggers.get(FileCollector.class);
+    private FileCollector() {};
 
     public static List<File> collect(File reportsDir, String glob) throws IOException {
         List<File> files = new ArrayList<>();
-        DirectoryStream<Path> stream = Files.newDirectoryStream(reportsDir.toPath(), glob);
-        for (Path p : stream) {
-            files.add(p.toFile());
+        DirectoryStream<Path> stream = null;
+        try {
+            stream = Files.newDirectoryStream(reportsDir.toPath(), glob);
+            for (Path p : stream) {
+                files.add(p.toFile());
+            }
+        } catch(IOException e) {
+            throw e;
+        } finally {
+            stream.close();
         }
 
        return  files;
