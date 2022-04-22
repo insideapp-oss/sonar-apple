@@ -33,9 +33,11 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class SwiftSensor implements Sensor {
 
+    private static final int EXECUTOR_TIMEOUT = 10000;
     private static final Logger LOGGER = Loggers.get(SwiftSensor.class);
 
     @Override
@@ -68,6 +70,14 @@ public class SwiftSensor implements Sensor {
                 }
             });
 
+        }
+
+        try {
+            executorService.shutdown();
+            executorService.awaitTermination(EXECUTOR_TIMEOUT, TimeUnit.SECONDS);
+            executorService.shutdownNow();
+        } catch (final InterruptedException e) {
+            LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
         }
     }
 }
