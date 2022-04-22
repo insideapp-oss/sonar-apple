@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import fr.insideapp.sonarqube.swift.lang.SourceLine;
+import fr.insideapp.sonaqube.apple.commons.SourceLine;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
