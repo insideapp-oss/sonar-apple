@@ -17,9 +17,6 @@
  */
 package fr.insideapp.sonaqube.apple.commons;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -30,7 +27,9 @@ import java.util.List;
 
 public class FileCollector {
 
-    private FileCollector() {};
+    private FileCollector() {
+        throw new UnsupportedOperationException();
+    };
 
     public static List<File> collect(File reportsDir, String glob) throws IOException {
         List<File> files = new ArrayList<>();
@@ -40,10 +39,10 @@ public class FileCollector {
             for (Path p : stream) {
                 files.add(p.toFile());
             }
-        } catch(IOException e) {
-            throw e;
         } finally {
-            stream.close();
+            if (stream != null) {
+                stream.close();
+            }
         }
 
        return  files;
