@@ -18,76 +18,116 @@
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
 import fr.insideapp.sonarqube.swift.lang.SourceLine;
-import fr.insideapp.sonarqube.swift.lang.SourceLinesProvider;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.InputStream;
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
     private static final Logger LOGGER = Loggers.get(SourceLinesVisitor.class);
-    private final SourceLinesProvider linesProvider = new SourceLinesProvider();
-
     @Override
     public void apply(ParseTree tree) {}
 
     @Override
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
-        // reading the content of file
-        try (InputStream stream = antlrContext.getFile().inputStream()) {
-            // all the tokens of the file
-            final Token[] tokens = antlrContext.getTokens();
-            // preparing the array containing the total of lines of the source file
-            final int[] linesTotal = new int[antlrContext.getLines().length];
 
-            // iterating over all tokens of the file
-            for (final Token token: tokens) {
-                int type = token.getType();
-                int startLine = token.getLine();
-                Optional<int[]> endLines = Optional.of(antlrContext.getLineAndColumn(token.getStartIndex()));
+        final SourceLine[] allLines = antlrContext.getLines();
+        // set containing the lines considered as comment
+        final Set<Integer> linesOfComment = new HashSet<>();
+        // all the tokens of the file
+        final Token[] tokens = antlrContext.getTokens();
 
-                // checking we got valid token
-                boolean hasInvalidToken = type == Swift5Parser.EOF || endLines.isEmpty() || endLines.get().length == 0 || token.getStartIndex() >= token.getStopIndex();
-                if (hasInvalidToken) { continue; }
-
-                // iterating over to count lines
-                for (int i = startLine - 1 ; i < endLines.get()[0]; i++) {
-                    switch(type) {
-                        case Swift5Parser.Line_comment:
-                        case Swift5Parser.Block_comment:
-                            linesTotal[i] = 2; // comment
-                            break;
-                        default:
-                            linesTotal[i] = 1; // code
-                            break;
+        // phase 1: computing the lines with comments
+        for (final Token token : tokens) {
+            int startLine = token.getLine();
+            switch(token.getType()) {
+                // only keeping the comments
+                case Swift5Parser.Line_comment:
+                case Swift5Parser.Block_comment:
+                    // computing the end line of the token
+                    // since the comment might be spread on several lines
+                    final Integer endLine = findEndLine(allLines, token.getStopIndex());
+                    // making sure we found it
+                    if (endLine != null) {
+                        // adding each line to our set
+                        for (int line = startLine; line <= endLine; line++) {
+                            linesOfComment.add(line);
+                        }
                     }
-
-                }
+                    break;
+                // do nothing for the other token
+                default:
+                    break;
             }
-
-            int comments = 0;
-            int locs = 0;
-            for (final int lineType : linesTotal) {
-                if (lineType == 1) {
-                    locs++;
-                } else if (lineType == 2) {
-                    comments++;
-                }
-            }
-
-            LOGGER.info(String.format("Comments = %i", comments));
-            LOGGER.info(String.format("LOCs = %i", locs));
-            // TODO: continue from here
-
-
-        } catch (Throwable error) {
-            LOGGER.error(error.getMessage(), error);
         }
+
+        // phase 2: overriding the lines containing comments if needed
+        // some line might be a mix of comment and code
+        // we consider them as code
+        for (final Token token : tokens) {
+            int startLine = token.getLine();
+            // only overriding if this line has a comment
+            if (linesOfComment.contains(startLine)) {
+                switch(token.getType()) {
+                    // ignoring comments, whitespace and end-of-file
+                    case Swift5Parser.Line_comment:
+                    case Swift5Parser.Block_comment:
+                    case Swift5Parser.WS:
+                    case Swift5Parser.EOF:
+                        break;
+                        // logic for any other token
+                    default:
+                        // computing the end line of the token
+                        // since the token might be spread on several lines
+                        final Integer endLine = findEndLine(allLines, token.getStopIndex());
+                        // making sure we found it
+                        if (endLine != null) {
+                            // removing each line from our set
+                            // since we consider it as LOC and not comment
+                            for (int line = startLine; line <= endLine; line++) {
+                                linesOfComment.remove(line);
+                            }
+                        }
+                        break;
+                }
+            }
+
+        }
+
+        // phase 3 : compute
+        final long allLinesCount = allLines.length;
+        final long linesOfCommentCount = linesOfComment.size();
+        // we consider that all lines without comment is a line of code
+        final long linesOfCodeCount = allLinesCount - linesOfCommentCount;
+
+        synchronized (SourceLinesVisitor.class) {
+
+            final InputFile file = antlrContext.getFile();
+
+            try {
+                context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.NCLOC).withValue(Math.toIntExact(linesOfCodeCount)).save();
+                context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMMENT_LINES).withValue(Math.toIntExact(linesOfCommentCount)).save();
+            } catch (Exception e) {
+                LOGGER.warn("Unexpected source lines measures", e);
+            }
+
+        }
+    }
+
+    private Integer findEndLine(final SourceLine[] lines, final int global) {
+        for (final SourceLine line : lines) {
+            if (line.getEnd() > global) {
+                return line.getLine();
+            }
+        }
+        return null;
     }
 }
