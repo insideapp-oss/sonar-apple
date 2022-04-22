@@ -30,7 +30,7 @@ public class AppleTestsSensor implements Sensor {
     private static final Logger LOGGER = Loggers.get(AppleTestsSensor.class);
     private static final String DEFAULT_REPORT_PATH = "build/reports/";
 
-    public static final String REPORT_PATH_KEY = "sonar.junit.reportPaths";
+    public static final String REPORT_PATH_KEY = "sonar.apple.junit.reportPath";
 
     private final SensorContext context;
 
