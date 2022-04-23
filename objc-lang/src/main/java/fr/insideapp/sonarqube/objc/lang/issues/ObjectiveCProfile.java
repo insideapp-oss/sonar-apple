@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.objc.lang.issues;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
+import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -31,9 +32,6 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(ObjectiveCProfile.class);
 
-    public static final String OCLINT_RULES_PATH = "/oclint-rules.json";
-
-
     @Override
     public void define(Context context) {
 
@@ -42,7 +40,7 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
         // OCLint rules
         try {
             RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
-            List<RepositoryRule> rules = repositoryRuleParser.parse(OCLINT_RULES_PATH);
+            List<RepositoryRule> rules = repositoryRuleParser.parse(OCLintRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
                 NewBuiltInActiveRule rule1 = profile.activateRule("OCLint",r.getKey());
                 rule1.overrideSeverity(r.getSeverity());

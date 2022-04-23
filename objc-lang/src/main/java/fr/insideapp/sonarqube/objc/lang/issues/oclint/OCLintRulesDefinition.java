@@ -24,7 +24,9 @@ public class OCLintRulesDefinition extends JSONRulesDefinition {
     public static final String REPOSITORY_KEY = "OCLint";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
+    public static final String RULES_PATH = "/oclint-rules.json";
+
     public OCLintRulesDefinition() {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, ObjectiveC.KEY, "/oclint-rules.json");
+        super(REPOSITORY_KEY, REPOSITORY_NAME, ObjectiveC.KEY, RULES_PATH);
     }
 }
