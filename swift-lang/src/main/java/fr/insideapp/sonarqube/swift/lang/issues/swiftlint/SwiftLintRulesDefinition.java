@@ -25,8 +25,10 @@ public class SwiftLintRulesDefinition extends JSONRulesDefinition {
     public static final String REPOSITORY_KEY = "SwiftLint";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
+    public static final String RULES_PATH = "/swiftlint-rules.json";
+
     public SwiftLintRulesDefinition() {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, "/swiftlint-rules.json");
+        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, RULES_PATH);
     }
 
 }
