@@ -15,19 +15,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.objc.lang.issues.oclint;
 
 import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
-import fr.insideapp.sonarqube.swift.lang.Swift;
+import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
 import org.sonar.api.SonarRuntime;
 
-public class SwiftLintRulesDefinition extends JSONRulesDefinition {
-
-    public static final String REPOSITORY_KEY = "SwiftLint";
+public class OCLintRulesDefinition extends JSONRulesDefinition {
+    public static final String REPOSITORY_KEY = "OCLint";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    public SwiftLintRulesDefinition(SonarRuntime sonarRuntime) {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, "/swiftlint-rules.json");
+    public OCLintRulesDefinition(SonarRuntime sonarRuntime) {
+        super(REPOSITORY_KEY, REPOSITORY_NAME, ObjectiveC.KEY, "/oclint-rules.json");
     }
-
 }

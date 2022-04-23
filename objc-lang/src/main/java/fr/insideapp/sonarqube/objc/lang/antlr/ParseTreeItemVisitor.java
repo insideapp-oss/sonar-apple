@@ -15,19 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.objc.lang.antlr;
 
-import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
-import fr.insideapp.sonarqube.swift.lang.Swift;
-import org.sonar.api.SonarRuntime;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.sonar.api.batch.sensor.SensorContext;
 
-public class SwiftLintRulesDefinition extends JSONRulesDefinition {
+public interface ParseTreeItemVisitor {
+    void apply(ParseTree tree);
 
-    public static final String REPOSITORY_KEY = "SwiftLint";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
-
-    public SwiftLintRulesDefinition(SonarRuntime sonarRuntime) {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, "/swiftlint-rules.json");
-    }
-
+    void fillContext(SensorContext context, AntlrContext antlrContext);
 }

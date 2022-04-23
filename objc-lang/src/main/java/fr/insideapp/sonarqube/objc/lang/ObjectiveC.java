@@ -15,19 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.objc.lang;
 
-import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
-import fr.insideapp.sonarqube.swift.lang.Swift;
-import org.sonar.api.SonarRuntime;
+import org.sonar.api.resources.AbstractLanguage;
 
-public class SwiftLintRulesDefinition extends JSONRulesDefinition {
+public class ObjectiveC extends AbstractLanguage {
 
-    public static final String REPOSITORY_KEY = "SwiftLint";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
+    public static final String KEY = "objc";
 
-    public SwiftLintRulesDefinition(SonarRuntime sonarRuntime) {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, "/swiftlint-rules.json");
+    public ObjectiveC() {
+        super(KEY, "Objective-C");
     }
 
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[]{"h,m,mm"};
+    }
 }

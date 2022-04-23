@@ -15,19 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.objc.lang;
 
-import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
-import fr.insideapp.sonarqube.swift.lang.Swift;
-import org.sonar.api.SonarRuntime;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
-public class SwiftLintRulesDefinition extends JSONRulesDefinition {
+public class ObjectiveCSensor implements Sensor {
+    @Override
+    public void describe(SensorDescriptor sensorDescriptor) {
 
-    public static final String REPOSITORY_KEY = "SwiftLint";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
-
-    public SwiftLintRulesDefinition(SonarRuntime sonarRuntime) {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, "/swiftlint-rules.json");
     }
 
+    @Override
+    public void execute(SensorContext sensorContext) {
+
+    }
 }
