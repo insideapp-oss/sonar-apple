@@ -17,8 +17,8 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues;
 
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRule;
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRuleParser;
+import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
+import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;

@@ -15,32 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.tests;
+package fr.insideapp.sonarqube.apple.commons;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 
-public class UnitTestIndex {
-
-    private final Map<String, UnitTestClassReport> indexByClassname;
-
-    public UnitTestIndex() {
-        this.indexByClassname = new HashMap<>();
-    }
-
-    public UnitTestClassReport index(String classname) {
-        return indexByClassname.computeIfAbsent(classname, name -> new UnitTestClassReport());
-    }
-
-    public UnitTestClassReport get(String classname) {
-        return indexByClassname.get(classname);
-    }
-
-    public Map<String, UnitTestClassReport> getIndexByClassname() {
-        return indexByClassname;
-    }
-
-    public int size() {
-        return indexByClassname.size();
-    }
+public interface TestFileFinder {
+    InputFile getUnitTestResource(FileSystem fileSystem, String classname);
 }

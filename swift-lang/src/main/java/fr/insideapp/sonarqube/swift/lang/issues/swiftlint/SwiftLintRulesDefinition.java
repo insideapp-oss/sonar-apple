@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 
 public class SwiftLintRulesDefinition extends JSONRulesDefinition {

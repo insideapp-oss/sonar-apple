@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
-import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;

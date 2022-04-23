@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonaqube.apple.commons.issues.ReportIssue;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

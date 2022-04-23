@@ -17,8 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
-import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
-import fr.insideapp.sonaqube.apple.commons.tests.JUnitReportParser;
+import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;

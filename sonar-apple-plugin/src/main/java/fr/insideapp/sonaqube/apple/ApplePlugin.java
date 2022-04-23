@@ -17,8 +17,8 @@
  */
 package fr.insideapp.sonaqube.apple;
 
-import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
-import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
+import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.lang.issues.ObjectiveCProfile;

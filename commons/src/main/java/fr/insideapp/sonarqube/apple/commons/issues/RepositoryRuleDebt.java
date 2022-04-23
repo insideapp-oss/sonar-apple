@@ -15,13 +15,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.antlr;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.sonar.api.batch.sensor.SensorContext;
+public class RepositoryRuleDebt {
 
-public interface ParseTreeItemVisitor {
-    void apply(ParseTree tree);
+    private final String function;
+    private final String offset;
 
-    void fillContext(SensorContext context, AntlrContext antlrContext);
+    public RepositoryRuleDebt(final String function, final String offset) {
+        this.function = function;
+        this.offset = offset;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public String getOffset() {
+        return offset;
+    }
 }

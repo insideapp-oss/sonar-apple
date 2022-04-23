@@ -15,23 +15,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.commons.tests;
 
-public class RepositoryRuleDebt {
+import java.util.HashMap;
+import java.util.Map;
 
-    private final String function;
-    private final String offset;
+public class UnitTestIndex {
 
-    public RepositoryRuleDebt(final String function, final String offset) {
-        this.function = function;
-        this.offset = offset;
+    private final Map<String, UnitTestClassReport> indexByClassname;
+
+    public UnitTestIndex() {
+        this.indexByClassname = new HashMap<>();
     }
 
-    public String getFunction() {
-        return function;
+    public UnitTestClassReport index(String classname) {
+        return indexByClassname.computeIfAbsent(classname, name -> new UnitTestClassReport());
     }
 
-    public String getOffset() {
-        return offset;
+    public UnitTestClassReport get(String classname) {
+        return indexByClassname.get(classname);
+    }
+
+    public Map<String, UnitTestClassReport> getIndexByClassname() {
+        return indexByClassname;
+    }
+
+    public int size() {
+        return indexByClassname.size();
     }
 }
