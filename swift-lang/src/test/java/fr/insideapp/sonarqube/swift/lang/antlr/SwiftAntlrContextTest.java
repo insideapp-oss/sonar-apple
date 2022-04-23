@@ -17,18 +17,23 @@
  */
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrContext;
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrUtils;
 import org.antlr.v4.runtime.Token;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+
+import java.nio.charset.Charset;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AntlrContextTest {
+public class SwiftAntlrContextTest {
     @Test
     public void linesDetection() throws Throwable {
         String s = "let test = \"test\"";
-        AntlrContext result = AntlrUtils.getRequest(s);
+
+        SwiftAntlrContext result = new SwiftAntlrContext();
+        result.loadFromStreams(null, IOUtils.toInputStream(s, Charset.defaultCharset()),
+                IOUtils.toInputStream(s, Charset.defaultCharset()), Charset.defaultCharset());
+
         for (Token t : result.getStream().getTokens()) {
             if (t.getType() == Token.EOF) {
                 continue;

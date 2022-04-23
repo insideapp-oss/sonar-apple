@@ -15,19 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.antlr;
+package fr.insideapp.sonaqube.apple.commons.antlr;
 
-import org.sonar.api.internal.apachecommons.io.IOUtils;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.sonar.api.batch.sensor.SensorContext;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
+public interface ParseTreeItemVisitor {
+    void apply(ParseTree tree);
 
-public class AntlrUtils {
-
-    public static AntlrContext getRequest(String text) throws IOException {
-        return AntlrContext.fromStreams(null, IOUtils.toInputStream(text, Charset.defaultCharset()),
-                IOUtils.toInputStream(text, Charset.defaultCharset()), Charset.defaultCharset());
-
-    }
-
+    void fillContext(SensorContext context, AntlrContext antlrContext);
 }

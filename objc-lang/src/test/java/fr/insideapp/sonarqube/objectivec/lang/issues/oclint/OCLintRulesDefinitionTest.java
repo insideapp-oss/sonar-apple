@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.objectivec.lang.issues.oclint;
 
+import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
 import org.junit.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -27,20 +28,20 @@ import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SwiftLintRulesDefinitionTest {
+public class OCLintRulesDefinitionTest {
 
     @Test
     public void define() {
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9),SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        SwiftLintRulesDefinition rulesDefinition = new SwiftLintRulesDefinition(sonarRuntime);
+        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+        OCLintRulesDefinition rulesDefinition = new OCLintRulesDefinition(sonarRuntime);
         RulesDefinition.Context context = new RulesDefinition.Context();
         rulesDefinition.define(context);
 
-        RulesDefinition.Repository repository = context.repository("SwiftLint");
+        RulesDefinition.Repository repository = context.repository("OCLint");
         assertThat(repository).isNotNull();
-        assertThat(repository.name()).isEqualTo("SwiftLint");
-        assertThat(repository.language()).isEqualTo("swift");
+        assertThat(repository.name()).isEqualTo("OCLint");
+        assertThat(repository.language()).isEqualTo("objc");
         assertThat(repository.rules()).isNotEmpty();
 
 

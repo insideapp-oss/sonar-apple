@@ -15,14 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.antlr;
+package fr.insideapp.sonaqube.apple.commons.antlr;
 
 import fr.insideapp.sonaqube.apple.commons.SourceLine;
-import fr.insideapp.sonaqube.apple.commons.SourceLinesProvider;
-import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Lexer;
-import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -32,34 +27,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
-public class AntlrContext {
+public abstract class AntlrContext {
 
-    private final InputFile file;
-    private final CommonTokenStream stream;
-    private final ParseTree root;
-    private final SourceLine[] lines;
+    private InputFile file;
+    private CommonTokenStream stream;
+    private ParseTree root;
+    private SourceLine[] lines;
 
-    public AntlrContext(InputFile file, CommonTokenStream stream, ParseTree root, SourceLine[] lines) {
-        this.file = file;
-        this.stream = stream;
-        this.root = root;
-        this.lines = lines;
-    }
-
-    public static AntlrContext fromStreams(InputFile inputFile, InputStream file, InputStream linesStream,
-                                           Charset charset) throws IOException {
-        final SourceLinesProvider linesProvider = new SourceLinesProvider();
-        final CharStream charStream = CharStreams.fromStream(file, charset);
-        final Swift5Lexer lexer = new Swift5Lexer(charStream);
-        lexer.removeErrorListeners();
-        final CommonTokenStream stream = new CommonTokenStream(lexer);
-        stream.fill();
-        final Swift5Parser parser = new Swift5Parser(stream);
-        parser.removeErrorListeners();
-        final Swift5Parser.Top_levelContext root =  parser.top_level();
-        final SourceLine[] lines = linesProvider.getLines(linesStream, charset);
-        return new AntlrContext(inputFile, stream, root, lines);
-    }
+    public abstract void loadFromStreams(InputFile inputFile, InputStream file, InputStream linesStream,
+                                         Charset charset) throws IOException;
 
     public SourceLine[] getLines() {
         return lines;
@@ -73,7 +49,7 @@ public class AntlrContext {
 
         for (final SourceLine line : this.lines) {
             if (line.getEnd() > global) {
-                return new int[] { line.getLine(), global - line.getStart() };
+                return new int[]{line.getLine(), global - line.getStart()};
             }
         }
         return null;
@@ -83,11 +59,27 @@ public class AntlrContext {
         return file;
     }
 
+    protected void setFile(InputFile file) {
+        this.file = file;
+    }
+
     public CommonTokenStream getStream() {
         return stream;
     }
 
     public ParseTree getRoot() {
         return root;
+    }
+
+    protected void setStream(CommonTokenStream stream) {
+        this.stream = stream;
+    }
+
+    protected void setRoot(ParseTree root) {
+        this.root = root;
+    }
+
+    protected void setLines(SourceLine[] lines) {
+        this.lines = lines;
     }
 }

@@ -15,13 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.antlr;
+package fr.insideapp.sonarqube.objectivec.lang.antlr;
 
 import fr.insideapp.sonaqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonaqube.apple.commons.antlr.CustomTreeVisitor;
 import fr.insideapp.sonaqube.apple.commons.antlr.ParseTreeItemVisitor;
-import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Lexer;
-import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
+import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCLexer;
+import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -40,7 +41,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomTreeVisitorTest {
 
-    private static final String MAIN_SRC = "/swift/main.swift";
+
+    private static final String MAIN_SRC = "/objc/main.m";
 
     @Mock
     private SensorContext sensorContext;
@@ -49,13 +51,13 @@ public class CustomTreeVisitorTest {
     public void visit() throws IOException {
 
         final CharStream charStream = CharStreams.fromStream(Objects.requireNonNull(this.getClass().getResourceAsStream(MAIN_SRC)));
-        final Swift5Lexer lexer = new Swift5Lexer(charStream);
+        final ObjectiveCLexer lexer = new ObjectiveCLexer(charStream);
         lexer.removeErrorListeners();
         final CommonTokenStream stream = new CommonTokenStream(lexer);
         stream.fill();
-        final Swift5Parser parser = new Swift5Parser(stream);
+        final ObjectiveCParser parser = new ObjectiveCParser(stream);
         parser.removeErrorListeners();
-        final ParseTree root = parser.top_level();
+        final ParseTree root = parser.topLevelDeclaration();
 
         CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(new ParseTreeItemVisitor() {
             @Override
@@ -65,13 +67,13 @@ public class CustomTreeVisitorTest {
 
             @Override
             public void fillContext(SensorContext context, AntlrContext antlrContext) {
-                assertThat(antlrContext.getTokens()).hasSize(30);
+                assertThat(antlrContext.getTokens()).hasSize(73);
             }
 
 
         });
 
-        SwiftAntlrContext antlrContext = new SwiftAntlrContext();
+        ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
         String text = IOUtils.toString(Objects.requireNonNull(this.getClass().getResourceAsStream(MAIN_SRC)), StandardCharsets.UTF_8);
         antlrContext.loadFromStreams(null, IOUtils.toInputStream(text, Charset.defaultCharset()),
                 IOUtils.toInputStream(text, Charset.defaultCharset()), Charset.defaultCharset());

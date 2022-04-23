@@ -19,12 +19,12 @@ package fr.insideapp.sonarqube.objc.lang.antlr;
 
 import fr.insideapp.sonaqube.apple.commons.SourceLine;
 import fr.insideapp.sonaqube.apple.commons.SourceLinesProvider;
+import fr.insideapp.sonaqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCLexer;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
 
@@ -32,22 +32,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
-public class AntlrContext {
+public class ObjectiveCAntlrContext extends AntlrContext {
 
-    private final InputFile file;
-    private final CommonTokenStream stream;
-    private final ParseTree root;
-    private final SourceLine[] lines;
-
-    public AntlrContext(InputFile file, CommonTokenStream stream, ParseTree root, SourceLine[] lines) {
-        this.file = file;
-        this.stream = stream;
-        this.root = root;
-        this.lines = lines;
-    }
-
-    public static AntlrContext fromStreams(InputFile inputFile, InputStream file, InputStream linesStream,
-                                           Charset charset) throws IOException {
+    @Override
+    public void loadFromStreams(InputFile inputFile, InputStream file, InputStream linesStream, Charset charset) throws IOException {
         final SourceLinesProvider linesProvider = new SourceLinesProvider();
         final CharStream charStream = CharStreams.fromStream(file, charset);
         final ObjectiveCLexer lexer = new ObjectiveCLexer(charStream);
@@ -58,36 +46,11 @@ public class AntlrContext {
         parser.removeErrorListeners();
         final ParseTree root =  parser.topLevelDeclaration();
         final SourceLine[] lines = linesProvider.getLines(linesStream, charset);
-        return new AntlrContext(inputFile, stream, root, lines);
-    }
 
-    public SourceLine[] getLines() {
-        return lines;
-    }
+        this.setFile(inputFile);
+        this.setStream(stream);
+        this.setLines(lines);
+        this.setRoot(root);
 
-    public Token[] getTokens() {
-        return this.stream.getTokens().toArray(new Token[0]);
-    }
-
-    public int[] getLineAndColumn(final int global) {
-
-        for (final SourceLine line : this.lines) {
-            if (line.getEnd() > global) {
-                return new int[] { line.getLine(), global - line.getStart() };
-            }
-        }
-        return null;
-    }
-
-    public InputFile getFile() {
-        return file;
-    }
-
-    public CommonTokenStream getStream() {
-        return stream;
-    }
-
-    public ParseTree getRoot() {
-        return root;
     }
 }
