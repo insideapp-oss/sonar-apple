@@ -17,9 +17,9 @@
  */
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import fr.insideapp.sonaqube.apple.commons.antlr.AntlrContext;
-import fr.insideapp.sonaqube.apple.commons.antlr.CustomTreeVisitor;
-import fr.insideapp.sonaqube.apple.commons.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
+import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Lexer;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.CharStream;

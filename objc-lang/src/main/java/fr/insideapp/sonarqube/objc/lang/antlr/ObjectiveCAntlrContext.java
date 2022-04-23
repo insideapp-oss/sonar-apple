@@ -17,9 +17,9 @@
  */
 package fr.insideapp.sonarqube.objc.lang.antlr;
 
-import fr.insideapp.sonaqube.apple.commons.SourceLine;
-import fr.insideapp.sonaqube.apple.commons.SourceLinesProvider;
-import fr.insideapp.sonaqube.apple.commons.antlr.AntlrContext;
+import fr.insideapp.sonarqube.apple.commons.SourceLine;
+import fr.insideapp.sonarqube.apple.commons.SourceLinesProvider;
+import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCLexer;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCParser;
 import org.antlr.v4.runtime.CharStream;

@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple.commons.antlr;
+package fr.insideapp.sonarqube.apple.commons.antlr;
 
-import fr.insideapp.sonaqube.apple.commons.SourceLine;
+import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;

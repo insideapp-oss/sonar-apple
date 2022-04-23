@@ -17,10 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons;
 
-import fr.insideapp.sonaqube.apple.commons.TestFileFinder;
-import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
 import org.junit.Test;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;

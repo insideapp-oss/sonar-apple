@@ -17,9 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.antlr;
 
-import fr.insideapp.sonaqube.apple.commons.antlr.AntlrContext;
-import fr.insideapp.sonaqube.apple.commons.antlr.CustomTreeVisitor;
-import fr.insideapp.sonaqube.apple.commons.antlr.ParseTreeItemVisitor;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorContext;

@@ -17,9 +17,9 @@
  */
 package fr.insideapp.sonarqube.objectivec.lang.antlr;
 
-import fr.insideapp.sonaqube.apple.commons.antlr.AntlrContext;
-import fr.insideapp.sonaqube.apple.commons.antlr.CustomTreeVisitor;
-import fr.insideapp.sonaqube.apple.commons.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
+import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCLexer;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCParser;

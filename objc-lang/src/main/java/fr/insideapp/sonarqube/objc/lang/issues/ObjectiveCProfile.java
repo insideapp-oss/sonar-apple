@@ -17,8 +17,8 @@
  */
 package fr.insideapp.sonarqube.objc.lang.issues;
 
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRule;
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRuleParser;
+import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
+import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
@@ -39,7 +39,7 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
         NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Objective-C", ObjectiveC.KEY);
 
-        // SwiftLint rules
+        // OCLint rules
         try {
             RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
             List<RepositoryRule> rules = repositoryRuleParser.parse(OCLINT_RULES_PATH);

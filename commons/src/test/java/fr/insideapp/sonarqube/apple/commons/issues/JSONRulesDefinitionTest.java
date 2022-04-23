@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
@@ -28,8 +27,7 @@ public class JSONRulesDefinitionTest {
     @Test
     public void define() {
 
-        JSONRulesDefinition rulesDefinition = new JSONRulesDefinition("rep_key", "rep_name", "lang", "/rules/rules.json") {
-        };
+        JSONRulesDefinition rulesDefinition = new JSONRulesDefinition("rep_key", "rep_name", "lang", "/rules/rules.json") {};
 
 
         RulesDefinition.Context context = new RulesDefinition.Context();

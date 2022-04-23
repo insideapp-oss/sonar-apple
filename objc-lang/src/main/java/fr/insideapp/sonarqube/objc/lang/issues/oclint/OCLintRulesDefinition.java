@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.lang.issues.oclint;
 
-import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
 
 public class OCLintRulesDefinition extends JSONRulesDefinition {
