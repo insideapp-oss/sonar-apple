@@ -40,73 +40,67 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
 
         final SourceLine[] allLines = antlrContext.getLines();
-        // set containing the lines considered as comment
+        // set containing the lines number considered as a comment
         final Set<Integer> linesOfComment = new HashSet<>();
-        // all the tokens of the file
-        final Token[] tokens = antlrContext.getTokens();
+        // set containing the lines number considered as code
+        final Set<Integer> linesOfCode = new HashSet<>();
 
-        // phase 1: computing the lines with comments
-        for (final Token token : tokens) {
-            int startLine = token.getLine();
+        // computing the lines according to token type
+        for (final Token token : antlrContext.getTokens()) {
+            Integer currentLineNumber = token.getLine();
             switch(token.getType()) {
-                // only keeping the comments
+                // ignoring white-space and end-of-file
+                case Swift5Parser.WS:
+                case Swift5Parser.EOF:
+                    break;
+                // single line comment
                 case Swift5Parser.Line_comment:
+                    linesOfComment.add(currentLineNumber);
+                    break;
                 case Swift5Parser.Block_comment:
                     // computing the end line of the token
-                    // since the comment might be spread on several lines
-                    final Integer endLine = findEndLine(allLines, token.getStopIndex());
+                    // since the comment might be spread over several lines
+                    final Integer endLineOfComment = findEndLine(allLines, token.getStopIndex());
                     // making sure we found it
-                    if (endLine != null) {
+                    if (endLineOfComment != null) {
                         // adding each line to our set
-                        for (int line = startLine; line <= endLine; line++) {
+                        for (int line = currentLineNumber; line <= endLineOfComment; line++) {
                             linesOfComment.add(line);
                         }
                     }
                     break;
-                // do nothing for the other token
+                // tokens that can be spread over several lines
+                case Swift5Parser.Interpolataion_multi_line:
+                case Swift5Parser.Quoted_multi_line_text:
+                case Swift5Parser.Quoted_multi_line_extended_text:
+                    // computing the end line of the token
+                    // since the token might be spread on several lines
+                    final Integer endLineOfCode = findEndLine(allLines, token.getStopIndex());
+                    // making sure we found it
+                    if (endLineOfCode != null) {
+                        // adding each line to our set
+                        for (int line = currentLineNumber; line <= endLineOfCode; line++) {
+                            linesOfCode.add(line);
+                        }
+                    }
+                    break;
+                // any other token should be considered "code" token
                 default:
+                    linesOfCode.add(currentLineNumber);
                     break;
             }
         }
 
-        // phase 2: overriding the lines containing comments if needed
-        // some line might be a mix of comment and code
-        // we consider them as code
-        for (final Token token : tokens) {
-            int startLine = token.getLine();
-            // only overriding if this line has a comment
-            if (linesOfComment.contains(startLine)) {
-                switch(token.getType()) {
-                    // ignoring comments, whitespace and end-of-file
-                    case Swift5Parser.Line_comment:
-                    case Swift5Parser.Block_comment:
-                    case Swift5Parser.WS:
-                    case Swift5Parser.EOF:
-                        break;
-                        // logic for any other token
-                    default:
-                        // computing the end line of the token
-                        // since the token might be spread on several lines
-                        final Integer endLine = findEndLine(allLines, token.getStopIndex());
-                        // making sure we found it
-                        if (endLine != null) {
-                            // removing each line from our set
-                            // since we consider it as LOC and not comment
-                            for (int line = startLine; line <= endLine; line++) {
-                                linesOfComment.remove(line);
-                            }
-                        }
-                        break;
-                }
-            }
+        // only keeping the comments that are "pure" comments
+        // meaning not mixed with a LOC
+        // we considered a LOC with a comment, as a LOC
+        linesOfComment.removeAll(linesOfCode);
 
-        }
-
-        // phase 3 : compute
-        final long allLinesCount = allLines.length;
         final long linesOfCommentCount = linesOfComment.size();
-        // we consider that all lines without comment is a line of code
-        final long linesOfCodeCount = allLinesCount - linesOfCommentCount;
+        final long linesOfCodeCount = linesOfCode.size();
+
+        LOGGER.info(String.format("Line of comments: %d", linesOfCommentCount));
+        LOGGER.info(String.format("Line of code: %d", linesOfCodeCount));
 
         synchronized (SourceLinesVisitor.class) {
 
