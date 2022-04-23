@@ -20,14 +20,14 @@ Let us know if you want to get involved.
 
 The plugin is designed to support Swift 5 syntax.
 
-| Feature             | Swift                                                        | Objective-C |
-|---------------------|--------------------------------------------------------------|-------------|
-| Size                | IN PROGRESS                                                  | IN PROGRESS |
-| Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
-| Tests               | YES                                                          | IN PROGRESS |
-| Coverage            | IN PROGRESS                                                  | IN PROGRESS |
-| Complexity          | IN PROGRESS                                                  | IN PROGRESS |
-| Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS |
+| Feature             | Swift                                                        | Objective-C                               |
+|---------------------|--------------------------------------------------------------|-------------------------------------------|
+| Size                | IN PROGRESS                                                  | IN PROGRESS                               |
+| Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | [OCLint 22.02](https://oclint.org/) rules |
+| Tests               | YES                                                          | IN PROGRESS                               |
+| Coverage            | IN PROGRESS                                                  | IN PROGRESS                               |
+| Complexity          | IN PROGRESS                                                  | IN PROGRESS                               |
+| Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS                               |
 
 ## Requirements
 
@@ -47,6 +47,25 @@ In order to generate reports from ``xcodebuild`` commands, extract command line 
 
 - [xcpretty](https://github.com/xcpretty/xcpretty) generates test reports
 - [slather](https://github.com/SlatherOrg/slather) generates coverage reports
+
+### SwiftLint
+
+SwiftLint is used to analyse Swift source files.
+
+See install instructions [here](https://github.com/realm/SwiftLint).
+
+### OCLint
+
+OCLint is used to analyse Objective-C source files.
+
+See install instructions [here](https://docs.oclint.org/en/stable/intro/homebrew.html).
+
+Important: after initial installation, macOS will block usage of OCLint libraries. In order to get rid of the manual verification of each of them, use the following commands:
+
+```bash
+$ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
+$ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
+```
 
 ## Installation (on the server)
 
@@ -88,13 +107,14 @@ Use the following commands from the root folder to start an analysis:
 ```bash
 
 # Run tests with xcpretty to generate test report in build/reports/junit.xml
+# Also saves Xcode log to build/xcodebuild.log (this is necessary for Objective-C code analysis)
 # Don't forget to add -workspace to the build command if your project is part of a workspace
-$ xcodebuild \                                                                                     SIGINT(2) ↵   10410  13:18:29 
+$ xcodebuild \
   -project MyApp.xcodeproj \
   -scheme MyApp \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-  test | xcpretty --report junit
+  clean test | tee build/xcodebuild.log | xcpretty --report junit
   
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner
