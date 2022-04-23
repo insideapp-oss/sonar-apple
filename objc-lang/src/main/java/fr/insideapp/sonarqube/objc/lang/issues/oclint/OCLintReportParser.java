@@ -15,35 +15,34 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.objc.lang.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
+import org.sonarsource.analyzer.commons.internal.json.simple.JSONArray;
+import org.sonarsource.analyzer.commons.internal.json.simple.JSONObject;
+import org.sonarsource.analyzer.commons.internal.json.simple.JSONValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class SwiftLintReportParser implements ReportParser {
-
+public class OCLintReportParser implements ReportParser {
     @Override
     public List<ReportIssue> parse(String input) {
-
         List<ReportIssue> issues = new ArrayList<>();
 
-        String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(.*.swift):(\\w+):(\\w+): (warning|error): (.*) \\((\\w+)\\)");
-        for (String line : lines) {
-            Matcher matcher = pattern.matcher(line);
-            while (matcher.find()) {
-                String filePath = matcher.group(1);
-                int lineNum = Integer.parseInt(matcher.group(2));
-                String message = matcher.group(5);
-                String ruleId = matcher.group(6);
-                issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
-            }
+        JSONObject jsonReport = (JSONObject) JSONValue.parse(input);
+        JSONArray jsonViolations = (JSONArray) jsonReport.get("violation");
+        for (Object obj : jsonViolations) {
+            JSONObject jsonViolation = (JSONObject) obj;
+
+            String filePath = (String) jsonViolation.get("path");
+            int lineNum = ((Long) jsonViolation.get("startLine")).intValue();
+            String message = (String) jsonViolation.get("message");
+            String ruleId = ((String) jsonViolation.get("rule")).replaceAll(" ", "-");
+            issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
         }
+
 
         return issues;
     }

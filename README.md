@@ -114,7 +114,7 @@ $ xcodebuild \
   -scheme MyApp \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-  clean test | tee build/xcodebuild.log | xcpretty --report junit
+   clean test | tee build/xcodebuild.log | xcpretty --report junit
   
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner
