@@ -36,7 +36,7 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
 
     private final String jsonResourcePath;
 
-    public JSONRulesDefinition(String repositoryKey, String repositoryName, String language, String jsonResourcePath) {
+    protected JSONRulesDefinition(String repositoryKey, String repositoryName, String language, String jsonResourcePath) {
         this.repositoryKey = repositoryKey;
         this.repositoryName = repositoryName;
         this.language = language;

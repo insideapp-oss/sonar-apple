@@ -18,12 +18,7 @@
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import org.junit.Test;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,8 +27,7 @@ public class SwiftLintRulesDefinitionTest {
     @Test
     public void define() {
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9),SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        SwiftLintRulesDefinition rulesDefinition = new SwiftLintRulesDefinition(sonarRuntime);
+        SwiftLintRulesDefinition rulesDefinition = new SwiftLintRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         rulesDefinition.define(context);
 

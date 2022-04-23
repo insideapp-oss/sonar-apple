@@ -15,18 +15,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
 import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
-import fr.insideapp.sonarqube.swift.lang.Swift;
+import org.junit.Test;
+import org.sonar.api.server.rule.RulesDefinition;
 
-public class SwiftLintRulesDefinition extends JSONRulesDefinition {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    public static final String REPOSITORY_KEY = "SwiftLint";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
+public class JSONRulesDefinitionTest {
 
-    public SwiftLintRulesDefinition() {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, "/swiftlint-rules.json");
+    @Test
+    public void define() {
+
+        JSONRulesDefinition rulesDefinition = new JSONRulesDefinition("rep_key", "rep_name", "lang", "/rules/rules.json") {
+        };
+
+
+        RulesDefinition.Context context = new RulesDefinition.Context();
+        rulesDefinition.define(context);
+
+        RulesDefinition.Repository repository = context.repository("rep_key");
+        assertThat(repository).isNotNull();
+        assertThat(repository.name()).isEqualTo("rep_name");
+        assertThat(repository.language()).isEqualTo("lang");
+        assertThat(repository.rules()).isNotEmpty();
+
+
     }
-
 }

@@ -52,7 +52,7 @@ public abstract class AntlrContext {
                 return new int[]{line.getLine(), global - line.getStart()};
             }
         }
-        return null;
+        return new int[0];
     }
 
     public InputFile getFile() {

@@ -19,13 +19,12 @@ package fr.insideapp.sonarqube.objc.lang.issues.oclint;
 
 import fr.insideapp.sonaqube.apple.commons.issues.JSONRulesDefinition;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
-import org.sonar.api.SonarRuntime;
 
 public class OCLintRulesDefinition extends JSONRulesDefinition {
     public static final String REPOSITORY_KEY = "OCLint";
     public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    public OCLintRulesDefinition(SonarRuntime sonarRuntime) {
+    public OCLintRulesDefinition() {
         super(REPOSITORY_KEY, REPOSITORY_NAME, ObjectiveC.KEY, "/oclint-rules.json");
     }
 }

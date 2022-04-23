@@ -19,12 +19,7 @@ package fr.insideapp.sonarqube.objectivec.lang.issues.oclint;
 
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
 import org.junit.Test;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,8 +28,7 @@ public class OCLintRulesDefinitionTest {
     @Test
     public void define() {
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        OCLintRulesDefinition rulesDefinition = new OCLintRulesDefinition(sonarRuntime);
+        OCLintRulesDefinition rulesDefinition = new OCLintRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         rulesDefinition.define(context);
 

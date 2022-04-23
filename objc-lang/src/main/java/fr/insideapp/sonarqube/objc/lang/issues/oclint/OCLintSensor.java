@@ -20,15 +20,22 @@ package fr.insideapp.sonarqube.objc.lang.issues.oclint;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class OCLintSensor implements Sensor {
+
+    private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
+
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-        
+
+        LOGGER.warn("Not implemented yet !");
     }
 
     @Override
     public void execute(SensorContext sensorContext) {
 
+        LOGGER.warn("Not implemented yet !");
     }
 }

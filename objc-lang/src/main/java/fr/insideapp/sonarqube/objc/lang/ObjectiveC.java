@@ -29,6 +29,6 @@ public class ObjectiveC extends AbstractLanguage {
 
     @Override
     public String[] getFileSuffixes() {
-        return new String[]{"h,m,mm"};
+        return new String[]{"h", "m","mm"};
     }
 }
