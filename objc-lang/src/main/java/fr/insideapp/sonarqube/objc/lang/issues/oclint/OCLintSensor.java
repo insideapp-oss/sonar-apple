@@ -32,6 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,11 +92,11 @@ public class OCLintSensor implements Sensor {
         }
 
         File compileCommandsFile = null;
-        try {
+        try (InputStream is = new FileInputStream((xcodebuildLogFile))) {
 
             // Generate compile_commands.json
             compileCommandsFile = new File("compile_commands.json");
-            String xcodebuildContent = IOUtils.toString(new FileInputStream((xcodebuildLogFile)), StandardCharsets.UTF_8);
+            String xcodebuildContent = IOUtils.toString(is, StandardCharsets.UTF_8);
             LOGGER.info("Running '{} -r json-compilation-database {}'...", XCPRETTY_COMMAND, compileCommandsFile.getAbsolutePath());
             ProcBuilder.filter(xcodebuildContent, XCPRETTY_COMMAND, "-r", "json-compilation-database", "-o", compileCommandsFile.getAbsolutePath());
 
@@ -111,12 +112,13 @@ public class OCLintSensor implements Sensor {
             List<ReportIssue> issues = new OCLintReportParser().parse(output);
             LOGGER.info("Found issues: {}", issues.size());
             return issues;
-
         } catch (Exception e) {
             throw new IOException(e);
         } finally {
             if (compileCommandsFile != null) {
-                compileCommandsFile.delete();
+                if (!compileCommandsFile.delete()) {
+                    LOGGER.error("Failed to delete {}", compileCommandsFile.getAbsolutePath());
+                }
             }
         }
     }
