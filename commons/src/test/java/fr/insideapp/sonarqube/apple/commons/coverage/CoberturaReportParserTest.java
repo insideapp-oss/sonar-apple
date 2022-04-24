@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
-import fr.insideapp.sonaqube.apple.commons.coverage.CoberturaReportParser;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
