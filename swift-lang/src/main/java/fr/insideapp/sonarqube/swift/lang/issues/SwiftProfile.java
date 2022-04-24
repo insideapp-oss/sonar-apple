@@ -17,9 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues;
 
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRule;
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRuleParser;
+import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
+import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.swift.lang.Swift;
+import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -30,7 +31,6 @@ import java.util.List;
 public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(SwiftProfile.class);
-    public static final String SWIFTLINT_RULES_PATH = "/swiftlint-rules.json";
 
     @Override
     public void define(Context context) {
@@ -40,7 +40,7 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
         // SwiftLint rules
         try {
             RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
-            List<RepositoryRule> rules = repositoryRuleParser.parse(SWIFTLINT_RULES_PATH);
+            List<RepositoryRule> rules = repositoryRuleParser.parse(SwiftLintRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
                 NewBuiltInActiveRule rule1 = profile.activateRule("SwiftLint",r.getKey());
                 rule1.overrideSeverity(r.getSeverity());

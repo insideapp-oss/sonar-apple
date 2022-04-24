@@ -17,10 +17,9 @@
  */
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrContext;
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrUtils;
-import fr.insideapp.sonarqube.swift.lang.antlr.CustomTreeVisitor;
-import fr.insideapp.sonarqube.swift.lang.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
+import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Lexer;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.CharStream;
@@ -33,6 +32,7 @@ import org.mockito.Mock;
 import org.sonar.api.batch.sensor.SensorContext;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -67,8 +67,15 @@ public class CustomTreeVisitorTest {
             public void fillContext(SensorContext context, AntlrContext antlrContext) {
                 assertThat(antlrContext.getTokens()).hasSize(30);
             }
+
+
         });
-        AntlrContext antlrContext = AntlrUtils.getRequest(IOUtils.toString(Objects.requireNonNull(this.getClass().getResourceAsStream(MAIN_SRC)), StandardCharsets.UTF_8));
+
+        SwiftAntlrContext antlrContext = new SwiftAntlrContext();
+        String text = IOUtils.toString(Objects.requireNonNull(this.getClass().getResourceAsStream(MAIN_SRC)), StandardCharsets.UTF_8);
+        antlrContext.loadFromStreams(null, IOUtils.toInputStream(text, Charset.defaultCharset()),
+                IOUtils.toInputStream(text, Charset.defaultCharset()), Charset.defaultCharset());
+
         customTreeVisitor.visit(root);
         customTreeVisitor.fillContext(sensorContext, antlrContext);
     }
