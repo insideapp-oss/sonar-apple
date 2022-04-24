@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import fr.insideapp.sonaqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 
 import java.util.ArrayList;
 import java.util.List;

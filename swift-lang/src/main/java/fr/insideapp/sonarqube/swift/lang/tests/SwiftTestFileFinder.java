@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.lang.tests;
 
-import fr.insideapp.sonaqube.apple.commons.TestFileFinder;
+import fr.insideapp.sonarqube.apple.commons.TestFileFinder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.batch.fs.FilePredicate;
