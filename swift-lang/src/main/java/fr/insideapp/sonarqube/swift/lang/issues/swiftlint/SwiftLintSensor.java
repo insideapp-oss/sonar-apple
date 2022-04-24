@@ -49,7 +49,7 @@ public class SwiftLintSensor implements Sensor {
         try {
             List<ReportIssue> issues = runAnalysis();
             ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.record(issues);
+            issueRecorder.recordIssues(issues, SwiftLintRulesDefinition.REPOSITORY_KEY);
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

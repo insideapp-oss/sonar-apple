@@ -94,6 +94,10 @@ sonar.tests=iOSAppTests
 # Defaults to build/reports
 #sonar.junit.reportsPaths=
 
+# Path to xcodebuild.log file
+# Defaults to build
+# sonar.apple.xcodebuild.logPath=
+
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
 ```
@@ -114,7 +118,7 @@ $ xcodebuild \
   -scheme MyApp \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-   clean test | tee build/xcodebuild.log | xcpretty --report junit
+   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log | xcpretty --report junit
   
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner

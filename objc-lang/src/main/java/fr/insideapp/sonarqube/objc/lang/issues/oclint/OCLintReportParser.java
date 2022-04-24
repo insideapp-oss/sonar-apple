@@ -39,7 +39,7 @@ public class OCLintReportParser implements ReportParser {
             String filePath = (String) jsonViolation.get("path");
             int lineNum = ((Long) jsonViolation.get("startLine")).intValue();
             String message = (String) jsonViolation.get("message");
-            String ruleId = ((String) jsonViolation.get("rule")).replaceAll(" ", "-");
+            String ruleId = ((String) jsonViolation.get("rule")).replace(" ", "-");
             issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
         }
 

@@ -40,6 +40,8 @@ public class ApplePlugin implements Plugin {
 
     public static final String TESTS_SUBCATEGORY = "Tests";
 
+    public static final String OCLINT_SUBCATEGORY = "OCLint";
+
     @Override
     public void define(Context context) {
 
@@ -58,7 +60,6 @@ public class ApplePlugin implements Plugin {
                         .category(APPLE_CATEGORY)
                         .subCategory(TESTS_SUBCATEGORY)
                         .build());
-
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
 
@@ -66,6 +67,14 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
 
         // OCLint
+        context.addExtension(
+                PropertyDefinition.builder(OCLintSensor.LOG_PATH_KEY)
+                        .name("xcodebuild log")
+                        .description("Path to xcodebuild log file. The path may be either absolute or relative to the project base directory.")
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .category(APPLE_CATEGORY)
+                        .subCategory(OCLINT_SUBCATEGORY)
+                        .build());
         context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
     }
 }

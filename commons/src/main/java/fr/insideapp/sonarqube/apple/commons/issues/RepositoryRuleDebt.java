@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-public class RepositoryRuleDebt {
+public final class RepositoryRuleDebt {
 
     private final String function;
     private final String offset;
