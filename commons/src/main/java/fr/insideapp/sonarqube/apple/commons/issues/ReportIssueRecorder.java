@@ -9,7 +9,6 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
 import java.util.List;
 
 public class ReportIssueRecorder {
@@ -22,12 +21,16 @@ public class ReportIssueRecorder {
     }
 
     public void recordIssues(List<ReportIssue> issues, String repository) {
+
+        FilePredicate mainPredicate = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
+
         // Record issues
         for (ReportIssue i : issues) {
-            File file = new File(i.getFilePath());
-            FilePredicate fp = sensorContext.fileSystem().predicates().hasAbsolutePath(file.getAbsolutePath());
+            FilePredicate fp = sensorContext.fileSystem().predicates().and(
+                    sensorContext.fileSystem().predicates().hasAbsolutePath(i.getFilePath()),
+                    mainPredicate);
             if (!sensorContext.fileSystem().hasFiles(fp)) {
-                LOGGER.warn("File not included in SonarQube {}", file.getAbsolutePath());
+                LOGGER.warn("File not included in SonarQube sources {}", i.getFilePath());
             } else {
                 InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
                 if (inputFile != null) {
