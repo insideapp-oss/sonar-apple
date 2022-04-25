@@ -91,5 +91,6 @@ public class ApplePlugin implements Plugin {
                         .subCategory(OCLINT_SUBCATEGORY)
                         .build());
         context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
+
     }
 }
