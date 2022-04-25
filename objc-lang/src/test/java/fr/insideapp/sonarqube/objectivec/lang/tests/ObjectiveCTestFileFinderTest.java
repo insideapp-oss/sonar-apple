@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.tests;
+package fr.insideapp.sonarqube.objectivec.lang.tests;
 
+import fr.insideapp.sonarqube.objc.lang.tests.ObjectiveCTestFileFinder;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -27,19 +28,19 @@ import java.io.File;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class SwiftTestFileFinderTest {
+public class ObjectiveCTestFileFinderTest {
 
     @Test
     public void getUnitTestResource() {
 
         DefaultFileSystem fs = new DefaultFileSystem(new File("src/test/resources"));
-        DefaultInputFile testFile = new TestInputFileBuilder("", "swift/main.swift").setLanguage("swift").build();
+        DefaultInputFile testFile = new TestInputFileBuilder("", "objc/main.m").setLanguage("objc").build();
         fs.add(testFile);
 
-        SwiftTestFileFinder finder = new SwiftTestFileFinder();
-        InputFile found = finder.getUnitTestResource(fs, "swift.main");
+        ObjectiveCTestFileFinder finder = new ObjectiveCTestFileFinder();
+        InputFile found = finder.getUnitTestResource(fs, "objc/main");
         assertThat(found).isNotNull();
-        assertThat(found.filename()).isEqualTo("main.swift");
+        assertThat(found.filename()).isEqualTo("main.m");
 
     }
 
@@ -48,8 +49,8 @@ public class SwiftTestFileFinderTest {
 
         DefaultFileSystem fs = new DefaultFileSystem(new File("src/test/resources"));
 
-        SwiftTestFileFinder finder = new SwiftTestFileFinder();
-        InputFile found = finder.getUnitTestResource(fs, "swift.main");
+        ObjectiveCTestFileFinder finder = new ObjectiveCTestFileFinder();
+        InputFile found = finder.getUnitTestResource(fs, "objc/main");
         assertThat(found).isNull();
 
     }

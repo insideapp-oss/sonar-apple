@@ -24,7 +24,7 @@ The plugin is designed to support Swift 5 syntax.
 |---------------------|--------------------------------------------------------------|-------------|
 | Size                | IN PROGRESS                                                  | IN PROGRESS |
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
-| Tests               | YES                                                          | IN PROGRESS |
+| Tests               | YES                                                          | YES         |
 | Coverage            | YES                                                          | YES         |
 | Complexity          | IN PROGRESS                                                  | IN PROGRESS |
 | Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS |
