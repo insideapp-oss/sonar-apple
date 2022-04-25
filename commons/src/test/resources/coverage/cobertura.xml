@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+
+    SonarQube Apple Plugin - Enables analysis of Swift and Objective-C projects into SonarQube.
+    Copyright © 2022 inside|app (contact@insideapp.fr)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.7692307692307693" branch-rate="0.8000000000000000" lines-covered="10" lines-valid="13" branches-covered="4" branches-valid="5" complexity="0.0" timestamp="1650561550" version="Slather 2.7.2">
+  <sources>
+    <source>/SQApp</source>
+  </sources>
+  <packages>
+    <package name="SQApp" line-rate="0.7692307692307693" branch-rate="0.8000000000000000" complexity="0.0">
+      <classes>
+        <class name="ContentView" filename="SQApp/ContentView.swift" line-rate="0.5714285714285714" branch-rate="0.5000000000000000" complexity="0.0">
+          <methods/>
+          <lines>
+            <line number="11" branch="true" hits="1" condition-coverage="100% (1/1)">
+              <conditions>
+                <condition number="0" type="jump" coverage="100%"/>
+              </conditions>
+            </line>
+            <line number="12" branch="false" hits="1"/>
+            <line number="13" branch="false" hits="1"/>
+            <line number="14" branch="false" hits="1"/>
+            <line number="18" branch="true" hits="0" condition-coverage="0% (0/1)">
+              <conditions>
+                <condition number="0" type="jump" coverage="0%"/>
+              </conditions>
+            </line>
+            <line number="19" branch="false" hits="0"/>
+            <line number="20" branch="false" hits="0"/>
+          </lines>
+        </class>
+        <class name="SQAppApp" filename="SQApp/SQAppApp.swift" line-rate="1.0000000000000000" branch-rate="1.0000000000000000" complexity="0.0">
+          <methods/>
+          <lines>
+            <line number="13" branch="true" hits="1" condition-coverage="100% (1/1)">
+              <conditions>
+                <condition number="0" type="jump" coverage="100%"/>
+              </conditions>
+            </line>
+            <line number="14" branch="false" hits="1"/>
+            <line number="15" branch="true" hits="1" condition-coverage="100% (1/1)">
+              <conditions>
+                <condition number="0" type="jump" coverage="100%"/>
+              </conditions>
+            </line>
+            <line number="16" branch="false" hits="1"/>
+            <line number="17" branch="true" hits="1" condition-coverage="100% (1/1)">
+              <conditions>
+                <condition number="0" type="jump" coverage="100%"/>
+              </conditions>
+            </line>
+            <line number="18" branch="false" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
