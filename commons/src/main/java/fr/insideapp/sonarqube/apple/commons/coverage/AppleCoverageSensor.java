@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.tests;
+package fr.insideapp.sonarqube.apple.commons.coverage;
 
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -25,40 +26,41 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
 
-public class AppleTestsSensor implements Sensor {
+public class AppleCoverageSensor implements Sensor {
+    private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
+    public static final String REPORT_PATH_KEY = "sonar.apple.cobertura.reportPath";
 
-    private static final Logger LOGGER = Loggers.get(AppleTestsSensor.class);
     private static final String DEFAULT_REPORT_PATH = "build/reports/";
-
-    public static final String REPORT_PATH_KEY = "sonar.apple.junit.reportPath";
-
     private final SensorContext context;
 
-    public AppleTestsSensor(SensorContext context) {
+    public AppleCoverageSensor(final SensorContext context) {
         this.context = context;
     }
 
-    protected String reportPath() {
+    private String reportPath() {
         return context.config()
                 .get(REPORT_PATH_KEY)
                 .orElse(DEFAULT_REPORT_PATH);
     }
 
     @Override
-    public void describe(SensorDescriptor sensorDescriptor) {
-        sensorDescriptor.name("Apple Tests").onlyOnLanguages("swift", "objc");
+    public void describe(SensorDescriptor descriptor) {
+        descriptor
+                .name("Apple Coverage")
+                .onlyOnLanguages("swift", "objc")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
-    public void execute(SensorContext sensorContext) {
-        JUnitReportParser surefireParser = new JUnitReportParser(context);
-        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
+    public void execute(SensorContext context) {
+        CoberturaReportParser parser = new CoberturaReportParser(context);
+        String reportFileName = context.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
         File reportsDir = new File(reportFileName);
 
         if (!reportsDir.isDirectory()) {
-            LOGGER.warn("JUnit report directory not found at {}", reportsDir);
+            LOGGER.warn("Coverage report directory not found at {}", reportsDir);
         } else {
-            surefireParser.collect(reportsDir);
+            parser.collect(reportsDir);
         }
     }
 }

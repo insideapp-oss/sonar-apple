@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
+import fr.insideapp.sonaqube.apple.commons.FileCollector;
 import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -30,9 +31,6 @@ import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,12 +47,10 @@ public class JUnitReportParser {
     }
 
     public void collect(File reportsDir) {
+
         List<File> xmlFiles = new ArrayList<>();
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(reportsDir.toPath(), "*{junit}*.{xml}")) {
-            for (Path p: stream) {
-                LOGGER.info("Processing Surefire report {}", p.getFileName());
-                xmlFiles.add(p.toFile());
-            }
+        try {
+            xmlFiles = FileCollector.collect(reportsDir, "*{junit}*.{xml}");
         } catch (IOException e) {
             LOGGER.error( "Error while finding test files.", e);
         }
