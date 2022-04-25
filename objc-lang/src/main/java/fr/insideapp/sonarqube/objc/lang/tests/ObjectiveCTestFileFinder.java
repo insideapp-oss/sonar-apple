@@ -18,7 +18,6 @@
 package fr.insideapp.sonarqube.objc.lang.tests;
 
 import fr.insideapp.sonarqube.apple.commons.TestFileFinder;
-import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -42,12 +41,6 @@ public class ObjectiveCTestFileFinder implements TestFileFinder {
          * Most xcodebuild JUnit parsers don't include the path to the class in the class field, so search for it if it
          * wasn't found in the root.
          */
-        String lastFileNameComponents = StringUtils.substringAfterLast(fileName, "/");
-
-        if(StringUtils.isEmpty(lastFileNameComponents)) {
-            lastFileNameComponents = fileName;
-        }
-
         fp = fileSystem.predicates().and(
                 fileSystem.predicates().hasType(InputFile.Type.TEST),
                 fileSystem.predicates().matchesPathPattern("**/" + fileName.replace("_", "+"))
