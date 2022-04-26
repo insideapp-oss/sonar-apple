@@ -79,6 +79,8 @@ public class SwiftSensor implements Sensor {
             executorService.shutdownNow();
         } catch (final InterruptedException e) {
             LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
     }
 }

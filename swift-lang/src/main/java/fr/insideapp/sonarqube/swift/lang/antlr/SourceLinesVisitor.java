@@ -21,6 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
+import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
@@ -36,7 +37,9 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
     private static final Logger LOGGER = Loggers.get(SourceLinesVisitor.class);
     @Override
-    public void apply(ParseTree tree) {}
+    public void apply(ParseTree tree) {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
@@ -53,7 +56,7 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
             switch(token.getType()) {
                 // ignoring white-space and end-of-file
                 case Swift5Parser.WS:
-                case Swift5Parser.EOF:
+                case Recognizer.EOF:
                     break;
                 // single line comment
                 case Swift5Parser.Line_comment:
