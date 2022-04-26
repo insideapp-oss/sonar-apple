@@ -19,7 +19,7 @@ package fr.insideapp.sonarqube.apple.commons.issues;
 
 import java.util.Objects;
 
-public class ReportIssue {
+public final class ReportIssue {
 
     private final String ruleId;
     private final String message;

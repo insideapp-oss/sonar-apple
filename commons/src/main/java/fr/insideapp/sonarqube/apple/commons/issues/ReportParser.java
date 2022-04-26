@@ -17,21 +17,9 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-public final class RepositoryRuleDebt {
+import java.util.List;
 
-    private final String function;
-    private final String offset;
+public interface ReportParser {
 
-    public RepositoryRuleDebt(final String function, final String offset) {
-        this.function = function;
-        this.offset = offset;
-    }
-
-    public String getFunction() {
-        return function;
-    }
-
-    public String getOffset() {
-        return offset;
-    }
+    public List<ReportIssue> parse(String input);
 }

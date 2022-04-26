@@ -54,6 +54,14 @@ Use the following command to update the SwiftLint rules file:
 $ mvn groovy:execute -Dsource=scripts/updateSwiftLintRules.groovy
 ```
 
+### OCLint update
+
+Use the following command to update the OCLint rules file:
+
+```bash
+$ mvn groovy:execute -Dsource=scripts/updateOCLintRules.groovy
+```
+
 ### Filling rules information
 
 Eventhough updating rule repository file is mostly automatic, some data related to rules cannot be automatically computed.
