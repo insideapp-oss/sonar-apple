@@ -1,18 +1,14 @@
 package fr.insideapp.sonarqube.swift.lang.antlr;
 
-import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
-import org.apache.commons.io.Charsets;
+import fr.insideapp.sonarqube.swift.lang.Swift;
 import org.apache.commons.io.FileUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,36 +19,88 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SourceLinesVisitorTest {
 
-    private final String baseDir = "src/test/resources/swift";
-    private static final Logger LOGGER = Loggers.get(SourceLinesVisitorTest.class);
+    private static class Container {
+        final String fileName;
+        final int linesOfCode;
+        final int linesOfComment;
+
+        public Container(String fileName, int linesOfCode, int linesOfComment) {
+            this.fileName = fileName;
+            this.linesOfCode = linesOfCode;
+            this.linesOfComment = linesOfComment;
+        }
+    }
+
+    private static final String BASE_DIR = "src/test/resources/swift/source_lines_visitor";
+    private SensorContextTester sensorContext;
+    private SwiftAntlrContext antlrContext;
+    private SourceLinesVisitor visitor;
+
+    @Before
+    public void prepare() {
+        sensorContext = SensorContextTester.create(new File(BASE_DIR));
+        antlrContext = new SwiftAntlrContext();
+        visitor = new SourceLinesVisitor();
+    }
 
     @Test
-    public void visit() throws IOException {
+    public void testNoComment() throws IOException {
+        assertContainer(new Container("NoComment", 1, 0));
+    }
 
-        // the real file
-        File file = new File(baseDir, "/test.swift");
-        // the "mock" file for test
-        InputFile inputFile = new TestInputFileBuilder("", "test.swift")
-                .setLanguage("swift")
-                .setModuleBaseDir(Paths.get(baseDir))
-                .setContents(FileUtils.readFileToString(file, Charset.)
+    @Test
+    public void testNoCode() throws IOException {
+        assertContainer(new Container("NoCode", 0, 1));
+    }
+
+    @Test
+    public void testEmpty() throws IOException {
+        assertContainer(new Container("Empty", 0, 0));
+    }
+
+    @Test
+    public void testLineWithMixedCodeComment() throws IOException {
+        assertContainer(new Container("LineWithMixedCodeComment", 3, 0));
+    }
+
+    @Test
+    public void testQuotedMultilineText() throws IOException {
+        assertContainer(new Container("QuotedMultilineText", 12, 0));
+    }
+
+    @Test
+    public void testWhiteLineIgnored() throws IOException {
+        assertContainer(new Container("WhiteLineIgnored", 3, 1));
+    }
+
+    private void assertContainer(Container container) throws IOException {
+
+        final String completeFileName = container.fileName + "." + Swift.KEY;
+
+        // real file
+        File file = new File(BASE_DIR, completeFileName);
+
+        // mock file for test purpose
+        // setting it up with the real file properties
+        InputFile inputFile = new TestInputFileBuilder("", completeFileName)
+                .setLanguage(Swift.KEY)
+                .setModuleBaseDir(Paths.get(BASE_DIR))
+                .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
+                .setCharset(Charset.defaultCharset())
                 .build();
 
-        // TODO: remove this log, lines count is good
-        LOGGER.warn(String.format("File lines %s", inputFile.lines()));
-
-        SensorContextTester context = SensorContextTester.create(new File(baseDir));
-        context.fileSystem().add(inputFile);
-
-        SwiftAntlrContext antlrContext = new SwiftAntlrContext();
-        // crashing here
+        // mock sensor
+        sensorContext.fileSystem().add(inputFile);
         antlrContext.loadFromFile(inputFile, inputFile.charset());
 
-        /*final SourceLinesVisitor visitor = new SourceLinesVisitor();
-        visitor.fillContext(context, antlrContext);
+        // running our code
+        visitor.fillContext(sensorContext, antlrContext);
 
-        Measure<Integer> measureNLOC = context.measure(inputFile.key(), CoreMetrics.NCLOC.key());
-        assertThat(measureNLOC).isEqualTo(3);*/
+        // asserting
+        Measure<Integer> measureNLOC = sensorContext.measure(inputFile.key(), CoreMetrics.NCLOC.key());
+        assertThat(measureNLOC.value()).isEqualTo(container.linesOfCode);
+        Measure<Integer> measureNCOMMENTS = sensorContext.measure(inputFile.key(), CoreMetrics.COMMENT_LINES.key());
+        assertThat(measureNCOMMENTS.value()).isEqualTo(container.linesOfComment);
     }
 
 }

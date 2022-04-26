@@ -1,6 +1,6 @@
 struct Test {
 
     // comment
-    let value: String
+    var test: String
 
 }
