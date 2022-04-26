@@ -22,7 +22,7 @@ public class ApplePluginTest {
         ApplePlugin plugin = new ApplePlugin();
         plugin.define(context);
 
-        assertThat(context.getExtensions()).hasSize(15);
+        assertThat(context.getExtensions()).hasSize(20);
 
 
     }
