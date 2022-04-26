@@ -22,7 +22,7 @@ The plugin is designed to support Swift 5 syntax.
 
 | Feature             | Swift                                                        | Objective-C |
 |---------------------|--------------------------------------------------------------|-------------|
-| Size                | IN PROGRESS                                                  | IN PROGRESS |
+| Size                | YES                                                          | IN PROGRESS |
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
 | Tests               | YES                                                          | YES         |
 | Coverage            | YES                                                          | YES         |
