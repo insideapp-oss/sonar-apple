@@ -20,12 +20,13 @@ Let us know if you want to get involved.
 
 The plugin is designed to support Swift 5 syntax.
 
+
 | Feature             | Swift                                                        | Objective-C                               |
 |---------------------|--------------------------------------------------------------|-------------------------------------------|
 | Size                | IN PROGRESS                                                  | IN PROGRESS                               |
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | [OCLint 22.02](https://oclint.org/) rules |
 | Tests               | YES                                                          | IN PROGRESS                               |
-| Coverage            | YES                                                  | IN PROGRESS                               |
+| Coverage            | YES                                                          | YES                                       |
 | Complexity          | IN PROGRESS                                                  | IN PROGRESS                               |
 | Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS                               |
 
