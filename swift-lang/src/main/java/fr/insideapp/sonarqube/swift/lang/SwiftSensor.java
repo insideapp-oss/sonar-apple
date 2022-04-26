@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
+import fr.insideapp.sonarqube.apple.commons.SensorRuntimeException;
 import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.SourceLinesVisitor;
@@ -77,8 +78,10 @@ public class SwiftSensor implements Sensor {
             executorService.shutdown();
             executorService.awaitTermination(EXECUTOR_TIMEOUT, TimeUnit.SECONDS);
             executorService.shutdownNow();
-        } catch (final Exception e) {
+        } catch (final InterruptedException e) {
             LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
+            Thread.currentThread().interrupt();
+            throw new SensorRuntimeException(e);
         }
     }
 }
