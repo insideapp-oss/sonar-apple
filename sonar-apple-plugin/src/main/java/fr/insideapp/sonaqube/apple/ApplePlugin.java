@@ -17,8 +17,15 @@
  */
 package fr.insideapp.sonaqube.apple;
 
-import fr.insideapp.sonaqube.apple.commons.TestFileFinders;
-import fr.insideapp.sonaqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
+import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
+import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
+import fr.insideapp.sonarqube.objc.lang.ObjectiveCSensor;
+import fr.insideapp.sonarqube.objc.lang.issues.ObjectiveCProfile;
+import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
+import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
+import fr.insideapp.sonarqube.objc.lang.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
@@ -35,6 +42,8 @@ public class ApplePlugin implements Plugin {
 
     public static final String TESTS_SUBCATEGORY = "Tests";
 
+    public static final String COVERAGE_SUBCATEGORY = "Coverage";
+
     @Override
     public void define(Context context) {
 
@@ -43,6 +52,12 @@ public class ApplePlugin implements Plugin {
 
         // SwiftLint
         context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
+
+        // Objective-C language support
+        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+
+        // OCLint
+        context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
 
         // Tests
         context.addExtension(
@@ -55,6 +70,19 @@ public class ApplePlugin implements Plugin {
                         .build());
 
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
+        TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
+
+        // Coverage
+        context.addExtension(
+                PropertyDefinition.builder(AppleCoverageSensor.REPORT_PATH_KEY)
+                        .name("Coverage Report")
+                        .description("Path to Apple coverage report file. The path may be either absolute or relative to the project base directory.")
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .category(APPLE_CATEGORY)
+                        .subCategory(COVERAGE_SUBCATEGORY)
+                        .build());
+
+        context.addExtension(AppleCoverageSensor.class);
     }
 }

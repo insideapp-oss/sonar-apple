@@ -17,10 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
-import fr.insideapp.sonarqube.swift.lang.antlr.AntlrContext;
-import fr.insideapp.sonarqube.swift.lang.antlr.CustomTreeVisitor;
-import fr.insideapp.sonarqube.swift.lang.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.SourceLinesVisitor;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftAntlrContext;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -62,7 +62,8 @@ public class SwiftSensor implements Sensor {
             executorService.execute(() -> {
                 // Visit source files
                 try {
-                    final AntlrContext antlrContext = AntlrContext.fromInputFile(inf, charset);
+                    final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
+                    antlrContext.loadFromStreams(inf, inf.inputStream(), inf.inputStream(), charset);
                     ParseTreeItemVisitor visitor = new CustomTreeVisitor(new SourceLinesVisitor());
                     visitor.fillContext(sensorContext, antlrContext);
                 } catch (IOException e) {

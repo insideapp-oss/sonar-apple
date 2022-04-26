@@ -40,6 +40,12 @@
             <version>0.1-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>fr.insideapp.sonarqube</groupId>
+            <artifactId>objc-lang</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -35,6 +35,7 @@
     <modules>
         <module>commons</module>
         <module>swift-lang</module>
+        <module>objc-lang</module>
         <module>sonar-apple-plugin</module>
     </modules>
 

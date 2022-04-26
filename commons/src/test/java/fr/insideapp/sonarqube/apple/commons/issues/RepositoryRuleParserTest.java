@@ -17,8 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRule;
-import fr.insideapp.sonaqube.apple.commons.issues.RepositoryRuleParser;
 import org.junit.Test;
 
 import java.util.List;

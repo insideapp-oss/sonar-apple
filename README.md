@@ -24,8 +24,8 @@ The plugin is designed to support Swift 5 syntax.
 |---------------------|--------------------------------------------------------------|-------------|
 | Size                | IN PROGRESS                                                  | IN PROGRESS |
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | IN PROGRESS |
-| Tests               | YES                                                          | IN PROGRESS |
-| Coverage            | IN PROGRESS                                                  | IN PROGRESS |
+| Tests               | YES                                                          | YES         |
+| Coverage            | YES                                                          | YES         |
 | Complexity          | IN PROGRESS                                                  | IN PROGRESS |
 | Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS |
 
@@ -73,7 +73,10 @@ sonar.tests=iOSAppTests
 
 # Path to test report (junit.xml)
 # Defaults to build/reports
-#sonar.junit.reportsPaths=
+# sonar.apple.junit.reportsPath=
+
+# Path to coverage report (cobertura.xml)
+# sonar.apple.cobertura.reportPath=
 
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
@@ -95,6 +98,10 @@ $ xcodebuild \                                                                  
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   test | xcpretty --report junit
+
+# Generate coverage report to build/reports/cobertura.xml
+# Don't forget to activate 'Gather coverage' option in the app scheme
+slather coverage --cobertura-xml --output-directory build/reports --scheme MyApp MyApp.xcodeproj
   
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner
