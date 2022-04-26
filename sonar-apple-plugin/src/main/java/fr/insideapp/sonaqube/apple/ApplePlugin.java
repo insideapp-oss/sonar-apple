@@ -25,6 +25,7 @@ import fr.insideapp.sonarqube.objc.lang.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.lang.issues.ObjectiveCProfile;
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
+import fr.insideapp.sonarqube.objc.lang.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
@@ -52,6 +53,12 @@ public class ApplePlugin implements Plugin {
         // SwiftLint
         context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
 
+        // Objective-C language support
+        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+
+        // OCLint
+        context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
+
         // Tests
         context.addExtension(
                 PropertyDefinition.builder(AppleTestsSensor.REPORT_PATH_KEY)
@@ -63,6 +70,7 @@ public class ApplePlugin implements Plugin {
                         .build());
 
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
+        TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
 
         // Coverage
@@ -76,11 +84,5 @@ public class ApplePlugin implements Plugin {
                         .build());
 
         context.addExtension(AppleCoverageSensor.class);
-
-        // Objective-C language support
-        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
-
-        // OCLint
-        context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
     }
 }
