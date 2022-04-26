@@ -59,6 +59,14 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
 
         // OCLint
+        context.addExtension(
+                PropertyDefinition.builder(OCLintSensor.LOG_PATH_KEY)
+                        .name("xcodebuild log")
+                        .description("Path to xcodebuild log file. The path may be either absolute or relative to the project base directory.")
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .category(APPLE_CATEGORY)
+                        .subCategory(OCLINT_SUBCATEGORY)
+                        .build());
         context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
 
         // Tests
@@ -85,21 +93,6 @@ public class ApplePlugin implements Plugin {
                         .build());
 
         context.addExtension(AppleCoverageSensor.class);
-
-
-        // Objective-C language support
-        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
-
-        // OCLint
-        context.addExtension(
-                PropertyDefinition.builder(OCLintSensor.LOG_PATH_KEY)
-                        .name("xcodebuild log")
-                        .description("Path to xcodebuild log file. The path may be either absolute or relative to the project base directory.")
-                        .onQualifiers(Qualifiers.PROJECT)
-                        .category(APPLE_CATEGORY)
-                        .subCategory(OCLINT_SUBCATEGORY)
-                        .build());
-        context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
 
     }
 }
