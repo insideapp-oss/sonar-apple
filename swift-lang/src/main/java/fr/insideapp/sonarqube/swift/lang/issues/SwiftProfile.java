@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.swift.lang.issues;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.swift.lang.Swift;
+import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
@@ -36,10 +37,10 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
     public void define(Context context) {
 
         NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Swift", Swift.KEY);
+        RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
 
         // SwiftLint rules
         try {
-            RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
             List<RepositoryRule> rules = repositoryRuleParser.parse(SwiftLintRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
                 NewBuiltInActiveRule rule1 = profile.activateRule("SwiftLint",r.getKey());
@@ -47,6 +48,17 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load SwiftLint rules", e);
+        }
+
+        // MobSFScan rules (for Swift)
+        try {
+            List<RepositoryRule> rules = repositoryRuleParser.parse(MobSFScanSwiftRulesDefinition.RULES_PATH);
+            for (RepositoryRule r: rules) {
+                NewBuiltInActiveRule rule = profile.activateRule(MobSFScanSwiftRulesDefinition.REPOSITORY_KEY, r.getKey());
+                rule.overrideSeverity(r.getSeverity());
+            }
+        } catch (IOException e) {
+            LOGGER.error("Failed to load MobSFScan rules (for Swift)", e);
         }
 
         profile.setDefault(true);

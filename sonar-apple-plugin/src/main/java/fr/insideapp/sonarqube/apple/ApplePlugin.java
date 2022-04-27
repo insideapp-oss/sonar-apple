@@ -29,6 +29,8 @@ import fr.insideapp.sonarqube.objc.lang.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
+import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
+import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
 import fr.insideapp.sonarqube.swift.lang.tests.SwiftTestFileFinder;
@@ -54,6 +56,9 @@ public class ApplePlugin implements Plugin {
 
         // SwiftLint
         context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
+
+        // MobSFScan (Swift)
+        context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
 
         // Objective-C language support
         context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);

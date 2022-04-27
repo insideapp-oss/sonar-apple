@@ -18,31 +18,16 @@
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.swift.lang.issues.ReportParserTest;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SwiftLintReportParserTest {
+public class SwiftLintReportParserTest extends ReportParserTest {
 
     private static final String FILE_PATH = "/SQApp/SQApp/SQAppApp.swift";
-
-    private void assertFilePath(ReportIssue issue, String expectedPath) {
-        assertThat(issue.getFilePath()).isEqualTo(expectedPath);
-    }
-
-    private void assertLineNumber(ReportIssue issue, Integer expectedLine) {
-        assertThat(issue.getLineNumber()).isEqualTo(expectedLine);
-    }
-
-    private void assertRuleId(ReportIssue issue, String expectedRuleId) {
-        assertThat(issue.getRuleId()).isEqualTo(expectedRuleId);
-    }
-
-    private void assertMessage(ReportIssue issue, String expectedMessage) {
-        assertThat(issue.getMessage()).isEqualTo(expectedMessage);
-    }
 
     @Test
     public void parse() {

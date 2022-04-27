@@ -15,26 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objectivec.lang.issues.oclint;
+package fr.insideapp.sonarqube.swift.lang.issues.mobsfscan;
 
-import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
-import org.junit.Test;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.swift.lang.Swift;
 
-import java.io.File;
+public class MobSFScanSwiftRulesDefinition extends JSONRulesDefinition {
 
-import static org.assertj.core.api.Assertions.assertThat;
+    public static final String REPOSITORY_KEY = "MobSFScan";
+    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-public class OCLintSensorTest {
+    public static final String RULES_PATH = "/mobsfscan-rules.json";
 
-    @Test
-    public void describe() {
-
-        SensorContextTester context = SensorContextTester.create(new File("."));
-        OCLintSensor sensor = new OCLintSensor(context);
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("OCLint sensor");
+    public MobSFScanSwiftRulesDefinition() {
+        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, RULES_PATH);
     }
+
 }

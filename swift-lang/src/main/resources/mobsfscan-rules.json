@@ -1,0 +1,9 @@
+[
+  {
+    "key": "ios_sha1_collision",
+    "name": "SHA-1 Collision",
+    "severity": "MAJOR",
+    "description": "SHA1 is a weak hash known to have hash collisions.",
+    "type": "VULNERABILITY"
+  }
+]
