@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
-import fr.insideapp.sonaqube.apple.commons.FileCollector;
+import fr.insideapp.sonarqube.apple.commons.FileCollector;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonaqube.apple;
+package fr.insideapp.sonarqube.apple;
 
 import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
@@ -42,6 +42,8 @@ public class ApplePlugin implements Plugin {
 
     public static final String TESTS_SUBCATEGORY = "Tests";
 
+    public static final String OCLINT_SUBCATEGORY = "OCLint";
+
     public static final String COVERAGE_SUBCATEGORY = "Coverage";
 
     @Override
@@ -57,6 +59,14 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
 
         // OCLint
+        context.addExtension(
+                PropertyDefinition.builder(OCLintSensor.LOG_PATH_KEY)
+                        .name("xcodebuild log")
+                        .description("Path to xcodebuild log file. The path may be either absolute or relative to the project base directory.")
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .category(APPLE_CATEGORY)
+                        .subCategory(OCLINT_SUBCATEGORY)
+                        .build());
         context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
 
         // Tests
@@ -68,7 +78,6 @@ public class ApplePlugin implements Plugin {
                         .category(APPLE_CATEGORY)
                         .subCategory(TESTS_SUBCATEGORY)
                         .build());
-
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
         TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
@@ -84,5 +93,6 @@ public class ApplePlugin implements Plugin {
                         .build());
 
         context.addExtension(AppleCoverageSensor.class);
+
     }
 }

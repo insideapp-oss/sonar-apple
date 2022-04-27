@@ -61,7 +61,7 @@ class Prompt {
 
             if (error) {
                 println "Invalid choice".style(ConsoleString.Color.RED)
-                return this.prompt()
+                return this.promptChoice()
             }
         }
     }
@@ -90,7 +90,7 @@ class Prompt {
 
         if (error) {
             println "Invalid value".style(ConsoleString.Color.RED)
-            return this.prompt()
+            return this.promptDuration()
         }
     }
 }
