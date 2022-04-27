@@ -30,7 +30,6 @@ import org.sonar.api.batch.fs.InputFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-
 public class SwiftAntlrContext extends AntlrContext {
 
     @Override
