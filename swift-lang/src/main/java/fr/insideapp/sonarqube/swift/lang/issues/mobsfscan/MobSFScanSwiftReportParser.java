@@ -55,7 +55,7 @@ public class MobSFScanSwiftReportParser implements ReportParser {
                         issues.add(new ReportIssue(resultKey, message, filePath, lineNum));
                     }
                 } else {
-                    // Ignoring global issue for now
+                    issues.add(new ReportIssue(resultKey, message));
                 }
             }
 

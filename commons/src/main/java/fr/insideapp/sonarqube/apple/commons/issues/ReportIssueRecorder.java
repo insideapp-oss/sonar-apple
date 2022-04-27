@@ -18,8 +18,11 @@
 package fr.insideapp.sonarqube.apple.commons.issues;
 
 import org.sonar.api.batch.fs.FilePredicate;
+import org.sonar.api.batch.fs.FilePredicates;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
 import org.sonar.api.rule.RuleKey;
@@ -39,25 +42,49 @@ public class ReportIssueRecorder {
 
     public void recordIssues(List<ReportIssue> issues, String repository) {
 
-        FilePredicate mainPredicate = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
+        final FileSystem fs = sensorContext.fileSystem();
+        final FilePredicates predicates = fs.predicates();
+        FilePredicate mainPredicate = predicates.hasType(InputFile.Type.MAIN);
 
         // Record issues
-        for (ReportIssue i : issues) {
-            FilePredicate fp = sensorContext.fileSystem().predicates().and(
-                    sensorContext.fileSystem().predicates().hasAbsolutePath(i.getFilePath()),
-                    mainPredicate);
-            if (!sensorContext.fileSystem().hasFiles(fp)) {
-                LOGGER.warn("File not included in SonarQube sources {}", i.getFilePath());
-            } else {
-                InputFile inputFile = sensorContext.fileSystem().inputFile(fp);
-                if (inputFile != null) {
-                    NewIssueLocation nil = new DefaultIssueLocation().on(inputFile)
-                            .at(inputFile.selectLine(i.getLineNumber())).message(i.getMessage());
-                    sensorContext.newIssue().forRule(RuleKey.of(repository, i.getRuleId()))
-                            .at(nil).save();
-                }
+        for (ReportIssue issue : issues) {
 
+            // The issue to be record
+            NewIssue sonarIssue = sensorContext
+                    .newIssue()
+                    .forRule(RuleKey.of(repository, issue.getRuleId()));
+            // The location of the issue to be record
+            NewIssueLocation sonarIssueLocation = new DefaultIssueLocation()
+                    .message(issue.getMessage());
+
+            final String filePath = issue.getFilePath();
+            // We have a file location associated with the generated issue
+            if (filePath != null) {
+                final FilePredicate filePredicate = predicates.and(predicates.hasAbsolutePath(filePath), mainPredicate);
+                // Making sure the file is part of SonarQube FS
+                if (fs.hasFiles(filePredicate)) {
+                    InputFile inputFile = fs.inputFile(filePredicate);
+                    // Adding the location of the file
+                    sonarIssueLocation.on(inputFile);
+                    final Integer lineNumber = issue.getLineNumber();
+                    // We have a line number for that file
+                    if (lineNumber != null) {
+                        // Adding the line number
+                        sonarIssueLocation.at(inputFile.selectLine(lineNumber));
+                    }
+                    // Associating the location to the issue and saving it.
+                    sonarIssue.at(sonarIssueLocation).save();
+                } else {
+                    LOGGER.warn("File not included in SonarQube sources {}", filePath);
+                }
+            } else {
+                // No location specified, so a global issue.
+                // Setting the project as location.
+                sonarIssueLocation.on(sensorContext.project());
+                // Associating the location to the issue and saving it.
+                sonarIssue.at(sonarIssueLocation).save();
             }
+
         }
     }
 }

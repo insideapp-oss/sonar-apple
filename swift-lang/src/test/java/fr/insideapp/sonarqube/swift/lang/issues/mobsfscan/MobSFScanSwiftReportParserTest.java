@@ -49,12 +49,19 @@ public class MobSFScanSwiftReportParserTest extends ReportParserTest {
         MobSFScanSwiftReportParser parser = new MobSFScanSwiftReportParser();
 
         List<ReportIssue> issues = parser.parse(input);
-        assertThat(issues).hasSize(1);
+        assertThat(issues).hasSize(2);
 
-        assertFilePath(issues.get(0), FILE_PATH);
-        assertLineNumber(issues.get(0), 28);
-        assertRuleId(issues.get(0), "ios_hardcoded_secret");
-        assertMessage(issues.get(0), "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.");
+        final ReportIssue keyboardRule = issues.get(0);
+        assertFilePath(keyboardRule, null);
+        assertLineNumber(keyboardRule, null);
+        assertRuleId(keyboardRule, "ios_custom_keyboard_disabled");
+        assertMessage(keyboardRule, "This app does not have custom keyboards disabled.");
+
+        final ReportIssue hardcodedRule = issues.get(1);
+        assertFilePath(hardcodedRule, FILE_PATH);
+        assertLineNumber(hardcodedRule, 28);
+        assertRuleId(hardcodedRule, "ios_hardcoded_secret");
+        assertMessage(hardcodedRule, "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.");
     }
 
 }

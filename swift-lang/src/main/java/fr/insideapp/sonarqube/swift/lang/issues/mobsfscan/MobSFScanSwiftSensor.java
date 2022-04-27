@@ -20,7 +20,8 @@ public class MobSFScanSwiftSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(MobSFScanSwiftSensor.class);
 
-    private static final String COMMAND = "mobsfscan --sonarqube";
+    private static final String COMMAND = "mobsfscan";
+    private static final String OUTPUT_FORMAT = "--json";
     private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
 
     @Override
@@ -35,7 +36,7 @@ public class MobSFScanSwiftSensor implements Sensor {
     public void execute(SensorContext sensorContext) {
 
         try {
-            List<ReportIssue> issues = runAnalysis();
+            List<ReportIssue> issues = runAnalysis(sensorContext);
             ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
             issueRecorder.recordIssues(issues, MobSFScanSwiftRulesDefinition.REPOSITORY_KEY);
         } catch (IOException e) {
@@ -44,12 +45,13 @@ public class MobSFScanSwiftSensor implements Sensor {
 
     }
 
-    private List<ReportIssue> runAnalysis() throws IOException {
+    private List<ReportIssue> runAnalysis(SensorContext sensorContext) throws IOException {
 
         try {
-            // Run SwiftLint
+            // Run MobSFScan
             LOGGER.info("Running '{} analyze'...", COMMAND);
-            String output = new ProcBuilder(COMMAND)
+            final String sources = sensorContext.config().get("sonar.sources").get();
+            String output = new ProcBuilder(COMMAND,  OUTPUT_FORMAT, sources)
                     .withTimeoutMillis(COMMAND_TIMEOUT)
                     .ignoreExitStatus()
                     .run()

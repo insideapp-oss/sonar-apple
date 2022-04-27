@@ -4,17 +4,18 @@ import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintReportParser;
 import org.junit.Test;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReportParserTest {
 
-    protected void assertFilePath(ReportIssue issue, String expectedPath) {
+    protected void assertFilePath(ReportIssue issue, @Nullable String expectedPath) {
         assertThat(issue.getFilePath()).isEqualTo(expectedPath);
     }
 
-    protected void assertLineNumber(ReportIssue issue, Integer expectedLine) {
+    protected void assertLineNumber(ReportIssue issue, @Nullable Integer expectedLine) {
         assertThat(issue.getLineNumber()).isEqualTo(expectedLine);
     }
 

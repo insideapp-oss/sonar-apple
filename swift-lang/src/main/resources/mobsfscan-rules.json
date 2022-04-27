@@ -5,5 +5,12 @@
     "severity": "MAJOR",
     "description": "SHA1 is a weak hash known to have hash collisions.",
     "type": "VULNERABILITY"
+  },
+  {
+    "key": "ios_cert_pinning",
+    "name": "Certificate Pinning",
+    "severity": "INFO",
+    "description": "This app does not have Certificate Pinning implemented in code.",
+    "type": "VULNERABILITY"
   }
 ]
