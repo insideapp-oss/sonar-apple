@@ -103,10 +103,7 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
         final long linesOfCommentCount = linesOfComment.size();
         final long linesOfCodeCount = linesOfCode.size();
-
-        LOGGER.info(String.format("Line of comments: %d", linesOfCommentCount));
-        LOGGER.info(String.format("Line of code: %d", linesOfCodeCount));
-
+        
         synchronized (SourceLinesVisitor.class) {
 
             final InputFile file = antlrContext.getFile();
