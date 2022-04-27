@@ -34,6 +34,10 @@ public abstract class AntlrContext {
     private ParseTree root;
     private SourceLine[] lines;
 
+    public void loadFromFile(InputFile file, Charset charset) throws IOException {
+        loadFromStreams(file, file.inputStream(), file.inputStream(), charset);
+    }
+
     public abstract void loadFromStreams(InputFile inputFile, InputStream file, InputStream linesStream,
                                          Charset charset) throws IOException;
 

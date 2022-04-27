@@ -38,67 +38,67 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
     private static final Logger LOGGER = Loggers.get(SourceLinesVisitor.class);
     @Override
     public void apply(ParseTree tree) {
-        throw new UnsupportedOperationException();
+        // no implementation needed
     }
 
     @Override
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
 
         final SourceLine[] allLines = antlrContext.getLines();
-        // set containing the lines number considered as a comment
+        // Set containing the lines number considered as a comment
         final Set<Integer> linesOfComment = new HashSet<>();
-        // set containing the lines number considered as code
+        // Set containing the lines number considered as code
         final Set<Integer> linesOfCode = new HashSet<>();
 
-        // computing the lines according to token type
+        // Computing the lines according to token type
         for (final Token token : antlrContext.getTokens()) {
             Integer currentLineNumber = token.getLine();
             switch(token.getType()) {
-                // ignoring white-space and end-of-file
+                // Ignoring white-space and end-of-file
                 case Swift5Parser.WS:
                 case Recognizer.EOF:
                     break;
-                // single line comment
+                // Single line comment
                 case Swift5Parser.Line_comment:
                     linesOfComment.add(currentLineNumber);
                     break;
                 case Swift5Parser.Block_comment:
-                    // computing the end line of the token
-                    // since the comment might be spread over several lines
+                    // Computing the end line of the token
+                    // Since the comment might be spread over several lines
                     final Integer endLineOfComment = findEndLine(allLines, token.getStopIndex());
-                    // making sure we found it
+                    // Making sure we found it
                     if (endLineOfComment != null) {
-                        // adding each line to our set
+                        // Adding each line to our set
                         for (int line = currentLineNumber; line <= endLineOfComment; line++) {
                             linesOfComment.add(line);
                         }
                     }
                     break;
-                // tokens that can be spread over several lines
+                // Tokens that can be spread over several lines
                 case Swift5Parser.Interpolataion_multi_line:
                 case Swift5Parser.Quoted_multi_line_text:
                 case Swift5Parser.Quoted_multi_line_extended_text:
-                    // computing the end line of the token
-                    // since the token might be spread on several lines
+                    // Computing the end line of the token
+                    // Since the token might be spread on several lines
                     final Integer endLineOfCode = findEndLine(allLines, token.getStopIndex());
-                    // making sure we found it
+                    // Making sure we found it
                     if (endLineOfCode != null) {
-                        // adding each line to our set
+                        // Adding each line to our set
                         for (int line = currentLineNumber; line <= endLineOfCode; line++) {
                             linesOfCode.add(line);
                         }
                     }
                     break;
-                // any other token should be considered "code" token
+                // Any other token should be considered "code" token
                 default:
                     linesOfCode.add(currentLineNumber);
                     break;
             }
         }
 
-        // only keeping the comments that are "pure" comments
-        // meaning not mixed with a LOC
-        // we considered a LOC with a comment, as a LOC
+        // Only keeping the comments that are "pure" comments
+        // Meaning not mixed with a LOC
+        // We considered a LOC with a comment, as a LOC
         linesOfComment.removeAll(linesOfCode);
 
         final long linesOfCommentCount = linesOfComment.size();

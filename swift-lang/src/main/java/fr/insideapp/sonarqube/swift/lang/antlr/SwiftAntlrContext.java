@@ -32,10 +32,6 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 public class SwiftAntlrContext extends AntlrContext {
 
-    public void loadFromFile(InputFile file, Charset charset) throws IOException {
-        loadFromStreams(file, file.inputStream(), file.inputStream(), charset);
-    }
-
     @Override
     public void loadFromStreams(InputFile inputFile, InputStream file, InputStream linesStream, Charset charset) throws IOException {
         final SourceLinesProvider linesProvider = new SourceLinesProvider();

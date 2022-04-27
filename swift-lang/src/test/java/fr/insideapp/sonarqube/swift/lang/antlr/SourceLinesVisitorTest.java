@@ -94,11 +94,11 @@ public class SourceLinesVisitorTest {
 
         final String completeFileName = container.fileName + "." + Swift.KEY;
 
-        // real file
+        // Real file
         File file = new File(BASE_DIR, completeFileName);
 
-        // mock file for test purpose
-        // setting it up with the real file properties
+        // Mock file for test purpose
+        // Setting it up with the real file properties
         InputFile inputFile = new TestInputFileBuilder("", completeFileName)
                 .setLanguage(Swift.KEY)
                 .setModuleBaseDir(Paths.get(BASE_DIR))
@@ -106,14 +106,14 @@ public class SourceLinesVisitorTest {
                 .setCharset(Charset.defaultCharset())
                 .build();
 
-        // mock sensor
+        // Mock sensor
         sensorContext.fileSystem().add(inputFile);
         antlrContext.loadFromFile(inputFile, inputFile.charset());
 
-        // running our code
+        // Running our code
         visitor.fillContext(sensorContext, antlrContext);
 
-        // asserting
+        // Asserting
         Measure<Integer> measureNLOC = sensorContext.measure(inputFile.key(), CoreMetrics.NCLOC.key());
         assertThat(measureNLOC.value()).isEqualTo(container.linesOfCode);
         Measure<Integer> measureNCOMMENTS = sensorContext.measure(inputFile.key(), CoreMetrics.COMMENT_LINES.key());
