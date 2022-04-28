@@ -1,11 +1,8 @@
-package fr.insideapp.sonarqube.swift.lang.issues;
+package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintReportParser;
-import org.junit.Test;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,4 +25,3 @@ public class ReportParserTest {
     }
 
 }
-

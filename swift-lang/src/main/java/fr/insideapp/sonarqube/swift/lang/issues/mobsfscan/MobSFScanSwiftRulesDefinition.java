@@ -18,17 +18,12 @@
 package fr.insideapp.sonarqube.swift.lang.issues.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 
-public class MobSFScanSwiftRulesDefinition extends JSONRulesDefinition {
-
-    public static final String REPOSITORY_KEY = "MobSFScan";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
-
-    public static final String RULES_PATH = "/mobsfscan-rules.json";
-
+public class MobSFScanSwiftRulesDefinition extends MobSFScanRulesDefinition {
     public MobSFScanSwiftRulesDefinition() {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, RULES_PATH);
+        super(Swift.KEY);
     }
 
 }

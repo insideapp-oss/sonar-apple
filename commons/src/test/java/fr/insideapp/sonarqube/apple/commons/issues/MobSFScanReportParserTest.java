@@ -1,15 +1,10 @@
-package fr.insideapp.sonarqube.swift.lang.issues.mobsfscan;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.swift.lang.issues.ReportParserTest;
-import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintReportParser;
 import org.junit.Test;
-
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanSwiftReportParserTest extends ReportParserTest {
+public class MobSFScanReportParserTest extends ReportParserTest {
 
     private static final String FILE_PATH = "SQApp/SQApp/SQAppApp.swift";
 
@@ -46,7 +41,7 @@ public class MobSFScanSwiftReportParserTest extends ReportParserTest {
                 "  }\n" +
                 "}";
 
-        MobSFScanSwiftReportParser parser = new MobSFScanSwiftReportParser();
+        MobSFScanReportParser parser = new MobSFScanReportParser();
 
         List<ReportIssue> issues = parser.parse(input);
         assertThat(issues).hasSize(2);
