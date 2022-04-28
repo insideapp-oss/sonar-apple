@@ -29,7 +29,6 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ReportIssueRecorder {
