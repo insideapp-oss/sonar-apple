@@ -103,9 +103,12 @@ class RuleUpdater {
                 if (r.severity == null || r.debt == null || r.type == null) {
                     println ""
                     println "Missing information on rule ${r.key}".style(ConsoleString.Color.YELLOW)
-                    println "${r.name}".style(ConsoleString.Color.DEFAULT_UNDERLINED)
                     println "${r.description}".style(ConsoleString.Color.DEFAULT)
                     println ""
+                    if (r.name == null) {
+                        r.name = new Prompt("Name ?").promptText()
+                        println r.name.style(ConsoleString.Color.DEFAULT_BOLD)
+                    }
                     if (r.severity == null) {
                         r.severity = new Prompt("Severity ?", "BLOCKER", "CRITICAL", "MAJOR", "MINOR", "INFO").promptChoice()
                         println r.severity.style(ConsoleString.Color.DEFAULT_BOLD)
@@ -115,9 +118,15 @@ class RuleUpdater {
                         println r.type.style(ConsoleString.Color.DEFAULT_BOLD)
                     }
                     if (r.debt == null) {
-                        def offset = new Prompt("Remediation time ?").promptDuration()
-                        println offset.style(ConsoleString.Color.DEFAULT_BOLD)
-                        r.debt = [offset: offset, function: "CONSTANT_ISSUE"]
+                        def needDebt = new Prompt("Remediation time needed ?", "Yes", "No").promptChoice()
+                        switch (needDebt) {
+                            case "Yes":
+                                def offset = new Prompt("Remediation time ?").promptDuration()
+                                println offset.style(ConsoleString.Color.DEFAULT_BOLD)
+                                r.debt = [offset: offset, function: "CONSTANT_ISSUE"]
+                            case "No":
+                                break
+                        }
                     }
 
                 }

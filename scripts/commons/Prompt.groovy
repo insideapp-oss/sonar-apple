@@ -93,4 +93,17 @@ class Prompt {
             return this.promptDuration()
         }
     }
+
+    /**
+     * Prompts for text.
+     * @return Text
+     */
+    def promptText() {
+        use(ConsoleString) {
+            println "${question}"
+        }
+
+        def answer = System.in.newReader().readLine()
+        return answer
+    }
 }
