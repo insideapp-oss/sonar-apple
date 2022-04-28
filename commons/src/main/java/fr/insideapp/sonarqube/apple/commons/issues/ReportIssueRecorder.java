@@ -65,10 +65,9 @@ public class ReportIssueRecorder {
                 final FilePredicate absolutePathPredicate = predicates.hasAbsolutePath(filePath);
                 final FilePredicate pathPredicate = predicates.or(absolutePathPredicate, relativePathPredicate);
                 final FilePredicate filePredicate = predicates.and(pathPredicate, mainPredicate);
+                InputFile inputFile = fs.inputFile(filePredicate);
                 // Making sure the file is part of SonarQube FS
-                if (fs.hasFiles(filePredicate)) {
-                    @Nonnull
-                    InputFile inputFile = fs.inputFile(filePredicate);
+                if (fs.hasFiles(filePredicate) && inputFile != null) {
                     // Adding the location of the file
                     sonarIssueLocation.on(inputFile);
                     final Integer lineNumber = issue.getLineNumber();
