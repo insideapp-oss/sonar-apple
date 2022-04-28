@@ -15,30 +15,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
-
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
 import javax.annotation.Nullable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReportParserTest {
+public final class ReportParserTestHelper {
 
-    protected void assertFilePath(ReportIssue issue, @Nullable String expectedPath) {
+    public static void assertFilePath(ReportIssue issue, @Nullable String expectedPath) {
         assertThat(issue.getFilePath()).isEqualTo(expectedPath);
     }
 
-    protected void assertLineNumber(ReportIssue issue, @Nullable Integer expectedLine) {
+    public static void assertLineNumber(ReportIssue issue, @Nullable Integer expectedLine) {
         assertThat(issue.getLineNumber()).isEqualTo(expectedLine);
     }
 
-    protected void assertRuleId(ReportIssue issue, String expectedRuleId) {
+    public static void assertRuleId(ReportIssue issue, String expectedRuleId) {
         assertThat(issue.getRuleId()).isEqualTo(expectedRuleId);
     }
 
-    protected void assertMessage(ReportIssue issue, String expectedMessage) {
+    public static void assertMessage(ReportIssue issue, String expectedMessage) {
         assertThat(issue.getMessage()).isEqualTo(expectedMessage);
     }
 
 }
+

@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.sonar.api.utils.log.Logger;

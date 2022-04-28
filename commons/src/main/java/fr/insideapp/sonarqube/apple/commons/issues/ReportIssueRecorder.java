@@ -29,6 +29,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ReportIssueRecorder {
@@ -66,6 +67,7 @@ public class ReportIssueRecorder {
                 final FilePredicate filePredicate = predicates.and(pathPredicate, mainPredicate);
                 // Making sure the file is part of SonarQube FS
                 if (fs.hasFiles(filePredicate)) {
+                    @Nonnull
                     InputFile inputFile = fs.inputFile(filePredicate);
                     // Adding the location of the file
                     sonarIssueLocation.on(inputFile);

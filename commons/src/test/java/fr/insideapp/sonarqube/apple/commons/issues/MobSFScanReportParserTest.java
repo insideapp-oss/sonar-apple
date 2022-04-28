@@ -21,7 +21,7 @@ import org.junit.Test;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanReportParserTest extends ReportParserTest {
+public class MobSFScanReportParserTest {
 
     private static final String FILE_PATH = "SQApp/SQApp/SQAppApp.swift";
 
@@ -64,16 +64,16 @@ public class MobSFScanReportParserTest extends ReportParserTest {
         assertThat(issues).hasSize(2);
 
         final ReportIssue keyboardRule = issues.get(0);
-        assertFilePath(keyboardRule, null);
-        assertLineNumber(keyboardRule, null);
-        assertRuleId(keyboardRule, "ios_custom_keyboard_disabled");
-        assertMessage(keyboardRule, "This app does not have custom keyboards disabled.");
+        ReportParserTestHelper.assertFilePath(keyboardRule, null);
+        ReportParserTestHelper.assertLineNumber(keyboardRule, null);
+        ReportParserTestHelper.assertRuleId(keyboardRule, "ios_custom_keyboard_disabled");
+        ReportParserTestHelper.assertMessage(keyboardRule, "This app does not have custom keyboards disabled.");
 
         final ReportIssue hardcodedRule = issues.get(1);
-        assertFilePath(hardcodedRule, FILE_PATH);
-        assertLineNumber(hardcodedRule, 28);
-        assertRuleId(hardcodedRule, "ios_hardcoded_secret");
-        assertMessage(hardcodedRule, "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.");
+        ReportParserTestHelper.assertFilePath(hardcodedRule, FILE_PATH);
+        ReportParserTestHelper.assertLineNumber(hardcodedRule, 28);
+        ReportParserTestHelper.assertRuleId(hardcodedRule, "ios_hardcoded_secret");
+        ReportParserTestHelper.assertMessage(hardcodedRule, "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.");
     }
 
 }

@@ -64,9 +64,12 @@ public abstract class MobSFScanSensor implements Sensor {
     private List<ReportIssue> runAnalysis(SensorContext sensorContext) throws IOException {
 
         try {
+            // Get sources folder or else default to current folder
+            final String sources = sensorContext.config().get("sonar.sources").orElse(".");
+
             // Run MobSFScan
             LOGGER.info("Running '{} analyze'...", COMMAND);
-            final String sources = sensorContext.config().get("sonar.sources").get();
+
             String output = new ProcBuilder(COMMAND,  OUTPUT_FORMAT, sources)
                     .withTimeoutMillis(COMMAND_TIMEOUT)
                     .ignoreExitStatus()

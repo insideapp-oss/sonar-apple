@@ -25,7 +25,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SwiftLintReportParserTest extends ReportParserTest {
+public class SwiftLintReportParserTest {
 
     private static final String FILE_PATH = "/SQApp/SQApp/SQAppApp.swift";
 
@@ -40,14 +40,14 @@ public class SwiftLintReportParserTest extends ReportParserTest {
         List<ReportIssue> issues = parser.parse(input);
         assertThat(issues).hasSize(2);
 
-        assertFilePath(issues.get(0), FILE_PATH);
-        assertLineNumber(issues.get(0), 23);
-        assertRuleId(issues.get(0), "trailing_whitespace");
-        assertMessage(issues.get(0), "Trailing Whitespace Violation: Lines should not have trailing whitespace.");
+        ReportParserTestHelper.assertFilePath(issues.get(0), FILE_PATH);
+        ReportParserTestHelper.assertLineNumber(issues.get(0), 23);
+        ReportParserTestHelper.assertRuleId(issues.get(0), "trailing_whitespace");
+        ReportParserTestHelper.assertMessage(issues.get(0), "Trailing Whitespace Violation: Lines should not have trailing whitespace.");
 
-        assertFilePath(issues.get(1), FILE_PATH);
-        assertLineNumber(issues.get(1), 17);
-        assertRuleId(issues.get(1), "unused_setter_value");
-        assertMessage(issues.get(1), "Unused Setter Value Violation: Setter value is not used.");
+        ReportParserTestHelper.assertFilePath(issues.get(1), FILE_PATH);
+        ReportParserTestHelper.assertLineNumber(issues.get(1), 17);
+        ReportParserTestHelper.assertRuleId(issues.get(1), "unused_setter_value");
+        ReportParserTestHelper.assertMessage(issues.get(1), "Unused Setter Value Violation: Setter value is not used.");
     }
 }
