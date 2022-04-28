@@ -9,4 +9,9 @@ public final class MobSFScanObjectiveCSensor extends MobSFScanSensor {
     public String language() {
         return ObjectiveC.KEY;
     }
+
+    @Override
+    public String nameSuffix() {
+        return String.format("for %s", ObjectiveC.KEY);
+    }
 }

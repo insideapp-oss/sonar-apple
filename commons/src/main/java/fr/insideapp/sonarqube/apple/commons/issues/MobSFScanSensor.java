@@ -21,9 +21,7 @@ public abstract class MobSFScanSensor implements Sensor {
 
     public abstract String language();
 
-    public String nameSuffix() { return ""; }
-
-    //public abstract <T extends MobSFScanRulesDefinition> Class<T> ruleDefinition();
+    public abstract String nameSuffix();
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {

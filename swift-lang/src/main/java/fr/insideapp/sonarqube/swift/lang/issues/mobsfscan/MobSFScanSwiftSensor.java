@@ -10,4 +10,9 @@ public final class MobSFScanSwiftSensor extends MobSFScanSensor {
     public String language() {
         return Swift.KEY;
     }
+
+    @Override
+    public String nameSuffix() {
+        return String.format("for %s", Swift.KEY);
+    }
 }
