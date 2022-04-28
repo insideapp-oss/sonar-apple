@@ -15,26 +15,28 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objectivec.lang.issues.oclint;
+package fr.insideapp.sonarqube.swift.lang.issues.mobsfscan;
 
-import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
 import org.junit.Test;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
-
-import java.io.File;
+import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OCLintSensorTest {
+public class MobSFScanSwiftRulesDefinitionTest {
 
     @Test
-    public void describe() {
+    public void define() {
 
-        SensorContextTester context = SensorContextTester.create(new File("."));
-        OCLintSensor sensor = new OCLintSensor(context);
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("OCLint sensor");
+        MobSFScanSwiftRulesDefinition rulesDefinition = new MobSFScanSwiftRulesDefinition();
+        RulesDefinition.Context context = new RulesDefinition.Context();
+        rulesDefinition.define(context);
+
+        RulesDefinition.Repository repository = context.repository("MobSFScanSwift");
+        assertThat(repository).isNotNull();
+        assertThat(repository.name()).isEqualTo("MobSFScanSwift");
+        assertThat(repository.language()).isEqualTo("swift");
+        assertThat(repository.rules()).isNotEmpty();
+
     }
+
 }

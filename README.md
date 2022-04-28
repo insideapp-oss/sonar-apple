@@ -20,14 +20,15 @@ Let us know if you want to get involved.
 
 The plugin is designed to support Swift 5 syntax.
 
-| Feature             | Swift                                                        | Objective-C                               |
-|---------------------|--------------------------------------------------------------|-------------------------------------------|
-| Size                | YES                                                          | IN PROGRESS                               |
-| Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | [OCLint 22.02](https://oclint.org/) rules |
-| Tests               | YES                                                          | IN PROGRESS                               |
-| Coverage            | YES                                                          | YES                                       |
-| Complexity          | IN PROGRESS                                                  | IN PROGRESS                               |
-| Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS                               |
+| Feature             | Swift                                                        | Objective-C                                                   |
+|---------------------|--------------------------------------------------------------|---------------------------------------------------------------|
+| Size                | YES                                                          | IN PROGRESS                                                   |
+| Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules | [OCLint 22.02](https://oclint.org/) rules                     |
+| Tests               | YES                                                          | IN PROGRESS                                                   |
+| Coverage            | YES                                                          | YES                                                           |
+| Complexity          | IN PROGRESS                                                  | IN PROGRESS                                                   |
+| Syntax highlighting | IN PROGRESS                                                  | IN PROGRESS                                                   |
+| Security            | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules  |
 
 ## Requirements
 
@@ -66,6 +67,12 @@ Important: after initial installation, macOS will block usage of OCLint librarie
 $ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
 $ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
 ```
+
+### mobsfscan
+
+mobsfscan is used to analyse Swift & Objective-C source files to find insecure code patterns.
+
+See install instructions [here](https://github.com/MobSF/mobsfscan).
 
 ## Installation (on the server)
 

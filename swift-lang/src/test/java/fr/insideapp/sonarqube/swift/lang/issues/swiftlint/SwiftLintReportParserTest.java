@@ -18,6 +18,7 @@
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+
 import org.junit.Test;
 
 import java.util.List;
@@ -27,22 +28,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SwiftLintReportParserTest {
 
     private static final String FILE_PATH = "/SQApp/SQApp/SQAppApp.swift";
-
-    private void assertFilePath(ReportIssue issue, String expectedPath) {
-        assertThat(issue.getFilePath()).isEqualTo(expectedPath);
-    }
-
-    private void assertLineNumber(ReportIssue issue, Integer expectedLine) {
-        assertThat(issue.getLineNumber()).isEqualTo(expectedLine);
-    }
-
-    private void assertRuleId(ReportIssue issue, String expectedRuleId) {
-        assertThat(issue.getRuleId()).isEqualTo(expectedRuleId);
-    }
-
-    private void assertMessage(ReportIssue issue, String expectedMessage) {
-        assertThat(issue.getMessage()).isEqualTo(expectedMessage);
-    }
 
     @Test
     public void parse() {
@@ -55,14 +40,14 @@ public class SwiftLintReportParserTest {
         List<ReportIssue> issues = parser.parse(input);
         assertThat(issues).hasSize(2);
 
-        assertFilePath(issues.get(0), FILE_PATH);
-        assertLineNumber(issues.get(0), 23);
-        assertRuleId(issues.get(0), "trailing_whitespace");
-        assertMessage(issues.get(0), "Trailing Whitespace Violation: Lines should not have trailing whitespace.");
+        ReportParserTestHelper.assertFilePath(issues.get(0), FILE_PATH);
+        ReportParserTestHelper.assertLineNumber(issues.get(0), 23);
+        ReportParserTestHelper.assertRuleId(issues.get(0), "trailing_whitespace");
+        ReportParserTestHelper.assertMessage(issues.get(0), "Trailing Whitespace Violation: Lines should not have trailing whitespace.");
 
-        assertFilePath(issues.get(1), FILE_PATH);
-        assertLineNumber(issues.get(1), 17);
-        assertRuleId(issues.get(1), "unused_setter_value");
-        assertMessage(issues.get(1), "Unused Setter Value Violation: Setter value is not used.");
+        ReportParserTestHelper.assertFilePath(issues.get(1), FILE_PATH);
+        ReportParserTestHelper.assertLineNumber(issues.get(1), 17);
+        ReportParserTestHelper.assertRuleId(issues.get(1), "unused_setter_value");
+        ReportParserTestHelper.assertMessage(issues.get(1), "Unused Setter Value Violation: Setter value is not used.");
     }
 }

@@ -15,26 +15,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objectivec.lang.issues.oclint;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
-import org.junit.Test;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
 
-public class OCLintSensorTest {
+    private static String repositoryKey = "MobSFScan";
+    public static final String RULES_PATH = File.separator + "mobsfscan-rules.json";
 
-    @Test
-    public void describe() {
-
-        SensorContextTester context = SensorContextTester.create(new File("."));
-        OCLintSensor sensor = new OCLintSensor(context);
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("OCLint sensor");
+    protected MobSFScanRulesDefinition(String language) {
+        super(builder(language), builder(language), language, RULES_PATH);
     }
+
+    public static String builder(String language) {
+        return repositoryKey + StringUtils.capitalize(language);
+    }
+
 }

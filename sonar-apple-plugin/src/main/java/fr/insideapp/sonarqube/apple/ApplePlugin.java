@@ -23,12 +23,16 @@ import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.lang.issues.ObjectiveCProfile;
+import fr.insideapp.sonarqube.objc.lang.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
+import fr.insideapp.sonarqube.objc.lang.issues.mobsfscan.MobSFScanObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
 import fr.insideapp.sonarqube.objc.lang.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
+import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
+import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
 import fr.insideapp.sonarqube.swift.lang.tests.SwiftTestFileFinder;
@@ -52,11 +56,15 @@ public class ApplePlugin implements Plugin {
         // Swift language support
         context.addExtensions(Swift.class, SwiftSensor.class , SwiftProfile.class);
 
+        // Objective-C language support
+        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+
         // SwiftLint
         context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
 
-        // Objective-C language support
-        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+        // MobSFScan (Swift & Objective-C)
+        context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
+        context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
 
         // OCLint
         context.addExtension(

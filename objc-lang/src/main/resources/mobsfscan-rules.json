@@ -1,0 +1,131 @@
+[
+    {
+        "key": "ios_hardcoded_secret",
+        "description": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
+        "severity": "MAJOR",
+        "type": "VULNERABILITY",
+        "name": "Hardcoded Secret",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ios_load_html_string",
+        "description": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
+        "severity": "INFO",
+        "type": "VULNERABILITY",
+        "name": "Unsafe WebView method",
+        "debt": {
+            "offset": "30min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ios_banned_api",
+        "description": "The App may contain banned API(s). These API(s) are insecure and must not be used.",
+        "severity": "MAJOR",
+        "type": "VULNERABILITY",
+        "name": "Banned API",
+        "debt": {
+            "offset": "10min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ios_self_signed_ssl",
+        "description": "App allows self signed or invalid SSL certificates. App is vulnerable to MITM attacks.",
+        "severity": "CRITICAL",
+        "type": "VULNERABILITY",
+        "name": "Self Signed SSL"
+    },
+    {
+        "key": "ios_webview_ignore_ssl",
+        "description": "UIWebView in App ignore SSL errors and accept any SSL Certificate. App is vulnerable to MITM attacks.",
+        "severity": "CRITICAL",
+        "type": "VULNERABILITY",
+        "name": "WebView ignore SSL"
+    },
+    {
+        "key": "ios_app_logging",
+        "description": "The App logs information. Sensitive information should never be logged.",
+        "severity": "INFO",
+        "type": "VULNERABILITY",
+        "name": "Logging method detected",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ios_file_perm",
+        "description": "The file has no special protections associated with it.",
+        "severity": "MAJOR",
+        "type": "VULNERABILITY",
+        "name": "No file encryption",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ios_weak_hash",
+        "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
+        "severity": "MAJOR",
+        "type": "VULNERABILITY",
+        "name": "Weak Hash algorithm used"
+    },
+    {
+        "key": "ios_sha1_collision",
+        "description": "SHA1 is a weak hash known to have hash collisions.",
+        "severity": "MAJOR",
+        "type": "VULNERABILITY",
+        "name": "SHA-1 Collision"
+    },
+    {
+        "key": "ios_aes_ecb",
+        "description": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
+        "severity": "CRITICAL",
+        "type": "VULNERABILITY",
+        "name": "Usage of ECB mode"
+    },
+    {
+        "key": "ios_biometric_bool",
+        "description": "Biometric authentication should be based on Keychain, not based on bool.",
+        "severity": "MAJOR",
+        "type": "VULNERABILITY",
+        "name": "Weak biometric implementation",
+        "debt": {
+            "offset": "30min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ios_jailbreak_detect",
+        "description": "This app does not have Jailbreak detection capabilities.",
+        "severity": "INFO",
+        "type": "VULNERABILITY",
+        "name": "No jailbreak detection"
+    },
+    {
+        "key": "ios_detect_jailbreak_check",
+        "description": "This app does not perform SFAntiPiracy Jailbreak checks.",
+        "severity": "INFO",
+        "type": "VULNERABILITY",
+        "name": "No SFAntiPiracy detection"
+    },
+    {
+        "key": "ios_piracy_check",
+        "description": "This app does not perform SFAntiPiracy Piracy checks.",
+        "severity": "INFO",
+        "type": "VULNERABILITY",
+        "name": "No SFAntiPiracy detection"
+    },
+    {
+        "key": "ios_mach_ports",
+        "description": "This app does not have anti-debugger code using Mach Exception Ports.",
+        "severity": "INFO",
+        "type": "VULNERABILITY",
+        "name": "No anti-debugger protection"
+    }
+]
