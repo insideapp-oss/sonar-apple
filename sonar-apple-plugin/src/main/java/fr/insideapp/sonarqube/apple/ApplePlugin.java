@@ -23,6 +23,8 @@ import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.lang.issues.ObjectiveCProfile;
+import fr.insideapp.sonarqube.objc.lang.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
+import fr.insideapp.sonarqube.objc.lang.issues.mobsfscan.MobSFScanObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintRulesDefinition;
 import fr.insideapp.sonarqube.objc.lang.issues.oclint.OCLintSensor;
 import fr.insideapp.sonarqube.objc.lang.tests.ObjectiveCTestFileFinder;
@@ -54,14 +56,15 @@ public class ApplePlugin implements Plugin {
         // Swift language support
         context.addExtensions(Swift.class, SwiftSensor.class , SwiftProfile.class);
 
+        // Objective-C language support
+        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+
         // SwiftLint
         context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
 
-        // MobSFScan (Swift)
+        // MobSFScan (Swift & Objective-C)
         context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
-
-        // Objective-C language support
-        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+        context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
 
         // OCLint
         context.addExtension(

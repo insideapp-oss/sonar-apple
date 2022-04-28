@@ -60,7 +60,8 @@ def parseCategory(url) {
 }
 
 @Field def LANGUAGE_RULES = [
-        "swift": "swift"
+        "swift": ["swift", "swift"],
+        "objc": ["objectivec", "objective_c"]
 ]
 
 LANGUAGE_RULES.forEach( (key, value) -> {
@@ -69,8 +70,8 @@ LANGUAGE_RULES.forEach( (key, value) -> {
 
         def result = []
 
-        result.addAll parseCategory(URL + "${key}/${value}_rules.yaml")
-        result.addAll parseCategory(URL + "${key}/best_practices.yaml")
+        result.addAll parseCategory(URL + "${value.get(0)}/${value.get(1)}_rules.yaml")
+        result.addAll parseCategory(URL + "${value.get(0)}/best_practices.yaml")
 
         return result
     })

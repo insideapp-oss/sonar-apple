@@ -39,7 +39,7 @@ public abstract class MobSFScanSensor implements Sensor {
         try {
             List<ReportIssue> issues = runAnalysis(sensorContext);
             ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.recordIssues(issues, MobSFScanRulesDefinition.REPOSITORY_KEY);
+            issueRecorder.recordIssues(issues, MobSFScanRulesDefinition.builder(language()));
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

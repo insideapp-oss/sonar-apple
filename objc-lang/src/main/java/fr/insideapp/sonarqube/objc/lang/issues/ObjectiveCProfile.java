@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.lang.issues;
 
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.objc.lang.ObjectiveC;
@@ -36,10 +37,10 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
     public void define(Context context) {
 
         NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Objective-C", ObjectiveC.KEY);
+        RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
 
         // OCLint rules
         try {
-            RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
             List<RepositoryRule> rules = repositoryRuleParser.parse(OCLintRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
                 NewBuiltInActiveRule rule1 = profile.activateRule("OCLint",r.getKey());
@@ -47,6 +48,17 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load OCLint rules", e);
+        }
+
+        // MobSFScan rules (for Objective-C)
+        try {
+            List<RepositoryRule> rules = repositoryRuleParser.parse(MobSFScanRulesDefinition.RULES_PATH);
+            for (RepositoryRule r: rules) {
+                NewBuiltInActiveRule rule = profile.activateRule(MobSFScanRulesDefinition.builder(ObjectiveC.KEY), r.getKey());
+                rule.overrideSeverity(r.getSeverity());
+            }
+        } catch (IOException e) {
+            LOGGER.error("Failed to load MobSFScan rules (for Swift)", e);
         }
 
         profile.setDefault(true);
