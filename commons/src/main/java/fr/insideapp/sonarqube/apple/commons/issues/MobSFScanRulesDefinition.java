@@ -1,5 +1,7 @@
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import org.apache.commons.lang3.StringUtils;
+
 public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
 
     private static String REPOSITORY_KEY = "MobSFScan";
@@ -10,7 +12,7 @@ public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
     }
 
     public static String builder(String language) {
-        return REPOSITORY_KEY + language;
+        return REPOSITORY_KEY + StringUtils.capitalize(language);
     }
 
 }

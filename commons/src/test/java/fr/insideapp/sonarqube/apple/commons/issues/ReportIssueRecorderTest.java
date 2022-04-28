@@ -23,6 +23,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,11 +43,12 @@ public class ReportIssueRecorderTest {
                 .setLines(10)
                 .setOriginalLineEndOffsets(new int[10])
                 .setOriginalLineStartOffsets(new int[10])
+                .setModuleBaseDir(Paths.get(TEST_ROOT))
                 .build();
         context.fileSystem().add(testFile);
 
         List<ReportIssue> issues = new ArrayList<>();
-        issues.add(new ReportIssue("ruleId", "message", TEST_ROOT + File.separator + TEST_FILENAME, 3));
+        issues.add(new ReportIssue("ruleId", "message", testFile.path().toString(), 3));
 
         ReportIssueRecorder recorder = new ReportIssueRecorder(context);
         recorder.recordIssues(issues, "TestRepo");

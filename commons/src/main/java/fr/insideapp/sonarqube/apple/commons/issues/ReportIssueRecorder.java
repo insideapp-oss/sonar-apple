@@ -60,7 +60,10 @@ public class ReportIssueRecorder {
             final String filePath = issue.getFilePath();
             // We have a file location associated with the generated issue
             if (filePath != null) {
-                final FilePredicate filePredicate = predicates.and(predicates.hasAbsolutePath(filePath), mainPredicate);
+                final FilePredicate relativePathPredicate = predicates.hasRelativePath(filePath);
+                final FilePredicate absolutePathPredicate = predicates.hasAbsolutePath(filePath);
+                final FilePredicate pathPredicate = predicates.or(absolutePathPredicate, relativePathPredicate);
+                final FilePredicate filePredicate = predicates.and(pathPredicate, mainPredicate);
                 // Making sure the file is part of SonarQube FS
                 if (fs.hasFiles(filePredicate)) {
                     InputFile inputFile = fs.inputFile(filePredicate);

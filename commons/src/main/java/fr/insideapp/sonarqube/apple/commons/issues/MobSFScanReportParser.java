@@ -1,20 +1,19 @@
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public final class MobSFScanReportParser implements ReportParser {
     private static final Logger LOGGER = Loggers.get(MobSFScanReportParser.class);
     @Override
     public List<ReportIssue> parse(String input) {
 
-        List<ReportIssue> issues = new ArrayList<>();
+        final Set<ReportIssue> issues = new HashSet<>();
 
         try {
             JSONObject results = new JSONObject(input).getJSONObject("results");
@@ -41,7 +40,7 @@ public final class MobSFScanReportParser implements ReportParser {
             LOGGER.error("Error while parsing MobSFScan report", e);
         }
 
-        return issues;
+        return new ArrayList<>(issues);
     }
 
 }
