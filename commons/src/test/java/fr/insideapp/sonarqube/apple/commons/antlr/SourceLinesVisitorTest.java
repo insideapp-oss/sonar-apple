@@ -1,0 +1,77 @@
+/*
+ * SonarQube Apple Plugin - Enables analysis of Swift and Objective-C projects into SonarQube.
+ * Copyright © 2022 inside|app (contact@insideapp.fr)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package fr.insideapp.sonarqube.apple.commons.antlr;
+
+import fr.insideapp.sonarqube.apple.commons.SourceLine;
+import org.antlr.v4.runtime.Token;
+import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.measure.Measure;
+import org.sonar.api.measures.CoreMetrics;
+
+import java.io.File;
+import java.nio.file.Paths;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class SourceLinesVisitorTest {
+
+    @Test
+    public void fillContext() {
+
+        SensorContextTester sensorContext = SensorContextTester.create(new File(""));
+        DefaultInputFile testFile = new TestInputFileBuilder("", "test.ext")
+                .setLines(2)
+                .setOriginalLineEndOffsets(new int[2])
+                .setOriginalLineStartOffsets(new int[2])
+                .setModuleBaseDir(Paths.get("/"))
+                .build();
+        sensorContext.fileSystem().add(testFile);
+
+        SourceLine[] lines = {
+                new SourceLine(0,1,0,10),
+                new SourceLine(1,2,0,10)
+        };
+
+        Token commentToken = mock(Token.class);
+        when(commentToken.getType()).thenReturn(1);
+        when(commentToken.getLine()).thenReturn(1);
+        Token codeToken = mock(Token.class);
+        when(codeToken.getType()).thenReturn(2);
+        when(codeToken.getLine()).thenReturn(2);
+        Token[] tokens = {commentToken, codeToken};
+
+        AntlrContext antlrContext = mock(AntlrContext.class);
+        when(antlrContext.getLines()).thenReturn(lines);
+        when(antlrContext.getTokens()).thenReturn(tokens);
+        when(antlrContext.getFile()).thenReturn(testFile);
+
+        SourceLinesVisitor sourceLinesVisitor = new SourceLinesVisitor.Builder().singleLineCommentToken(1).build();
+        sourceLinesVisitor.fillContext(sensorContext, antlrContext);
+
+        // Asserting
+        Measure<Integer> measureNLOC = sensorContext.measure(testFile.key(), CoreMetrics.NCLOC.key());
+        assertThat(measureNLOC.value()).isEqualTo(1);
+        Measure<Integer> measureNCOMMENTS = sensorContext.measure(testFile.key(), CoreMetrics.COMMENT_LINES.key());
+        assertThat(measureNCOMMENTS.value()).isEqualTo(1);
+    }
+}

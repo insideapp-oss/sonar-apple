@@ -17,30 +17,15 @@
  */
 package fr.insideapp.sonarqube.objc.lang;
 
-import fr.insideapp.sonarqube.apple.commons.SensorRuntimeException;
-import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
-import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeAnalyzer;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCSourceLinesVisitor;
-import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class ObjectiveCSensor implements Sensor {
-
-    private static final int EXECUTOR_TIMEOUT = 10000;
-
-    private static final Logger LOGGER = Loggers.get(ObjectiveCSensor.class);
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
@@ -52,38 +37,7 @@ public class ObjectiveCSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-
-        FilePredicate hasSwift = sensorContext.fileSystem().predicates().hasLanguage(ObjectiveC.KEY);
-        FilePredicate isMain = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
-        FilePredicate swiftAndMain = sensorContext.fileSystem().predicates().and(hasSwift, isMain);
-        final Charset charset = sensorContext.fileSystem().encoding();
-
-        final ExecutorService executorService = Executors.newWorkStealingPool();
-
-        for(InputFile inf : sensorContext.fileSystem().inputFiles(swiftAndMain)){
-
-            executorService.execute(() -> {
-                // Visit source files
-                try {
-                    final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
-                    antlrContext.loadFromFile(inf, charset);
-                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new ObjectiveCSourceLinesVisitor());
-                    visitor.fillContext(sensorContext, antlrContext);
-                } catch (IOException e) {
-                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
-                }
-            });
-
-        }
-
-        try {
-            executorService.shutdown();
-            executorService.awaitTermination(EXECUTOR_TIMEOUT, TimeUnit.SECONDS);
-            executorService.shutdownNow();
-        } catch (final InterruptedException e) {
-            LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
-            Thread.currentThread().interrupt();
-            throw new SensorRuntimeException(e);
-        }
+        final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
+        new ParseTreeAnalyzer(ObjectiveC.KEY,antlrContext, sensorContext).analyze(new ObjectiveCSourceLinesVisitor());
     }
 }
