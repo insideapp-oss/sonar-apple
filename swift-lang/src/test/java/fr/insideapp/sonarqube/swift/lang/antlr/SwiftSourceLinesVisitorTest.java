@@ -34,7 +34,7 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class SourceLinesVisitorTest {
+public class SwiftSourceLinesVisitorTest {
 
     private static class Container {
         final String fileName;
@@ -51,13 +51,13 @@ public class SourceLinesVisitorTest {
     private static final String BASE_DIR = "src/test/resources/swift/source_lines_visitor";
     private SensorContextTester sensorContext;
     private SwiftAntlrContext antlrContext;
-    private SourceLinesVisitor visitor;
+    private SwiftSourceLinesVisitor visitor;
 
     @Before
     public void prepare() {
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
         antlrContext = new SwiftAntlrContext();
-        visitor = new SourceLinesVisitor();
+        visitor = new SwiftSourceLinesVisitor();
     }
 
     @Test

@@ -21,7 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.SensorRuntimeException;
 import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
-import fr.insideapp.sonarqube.objc.lang.antlr.SourceLinesVisitor;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCSourceLinesVisitor;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -67,7 +67,7 @@ public class ObjectiveCSensor implements Sensor {
                 try {
                     final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
                     antlrContext.loadFromFile(inf, charset);
-                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new SourceLinesVisitor());
+                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new ObjectiveCSourceLinesVisitor());
                     visitor.fillContext(sensorContext, antlrContext);
                 } catch (IOException e) {
                     LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);

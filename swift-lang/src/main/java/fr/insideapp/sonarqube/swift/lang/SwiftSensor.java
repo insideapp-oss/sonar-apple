@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.swift.lang;
 import fr.insideapp.sonarqube.apple.commons.SensorRuntimeException;
 import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
-import fr.insideapp.sonarqube.swift.lang.antlr.SourceLinesVisitor;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftSourceLinesVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.SwiftAntlrContext;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
@@ -65,7 +65,7 @@ public class SwiftSensor implements Sensor {
                 try {
                     final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
                     antlrContext.loadFromFile(inf, charset);
-                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new SourceLinesVisitor());
+                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(new SwiftSourceLinesVisitor());
                     visitor.fillContext(sensorContext, antlrContext);
                 } catch (IOException e) {
                     LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
