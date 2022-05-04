@@ -17,25 +17,27 @@
  */
 package fr.insideapp.sonarqube.objc.lang;
 
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeAnalyzer;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCSourceLinesVisitor;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 public class ObjectiveCSensor implements Sensor {
 
-    private static final Logger LOGGER = Loggers.get(ObjectiveCSensor.class);
-
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-
-        LOGGER.warn("Not implemented yet !");
+        sensorDescriptor
+                .onlyOnLanguage(ObjectiveC.KEY)
+                .name("Objective-C Sensor")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
     public void execute(SensorContext sensorContext) {
-
-        LOGGER.warn("Not implemented yet !");
+        final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
+        new ParseTreeAnalyzer(ObjectiveC.KEY,antlrContext, sensorContext).analyze(new ObjectiveCSourceLinesVisitor());
     }
 }
