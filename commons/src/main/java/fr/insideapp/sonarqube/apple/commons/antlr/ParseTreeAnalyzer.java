@@ -50,12 +50,12 @@ public class ParseTreeAnalyzer {
 
         FilePredicate hasLang = sensorContext.fileSystem().predicates().hasLanguage(languageKey);
         FilePredicate isMain = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
-        FilePredicate swiftAndMain = sensorContext.fileSystem().predicates().and(hasLang, isMain);
+        FilePredicate langAndMain = sensorContext.fileSystem().predicates().and(hasLang, isMain);
         final Charset charset = sensorContext.fileSystem().encoding();
 
         final ExecutorService executorService = Executors.newWorkStealingPool();
 
-        for(InputFile inf : sensorContext.fileSystem().inputFiles(swiftAndMain)){
+        for(InputFile inf : sensorContext.fileSystem().inputFiles(langAndMain)){
 
             executorService.execute(() -> {
                 // Visit source files

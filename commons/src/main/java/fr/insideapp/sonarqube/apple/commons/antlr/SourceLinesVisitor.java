@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.antlr;
 
-
 import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;

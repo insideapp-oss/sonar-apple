@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.objc.lang.antlr;
 
-
 import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.apple.commons.antlr.SourceLinesVisitor;
