@@ -17,36 +17,34 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.periphery;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
+import fr.insideapp.sonarqube.swift.lang.issues.RegexReportParser;
 
-import java.util.*;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class PeripheryReportParser implements ReportParser {
+public class PeripheryReportParser extends RegexReportParser {
+
+    public PeripheryReportParser() {
+        super("(.*.swift):(\\w+):(\\w+): (warning): (.*)");
+    }
 
     @Override
-    public List<ReportIssue> parse(String input) {
+    public String filePath(Matcher matcher) {
+        return matcher.group(1);
+    }
 
-        List<ReportIssue> issues = new ArrayList<>();
+    @Override
+    public int lineNum(Matcher matcher) {
+        return Integer.parseInt(matcher.group(2));
+    }
 
-        String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(.*.swift):(\\w+):(\\w+): (warning): (.*)");
-        for (String line : lines) {
-            Matcher matcher = pattern.matcher(line);
-            while (matcher.find()) {
-                String filePath = matcher.group(1);
-                int lineNum = Integer.parseInt(matcher.group(2));
-                String message = matcher.group(5);
-                /*
-                 Periphery doesn't provide the ruleId at the moment
-                */
-                String ruleId = "unused";
-                issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
-            }
-        }
+    @Override
+    public String message(Matcher matcher) {
+        return matcher.group(5);
+    }
 
-        return issues;
+    @Override
+    public String ruleId(Matcher matcher) {
+        // periphery doesn't provide the ruleId at the moment
+        return "unused";
     }
 }

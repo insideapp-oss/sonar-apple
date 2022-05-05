@@ -17,34 +17,34 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
+import fr.insideapp.sonarqube.swift.lang.issues.RegexReportParser;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class SwiftLintReportParser implements ReportParser {
+public class SwiftLintReportParser extends RegexReportParser {
+
+    public SwiftLintReportParser() {
+        super("(.*.swift):(\\w+):(\\w+): (warning|error): (.*) \\((\\w+)\\)");
+    }
 
     @Override
-    public List<ReportIssue> parse(String input) {
-
-        List<ReportIssue> issues = new ArrayList<>();
-
-        String[] lines = input.split(System.getProperty("line.separator"));
-        Pattern pattern = Pattern.compile("(.*.swift):(\\w+):(\\w+): (warning|error): (.*) \\((\\w+)\\)");
-        for (String line : lines) {
-            Matcher matcher = pattern.matcher(line);
-            while (matcher.find()) {
-                String filePath = matcher.group(1);
-                int lineNum = Integer.parseInt(matcher.group(2));
-                String message = matcher.group(5);
-                String ruleId = matcher.group(6);
-                issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
-            }
-        }
-
-        return issues;
+    public String filePath(Matcher matcher) {
+        return matcher.group(1);
     }
+
+    @Override
+    public int lineNum(Matcher matcher) {
+        return Integer.parseInt(matcher.group(2));
+    }
+
+    @Override
+    public String message(Matcher matcher) {
+        return matcher.group(5);
+    }
+
+    @Override
+    public String ruleId(Matcher matcher) {
+        return matcher.group(6);
+    }
+
 }

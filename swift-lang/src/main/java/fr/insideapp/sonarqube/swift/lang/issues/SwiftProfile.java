@@ -17,9 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
-import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
-import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
+import fr.insideapp.sonarqube.apple.commons.issues.*;
 import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
@@ -28,7 +26,10 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
