@@ -59,7 +59,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <pluginKey>sonar-apple</pluginKey>
-                    <pluginClass>fr.insideapp.sonaqube.apple.ApplePlugin</pluginClass>
+                    <pluginClass>fr.insideapp.sonarqube.apple.ApplePlugin</pluginClass>
                     <pluginName>Swift/Objective-C Code Quality and Security</pluginName>
                 </configuration>
             </plugin>

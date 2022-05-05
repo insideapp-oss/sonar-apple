@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-public class RepositoryRule {
+public final class RepositoryRule {
 
     private final String key;
     private final String name;

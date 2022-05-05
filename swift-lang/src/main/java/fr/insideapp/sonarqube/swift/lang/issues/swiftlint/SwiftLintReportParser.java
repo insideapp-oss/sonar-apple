@@ -18,14 +18,16 @@
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SwiftLintReportParser {
+public class SwiftLintReportParser implements ReportParser {
 
+    @Override
     public List<ReportIssue> parse(String input) {
 
         List<ReportIssue> issues = new ArrayList<>();

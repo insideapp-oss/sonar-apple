@@ -54,6 +54,22 @@ Use the following command to update the SwiftLint rules file:
 $ mvn groovy:execute -Dsource=scripts/updateSwiftLintRules.groovy
 ```
 
+### OCLint update
+
+Use the following command to update the OCLint rules file:
+
+```bash
+$ mvn groovy:execute -Dsource=scripts/updateOCLintRules.groovy
+```
+
+### mobsfscan update
+
+Use the following command to update the mobsfscan rules file:
+
+```bash
+$ mvn groovy:execute -Dsource=scripts/updateMobSFScanRules.groovy
+```
+
 ### Filling rules information
 
 Eventhough updating rule repository file is mostly automatic, some data related to rules cannot be automatically computed.
@@ -61,7 +77,7 @@ Eventhough updating rule repository file is mostly automatic, some data related 
 This is the case for :
 - severity (blocker, critical, major, minor, info)
 - type (code smell, bug, vulnerability)
-- debt (remediation effort estimate)
+- debt (remediation effort estimate, optional)
 
 At the end of a rule update script, rules are scanned, and you are asked to fill missing information:
 

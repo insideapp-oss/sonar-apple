@@ -17,20 +17,30 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class ReportIssue {
 
     private final String ruleId;
     private final String message;
+    @Nullable
     private final String filePath;
-    private final int lineNumber;
+    @Nullable
+    private final Integer lineNumber;
 
-    public ReportIssue(String ruleId, String message, String filePath, int lineNumber) {
+    public ReportIssue(String ruleId, String message, @Nullable String filePath, @Nullable Integer lineNumber) {
         this.ruleId = ruleId;
         this.message = message;
         this.filePath = filePath;
         this.lineNumber = lineNumber;
+    }
+
+    public ReportIssue(String ruleId, String message) {
+        this.ruleId = ruleId;
+        this.message = message;
+        this.filePath = null;
+        this.lineNumber = null;
     }
 
     public String getRuleId() {
@@ -45,7 +55,7 @@ public class ReportIssue {
         return filePath;
     }
 
-    public int getLineNumber() {
+    public Integer getLineNumber() {
         return lineNumber;
     }
 
@@ -54,7 +64,7 @@ public class ReportIssue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReportIssue that = (ReportIssue) o;
-        return lineNumber == that.lineNumber &&
+        return Objects.equals(lineNumber, that.lineNumber) &&
                 Objects.equals(ruleId, that.ruleId) &&
                 Objects.equals(message, that.message) &&
                 Objects.equals(filePath, that.filePath);

@@ -1,0 +1,37 @@
+{
+  "version": "22.02",
+  "url": "https://oclint.org",
+  "timestamp": 1650749466,
+  "summary": {
+    "numberOfFiles": 2,
+    "numberOfFilesWithViolations": 1,
+    "numberOfViolationsWithPriority": [
+      {
+        "priority": 1,
+        "number": 0
+      },
+      {
+        "priority": 2,
+        "number": 0
+      },
+      {
+        "priority": 3,
+        "number": 1
+      }
+    ]
+  },
+  "violation": [
+    {
+      "path": "/SQApp/SQApp/Greeting.m",
+      "startLine": 18,
+      "startColumn": 5,
+      "endLine": 18,
+      "endColumn": 19,
+      "rule": "short variable name",
+      "category": "naming",
+      "priority": 3,
+      "message": "Length of variable name `s` is 1, which is shorter than the threshold of 3"
+    }
+  ],
+  "clangStaticAnalyzer": []
+}

@@ -17,6 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift.lang;
 
+import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeAnalyzer;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftAntlrContext;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftSourceLinesVisitor;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -25,11 +29,15 @@ public class SwiftSensor implements Sensor {
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-
+        sensorDescriptor
+                .onlyOnLanguage(Swift.KEY)
+                .name("Swift Sensor")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
     public void execute(SensorContext sensorContext) {
-
+        final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
+        new ParseTreeAnalyzer(Swift.KEY, antlrContext, sensorContext).analyze(new SwiftSourceLinesVisitor());
     }
 }

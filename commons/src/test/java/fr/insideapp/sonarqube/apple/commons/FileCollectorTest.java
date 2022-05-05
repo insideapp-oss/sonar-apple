@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons;
 
-import fr.insideapp.sonaqube.apple.commons.FileCollector;
 import org.junit.Test;
 
 import java.io.File;

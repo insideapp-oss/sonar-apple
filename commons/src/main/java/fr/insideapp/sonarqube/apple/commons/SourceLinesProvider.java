@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons;
 
-import org.sonar.api.internal.apachecommons.io.input.BOMInputStream;
+import org.apache.commons.io.input.BOMInputStream;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
