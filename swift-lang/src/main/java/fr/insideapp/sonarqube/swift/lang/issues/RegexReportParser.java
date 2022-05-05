@@ -29,7 +29,7 @@ public abstract class RegexReportParser implements ReportParser {
 
     private final String regex;
 
-    public RegexReportParser(String regex) {
+    protected RegexReportParser(String regex) {
         this.regex = regex;
     }
 
@@ -42,9 +42,9 @@ public abstract class RegexReportParser implements ReportParser {
         for (String line : lines) {
             Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
-                String filePath = filePath(matcher);
-                int lineNum = lineNum(matcher);
-                String message = message(matcher);
+                String filePath = matcher.group(1);
+                int lineNum = Integer.parseInt(matcher.group(2));
+                String message = matcher.group(5);
                 String ruleId = ruleId(matcher);
                 issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
             }
@@ -52,12 +52,6 @@ public abstract class RegexReportParser implements ReportParser {
 
         return issues;
     }
-
-    public abstract String filePath(Matcher matcher);
-
-    public abstract int lineNum(Matcher matcher);
-
-    public abstract String message(Matcher matcher);
 
     public abstract String ruleId(Matcher matcher);
 

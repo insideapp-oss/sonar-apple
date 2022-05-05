@@ -28,21 +28,6 @@ public class SwiftLintReportParser extends RegexReportParser {
     }
 
     @Override
-    public String filePath(Matcher matcher) {
-        return matcher.group(1);
-    }
-
-    @Override
-    public int lineNum(Matcher matcher) {
-        return Integer.parseInt(matcher.group(2));
-    }
-
-    @Override
-    public String message(Matcher matcher) {
-        return matcher.group(5);
-    }
-
-    @Override
     public String ruleId(Matcher matcher) {
         return matcher.group(6);
     }
