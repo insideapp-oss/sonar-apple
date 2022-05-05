@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 
+import fr.insideapp.sonarqube.swift.lang.issues.ReportParserTestHelper;
 import org.junit.Test;
 
 import java.util.List;
