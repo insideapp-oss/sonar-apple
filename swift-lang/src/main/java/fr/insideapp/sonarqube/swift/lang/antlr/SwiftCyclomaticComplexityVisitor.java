@@ -45,6 +45,7 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
                 Swift5Parser.While_statementContext.class.equals(classz) ||
                 Swift5Parser.Case_labelContext.class.equals(classz) ||
                 Swift5Parser.Guard_statementContext.class.equals(classz) ||
+                Swift5Parser.Closure_expressionContext.class.equals(classz) ||
                 Swift5Parser.Function_bodyContext.class.equals(classz)
         ) {
             complexity++;
@@ -61,9 +62,10 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
         final InputFile file = antlrContext.getFile();
 
-        synchronized (context) {
+        synchronized (SwiftCyclomaticComplexityVisitor.class) {
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity).save();
+                complexity = 0;
             } catch (final Throwable e) {
                 LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.path()), e);
             }
