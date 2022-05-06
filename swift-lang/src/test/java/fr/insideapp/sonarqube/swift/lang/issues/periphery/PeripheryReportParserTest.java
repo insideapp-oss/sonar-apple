@@ -15,10 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
+package fr.insideapp.sonarqube.swift.lang.issues.periphery;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-
 import fr.insideapp.sonarqube.swift.lang.issues.ReportParserTestHelper;
 import org.junit.Test;
 
@@ -26,29 +25,29 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SwiftLintReportParserTest {
+public class PeripheryReportParserTest {
 
     private static final String FILE_PATH = "/SQApp/SQApp/SQAppApp.swift";
 
     @Test
     public void parse() {
 
-        String input = "/SQApp/SQApp/SQAppApp.swift:23:1: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)\n" +
-                "/SQApp/SQApp/SQAppApp.swift:17:9: warning: Unused Setter Value Violation: Setter value is not used. (unused_setter_value)";
+        String input = "/SQApp/SQApp/SQAppApp.swift:23:1: warning: Property 'myProperty' is assigned, but never used\n" +
+                "/SQApp/SQApp/SQAppApp.swift:17:9: warning: Function 'myFunction(param1:param2:)' is unused";
 
-        SwiftLintReportParser parser = new SwiftLintReportParser();
+        PeripheryReportParser parser = new PeripheryReportParser();
 
         List<ReportIssue> issues = parser.parse(input);
         assertThat(issues).hasSize(2);
 
         ReportParserTestHelper.assertFilePath(issues.get(0), FILE_PATH);
         ReportParserTestHelper.assertLineNumber(issues.get(0), 23);
-        ReportParserTestHelper.assertRuleId(issues.get(0), "trailing_whitespace");
-        ReportParserTestHelper.assertMessage(issues.get(0), "Trailing Whitespace Violation: Lines should not have trailing whitespace.");
+        ReportParserTestHelper.assertRuleId(issues.get(0), "unused");
+        ReportParserTestHelper.assertMessage(issues.get(0), "Property 'myProperty' is assigned, but never used");
 
         ReportParserTestHelper.assertFilePath(issues.get(1), FILE_PATH);
         ReportParserTestHelper.assertLineNumber(issues.get(1), 17);
-        ReportParserTestHelper.assertRuleId(issues.get(1), "unused_setter_value");
-        ReportParserTestHelper.assertMessage(issues.get(1), "Unused Setter Value Violation: Setter value is not used.");
+        ReportParserTestHelper.assertRuleId(issues.get(1), "unused");
+        ReportParserTestHelper.assertMessage(issues.get(1), "Function 'myFunction(param1:param2:)' is unused");
     }
 }

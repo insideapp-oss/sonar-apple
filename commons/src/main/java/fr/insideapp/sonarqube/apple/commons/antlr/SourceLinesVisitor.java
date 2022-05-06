@@ -40,6 +40,8 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
     private final int interpolationMultiLineToken;
     private final int quotedMultiLineTextToken;
     private final int quotedMultiLineExtendedTextToken;
+    private final int classToken;
+    private final int functionToken;
 
     public static class Builder
     {
@@ -49,6 +51,8 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
         private int interpolationMultiLineToken = -4;
         private int quotedMultiLineTextToken = -5;
         private int quotedMultiLineExtendedTextToken = -6;
+        private int classToken = -7;
+        private int functionToken = -8;
 
         public Builder whiteSpaceToken(int whitespaceToken) {
             this.whiteSpaceToken = whitespaceToken;
@@ -80,6 +84,16 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
             return this;
         }
 
+        public Builder classToken(int classToken) {
+            this.classToken = classToken;
+            return this;
+        }
+
+        public Builder functionToken(int functionToken) {
+            this.functionToken = functionToken;
+            return this;
+        }
+
         public SourceLinesVisitor build() {
             return new SourceLinesVisitor(this);
         }
@@ -98,6 +112,8 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
         this.quotedMultiLineTextToken = builder.quotedMultiLineTextToken;
         this.singleLineCommentToken = builder.singleLineCommentToken;
         this.whiteSpaceToken = builder.whiteSpaceToken;
+        this.classToken = builder.classToken;
+        this.functionToken = builder.functionToken;
     }
 
 
@@ -109,8 +125,10 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
         final Set<Integer> linesOfComment = new HashSet<>();
         // Set containing the lines number considered as code
         final Set<Integer> linesOfCode = new HashSet<>();
+        int numberOfClasses = 0;
+        int numberOfFunctions = 0;
 
-        // Computing the lines according to token type
+        // Computing the metrics according to token type
         for (final Token token : antlrContext.getTokens()) {
             Integer currentLineNumber = token.getLine();
 
@@ -151,6 +169,12 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
                 linesOfCode.add(currentLineNumber);
             }
 
+            if (tokenType == classToken) {
+                numberOfClasses++;
+            } else if (tokenType == functionToken) {
+                numberOfFunctions++;
+            }
+
         }
 
         // Only keeping the comments that are "pure" comments
@@ -168,6 +192,8 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.NCLOC).withValue(Math.toIntExact(linesOfCodeCount)).save();
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMMENT_LINES).withValue(Math.toIntExact(linesOfCommentCount)).save();
+                context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.CLASSES).withValue(numberOfClasses).save();
+                context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.FUNCTIONS).withValue(numberOfFunctions).save();
             } catch (Exception e) {
                 LOGGER.warn("Unexpected source lines measures", e);
             }

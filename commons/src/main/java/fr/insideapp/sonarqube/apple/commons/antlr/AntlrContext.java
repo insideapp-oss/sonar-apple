@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.apple.commons.antlr;
 import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.Vocabulary;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
 
@@ -33,6 +34,7 @@ public abstract class AntlrContext {
     private CommonTokenStream stream;
     private ParseTree root;
     private SourceLine[] lines;
+    private Vocabulary vocabulary;
 
     public void loadFromFile(InputFile file, Charset charset) throws IOException {
         loadFromStreams(file, file.inputStream(), file.inputStream(), charset);
@@ -74,6 +76,7 @@ public abstract class AntlrContext {
     public ParseTree getRoot() {
         return root;
     }
+    public Vocabulary getVocabulary() { return vocabulary; }
 
     protected void setStream(CommonTokenStream stream) {
         this.stream = stream;
@@ -86,4 +89,5 @@ public abstract class AntlrContext {
     protected void setLines(SourceLine[] lines) {
         this.lines = lines;
     }
+    protected void setVocabulary(Vocabulary vocabulary) { this.vocabulary = vocabulary; }
 }

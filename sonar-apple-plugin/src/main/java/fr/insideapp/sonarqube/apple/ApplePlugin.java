@@ -33,6 +33,8 @@ import fr.insideapp.sonarqube.swift.lang.SwiftSensor;
 import fr.insideapp.sonarqube.swift.lang.issues.SwiftProfile;
 import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.mobsfscan.MobSFScanSwiftSensor;
+import fr.insideapp.sonarqube.swift.lang.issues.periphery.PeripheryRulesDefinition;
+import fr.insideapp.sonarqube.swift.lang.issues.periphery.PeripherySensor;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintRulesDefinition;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
 import fr.insideapp.sonarqube.swift.lang.tests.SwiftTestFileFinder;
@@ -47,6 +49,8 @@ public class ApplePlugin implements Plugin {
     public static final String TESTS_SUBCATEGORY = "Tests";
 
     public static final String OCLINT_SUBCATEGORY = "OCLint";
+
+    public static final String PERIPHERY_SUBCATEGORY = "Periphery";
 
     public static final String COVERAGE_SUBCATEGORY = "Coverage";
 
@@ -65,6 +69,17 @@ public class ApplePlugin implements Plugin {
         // MobSFScan (Swift & Objective-C)
         context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
         context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
+
+        // Periphery
+        context.addExtension(
+                PropertyDefinition.builder(PeripherySensor.LOG_PATH_KEY)
+                        .name("periphery log")
+                        .description("Path to periphery log file. The path may be either absolute or relative to the project base directory.")
+                        .onQualifiers(Qualifiers.PROJECT)
+                        .category(APPLE_CATEGORY)
+                        .subCategory(PERIPHERY_SUBCATEGORY)
+                        .build());
+        context.addExtensions(PeripherySensor.class, PeripheryRulesDefinition.class);
 
         // OCLint
         context.addExtension(
