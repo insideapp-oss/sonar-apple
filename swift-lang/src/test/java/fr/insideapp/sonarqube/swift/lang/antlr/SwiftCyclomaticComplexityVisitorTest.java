@@ -74,6 +74,11 @@ public class SwiftCyclomaticComplexityVisitorTest {
         assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase6", 3));
     }
 
+    @Test
+    public void testCase7() throws IOException {
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase7", 2));
+    }
+
     private void assertContainer(SwiftCyclomaticComplexityVisitorTest.Container container) throws IOException {
 
         final String completeFileName = container.fileName + "." + Swift.KEY;
