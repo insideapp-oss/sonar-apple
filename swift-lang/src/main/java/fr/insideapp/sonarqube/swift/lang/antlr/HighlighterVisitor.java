@@ -107,7 +107,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
     );
 
     @Override
-    public void apply(ParseTree tree) { // No default implementation
+    public void apply(ParseTree tree) { // no default implementation
     }
 
     @Override
@@ -140,24 +140,22 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 addHighlighting(newHighlighting, token, file, range, antlrContext.getVocabulary());
                 addCpdToken(cpdTokens, file, token, range);
             } catch (final Exception e) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug(format(
-                                    "Unexpected error creating text range on file %s for token %s on (%s, %s) -  (%s, %s)",
-                                    file.key(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
-                            e);
-                }
+                LOGGER.warn(format(
+                                "Unexpected error creating text range on file %s for token %s on (%s, %s) -  (%s, %s)",
+                                file.key(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
+                        e);
             }
         }
         synchronized (HighlighterVisitor.class) {
             try {
                 newHighlighting.save();
-            } catch (final Exception e) {
+            } catch (Exception e) {
                 LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.key()), e);
             }
 
             try {
                 cpdTokens.save();
-            } catch (final Exception e) {
+            } catch (Exception e) {
                 LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.key()), e);
             }
         }
@@ -167,9 +165,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
         try {
             cpdTokens.addToken(range, token.getText());
         } catch (Exception e) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.key()), e);
-            }
+            LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.key()), e);
         }
     }
 
@@ -201,10 +197,8 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 newHighlighting.highlight(range, TypeOfText.KEYWORD);
             }
 
-        } catch (final Exception e) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(format("Unexpected error adding highlighting on file %s", file.key()), e);
-            }
+        } catch (Exception e) {
+            LOGGER.warn(format("Unexpected error adding highlighting on file %s", file.key()), e);
         }
     }
 }
