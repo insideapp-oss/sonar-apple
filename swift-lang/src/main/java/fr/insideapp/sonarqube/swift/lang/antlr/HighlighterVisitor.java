@@ -32,7 +32,6 @@ import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
