@@ -15,32 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple;
+package fr.insideapp.sonarqube.swift.lang.issues.periphery;
 
 import org.junit.Test;
-import org.sonar.api.Plugin;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import java.io.File;
 
-public class ApplePluginTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class PeripherySensorTest {
+
+    private static final String BASE_DIR = "src/test/resources/swift";
 
     @Test
-    public void define() {
-
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        Plugin.Context context = new Plugin.Context(sonarRuntime);
-
-
-        ApplePlugin plugin = new ApplePlugin();
-        plugin.define(context);
-
-        assertThat(context.getExtensions()).hasSize(22);
-
-
+    public void describe() {
+        PeripherySensor sensor = new PeripherySensor(SensorContextTester.create(new File(BASE_DIR)));
+        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        sensor.describe(descriptor);
+        assertThat(descriptor.name()).isEqualTo("Periphery Sensor");
     }
+
 }

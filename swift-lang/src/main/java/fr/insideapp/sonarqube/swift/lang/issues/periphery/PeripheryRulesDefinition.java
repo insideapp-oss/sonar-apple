@@ -15,32 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple;
+package fr.insideapp.sonarqube.swift.lang.issues.periphery;
 
-import org.junit.Test;
-import org.sonar.api.Plugin;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.swift.lang.Swift;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+public class PeripheryRulesDefinition extends JSONRulesDefinition {
 
-public class ApplePluginTest {
+    public static final String REPOSITORY_KEY = "Periphery";
+    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    @Test
-    public void define() {
+    public static final String RULES_PATH = "/periphery-rules.json";
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        Plugin.Context context = new Plugin.Context(sonarRuntime);
-
-
-        ApplePlugin plugin = new ApplePlugin();
-        plugin.define(context);
-
-        assertThat(context.getExtensions()).hasSize(22);
-
-
+    public PeripheryRulesDefinition() {
+        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, RULES_PATH);
     }
+
 }

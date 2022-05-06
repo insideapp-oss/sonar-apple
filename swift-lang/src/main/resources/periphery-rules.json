@@ -1,0 +1,13 @@
+[
+    {
+        "key": "unused",
+        "name": "Unused",
+        "severity": "MAJOR",
+        "description": "This code is never unused",
+        "debt": {
+            "function": "CONSTANT_ISSUE",
+            "offset": "1min"
+        },
+        "type": "CODE_SMELL"
+    }
+]
