@@ -29,9 +29,9 @@ import org.sonar.api.utils.log.Loggers;
 
 import static java.lang.String.format;
 
-public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
+public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
 
-    private static final Logger LOGGER = Loggers.get(CyclomaticComplexityVisitor.class);
+    private static final Logger LOGGER = Loggers.get(SwiftCyclomaticComplexityVisitor.class);
 
     private int complexity = 0;
 
@@ -41,23 +41,23 @@ public class CyclomaticComplexityVisitor implements ParseTreeItemVisitor {
         final Class<? extends ParseTree> classz = tree.getClass();
 
         if(Swift5Parser.If_statementContext.class.equals(classz) ||
-                Swift5Parser.For_in_statementContext.class.equals(classz) ||
-                Swift5Parser.While_statementContext.class.equals(classz) ||
-                Swift5Parser.Switch_caseContext.class.equals(classz) ||
-                Swift5Parser.Switch_casesContext.class.equals(classz) ||
-                Swift5Parser.Do_statementContext.class.equals(classz) ||
-                Swift5Parser.Function_bodyContext.class.equals(classz) ||
-                Swift5Parser.Closure_expressionContext.class.equals(classz)
+            Swift5Parser.For_in_statementContext.class.equals(classz) ||
+            Swift5Parser.While_statementContext.class.equals(classz) ||
+            Swift5Parser.Switch_caseContext.class.equals(classz) ||
+            Swift5Parser.Switch_casesContext.class.equals(classz) ||
+            Swift5Parser.Do_statementContext.class.equals(classz) ||
+            Swift5Parser.Function_bodyContext.class.equals(classz) ||
+            Swift5Parser.Closure_expressionContext.class.equals(classz)
         ) {
             complexity++;
         }
 
-        if (Swift5Parser.Conditional_operatorContext.class.equals(classz)) {
+        /*if (Swift5Parser.Conditional_operatorContext.class.equals(classz)) {
 
             int countOr = ( tree.getText().split("\\|\\|", -1).length ) - 1;
             int countAnd = ( tree.getText().split("&&", -1).length ) - 1;
             complexity = complexity + countOr + countAnd;
-        }
+        }*/
     }
 
     @Override
