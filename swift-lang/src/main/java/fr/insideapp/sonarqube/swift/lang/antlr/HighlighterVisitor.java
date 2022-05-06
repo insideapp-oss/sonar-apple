@@ -19,8 +19,6 @@ package fr.insideapp.sonarqube.swift.lang.antlr;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
-import fr.insideapp.sonarqube.swift.lang.KeywordsProvider;
-import fr.insideapp.sonarqube.swift.lang.Swift;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.Vocabulary;
@@ -43,7 +41,6 @@ import static java.lang.String.format;
 public class HighlighterVisitor implements ParseTreeItemVisitor {
 
     private static final Logger LOGGER = Loggers.get(HighlighterVisitor.class);
-    private final KeywordsProvider keywordsProvider = new KeywordsProvider();
 
     private static final Set<Integer> Swift5CommentTypes = Set.of(
             Swift5Parser.Block_comment,
