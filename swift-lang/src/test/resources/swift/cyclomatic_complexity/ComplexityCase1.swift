@@ -1,19 +1,6 @@
-class TestComplexity {
-    func test() {
-        for i in 0..100 {
-            for i in 0..100 {
-                for i in 0..100 {
-                    for i in 0..100 {
-                        for i in 0..100 {
-                            for i in 0..100 {
-                                for i in 0..100 {
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+func test() {
+    if true {
+        for _ in 1..5 { }
     }
+    if false { }
 }

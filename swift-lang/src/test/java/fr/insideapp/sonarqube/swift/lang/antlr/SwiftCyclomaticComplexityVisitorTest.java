@@ -46,17 +46,32 @@ public class SwiftCyclomaticComplexityVisitorTest {
 
     @Test
     public void testCase1() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase1", 8));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase1", 4));
     }
 
     @Test
-    public void testRealCase2() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase2", 2));
+    public void testCase2() throws IOException {
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase2", 10));
     }
 
     @Test
-    public void testRealCase3() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase3", 4));
+    public void testCase3() throws IOException {
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase3", 13));
+    }
+
+    @Test
+    public void testCase4() throws IOException {
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase4", 11));
+    }
+
+    @Test
+    public void testCase5() throws IOException {
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase5", 8));
+    }
+
+    @Test
+    public void testCase6() throws IOException {
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase6", 3));
     }
 
     private void assertContainer(SwiftCyclomaticComplexityVisitorTest.Container container) throws IOException {
