@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.apple.commons.antlr;
 import fr.insideapp.sonarqube.apple.commons.SensorRuntimeException;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -37,11 +38,13 @@ public class ParseTreeAnalyzer {
     private static final Logger LOGGER = Loggers.get(ParseTreeAnalyzer.class);
 
     private final String languageKey;
+    private final Type type;
     private final AntlrContext antlrContext;
     private final SensorContext sensorContext;
 
-    public ParseTreeAnalyzer(String languageKey, AntlrContext antlrContext, SensorContext sensorContext) {
+    public ParseTreeAnalyzer(String languageKey, Type type, AntlrContext antlrContext, SensorContext sensorContext) {
         this.languageKey = languageKey;
+        this.type = type;
         this.antlrContext = antlrContext;
         this.sensorContext = sensorContext;
     }
@@ -49,14 +52,13 @@ public class ParseTreeAnalyzer {
     public void analyze(final ParseTreeItemVisitor... visitors) {
 
         FilePredicate hasLang = sensorContext.fileSystem().predicates().hasLanguage(languageKey);
-        FilePredicate isMain = sensorContext.fileSystem().predicates().hasType(InputFile.Type.MAIN);
-        FilePredicate langAndMain = sensorContext.fileSystem().predicates().and(hasLang, isMain);
+        FilePredicate hasType = sensorContext.fileSystem().predicates().hasType(type);
+        FilePredicate langAndType = sensorContext.fileSystem().predicates().and(hasLang, hasType);
         final Charset charset = sensorContext.fileSystem().encoding();
 
         final ExecutorService executorService = Executors.newWorkStealingPool();
 
-        for(InputFile inf : sensorContext.fileSystem().inputFiles(langAndMain)){
-
+        for(InputFile inf : sensorContext.fileSystem().inputFiles(langAndType)){
             executorService.execute(() -> {
                 // Visit source files
                 try {
@@ -67,7 +69,6 @@ public class ParseTreeAnalyzer {
                     LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
                 }
             });
-
         }
 
         try {

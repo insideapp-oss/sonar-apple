@@ -51,6 +51,5 @@ public class ObjectiveCAntlrContext extends AntlrContext {
         this.setStream(stream);
         this.setLines(lines);
         this.setRoot(root);
-
     }
 }

@@ -15,9 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.antlr;
+package fr.insideapp.sonarqube.objectivec.lang.antlr;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
+import fr.insideapp.sonarqube.objc.lang.antlr.HighlighterVisitor;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -29,14 +31,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class HighlighterVisitorTest {
 
-    private static final String TEST_ROOT = "src/test/resources/swift";
-    private static final String TEST_FILENAME = "main.swift";
+    private static final String TEST_ROOT = "src/test/resources/objc";
+    private static final String TEST_FILENAME = "main.m";
 
     @Test
     public void fillContext() throws IOException {
@@ -45,13 +46,13 @@ public class HighlighterVisitorTest {
         File file = new File(TEST_ROOT, TEST_FILENAME);
 
         InputFile testFile = new TestInputFileBuilder("foo", TEST_FILENAME)
-                .setLanguage("swift")
+                .setLanguage("objc")
                 .setModuleBaseDir(Paths.get(TEST_ROOT))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
                 .setCharset(Charset.defaultCharset())
                 .build();
         context.fileSystem().add(testFile);
-        SwiftAntlrContext antlrContext = new SwiftAntlrContext();
+        ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
         antlrContext.loadFromStreams(
                 testFile,
                 testFile.inputStream(),
@@ -62,11 +63,14 @@ public class HighlighterVisitorTest {
         HighlighterVisitor highlighterVisitor = new HighlighterVisitor();
         CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(highlighterVisitor);
         customTreeVisitor.fillContext(context, antlrContext);
-        assertThat(context.highlightingTypeAt(testFile.key(), 2, 0)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
-        assertThat(context.highlightingTypeAt(testFile.key(), 2, 10)).isEmpty();
-        assertThat(context.highlightingTypeAt(testFile.key(), 3, 8)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
-        assertThat(context.highlightingTypeAt(testFile.key(), 3, 13)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
-        assertThat(context.highlightingTypeAt(testFile.key(), 3, 19)).containsExactlyInAnyOrder(TypeOfText.KEYWORD_LIGHT);
-        assertThat(context.highlightingTypeAt(testFile.key(), 4, 20)).containsExactlyInAnyOrder(TypeOfText.STRING);
+        assertThat(context.highlightingTypeAt(testFile.key(), 1, 0)).containsExactlyInAnyOrder(TypeOfText.COMMENT);
+        assertThat(context.highlightingTypeAt(testFile.key(), 5, 0)).containsExactlyInAnyOrder(TypeOfText.COMMENT);
+        assertThat(context.highlightingTypeAt(testFile.key(), 7, 6)).containsExactlyInAnyOrder(TypeOfText.PREPROCESS_DIRECTIVE);
+        assertThat(context.highlightingTypeAt(testFile.key(), 8, 13)).containsExactlyInAnyOrder(TypeOfText.PREPROCESS_DIRECTIVE);
+        assertThat(context.highlightingTypeAt(testFile.key(), 9, 0)).isEmpty();
+        assertThat(context.highlightingTypeAt(testFile.key(), 10, 1)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
+        assertThat(context.highlightingTypeAt(testFile.key(), 10, 7)).containsExactlyInAnyOrder(TypeOfText.KEYWORD_LIGHT);
+        assertThat(context.highlightingTypeAt(testFile.key(), 10, 22)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
+        assertThat(context.highlightingTypeAt(testFile.key(), 12, 11)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
     }
 }

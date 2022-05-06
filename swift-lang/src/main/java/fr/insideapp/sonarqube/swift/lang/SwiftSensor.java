@@ -39,7 +39,11 @@ public class SwiftSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
         final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
-        new ParseTreeAnalyzer(Swift.KEY, antlrContext, sensorContext)
+        // Analyse source files
+        new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.MAIN, antlrContext, sensorContext)
                 .analyze(new SwiftSourceLinesVisitor(), new HighlighterVisitor());
+        // Analyse test files (highlighter only)
+        new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.TEST, antlrContext, sensorContext)
+                .analyze(new HighlighterVisitor());
     }
 }

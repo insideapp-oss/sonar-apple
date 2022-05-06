@@ -22,7 +22,6 @@ import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.Vocabulary;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
@@ -34,7 +33,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -46,6 +44,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             Swift5Parser.Block_comment,
             Swift5Parser.Line_comment
     );
+
     private static final Set<Integer> Swift5StringTypes = Set.of(
             Swift5Parser.Single_line_extended_string_open,
             Swift5Parser.Multi_line_extended_string_open,
@@ -62,6 +61,11 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             Swift5Parser.Multi_line_extended_string_close,
             Swift5Parser.Quoted_multi_line_extended_text
     );
+
+    private static final Set<Integer> Swift5KeywordLightTypes = Set.of(
+            Swift5Parser.Identifier
+    );
+
     private static final Set<Integer> Swift5KeywordTypes = Set.of(
             Swift5Parser.AS, Swift5Parser.ALPHA, Swift5Parser.BREAK, Swift5Parser.CASE, Swift5Parser.CATCH,
             Swift5Parser.CLASS, Swift5Parser.CONTINUE, Swift5Parser.DEFAULT, Swift5Parser.DEFER, Swift5Parser.DO,
@@ -93,7 +97,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             Swift5Parser.HASH_FILE_ID, Swift5Parser.HASH_FILE_PATH, Swift5Parser.HASH_LINE, Swift5Parser.HASH_COLUMN,
             Swift5Parser.HASH_FUNCTION, Swift5Parser.HASH_DSO_HANDLE, Swift5Parser.HASH_SELECTOR,
             Swift5Parser.HASH_KEYPATH, Swift5Parser.HASH_COLOR_LITERAL, Swift5Parser.HASH_FILE_LITERAL,
-            Swift5Parser.HASH_IMAGE_LITERAL, Swift5Parser.GETTER, Swift5Parser.SETTER, Swift5Parser.Identifier,
+            Swift5Parser.HASH_IMAGE_LITERAL, Swift5Parser.GETTER, Swift5Parser.SETTER,
             Swift5Parser.DOT, Swift5Parser.LCURLY, Swift5Parser.LPAREN, Swift5Parser.LBRACK, Swift5Parser.RCURLY,
             Swift5Parser.RPAREN, Swift5Parser.RBRACK, Swift5Parser.COMMA, Swift5Parser.COLON, Swift5Parser.SEMI,
             Swift5Parser.LT, Swift5Parser.GT, Swift5Parser.UNDERSCORE, Swift5Parser.BANG, Swift5Parser.QUESTION,
@@ -137,7 +141,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
 
             try {
                 final TextRange range = file.newRange(startLine, startLineOffset, endLine, endLineOffset);
-                addHighlighting(newHighlighting, token, file, range, antlrContext.getVocabulary());
+                addHighlighting(newHighlighting, token, file, range);
                 addCpdToken(cpdTokens, file, token, range);
             } catch (final Exception e) {
                 LOGGER.warn(format(
@@ -169,7 +173,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
         }
     }
 
-    private void addHighlighting(NewHighlighting newHighlighting, Token token, InputFile file, TextRange range, Vocabulary vocabulary) {
+    private void addHighlighting(NewHighlighting newHighlighting, Token token, InputFile file, TextRange range) {
         // Tokens on a single char are ignored
         if (range.start().lineOffset() == range.end().lineOffset()) {
             return;
@@ -188,15 +192,16 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 return;
             }
 
-            // Keyword
-            Set<String> keywords = Swift5KeywordTypes.stream()
-                    .map(vocabulary::getLiteralName)
-                    .collect(Collectors.toSet());
-            keywords.remove(null);
-            if (keywords.contains("'" + token.getText() + "'")) {
-                newHighlighting.highlight(range, TypeOfText.KEYWORD);
+            // Constant
+            if (HighlighterVisitor.Swift5KeywordLightTypes.contains(token.getType())) {
+                newHighlighting.highlight(range, TypeOfText.KEYWORD_LIGHT);
+                return;
             }
 
+            // Keyword
+            if (HighlighterVisitor.Swift5KeywordTypes.contains(token.getType())) {
+                newHighlighting.highlight(range, TypeOfText.KEYWORD);
+            }
         } catch (Exception e) {
             LOGGER.warn(format("Unexpected error adding highlighting on file %s", file.key()), e);
         }
