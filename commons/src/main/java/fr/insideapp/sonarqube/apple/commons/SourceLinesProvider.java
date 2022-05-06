@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceLinesProvider {
-
     private static final Logger LOGGER = Loggers.get(SourceLinesProvider.class);
 
     public SourceLine[] getLines(final InputStream inputStream, final Charset charset) {
@@ -46,7 +45,6 @@ public class SourceLinesProvider {
 
             int currentChar;
             while ((currentChar = bufferedReader.read()) != -1) {
-
                 global++;
                 count++;
                 if (currentChar == 10) {

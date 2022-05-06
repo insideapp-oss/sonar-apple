@@ -27,7 +27,7 @@ The plugin is designed to support Swift 5 syntax.
 | Tests               | YES                                                                                                                             | YES                                                          |
 | Coverage            | YES                                                                                                                             | YES                                                          |
 | Complexity          | IN PROGRESS                                                                                                                     | IN PROGRESS                                                  |
-| Syntax highlighting | IN PROGRESS                                                                                                                     | IN PROGRESS                                                  |
+| Syntax highlighting | YES                                                                                                                             | IN PROGRESS                                                  |
 | Security            | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules                                                                    | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules |
 
 ## Requirements
