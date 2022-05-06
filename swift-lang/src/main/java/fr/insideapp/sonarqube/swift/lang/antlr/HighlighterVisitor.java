@@ -106,8 +106,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
     );
 
     @Override
-    public void apply(ParseTree tree) {
-
+    public void apply(ParseTree tree) { // No default implementation
     }
 
     @Override
@@ -144,7 +143,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug(format(
                                     "Unexpected error creating text range on file %s for token %s on (%s, %s) -  (%s, %s)",
-                                    file.absolutePath(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
+                                    file.key(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
                             e);
                 }
             }
@@ -153,13 +152,13 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             try {
                 newHighlighting.save();
             } catch (final Throwable e) {
-                LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.absolutePath()), e);
+                LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.key()), e);
             }
 
             try {
                 cpdTokens.save();
             } catch (final Throwable e) {
-                LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.absolutePath()), e);
+                LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.key()), e);
             }
         }
     }
@@ -169,7 +168,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             cpdTokens.addToken(range, token.getText());
         } catch (Throwable e) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.absolutePath()), e);
+                LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.key()), e);
             }
         }
     }
@@ -195,17 +194,16 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
 
             // Keyword
             Set<String> keywords = Swift5KeywordTypes.stream()
-                    .map(type -> vocabulary.getLiteralName(type))
+                    .map(vocabulary::getLiteralName)
                     .collect(Collectors.toSet());
             keywords.remove(null);
             if (keywords.contains("'" + token.getText() + "'")) {
                 newHighlighting.highlight(range, TypeOfText.KEYWORD);
-                return;
             }
 
         } catch (final Throwable e) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(format("Unexpected error adding highlighting on file %s", file.absolutePath()), e);
+                LOGGER.debug(format("Unexpected error adding highlighting on file %s", file.key()), e);
             }
         }
     }
