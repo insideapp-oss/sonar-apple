@@ -50,5 +50,6 @@ public class HighlighterVisitorTest {
         assertThat(context.highlightingTypeAt(testFile.key(), 3, 8)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
         assertThat(context.highlightingTypeAt(testFile.key(), 3, 13)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
         assertThat(context.highlightingTypeAt(testFile.key(), 3, 19)).isEmpty();
+        assertThat(context.highlightingTypeAt(testFile.key(), 4, 20)).containsExactlyInAnyOrder(TypeOfText.STRING);
     }
 }

@@ -49,7 +49,7 @@ public class SwiftAntlrContext extends AntlrContext {
         this.setStream(stream);
         this.setLines(lines);
         this.setRoot(root);
-
+        this.setVocabulary(parser.getVocabulary());
     }
 
 }
