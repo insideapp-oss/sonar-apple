@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.swift.lang.antlr;
 import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.generated.Swift5Parser;
+import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.Vocabulary;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -125,10 +126,9 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
 
             if (endDetails == null
                     || endDetails.length != 2
-                    || token.getType() == Swift5Parser.EOF
+                    || token.getType() == Recognizer.EOF
                     || token.getType() == Swift5Parser.WS
-                    || token.getStartIndex() >= token.getStopIndex()
-            ) {
+                    || token.getStartIndex() >= token.getStopIndex()) {
                 continue;
             }
 
@@ -139,7 +139,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 final TextRange range = file.newRange(startLine, startLineOffset, endLine, endLineOffset);
                 addHighlighting(newHighlighting, token, file, range, antlrContext.getVocabulary());
                 addCpdToken(cpdTokens, file, token, range);
-            } catch (final Throwable e) {
+            } catch (final Exception e) {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug(format(
                                     "Unexpected error creating text range on file %s for token %s on (%s, %s) -  (%s, %s)",
@@ -151,13 +151,13 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
         synchronized (HighlighterVisitor.class) {
             try {
                 newHighlighting.save();
-            } catch (final Throwable e) {
+            } catch (final Exception e) {
                 LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.key()), e);
             }
 
             try {
                 cpdTokens.save();
-            } catch (final Throwable e) {
+            } catch (final Exception e) {
                 LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.key()), e);
             }
         }
@@ -166,7 +166,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
     private void addCpdToken(NewCpdTokens cpdTokens, InputFile file, Token token, TextRange range) {
         try {
             cpdTokens.addToken(range, token.getText());
-        } catch (Throwable e) {
+        } catch (Exception e) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.key()), e);
             }
@@ -201,7 +201,7 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
                 newHighlighting.highlight(range, TypeOfText.KEYWORD);
             }
 
-        } catch (final Throwable e) {
+        } catch (final Exception e) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug(format("Unexpected error adding highlighting on file %s", file.key()), e);
             }
