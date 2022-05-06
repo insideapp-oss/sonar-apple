@@ -41,13 +41,12 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
         final Class<? extends ParseTree> classz = tree.getClass();
 
         if(Swift5Parser.If_statementContext.class.equals(classz) ||
-            Swift5Parser.For_in_statementContext.class.equals(classz) ||
-            Swift5Parser.While_statementContext.class.equals(classz) ||
-            Swift5Parser.Switch_caseContext.class.equals(classz) ||
-            Swift5Parser.Switch_casesContext.class.equals(classz) ||
-            Swift5Parser.Do_statementContext.class.equals(classz) ||
-            Swift5Parser.Function_bodyContext.class.equals(classz) ||
-            Swift5Parser.Closure_expressionContext.class.equals(classz)
+                Swift5Parser.For_in_statementContext.class.equals(classz) ||
+                Swift5Parser.While_statementContext.class.equals(classz) ||
+                Swift5Parser.Switch_statementContext.class.equals(classz) ||
+                Swift5Parser.Do_statementContext.class.equals(classz) ||
+                Swift5Parser.Function_bodyContext.class.equals(classz) ||
+                Swift5Parser.Closure_expressionContext.class.equals(classz)
         ) {
             complexity++;
         }
@@ -67,6 +66,7 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
         synchronized (context) {
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity).save();
+                complexity = 0;
             } catch (final Throwable e) {
                 LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.absolutePath()), e);
             }
