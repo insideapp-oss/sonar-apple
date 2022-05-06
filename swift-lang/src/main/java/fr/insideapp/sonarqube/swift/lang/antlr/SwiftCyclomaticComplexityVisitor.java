@@ -46,14 +46,10 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
                 Swift5Parser.Case_labelContext.class.equals(classz) ||
                 Swift5Parser.Guard_statementContext.class.equals(classz) ||
                 Swift5Parser.Closure_expressionContext.class.equals(classz) ||
-                Swift5Parser.Function_bodyContext.class.equals(classz)
+                Swift5Parser.Function_bodyContext.class.equals(classz) ||
+                (Swift5Parser.InitializerContext.class.equals(classz)
+                                && tree.getText().matches("=(.*)\\?(.*):(.*)"))
         ) {
-            complexity++;
-        } else if(
-                Swift5Parser.InitializerContext.class.equals(classz)
-                && tree.getText().matches("=(.*)\\?(.*):(.*)")
-        ) {
-            // For ternary operator
             complexity++;
         }
     }
@@ -66,7 +62,7 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity).save();
                 complexity = 0;
-            } catch (final Throwable e) {
+            } catch (final Exception e) {
                 LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.path()), e);
             }
         }
