@@ -40,11 +40,15 @@ public class SwiftSourceLinesVisitorTest {
         final String fileName;
         final int linesOfCode;
         final int linesOfComment;
+        final int numberOfClasses;
+        final int numberOfFunctions;
 
-        public Container(String fileName, int linesOfCode, int linesOfComment) {
+        public Container(String fileName, int linesOfCode, int linesOfComment, int numberOfClasses, int numberOfFunctions) {
             this.fileName = fileName;
             this.linesOfCode = linesOfCode;
             this.linesOfComment = linesOfComment;
+            this.numberOfClasses = numberOfClasses;
+            this.numberOfFunctions = numberOfFunctions;
         }
     }
 
@@ -62,32 +66,42 @@ public class SwiftSourceLinesVisitorTest {
 
     @Test
     public void testNoComment() throws IOException {
-        assertContainer(new Container("NoComment", 1, 0));
+        assertContainer(new Container("NoComment", 1, 0, 0 ,0));
     }
 
     @Test
     public void testNoCode() throws IOException {
-        assertContainer(new Container("NoCode", 0, 1));
+        assertContainer(new Container("NoCode", 0, 1, 0 ,0));
     }
 
     @Test
     public void testEmpty() throws IOException {
-        assertContainer(new Container("Empty", 0, 0));
+        assertContainer(new Container("Empty", 0, 0, 0, 0));
     }
 
     @Test
     public void testLineWithMixedCodeComment() throws IOException {
-        assertContainer(new Container("LineWithMixedCodeComment", 3, 0));
+        assertContainer(new Container("LineWithMixedCodeComment", 3, 0, 0, 0));
     }
 
     @Test
     public void testQuotedMultilineText() throws IOException {
-        assertContainer(new Container("QuotedMultilineText", 12, 0));
+        assertContainer(new Container("QuotedMultilineText", 12, 0, 0,0));
     }
 
     @Test
     public void testWhiteLineIgnored() throws IOException {
-        assertContainer(new Container("WhiteLineIgnored", 3, 1));
+        assertContainer(new Container("WhiteLineIgnored", 3, 1,0,0));
+    }
+
+    @Test
+    public void testHasAClass() throws IOException {
+        assertContainer(new Container("Class", 1, 0, 1, 0));
+    }
+
+    @Test
+    public void testHasAFunction() throws IOException {
+        assertContainer(new Container("Function", 1, 0, 0, 1));
     }
 
     private void assertContainer(Container container) throws IOException {

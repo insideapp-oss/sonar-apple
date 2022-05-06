@@ -58,14 +58,24 @@ public class SourceLinesVisitorTest {
         Token codeToken = mock(Token.class);
         when(codeToken.getType()).thenReturn(2);
         when(codeToken.getLine()).thenReturn(2);
-        Token[] tokens = {commentToken, codeToken};
+        Token classToken = mock(Token.class);
+        when(classToken.getType()).thenReturn(3);
+        when(classToken.getLine()).thenReturn(2); // same line as code
+        Token functionToken = mock(Token.class);
+        when(functionToken.getType()).thenReturn(4);
+        when(functionToken.getLine()).thenReturn(2); // same line as code
+        Token[] tokens = {commentToken, codeToken, classToken, functionToken};
 
         AntlrContext antlrContext = mock(AntlrContext.class);
         when(antlrContext.getLines()).thenReturn(lines);
         when(antlrContext.getTokens()).thenReturn(tokens);
         when(antlrContext.getFile()).thenReturn(testFile);
 
-        SourceLinesVisitor sourceLinesVisitor = new SourceLinesVisitor.Builder().singleLineCommentToken(1).build();
+        SourceLinesVisitor sourceLinesVisitor = new SourceLinesVisitor.Builder()
+                .singleLineCommentToken(1)
+                .classToken(3)
+                .functionToken(4)
+                .build();
         sourceLinesVisitor.fillContext(sensorContext, antlrContext);
 
         // Asserting
@@ -73,5 +83,9 @@ public class SourceLinesVisitorTest {
         assertThat(measureNLOC.value()).isEqualTo(1);
         Measure<Integer> measureNCOMMENTS = sensorContext.measure(testFile.key(), CoreMetrics.COMMENT_LINES.key());
         assertThat(measureNCOMMENTS.value()).isEqualTo(1);
+        Measure<Integer> measureNCLASSES = sensorContext.measure(testFile.key(), CoreMetrics.CLASSES.key());
+        assertThat(measureNCLASSES.value()).isEqualTo(1);
+        Measure<Integer> measureNFUNCTION = sensorContext.measure(testFile.key(), CoreMetrics.FUNCTIONS.key());
+        assertThat(measureNFUNCTION.value()).isEqualTo(1);
     }
 }
