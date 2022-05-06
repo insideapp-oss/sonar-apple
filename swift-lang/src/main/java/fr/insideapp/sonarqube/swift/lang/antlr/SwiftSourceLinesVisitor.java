@@ -36,6 +36,8 @@ public class SwiftSourceLinesVisitor implements ParseTreeItemVisitor {
                 .interpolationMultiLineToken(Swift5Parser.Interpolataion_multi_line)
                 .quotedMultiLineTextToken(Swift5Parser.Quoted_multi_line_text)
                 .quotedMultiLineExtendedTextToken(Swift5Parser.Quoted_multi_line_extended_text)
+                .classToken(Swift5Parser.CLASS)
+                .functionToken(Swift5Parser.FUNC)
                 .build();
     }
     @Override
