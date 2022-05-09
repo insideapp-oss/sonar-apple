@@ -17,19 +17,12 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import org.buildobjects.process.ProcBuilder;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.Sensor;
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.SensorDescriptor;
+import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public abstract class MobSFScanSensor implements Sensor {
+public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
 
     private static final Logger LOGGER = Loggers.get(MobSFScanSensor.class);
 
@@ -37,59 +30,30 @@ public abstract class MobSFScanSensor implements Sensor {
     private static final String OUTPUT_FORMAT = "--json";
     private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
 
-    public abstract String language();
+    public String name() {
+        return String.join(" ", "MobSFScan Sensor", nameSuffix());
+    }
 
     public abstract String nameSuffix();
 
     @Override
-    public void describe(SensorDescriptor sensorDescriptor) {
-        sensorDescriptor
-                .onlyOnLanguage(language())
-                .name(String.join(" ", "MobSFScan sensor", nameSuffix()))
-                .onlyOnFileType(InputFile.Type.MAIN);
+    public String repository() {
+        return MobSFScanRulesDefinition.builder(language());
     }
 
     @Override
-    public void execute(SensorContext sensorContext) {
-
-        try {
-            List<ReportIssue> issues = runAnalysis(sensorContext);
-            ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.recordIssues(issues, MobSFScanRulesDefinition.builder(language()));
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-
+    public ReportParser reportParser() {
+        return new MobSFScanReportParser();
     }
 
-    private List<ReportIssue> runAnalysis(SensorContext sensorContext) throws IOException {
+    @Override
+    public String command() {
+        return "mobsfscan";
+    }
 
-        // the list of issues
-        List<ReportIssue> issues = new ArrayList<>();
-        final MobSFScanReportParser reportParser = new MobSFScanReportParser();
-        // get sources folder or else default to current folder
-        final String sourcesInput = sensorContext.config().get("sonar.sources").orElse(".");
-        String[] sources = sourcesInput.split(",");
-        LOGGER.info("Running '{} analyze'...", COMMAND);
-
-        for (String source : sources) {
-            try {
-                // run MobSFScan
-                String output = new ProcBuilder(COMMAND,  OUTPUT_FORMAT, source)
-                        .withTimeoutMillis(COMMAND_TIMEOUT)
-                        .ignoreExitStatus()
-                        .run()
-                        .getOutputString();
-
-                // Parse issues & save them
-                issues.addAll(reportParser.parse(output));
-            } catch (Exception e) {
-                throw new IOException(e);
-            }
-        }
-
-        LOGGER.info("Found issues: {}", issues.size());
-        return issues;
+    @Override
+    public String[] commandOptions(String source) {
+        return new String[]{"--json", source};
     }
 
 }

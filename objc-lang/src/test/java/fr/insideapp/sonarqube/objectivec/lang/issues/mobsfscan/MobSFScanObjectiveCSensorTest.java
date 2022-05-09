@@ -17,7 +17,9 @@
  */
 package fr.insideapp.sonarqube.objectivec.lang.issues.mobsfscan;
 
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
 import fr.insideapp.sonarqube.objc.lang.issues.mobsfscan.MobSFScanObjectiveCSensor;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
@@ -25,12 +27,48 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MobSFScanObjectiveCSensorTest {
 
+    private MobSFScanObjectiveCSensor sensor;
+
+    @Before
+    public void prepare() {
+        sensor = new MobSFScanObjectiveCSensor();
+    }
+
+    @Test
+    public void language() {
+        assertThat(sensor.language()).isEqualTo("objc");
+    }
+
+    @Test
+    public void name() {
+        assertThat(sensor.name()).isEqualTo("MobSFScan Sensor for Objc");
+    }
+
+    @Test
+    public void repository() {
+        assertThat(sensor.repository()).isEqualTo("MobSFScanObjc");
+    }
+
+    @Test
+    public void reportParser() {
+        assertThat(sensor.reportParser()).isInstanceOf(MobSFScanReportParser.class);
+    }
+
+    @Test
+    public void command() {
+        assertThat(sensor.command()).isEqualTo("mobsfscan");
+    }
+
+    @Test
+    public void commandOptions() {
+        assertThat(sensor.commandOptions("FOLDER")).isEqualTo(new String[]{"--json", "FOLDER"});
+    }
+
     @Test
     public void describe() {
-        MobSFScanObjectiveCSensor sensor = new MobSFScanObjectiveCSensor();
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
         sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("MobSFScan sensor for Objc");
+        assertThat(descriptor.name()).isEqualTo("MobSFScan Sensor for Objc");
     }
 
 }

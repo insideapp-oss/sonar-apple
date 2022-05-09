@@ -17,76 +17,40 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
+import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
 import fr.insideapp.sonarqube.swift.lang.Swift;
-import org.buildobjects.process.ProcBuilder;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.Sensor;
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class SwiftLintSensor implements Sensor {
-
-    private static final Logger LOGGER = Loggers.get(SwiftLintSensor.class);
-
-    private static final String COMMAND = "swiftlint";
-    private static final String SOURCES_PATH = "--path";
-
-    private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
+public class SwiftLintSensor extends RunningSourcesCLISensor {
 
     @Override
-    public void describe(SensorDescriptor sensorDescriptor) {
-        sensorDescriptor.onlyOnLanguage(Swift.KEY).name("SwiftLint sensor").onlyOnFileType(InputFile.Type.MAIN);
+    public String name() {
+        return "SwiftLint Sensor";
     }
 
     @Override
-    public void execute(SensorContext sensorContext) {
-
-        try {
-            List<ReportIssue> issues = runAnalysis(sensorContext);
-            ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.recordIssues(issues, SwiftLintRulesDefinition.REPOSITORY_KEY);
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-
+    public String language() {
+        return Swift.KEY;
     }
 
-    private List<ReportIssue> runAnalysis(SensorContext sensorContext) throws IOException {
+    @Override
+    public String repository() {
+        return SwiftLintRulesDefinition.REPOSITORY_KEY;
+    }
 
-        // the list of issues
-        List<ReportIssue> issues = new ArrayList<>();
-        final SwiftLintReportParser reportParser = new SwiftLintReportParser();
-        // get sources folder or else default to current folder
-        final String sourcesInput = sensorContext.config().get("sonar.sources").orElse(".");
-        String[] sources = sourcesInput.split(",");
-        LOGGER.info("Running '{} analyze'...", COMMAND);
+    @Override
+    public ReportParser reportParser() {
+        return new SwiftLintReportParser();
+    }
 
-        for (String source : sources) {
-            try {
-                // run SwiftLint
-                String output = new ProcBuilder(COMMAND,  SOURCES_PATH, source)
-                        .withTimeoutMillis(COMMAND_TIMEOUT)
-                        .ignoreExitStatus()
-                        .run()
-                        .getOutputString();
+    @Override
+    public String command() {
+        return "swiftlint";
+    }
 
-                // Parse issues & save them
-                issues.addAll(reportParser.parse(output));
-            } catch (Exception e) {
-                throw new IOException(e);
-            }
-        }
-
-        LOGGER.info("Found issues: {}", issues.size());
-        return issues;
+    @Override
+    public String[] commandOptions(String source) {
+        return new String[]{"--path", source};
     }
 
 }

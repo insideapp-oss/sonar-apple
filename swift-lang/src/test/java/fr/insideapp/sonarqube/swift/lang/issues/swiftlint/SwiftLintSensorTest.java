@@ -17,19 +17,62 @@
  */
 package fr.insideapp.sonarqube.swift.lang.issues.swiftlint;
 
+import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftAntlrContext;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftSourceLinesVisitor;
 import fr.insideapp.sonarqube.swift.lang.issues.swiftlint.SwiftLintSensor;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+
+import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SwiftLintSensorTest {
 
+    private SwiftLintSensor sensor;
+
+    @Before
+    public void prepare() {
+        sensor = new SwiftLintSensor();
+    }
+
+    @Test
+    public void language() {
+        assertThat(sensor.language()).isEqualTo("swift");
+    }
+
+    @Test
+    public void name() {
+        assertThat(sensor.name()).isEqualTo("SwiftLint Sensor");
+    }
+
+    @Test
+    public void repository() {
+        assertThat(sensor.repository()).isEqualTo("SwiftLint");
+    }
+
+    @Test
+    public void reportParser() {
+        assertThat(sensor.reportParser()).isInstanceOf(SwiftLintReportParser.class);
+    }
+
+    @Test
+    public void command() {
+        assertThat(sensor.command()).isEqualTo("swiftlint");
+    }
+
+    @Test
+    public void commandOptions() {
+        assertThat(sensor.commandOptions("FOLDER")).isEqualTo(new String[]{"--path", "FOLDER"});
+    }
+
     @Test
     public void describe() {
-        SwiftLintSensor sensor = new SwiftLintSensor();
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
         sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("SwiftLint sensor");
+        assertThat(descriptor.name()).isEqualTo("SwiftLint Sensor");
     }
 }
