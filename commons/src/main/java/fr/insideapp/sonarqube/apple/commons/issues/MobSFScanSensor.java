@@ -18,8 +18,6 @@
 package fr.insideapp.sonarqube.apple.commons.issues;
 
 import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 
 public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
