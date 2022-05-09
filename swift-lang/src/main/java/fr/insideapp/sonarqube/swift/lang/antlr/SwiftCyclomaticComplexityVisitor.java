@@ -61,10 +61,10 @@ public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
         synchronized (SwiftCyclomaticComplexityVisitor.class) {
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity).save();
-                complexity = 0;
             } catch (final Exception e) {
                 LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.path()), e);
             }
+            complexity = 0;
         }
     }
 }
