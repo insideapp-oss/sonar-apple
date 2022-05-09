@@ -24,12 +24,6 @@ import org.sonar.api.utils.log.Loggers;
 
 public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
 
-    private static final Logger LOGGER = Loggers.get(MobSFScanSensor.class);
-
-    private static final String COMMAND = "mobsfscan";
-    private static final String OUTPUT_FORMAT = "--json";
-    private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
-
     public String name() {
         return String.join(" ", "MobSFScan Sensor", nameSuffix());
     }
