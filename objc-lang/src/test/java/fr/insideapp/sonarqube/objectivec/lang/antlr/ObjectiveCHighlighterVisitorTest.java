@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.objectivec.lang.antlr;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
-import fr.insideapp.sonarqube.objc.lang.antlr.HighlighterVisitor;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCHighlighterVisitor;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -34,7 +34,7 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class HighlighterVisitorTest {
+public class ObjectiveCHighlighterVisitorTest {
 
     private static final String TEST_ROOT = "src/test/resources/objc";
     private static final String TEST_FILENAME = "main.m";
@@ -60,7 +60,7 @@ public class HighlighterVisitorTest {
                 testFile.charset()
         );
 
-        HighlighterVisitor highlighterVisitor = new HighlighterVisitor();
+        ObjectiveCHighlighterVisitor highlighterVisitor = new ObjectiveCHighlighterVisitor();
         CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(highlighterVisitor);
         customTreeVisitor.fillContext(context, antlrContext);
         assertThat(context.highlightingTypeAt(testFile.key(), 1, 0)).containsExactlyInAnyOrder(TypeOfText.COMMENT);

@@ -29,11 +29,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class HighlighterVisitorTest {
+public class SwiftHighlighterVisitorTest {
 
     private static final String TEST_ROOT = "src/test/resources/swift";
     private static final String TEST_FILENAME = "main.swift";
@@ -59,7 +58,7 @@ public class HighlighterVisitorTest {
                 testFile.charset()
         );
 
-        HighlighterVisitor highlighterVisitor = new HighlighterVisitor();
+        SwiftHighlighterVisitor highlighterVisitor = new SwiftHighlighterVisitor();
         CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(highlighterVisitor);
         customTreeVisitor.fillContext(context, antlrContext);
         assertThat(context.highlightingTypeAt(testFile.key(), 2, 0)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);

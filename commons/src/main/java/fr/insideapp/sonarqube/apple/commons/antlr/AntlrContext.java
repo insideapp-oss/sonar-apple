@@ -20,7 +20,6 @@ package fr.insideapp.sonarqube.apple.commons.antlr;
 import fr.insideapp.sonarqube.apple.commons.SourceLine;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.Vocabulary;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
 

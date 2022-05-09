@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.swift.lang;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeAnalyzer;
-import fr.insideapp.sonarqube.swift.lang.antlr.HighlighterVisitor;
+import fr.insideapp.sonarqube.swift.lang.antlr.SwiftHighlighterVisitor;
 import fr.insideapp.sonarqube.swift.lang.antlr.SwiftAntlrContext;
 import fr.insideapp.sonarqube.swift.lang.antlr.SwiftSourceLinesVisitor;
 import org.sonar.api.batch.fs.InputFile;
@@ -41,9 +41,9 @@ public class SwiftSensor implements Sensor {
         final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
         // Analyse source files
         new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.MAIN, antlrContext, sensorContext)
-                .analyze(new SwiftSourceLinesVisitor(), new HighlighterVisitor());
+                .analyze(new SwiftSourceLinesVisitor(), new SwiftHighlighterVisitor());
         // Analyse test files (highlighter only)
         new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.TEST, antlrContext, sensorContext)
-                .analyze(new HighlighterVisitor());
+                .analyze(new SwiftHighlighterVisitor());
     }
 }

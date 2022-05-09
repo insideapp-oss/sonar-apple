@@ -18,26 +18,15 @@
 package fr.insideapp.sonarqube.objc.lang.antlr;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.AntlrContext;
+import fr.insideapp.sonarqube.apple.commons.antlr.HighlighterVisitor;
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.objc.lang.antlr.generated.ObjectiveCParser;
-import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
-import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
-import org.sonar.api.batch.sensor.highlighting.TypeOfText;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 import java.util.Set;
 
-import static java.lang.String.format;
-
-public class HighlighterVisitor implements ParseTreeItemVisitor {
-    private static final Logger LOGGER = Loggers.get(HighlighterVisitor.class);
+public class ObjectiveCHighlighterVisitor implements ParseTreeItemVisitor {
 
     private static final Set<Integer> ObjectiveCCommentTypes = Set.of(
             ObjectiveCParser.MULTI_COMMENT,
@@ -123,106 +112,26 @@ public class HighlighterVisitor implements ParseTreeItemVisitor {
             ObjectiveCParser.FLOATING_POINT_LITERAL, ObjectiveCParser.WS
     );
 
+    private final HighlighterVisitor highlighterVisitor;
+
+    public ObjectiveCHighlighterVisitor() {
+        highlighterVisitor = new HighlighterVisitor.Builder()
+                .commentTypes(ObjectiveCHighlighterVisitor.ObjectiveCCommentTypes)
+                .stringTypes(ObjectiveCHighlighterVisitor.ObjectiveCStringTypes)
+                .preprocessTypes(ObjectiveCHighlighterVisitor.ObjectiveCPreProcessTypes)
+                .keywordLightTypes(ObjectiveCHighlighterVisitor.ObjectiveCKeywordLightTypes)
+                .keywordTypes(ObjectiveCHighlighterVisitor.ObjectiveCKeywordTypes)
+                .whitespaceType(ObjectiveCParser.WS)
+                .build();
+    }
+
     @Override
-    public void apply(ParseTree tree) { // no default implementation
+    public void apply(ParseTree tree) {
+        highlighterVisitor.apply(tree);
     }
 
     @Override
     public void fillContext(SensorContext context, AntlrContext antlrContext) {
-        final InputFile file = antlrContext.getFile();
-        if (file == null) {
-            return;
-        }
-        final NewCpdTokens cpdTokens = context.newCpdTokens().onFile(file);
-        final NewHighlighting newHighlighting = context.newHighlighting().onFile(file);
-
-        for (final Token token : antlrContext.getTokens()) {
-            final int startLine = token.getLine();
-            final int startLineOffset = token.getCharPositionInLine();
-            final int[] endDetails = antlrContext.getLineAndColumn(token.getStopIndex());
-
-            if (endDetails == null
-                    || endDetails.length != 2
-                    || token.getType() == Recognizer.EOF
-                    || token.getType() == ObjectiveCParser.WS
-                    || token.getStartIndex() >= token.getStopIndex()) {
-                continue;
-            }
-
-            final int endLine = endDetails[0];
-            final int endLineOffset = endDetails[1] + (token.getText().contains("\n") ? 0 : 1);
-
-            try {
-                final TextRange range = file.newRange(startLine, startLineOffset, endLine, endLineOffset);
-                addHighlighting(newHighlighting, token, file, range);
-                addCpdToken(cpdTokens, file, token, range);
-            } catch (final Exception e) {
-                LOGGER.warn(format(
-                                "Unexpected error creating text range on file %s for token %s on (%s, %s) -  (%s, %s)",
-                                file.key(), token.getText(), startLine, startLineOffset, endLine, endLineOffset),
-                        e);
-            }
-        }
-        synchronized (HighlighterVisitor.class) {
-            try {
-                newHighlighting.save();
-            } catch (Exception e) {
-                LOGGER.warn(format("Unexpected error saving highlightings on file %s", file.key()), e);
-            }
-
-            try {
-                cpdTokens.save();
-            } catch (Exception e) {
-                LOGGER.warn(format("Unexpected error saving cpd tokens on file %s", file.key()), e);
-            }
-        }
-    }
-
-    private void addCpdToken(NewCpdTokens cpdTokens, InputFile file, Token token, TextRange range) {
-        try {
-            cpdTokens.addToken(range, token.getText());
-        } catch (Exception e) {
-            LOGGER.debug(format("Unexpected error adding cpd tokens on file %s", file.key()), e);
-        }
-    }
-
-    private void addHighlighting(NewHighlighting newHighlighting, Token token, InputFile file, TextRange range) {
-        // Tokens on a single char are ignored
-        if (range.start().lineOffset() == range.end().lineOffset()) {
-            return;
-        }
-
-        try {
-            // Comment
-            if (HighlighterVisitor.ObjectiveCCommentTypes.contains(token.getType())) {
-                newHighlighting.highlight(range, TypeOfText.COMMENT);
-                return;
-            }
-
-            // String
-            if (HighlighterVisitor.ObjectiveCStringTypes.contains(token.getType())) {
-                newHighlighting.highlight(range, TypeOfText.STRING);
-                return;
-            }
-
-            // Preprocessor
-            if (HighlighterVisitor.ObjectiveCPreProcessTypes.contains(token.getType())) {
-                newHighlighting.highlight(range, TypeOfText.PREPROCESS_DIRECTIVE);
-                return;
-            }
-
-            // Constant
-            if (HighlighterVisitor.ObjectiveCKeywordLightTypes.contains(token.getType())) {
-                newHighlighting.highlight(range, TypeOfText.KEYWORD_LIGHT);
-                return;
-            }
-
-            // Keyword
-            if (HighlighterVisitor.ObjectiveCKeywordTypes.contains(token.getType())) {
-                newHighlighting.highlight(range, TypeOfText.KEYWORD);
-            }
-        } catch (Exception e) {
-            LOGGER.warn(format("Unexpected error adding highlighting on file %s", file.key()), e);
-        }
+        highlighterVisitor.fillContext(context, antlrContext);
     }
 }
