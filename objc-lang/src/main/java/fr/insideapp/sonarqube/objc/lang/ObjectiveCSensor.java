@@ -18,6 +18,7 @@
 package fr.insideapp.sonarqube.objc.lang;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeAnalyzer;
+import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCHighlighterVisitor;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCAntlrContext;
 import fr.insideapp.sonarqube.objc.lang.antlr.ObjectiveCSourceLinesVisitor;
 import org.sonar.api.batch.fs.InputFile;
@@ -38,6 +39,11 @@ public class ObjectiveCSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
         final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
-        new ParseTreeAnalyzer(ObjectiveC.KEY,antlrContext, sensorContext).analyze(new ObjectiveCSourceLinesVisitor());
+        // Analyse source files
+        new ParseTreeAnalyzer(ObjectiveC.KEY, InputFile.Type.MAIN, antlrContext, sensorContext)
+                .analyze(new ObjectiveCSourceLinesVisitor(), new ObjectiveCHighlighterVisitor());
+        // Analyse test files (highlighter only)
+        new ParseTreeAnalyzer(ObjectiveC.KEY, InputFile.Type.TEST, antlrContext, sensorContext)
+                .analyze(new ObjectiveCHighlighterVisitor());
     }
 }

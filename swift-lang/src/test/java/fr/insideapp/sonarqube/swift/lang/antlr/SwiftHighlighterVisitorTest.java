@@ -29,11 +29,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class HighlighterVisitorTest {
+public class SwiftHighlighterVisitorTest {
 
     private static final String TEST_ROOT = "src/test/resources/swift";
     private static final String TEST_FILENAME = "main.swift";
@@ -59,14 +58,14 @@ public class HighlighterVisitorTest {
                 testFile.charset()
         );
 
-        HighlighterVisitor highlighterVisitor = new HighlighterVisitor();
+        SwiftHighlighterVisitor highlighterVisitor = new SwiftHighlighterVisitor();
         CustomTreeVisitor customTreeVisitor = new CustomTreeVisitor(highlighterVisitor);
         customTreeVisitor.fillContext(context, antlrContext);
         assertThat(context.highlightingTypeAt(testFile.key(), 2, 0)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
         assertThat(context.highlightingTypeAt(testFile.key(), 2, 10)).isEmpty();
         assertThat(context.highlightingTypeAt(testFile.key(), 3, 8)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
         assertThat(context.highlightingTypeAt(testFile.key(), 3, 13)).containsExactlyInAnyOrder(TypeOfText.KEYWORD);
-        assertThat(context.highlightingTypeAt(testFile.key(), 3, 19)).isEmpty();
+        assertThat(context.highlightingTypeAt(testFile.key(), 3, 19)).containsExactlyInAnyOrder(TypeOfText.KEYWORD_LIGHT);
         assertThat(context.highlightingTypeAt(testFile.key(), 4, 20)).containsExactlyInAnyOrder(TypeOfText.STRING);
     }
 }
