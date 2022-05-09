@@ -29,6 +29,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SwiftLintSensor implements Sensor {
@@ -36,6 +37,8 @@ public class SwiftLintSensor implements Sensor {
     private static final Logger LOGGER = Loggers.get(SwiftLintSensor.class);
 
     private static final String COMMAND = "swiftlint";
+    private static final String SOURCES_PATH = "--path";
+
     private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
 
     @Override
@@ -47,7 +50,7 @@ public class SwiftLintSensor implements Sensor {
     public void execute(SensorContext sensorContext) {
 
         try {
-            List<ReportIssue> issues = runAnalysis();
+            List<ReportIssue> issues = runAnalysis(sensorContext);
             ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
             issueRecorder.recordIssues(issues, SwiftLintRulesDefinition.REPOSITORY_KEY);
         } catch (IOException e) {
@@ -56,24 +59,34 @@ public class SwiftLintSensor implements Sensor {
 
     }
 
-    private List<ReportIssue> runAnalysis() throws IOException {
+    private List<ReportIssue> runAnalysis(SensorContext sensorContext) throws IOException {
 
-        try {
-            // Run SwiftLint
-            LOGGER.info("Running '{} analyze'...", COMMAND);
-            String output = new ProcBuilder(COMMAND)
-                    .withTimeoutMillis(COMMAND_TIMEOUT)
-                    .ignoreExitStatus()
-                    .run()
-                    .getOutputString();
+        // the list of issues
+        List<ReportIssue> issues = new ArrayList<>();
+        final SwiftLintReportParser reportParser = new SwiftLintReportParser();
+        // get sources folder or else default to current folder
+        final String sourcesInput = sensorContext.config().get("sonar.sources").orElse(".");
+        String[] sources = sourcesInput.split(",");
+        LOGGER.info("Running '{} analyze'...", COMMAND);
 
-            // Parse issues
-            List<ReportIssue> issues = new SwiftLintReportParser().parse(output);
-            LOGGER.info("Found issues: {}", issues.size());
-            return issues;
-        } catch (Exception e) {
-            throw new IOException(e);
+        for (String source : sources) {
+            try {
+                // run SwiftLint
+                String output = new ProcBuilder(COMMAND,  SOURCES_PATH, source)
+                        .withTimeoutMillis(COMMAND_TIMEOUT)
+                        .ignoreExitStatus()
+                        .run()
+                        .getOutputString();
+
+                // Parse issues & save them
+                issues.addAll(reportParser.parse(output));
+            } catch (Exception e) {
+                throw new IOException(e);
+            }
         }
+
+        LOGGER.info("Found issues: {}", issues.size());
+        return issues;
     }
 
 }

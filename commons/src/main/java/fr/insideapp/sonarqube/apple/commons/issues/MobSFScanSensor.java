@@ -26,6 +26,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MobSFScanSensor implements Sensor {
@@ -63,26 +64,32 @@ public abstract class MobSFScanSensor implements Sensor {
 
     private List<ReportIssue> runAnalysis(SensorContext sensorContext) throws IOException {
 
-        try {
-            // Get sources folder or else default to current folder
-            final String sources = sensorContext.config().get("sonar.sources").orElse(".");
+        // the list of issues
+        List<ReportIssue> issues = new ArrayList<>();
+        final MobSFScanReportParser reportParser = new MobSFScanReportParser();
+        // get sources folder or else default to current folder
+        final String sourcesInput = sensorContext.config().get("sonar.sources").orElse(".");
+        String[] sources = sourcesInput.split(",");
+        LOGGER.info("Running '{} analyze'...", COMMAND);
 
-            // Run MobSFScan
-            LOGGER.info("Running '{} analyze'...", COMMAND);
+        for (String source : sources) {
+            try {
+                // run MobSFScan
+                String output = new ProcBuilder(COMMAND,  OUTPUT_FORMAT, source)
+                        .withTimeoutMillis(COMMAND_TIMEOUT)
+                        .ignoreExitStatus()
+                        .run()
+                        .getOutputString();
 
-            String output = new ProcBuilder(COMMAND,  OUTPUT_FORMAT, sources)
-                    .withTimeoutMillis(COMMAND_TIMEOUT)
-                    .ignoreExitStatus()
-                    .run()
-                    .getOutputString();
-
-            // Parse issues
-            List<ReportIssue> issues = new MobSFScanReportParser().parse(output);
-            LOGGER.info("Found issues: {}", issues.size());
-            return issues;
-        } catch (Exception e) {
-            throw new IOException(e);
+                // Parse issues & save them
+                issues.addAll(reportParser.parse(output));
+            } catch (Exception e) {
+                throw new IOException(e);
+            }
         }
+
+        LOGGER.info("Found issues: {}", issues.size());
+        return issues;
     }
 
 }
