@@ -95,7 +95,7 @@ public class RunningSourcesCLISensorTest {
     @Test
     public void execute() {
         sensor.execute(sensorContext);
-        assertThat(sensorContext.allIssues()).hasSize(0);
+        assertThat(sensorContext.allIssues()).isEmpty();
     }
 
 }
