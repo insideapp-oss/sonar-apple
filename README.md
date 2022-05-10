@@ -26,7 +26,7 @@ The plugin is designed to support Swift 5 syntax.
 | Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules <br/> [Periphery](https://github.com/peripheryapp/periphery) rules | [OCLint 22.02](https://oclint.org/) rules                    |
 | Tests               | YES                                                                                                                             | YES                                                          |
 | Coverage            | YES                                                                                                                             | YES                                                          |
-| Complexity          | IN PROGRESS                                                                                                                     | IN PROGRESS                                                  |
+| Complexity          | YES                                                                                                                             | IN PROGRESS                                                  |
 | Syntax highlighting | YES                                                                                                                             | YES                                                          |
 | Security            | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules                                                                    | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules |
 
