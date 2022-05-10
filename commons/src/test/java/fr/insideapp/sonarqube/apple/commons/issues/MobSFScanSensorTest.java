@@ -15,37 +15,42 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.lang.issues.mobsfscan;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanSwiftSensorTest {
+public class MobSFScanSensorTest {
 
-    private MobSFScanSwiftSensor sensor;
+    private MobSFScanSensor sensor;
+    private final String SUFFIX = "SUFFIX";
+    private final String LANG = "LANG";
 
     @Before
     public void prepare() {
-        sensor = new MobSFScanSwiftSensor();
-    }
+        sensor = new MobSFScanSensor() {
+            @Override
+            public String nameSuffix() {
+                return SUFFIX;
+            }
 
-    @Test
-    public void language() {
-        assertThat(sensor.language()).isEqualTo("swift");
+            @Override
+            public String language() {
+                return LANG;
+            }
+        };
     }
 
     @Test
     public void name() {
-        assertThat(sensor.name()).isEqualTo("MobSFScan Sensor for Swift");
+        assertThat(sensor.name()).isEqualTo("MobSFScan Sensor " + SUFFIX);
     }
 
     @Test
     public void repository() {
-        assertThat(sensor.repository()).isEqualTo("MobSFScanSwift");
+        assertThat(sensor.repository()).isEqualTo("MobSFScan" + LANG);
     }
 
     @Test
@@ -61,13 +66,6 @@ public class MobSFScanSwiftSensorTest {
     @Test
     public void commandOptions() {
         assertThat(sensor.commandOptions("FOLDER")).isEqualTo(new String[]{"--json", "FOLDER"});
-    }
-
-    @Test
-    public void describe() {
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("MobSFScan Sensor for Swift");
     }
 
 }
