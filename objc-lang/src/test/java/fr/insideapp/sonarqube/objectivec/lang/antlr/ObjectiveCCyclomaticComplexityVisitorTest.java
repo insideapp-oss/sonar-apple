@@ -90,7 +90,7 @@ public class ObjectiveCCyclomaticComplexityVisitorTest {
 
     @Test
     public void testCase6() throws IOException {
-        assertContainer(new ObjectiveCCyclomaticComplexityVisitorTest.Container("ComplexityCase6", 3));
+        assertContainer(new ObjectiveCCyclomaticComplexityVisitorTest.Container("ComplexityCase6", 4));
     }
 
     private void assertContainer(ObjectiveCCyclomaticComplexityVisitorTest.Container container) throws IOException {
