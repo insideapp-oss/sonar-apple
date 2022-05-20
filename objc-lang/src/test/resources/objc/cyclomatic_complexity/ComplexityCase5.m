@@ -16,6 +16,17 @@
     while( a < 20 ) {
         a++;
     }
+
+    NSArray *myColors;
+
+    myColors = [NSArray arrayWithObjects: @"Red", @"Green", @"Blue", @"Yellow", nil];
+
+    for (NSString* color in myColors)
+    {
+        if(color == nil) {
+            break;
+        }
+    }
 }
 
 @end
