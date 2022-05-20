@@ -41,7 +41,6 @@ public class ObjectiveCCyclomaticComplexityVisitor implements ParseTreeItemVisit
 
         final Class<? extends ParseTree> classz = tree.getClass();
 
-        // if
         if(ObjectiveCParser.FunctionSignatureContext.class.equals(classz) ||
                 ObjectiveCParser.MethodDefinitionContext.class.equals(classz) ||
                 ObjectiveCParser.ForInStatementContext.class.equals(classz) ||
@@ -49,13 +48,15 @@ public class ObjectiveCCyclomaticComplexityVisitor implements ParseTreeItemVisit
                 ObjectiveCParser.SwitchSectionContext.class.equals(classz) ||
                 ObjectiveCParser.WhileStatementContext.class.equals(classz) ||
                 ObjectiveCParser.DoStatementContext.class.equals(classz) ||
-                (ObjectiveCParser.StatementContext.class.equals(classz) && tree.getText().matches("(.*)=(.*)\\?(.*):(.*)"))) {
+                (ObjectiveCParser.StatementContext.class.equals(classz) && tree.getText().matches("(.*)=(.*)\\?(.*):(.*)"))) { // To detect ternary operator
             complexity++;
         }
 
+        // To detect if statement
         if((ObjectiveCParser.SelectionStatementContext.class.equals(classz) && tree.getText().matches("if(.*)\\((.*)\\)\\{(.*)}(.*)"))) {
             complexity++;
 
+            // Each matches of && and || add 1 to complexity
             complexity += StringUtils.countMatches(tree.getText(), "&&");
             complexity += StringUtils.countMatches(tree.getText(), "||");
         }
