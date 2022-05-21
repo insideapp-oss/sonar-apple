@@ -137,32 +137,15 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
             // Single line comment
             if (tokenType == singleLineCommentToken) {
                 linesOfComment.add(currentLineNumber);
-
+            // Multiline comments
             } else if (tokenType == multiLineCommentToken) {
-                final Integer endLineOfComment = findEndLine(allLines, token.getStopIndex());
-                // Making sure we found it
-                if (endLineOfComment != null) {
-                    // Adding each line to our set
-                    for (int line = currentLineNumber; line <= endLineOfComment; line++) {
-                        linesOfComment.add(line);
-                    }
-                }
-
+                linesOfComment.addAll(handleMultilineComment(token, allLines, currentLineNumber));
             // Tokens that can be spread over several lines
             } else if (
                     tokenType == interpolationMultiLineToken ||
                     tokenType == quotedMultiLineExtendedTextToken ||
                     tokenType == quotedMultiLineTextToken) {
-                // Computing the end line of the token
-                // Since the token might be spread on several lines
-                final Integer endLineOfCode = findEndLine(allLines, token.getStopIndex());
-                // Making sure we found it
-                if (endLineOfCode != null) {
-                    // Adding each line to our set
-                    for (int line = currentLineNumber; line <= endLineOfCode; line++) {
-                        linesOfCode.add(line);
-                    }
-                }
+                linesOfCode.addAll(handleMultilineTokens(token, allLines, currentLineNumber));
 
             // Ignoring white-space and end-of-file
             } else if (tokenType != whiteSpaceToken && tokenType != Recognizer.EOF){
@@ -184,6 +167,46 @@ public class SourceLinesVisitor implements ParseTreeItemVisitor {
 
         final long linesOfCommentCount = linesOfComment.size();
         final long linesOfCodeCount = linesOfCode.size();
+
+
+        recordMeasures(context, antlrContext, linesOfCodeCount, linesOfCommentCount, numberOfClasses, numberOfFunctions);
+    }
+
+    private Set<Integer> handleMultilineComment(Token token, SourceLine[] allLines, Integer currentLineNumber) {
+
+        final Set<Integer> linesOfComment = new HashSet<>();
+
+        final Integer endLineOfComment = findEndLine(allLines, token.getStopIndex());
+        // Making sure we found it
+        if (endLineOfComment != null) {
+            // Adding each line to our set
+            for (int line = currentLineNumber; line <= endLineOfComment; line++) {
+                linesOfComment.add(line);
+            }
+        }
+
+        return linesOfComment;
+    }
+
+    private Set<Integer> handleMultilineTokens(Token token, SourceLine[] allLines, Integer currentLineNumber) {
+
+        final Set<Integer> linesOfCode = new HashSet<>();
+
+        // Computing the end line of the token
+        // Since the token might be spread on several lines
+        final Integer endLineOfCode = findEndLine(allLines, token.getStopIndex());
+        // Making sure we found it
+        if (endLineOfCode != null) {
+            // Adding each line to our set
+            for (int line = currentLineNumber; line <= endLineOfCode; line++) {
+                linesOfCode.add(line);
+            }
+        }
+
+        return linesOfCode;
+    }
+
+    private void recordMeasures(SensorContext context, AntlrContext antlrContext , long linesOfCodeCount, long linesOfCommentCount, int numberOfClasses, int numberOfFunctions) {
 
         synchronized (SourceLinesVisitor.class) {
 

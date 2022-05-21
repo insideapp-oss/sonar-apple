@@ -15,34 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons;
+package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.swift.Swift;
 
-public class FileCollector {
+public class SwiftLintRulesDefinition extends JSONRulesDefinition {
 
-    private FileCollector() {}
+    public static final String REPOSITORY_KEY = "SwiftLint";
+    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    public static List<File> collect(File reportsDir, String glob) throws IOException {
-        List<File> files = new ArrayList<>();
-        DirectoryStream<Path> stream = null;
-        try {
-            stream = Files.newDirectoryStream(reportsDir.toPath(), glob);
-            for (Path p : stream) {
-                files.add(p.toFile());
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
+    public static final String RULES_PATH = "/swiftlint-rules.json";
 
-        return files;
+    public SwiftLintRulesDefinition() {
+        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, RULES_PATH);
     }
+
 }

@@ -15,34 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons;
+package fr.insideapp.sonarqube.objc;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import org.sonar.api.resources.AbstractLanguage;
 
-public class FileCollector {
+public class ObjectiveC extends AbstractLanguage {
 
-    private FileCollector() {}
+    public static final String KEY = "objc";
 
-    public static List<File> collect(File reportsDir, String glob) throws IOException {
-        List<File> files = new ArrayList<>();
-        DirectoryStream<Path> stream = null;
-        try {
-            stream = Files.newDirectoryStream(reportsDir.toPath(), glob);
-            for (Path p : stream) {
-                files.add(p.toFile());
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
+    public ObjectiveC() {
+        super(KEY, "Objective-C");
+    }
 
-        return files;
+    @Override
+    public String[] getFileSuffixes() {
+        return new String[]{"h", "m","mm"};
     }
 }
