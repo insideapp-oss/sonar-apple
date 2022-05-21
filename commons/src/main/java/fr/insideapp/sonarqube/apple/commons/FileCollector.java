@@ -27,7 +27,7 @@ import java.util.List;
 
 public class FileCollector {
 
-    private FileCollector() {};
+    private FileCollector() {}
 
     public static List<File> collect(File reportsDir, String glob) throws IOException {
         List<File> files = new ArrayList<>();
