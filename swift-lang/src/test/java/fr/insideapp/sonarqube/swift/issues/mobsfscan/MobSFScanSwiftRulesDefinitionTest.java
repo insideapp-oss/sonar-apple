@@ -15,34 +15,28 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons;
+package fr.insideapp.sonarqube.swift.issues.mobsfscan;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.Test;
+import org.sonar.api.server.rule.RulesDefinition;
 
-public class FileCollector {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    private FileCollector() {}
+public class MobSFScanSwiftRulesDefinitionTest {
 
-    public static List<File> collect(File reportsDir, String glob) throws IOException {
-        List<File> files = new ArrayList<>();
-        DirectoryStream<Path> stream = null;
-        try {
-            stream = Files.newDirectoryStream(reportsDir.toPath(), glob);
-            for (Path p : stream) {
-                files.add(p.toFile());
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
+    @Test
+    public void define() {
 
-        return files;
+        MobSFScanSwiftRulesDefinition rulesDefinition = new MobSFScanSwiftRulesDefinition();
+        RulesDefinition.Context context = new RulesDefinition.Context();
+        rulesDefinition.define(context);
+
+        RulesDefinition.Repository repository = context.repository("MobSFScanSwift");
+        assertThat(repository).isNotNull();
+        assertThat(repository.name()).isEqualTo("MobSFScanSwift");
+        assertThat(repository.language()).isEqualTo("swift");
+        assertThat(repository.rules()).isNotEmpty();
+
     }
+
 }

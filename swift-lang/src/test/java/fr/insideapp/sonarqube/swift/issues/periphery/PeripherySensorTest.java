@@ -15,34 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons;
+package fr.insideapp.sonarqube.swift.issues.periphery;
+
+import org.junit.Test;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
-public class FileCollector {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    private FileCollector() {}
+public class PeripherySensorTest {
 
-    public static List<File> collect(File reportsDir, String glob) throws IOException {
-        List<File> files = new ArrayList<>();
-        DirectoryStream<Path> stream = null;
-        try {
-            stream = Files.newDirectoryStream(reportsDir.toPath(), glob);
-            for (Path p : stream) {
-                files.add(p.toFile());
-            }
-        } finally {
-            if (stream != null) {
-                stream.close();
-            }
-        }
+    private static final String BASE_DIR = "src/test/resources/swift";
 
-        return files;
+    @Test
+    public void describe() {
+        PeripherySensor sensor = new PeripherySensor(SensorContextTester.create(new File(BASE_DIR)));
+        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        sensor.describe(descriptor);
+        assertThat(descriptor.name()).isEqualTo("Periphery Sensor");
     }
+
 }

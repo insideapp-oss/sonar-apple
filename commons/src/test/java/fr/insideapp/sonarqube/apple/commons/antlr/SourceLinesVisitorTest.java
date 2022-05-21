@@ -40,21 +40,29 @@ public class SourceLinesVisitorTest {
 
         SensorContextTester sensorContext = SensorContextTester.create(new File(""));
         DefaultInputFile testFile = new TestInputFileBuilder("", "test.ext")
-                .setLines(2)
-                .setOriginalLineEndOffsets(new int[2])
-                .setOriginalLineStartOffsets(new int[2])
+                .setLines(7)
+                .setOriginalLineEndOffsets(new int[7])
+                .setOriginalLineStartOffsets(new int[7])
                 .setModuleBaseDir(Paths.get("/"))
                 .build();
         sensorContext.fileSystem().add(testFile);
 
         SourceLine[] lines = {
                 new SourceLine(0,1,0,10),
-                new SourceLine(1,2,0,10)
+                new SourceLine(1,2,0,20),
+                new SourceLine(2,3,0,30),
+                new SourceLine(3,4,0,40),
+                new SourceLine(4,5,0,50),
+                new SourceLine(5,6,0,60),
+                new SourceLine(6,7,0,70),
         };
 
+        // Line 1
         Token commentToken = mock(Token.class);
         when(commentToken.getType()).thenReturn(1);
         when(commentToken.getLine()).thenReturn(1);
+
+        // Line 2
         Token codeToken = mock(Token.class);
         when(codeToken.getType()).thenReturn(2);
         when(codeToken.getLine()).thenReturn(2);
@@ -64,7 +72,20 @@ public class SourceLinesVisitorTest {
         Token functionToken = mock(Token.class);
         when(functionToken.getType()).thenReturn(4);
         when(functionToken.getLine()).thenReturn(2); // same line as code
-        Token[] tokens = {commentToken, codeToken, classToken, functionToken};
+
+        // Line 3
+        Token multilineCommentToken = mock(Token.class);
+        when(multilineCommentToken.getType()).thenReturn(5);
+        when(multilineCommentToken.getLine()).thenReturn(3);
+        when(multilineCommentToken.getStopIndex()).thenReturn(41);
+
+        // Line 5
+        Token multilineCodeToken = mock(Token.class);
+        when(multilineCodeToken.getType()).thenReturn(6);
+        when(multilineCodeToken.getLine()).thenReturn(5);
+        when(multilineCodeToken.getStopIndex()).thenReturn(61);
+
+        Token[] tokens = {commentToken, multilineCommentToken, multilineCodeToken, codeToken, classToken, functionToken};
 
         AntlrContext antlrContext = mock(AntlrContext.class);
         when(antlrContext.getLines()).thenReturn(lines);
@@ -73,6 +94,8 @@ public class SourceLinesVisitorTest {
 
         SourceLinesVisitor sourceLinesVisitor = new SourceLinesVisitor.Builder()
                 .singleLineCommentToken(1)
+                .multiLineCommentToken(5)
+                .quotedMultiLineTextToken(6)
                 .classToken(3)
                 .functionToken(4)
                 .build();
@@ -80,9 +103,9 @@ public class SourceLinesVisitorTest {
 
         // Asserting
         Measure<Integer> measureNLOC = sensorContext.measure(testFile.key(), CoreMetrics.NCLOC.key());
-        assertThat(measureNLOC.value()).isEqualTo(1);
+        assertThat(measureNLOC.value()).isEqualTo(3);
         Measure<Integer> measureNCOMMENTS = sensorContext.measure(testFile.key(), CoreMetrics.COMMENT_LINES.key());
-        assertThat(measureNCOMMENTS.value()).isEqualTo(1);
+        assertThat(measureNCOMMENTS.value()).isEqualTo(3);
         Measure<Integer> measureNCLASSES = sensorContext.measure(testFile.key(), CoreMetrics.CLASSES.key());
         assertThat(measureNCLASSES.value()).isEqualTo(1);
         Measure<Integer> measureNFUNCTION = sensorContext.measure(testFile.key(), CoreMetrics.FUNCTIONS.key());
