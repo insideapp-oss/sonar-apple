@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - *
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Retrieve tag name
+        uses: olegtarasov/get-tag@v2.1
+        id: tag_name
+
+      - name: Set up JDK 1.11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+
+      - name: Set version
+        run: mvn versions:set -DnewVersion=$GIT_TAG_NAME
+
+      - name: Build
+        run: mvn -B package --file pom.xml
+
+      - name: Analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.organization=insideapp-oss \
+          -Dsonar.projectKey=insideapp-oss_sonar-apple
+
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{github.workspace}}/sonar-apple-plugin/target/*.jar
+          tag: ${{ steps.tag_name.outputs.tag }}
+          overwrite: true
+          body: ${{steps.build_changelog.outputs.changelog}}
+          file_glob: true

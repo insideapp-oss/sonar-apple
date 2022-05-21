@@ -19,13 +19,6 @@ jobs:
     - name: Build
       run: mvn -B package --file pom.xml
 
-# Redundant with SonarQube analysis
-#    - name: Upload coverage to Codecov
-#      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-#      uses: codecov/codecov-action@v1
-#      with:
-#        token: ${{ secrets.CODECOV_TOKEN }}
-
     - name: Analyze
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
