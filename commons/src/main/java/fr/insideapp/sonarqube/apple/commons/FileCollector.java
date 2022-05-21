@@ -27,9 +27,7 @@ import java.util.List;
 
 public class FileCollector {
 
-    private FileCollector() {
-        throw new UnsupportedOperationException();
-    };
+    private FileCollector() {};
 
     public static List<File> collect(File reportsDir, String glob) throws IOException {
         List<File> files = new ArrayList<>();
@@ -45,6 +43,6 @@ public class FileCollector {
             }
         }
 
-       return  files;
+        return files;
     }
 }

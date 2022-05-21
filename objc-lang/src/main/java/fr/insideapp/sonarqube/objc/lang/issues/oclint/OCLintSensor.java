@@ -115,10 +115,8 @@ public class OCLintSensor implements Sensor {
         } catch (Exception e) {
             throw new IOException(e);
         } finally {
-            if (compileCommandsFile != null) {
-                if (!compileCommandsFile.delete()) {
-                    LOGGER.error("Failed to delete {}", compileCommandsFile.getAbsolutePath());
-                }
+            if (compileCommandsFile != null && !compileCommandsFile.delete()) {
+                LOGGER.error("Failed to delete {}", compileCommandsFile.getAbsolutePath());
             }
         }
     }

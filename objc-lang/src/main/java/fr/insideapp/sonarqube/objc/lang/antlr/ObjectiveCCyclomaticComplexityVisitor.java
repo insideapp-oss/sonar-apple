@@ -70,7 +70,7 @@ public class ObjectiveCCyclomaticComplexityVisitor implements ParseTreeItemVisit
             try {
                 context.<Integer>newMeasure().on(file).forMetric(CoreMetrics.COMPLEXITY).withValue(complexity).save();
             } catch (final Exception e) {
-                LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.path()), e);
+                LOGGER.warn(format("Unexpected adding complexity measures on file %s", file.key()), e);
             }
             complexity = 0;
         }
