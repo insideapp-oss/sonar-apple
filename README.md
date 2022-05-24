@@ -143,7 +143,7 @@ $ xcodebuild \
 
 # Generate coverage report to build/reports/cobertura.xml
 # Don't forget to activate 'Gather coverage' option in the app scheme
-$ slather coverage --cobertura-xml --output-directory build/reports --scheme MyApp MyApp.xcodeproj
+$ slather coverage --cobertura-xml --build-directory ./derivedData --output-directory build/reports --scheme MyApp MyApp.xcodeproj
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
 # Don't forget to add --workspace to the build command if your project is part of a workspace
