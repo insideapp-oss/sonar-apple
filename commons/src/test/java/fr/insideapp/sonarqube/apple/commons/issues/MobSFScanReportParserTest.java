@@ -58,7 +58,7 @@ public class MobSFScanReportParserTest {
                 "  }\n" +
                 "}";
 
-        MobSFScanReportParser parser = new MobSFScanReportParser();
+        MobSFScanReportParser parser = new MobSFScanReportParser(new String[]{"swift"});
 
         List<ReportIssue> issues = parser.parse(input);
         assertThat(issues).hasSize(2);

@@ -17,7 +17,9 @@
  */
 package fr.insideapp.sonarqube.swift.issues.mobsfscan;
 
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanSensor;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,5 +34,10 @@ public final class MobSFScanSwiftSensor extends MobSFScanSensor {
     @Override
     public String nameSuffix() {
         return String.format("for %s", StringUtils.capitalize(Swift.KEY));
+    }
+
+    @Override
+    public ReportParser reportParser() {
+        return new MobSFScanReportParser(Swift.EXTENSIONS);
     }
 }

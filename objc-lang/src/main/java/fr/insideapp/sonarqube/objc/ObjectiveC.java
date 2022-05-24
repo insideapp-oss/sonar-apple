@@ -23,12 +23,14 @@ public class ObjectiveC extends AbstractLanguage {
 
     public static final String KEY = "objc";
 
+    public static final String[] EXTENSIONS = {"h", "m","mm"};
+
     public ObjectiveC() {
         super(KEY, "Objective-C");
     }
 
     @Override
     public String[] getFileSuffixes() {
-        return new String[]{"h", "m","mm"};
+        return EXTENSIONS;
     }
 }

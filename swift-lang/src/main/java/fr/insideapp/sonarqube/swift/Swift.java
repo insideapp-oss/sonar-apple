@@ -23,12 +23,14 @@ public class Swift extends AbstractLanguage {
 
     public static final String KEY = "swift";
 
+    public static final String[] EXTENSIONS = {"swift"};
+
     public Swift() {
         super(KEY, "Swift");
     }
 
     @Override
     public String[] getFileSuffixes() {
-        return new String[]{"swift"};
+        return EXTENSIONS;
     }
 }

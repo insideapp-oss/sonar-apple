@@ -40,6 +40,11 @@ public class MobSFScanSensorTest {
             public String language() {
                 return LANG;
             }
+
+            @Override
+            public ReportParser reportParser() {
+                return new MobSFScanReportParser(new String[]{"swift"});
+            }
         };
     }
 
