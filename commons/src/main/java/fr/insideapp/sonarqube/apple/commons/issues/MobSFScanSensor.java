@@ -34,11 +34,6 @@ public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
     }
 
     @Override
-    public ReportParser reportParser() {
-        return new MobSFScanReportParser();
-    }
-
-    @Override
     public String command() {
         return "mobsfscan";
     }

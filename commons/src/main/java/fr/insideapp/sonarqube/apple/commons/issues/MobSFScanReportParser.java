@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import org.apache.commons.io.FilenameUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.sonar.api.utils.log.Logger;
@@ -26,6 +27,13 @@ import java.util.*;
 
 public final class MobSFScanReportParser implements ReportParser {
     private static final Logger LOGGER = Loggers.get(MobSFScanReportParser.class);
+
+    private String[] extensions = {};
+
+    public MobSFScanReportParser(String[] extensions) {
+        this.extensions = extensions;
+    }
+
     @Override
     public List<ReportIssue> parse(String input) {
 
@@ -44,8 +52,11 @@ public final class MobSFScanReportParser implements ReportParser {
                     for (int i = 0; i < files.length(); i++) {
                         JSONObject file = files.getJSONObject(i);
                         String filePath = file.getString("file_path");
-                        int lineNum = file.getJSONArray("match_lines").getInt(0);
-                        issues.add(new ReportIssue(resultKey, message, filePath, lineNum));
+                        // Only files with matching extensions are reported
+                        if (Arrays.stream(this.extensions).anyMatch(e -> e.equalsIgnoreCase(FilenameUtils.getExtension(filePath)))) {
+                            int lineNum = file.getJSONArray("match_lines").getInt(0);
+                            issues.add(new ReportIssue(resultKey, message, filePath, lineNum));
+                        }
                     }
                 } else {
                     issues.add(new ReportIssue(resultKey, message));
