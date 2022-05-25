@@ -56,29 +56,18 @@ public class ParseTreeAnalyzer {
         FilePredicate langAndType = sensorContext.fileSystem().predicates().and(hasLang, hasType);
         final Charset charset = sensorContext.fileSystem().encoding();
 
-        final ExecutorService executorService = Executors.newWorkStealingPool();
+        for (InputFile inf : sensorContext.fileSystem().inputFiles(langAndType)) {
 
-        for(InputFile inf : sensorContext.fileSystem().inputFiles(langAndType)){
-            executorService.execute(() -> {
-                // Visit source files
-                try {
-                    antlrContext.loadFromFile(inf, charset);
-                    ParseTreeItemVisitor visitor = new CustomTreeVisitor(visitors);
-                    visitor.fillContext(sensorContext, antlrContext);
-                } catch (IOException e) {
-                    LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
-                }
-            });
+            // Visit source files
+            try {
+                antlrContext.loadFromFile(inf, charset);
+                ParseTreeItemVisitor visitor = new CustomTreeVisitor(visitors);
+                visitor.fillContext(sensorContext, antlrContext);
+            } catch (IOException e) {
+                LOGGER.warn("Unexpected error while analyzing file " + inf.filename(), e);
+            }
+
         }
 
-        try {
-            executorService.shutdown();
-            executorService.awaitTermination(EXECUTOR_TIMEOUT, TimeUnit.SECONDS);
-            executorService.shutdownNow();
-        } catch (final InterruptedException e) {
-            LOGGER.warn("Unexpected error while running waiting for executor service to finish", e);
-            Thread.currentThread().interrupt();
-            throw new SensorRuntimeException(e);
-        }
     }
 }
