@@ -2286,5 +2286,60 @@
             "offset": "1min",
             "function": "CONSTANT_ISSUE"
         }
+    },
+    {
+        "key": "accessibility_label_for_image",
+        "name": "Accessibility Label for Image",
+        "description": "All Images that provide context should have an accessibility label. Purely decorative images can be hidden from accessibility.",
+        "severity": "CRITICAL",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "comma_inheritance",
+        "name": "Comma Inheritance",
+        "description": "Use commas to separate types in inheritance lists",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "return_value_from_void_function",
+        "name": "Return Value from Void Function",
+        "description": "Returning values from Void functions should be avoided.",
+        "severity": "CRITICAL",
+        "type": "BUG",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "typesafe_array_init",
+        "name": "Type-safe Array Init",
+        "description": "Prefer using `Array(seq)` over `seq.map { $0 }` to convert a sequence into an Array.",
+        "severity": "MAJOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "unavailable_condition",
+        "name": "Unavailable Condition",
+        "description": "Use #unavailable instead of #available with an empty body.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     }
 ]
