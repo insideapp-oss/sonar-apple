@@ -32,17 +32,20 @@ public class OCLintReportParser implements ReportParser {
         List<ReportIssue> issues = new ArrayList<>();
 
         JSONObject jsonReport = (JSONObject) JSONValue.parse(input);
-        JSONArray jsonViolations = (JSONArray) jsonReport.get("violation");
-        for (Object obj : jsonViolations) {
-            JSONObject jsonViolation = (JSONObject) obj;
+        if (jsonReport != null) {
+            JSONArray jsonViolations = (JSONArray) jsonReport.get("violation");
+            if (jsonViolations != null) {
+                for (Object obj : jsonViolations) {
+                    JSONObject jsonViolation = (JSONObject) obj;
 
-            String filePath = (String) jsonViolation.get("path");
-            int lineNum = ((Long) jsonViolation.get("startLine")).intValue();
-            String message = (String) jsonViolation.get("message");
-            String ruleId = ((String) jsonViolation.get("rule")).replace(" ", "-");
-            issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
+                    String filePath = (String) jsonViolation.get("path");
+                    int lineNum = ((Long) jsonViolation.get("startLine")).intValue();
+                    String message = (String) jsonViolation.get("message");
+                    String ruleId = ((String) jsonViolation.get("rule")).replace(" ", "-");
+                    issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
+                }
+            }
         }
-
 
         return issues;
     }

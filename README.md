@@ -23,7 +23,7 @@ The plugin is designed to support Swift 5 syntax.
 | Feature             | Swift                                                                                                                           | Objective-C                                                  |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | Size                | YES                                                                                                                             | YES                                                          |
-| Issues              | [SwiftLint 0.47.0](https://github.com/realm/SwiftLint) rules <br/> [Periphery](https://github.com/peripheryapp/periphery) rules | [OCLint 22.02](https://oclint.org/) rules                    |
+| Issues              | [SwiftLint 0.47.1](https://github.com/realm/SwiftLint) rules <br/> [Periphery](https://github.com/peripheryapp/periphery) rules | [OCLint 22.02](https://oclint.org/) rules                    |
 | Tests               | YES                                                                                                                             | YES                                                          |
 | Coverage            | YES                                                                                                                             | YES                                                          |
 | Complexity          | YES                                                                                                                             | YES                                                          |
@@ -139,7 +139,7 @@ $ xcodebuild \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   -derivedDataPath ./derivedData \
-   clean test | tee build/xcodebuild.log | xcpretty --report junit
+   clean test | xcpretty --report junit
 
 # Generate coverage report to build/reports/cobertura.xml
 # Don't forget to activate 'Gather coverage' option in the app scheme
@@ -155,6 +155,16 @@ $ periphery scan \
   --index-store-path ./derivedData/Index/DataStore \
   --format xcode \
   --quiet | tee build/periphery.log
+
+# This rebuild is required to perform Objective-C issue analysis
+# Skip it if your project doe not use Objective-C, or if you do want to report Objective-C issues
+$ xcodebuild \
+  -project MyApp.xcodeproj \
+  -scheme MyApp \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
+   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log | xcpretty --report junit
+
   
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner

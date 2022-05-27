@@ -46,7 +46,7 @@ public class OCLintSensor implements Sensor {
 
     private static final String OCLINT_COMMAND = "oclint-json-compilation-database";
 
-    private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
+    private static final int COMMAND_TIMEOUT = 30 * 60 * 1000;
 
     private static final String DEFAULT_LOG_PATH = "build";
 
@@ -102,24 +102,37 @@ public class OCLintSensor implements Sensor {
             ProcBuilder.filter(xcodebuildContent, XCPRETTY_COMMAND, "-r", "json-compilation-database", "-o", compileCommandsFile.getAbsolutePath());
 
             // Run OCLint
-            LOGGER.info("Running '{} ./* -- -report-type json'...", OCLINT_COMMAND);
-            String output = new ProcBuilder(OCLINT_COMMAND, "./*", "--", "-report-type", "json")
+            final String sourcesInput = context.config().get("sonar.sources").orElse(".");
+            String[] sources = sourcesInput.split(",");
+            String[] sourceArgs = new String[sources.length * 2];
+            for (int i = 0; i < sources.length; i++) {
+                sourceArgs[i * 2] = "--include";
+                sourceArgs[i * 2 + 1] = String.format("./%s", sources[i]);
+            }
+            LOGGER.info("Running '{} {} -- -report-type json'...", OCLINT_COMMAND, String.join(" ", sourceArgs));
+            String output = new ProcBuilder(OCLINT_COMMAND, sourceArgs)
+                    .withArgs("--", "-report-type", "json")
                     .withTimeoutMillis(COMMAND_TIMEOUT)
                     .ignoreExitStatus()
                     .run()
                     .getOutputString();
 
-            // Parse issues
-            List<ReportIssue> issues = new OCLintReportParser().parse(output);
-            LOGGER.info("Found issues: {}", issues.size());
-            return issues;
+            if (output.isEmpty()) {
+                LOGGER.warn("Failed to run OCLint analysis, please check your build parameters");
+                return new ArrayList<>();
+            } else {
+                // Parse issues
+                List<ReportIssue> issues = new OCLintReportParser().parse(output);
+                LOGGER.info("Found issues: {}", issues.size());
+                return issues;
+            }
+
         } catch (Exception e) {
             throw new IOException(e);
         } finally {
 
             if (compileCommandsFile != null) {
                 Files.delete(compileCommandsFile.toPath());
-                LOGGER.error("Failed to delete {}", compileCommandsFile.getAbsolutePath());
             }
         }
     }
