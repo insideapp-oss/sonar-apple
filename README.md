@@ -139,7 +139,7 @@ $ xcodebuild \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   -derivedDataPath ./derivedData \
-   clean test | tee build/xcodebuild.log | xcpretty --report junit
+   clean test | xcpretty --report junit
 
 # Generate coverage report to build/reports/cobertura.xml
 # Don't forget to activate 'Gather coverage' option in the app scheme
@@ -155,6 +155,16 @@ $ periphery scan \
   --index-store-path ./derivedData/Index/DataStore \
   --format xcode \
   --quiet | tee build/periphery.log
+
+# This rebuild is required to perform Objective-C issue analysis
+# Skip it if your project doe not use Objective-C, or if you do want to report Objective-C issues
+$ xcodebuild \
+  -project MyApp.xcodeproj \
+  -scheme MyApp \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
+   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log | xcpretty --report junit
+
   
 # Run the analysis and publish to the SonarQube server
 $ sonar-scanner
