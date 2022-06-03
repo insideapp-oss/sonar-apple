@@ -118,15 +118,9 @@ class RuleUpdater {
                         println r.type.style(ConsoleString.Color.DEFAULT_BOLD)
                     }
                     if (r.debt == null) {
-                        def needDebt = new Prompt("Remediation time needed ?", "Yes", "No").promptChoice()
-                        switch (needDebt) {
-                            case "Yes":
-                                def offset = new Prompt("Remediation time ?").promptDuration()
-                                println offset.style(ConsoleString.Color.DEFAULT_BOLD)
-                                r.debt = [offset: offset, function: "CONSTANT_ISSUE"]
-                            case "No":
-                                break
-                        }
+                        def offset = new Prompt("Remediation time ?").promptDuration()
+                        println offset.style(ConsoleString.Color.DEFAULT_BOLD)
+                        r.debt = [offset: offset, function: "CONSTANT_ISSUE"]
                     }
 
                 }

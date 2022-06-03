@@ -4,14 +4,22 @@
         "name": "SHA-1 Collision",
         "severity": "MAJOR",
         "description": "SHA1 is a weak hash known to have hash collisions.",
-        "type": "VULNERABILITY"
+        "type": "VULNERABILITY",
+        "debt": {
+            "offset": "60min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_cert_pinning",
         "name": "Certificate Pinning",
         "severity": "INFO",
         "description": "This app does not have Certificate Pinning implemented in code.",
-        "type": "VULNERABILITY"
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_hardcoded_secret",
@@ -51,16 +59,20 @@
         "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
         "severity": "MAJOR",
         "type": "VULNERABILITY",
-        "name": "Weak Hash algorithm used"
+        "name": "Weak Hash algorithm used",
+        "debt": {
+            "offset": "60min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_biometric_bool",
         "description": "Biometric authentication should be based on Keychain, not based on bool.",
         "severity": "MAJOR",
-        "type": "VULNERABILITY",
+        "type": "SECURITY_HOTSPOT",
         "name": "Weak biometric implementation",
         "debt": {
-            "offset": "30min",
+            "offset": "60min",
             "function": "CONSTANT_ISSUE"
         }
     },
@@ -91,21 +103,33 @@
         "description": "The app uses TLS 1.0 or TLS 1.1. TLS 1.3 should be used instead.",
         "severity": "CRITICAL",
         "type": "VULNERABILITY",
-        "name": "Deprecated TLS version"
+        "name": "Deprecated TLS version",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_tls12_used",
         "description": "This app uses TLS 1.2. TLS 1.3 should be used instead.",
         "severity": "MAJOR",
+        "name": "Deprecated TLS version",
         "type": "VULNERABILITY",
-        "name": "Deprecated TLS version"
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_dtls1_used",
         "description": "DTLS 1.2 should be used. Detected old version - DTLS 1.0.",
         "severity": "MAJOR",
         "type": "VULNERABILITY",
-        "name": "Deprecated DTLS version"
+        "name": "Deprecated DTLS version",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_depr_tls_min",
@@ -133,15 +157,19 @@
         "key": "ios_jailbreak_detect",
         "description": "This app does not have Jailbreak detection capabilities.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
-        "name": "No jailbreak detection"
+        "name": "No jailbreak detection",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_custom_keyboard_disabled",
         "description": "This app does not have custom keyboards disabled.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Custom keyboard enabled",
+        "type": "SECURITY_HOTSPOT",
         "debt": {
             "offset": "5min",
             "function": "CONSTANT_ISSUE"
@@ -162,7 +190,11 @@
         "key": "ios_detect_reversing",
         "description": "This app does not have Reverse engineering detection capabilities.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
-        "name": "No reverse engineering detection"
+        "name": "No reverse engineering detection",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     }
 ]
