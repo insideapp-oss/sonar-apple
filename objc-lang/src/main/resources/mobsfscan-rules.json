@@ -36,15 +36,23 @@
         "key": "ios_self_signed_ssl",
         "description": "App allows self signed or invalid SSL certificates. App is vulnerable to MITM attacks.",
         "severity": "CRITICAL",
-        "type": "VULNERABILITY",
-        "name": "Self Signed SSL"
+        "name": "Self Signed SSL",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_webview_ignore_ssl",
         "description": "UIWebView in App ignore SSL errors and accept any SSL Certificate. App is vulnerable to MITM attacks.",
         "severity": "CRITICAL",
-        "type": "VULNERABILITY",
-        "name": "WebView ignore SSL"
+        "name": "WebView ignore SSL",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_app_logging",
@@ -73,59 +81,87 @@
         "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
         "severity": "MAJOR",
         "type": "VULNERABILITY",
-        "name": "Weak Hash algorithm used"
+        "name": "Weak Hash algorithm used",
+        "debt": {
+            "offset": "60min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_sha1_collision",
         "description": "SHA1 is a weak hash known to have hash collisions.",
         "severity": "MAJOR",
         "type": "VULNERABILITY",
-        "name": "SHA-1 Collision"
+        "name": "SHA-1 Collision",
+        "debt": {
+            "offset": "60min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_aes_ecb",
         "description": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
         "severity": "CRITICAL",
         "type": "VULNERABILITY",
-        "name": "Usage of ECB mode"
+        "name": "Usage of ECB mode",
+        "debt": {
+            "offset": "60min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_biometric_bool",
         "description": "Biometric authentication should be based on Keychain, not based on bool.",
         "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Weak biometric implementation",
         "debt": {
-            "offset": "30min",
+            "offset": "60min",
             "function": "CONSTANT_ISSUE"
-        }
+        },
+        "type": "SECURITY_HOTSPOT"
     },
     {
         "key": "ios_jailbreak_detect",
         "description": "This app does not have Jailbreak detection capabilities.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
-        "name": "No jailbreak detection"
+        "name": "No jailbreak detection",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_detect_jailbreak_check",
         "description": "This app does not perform SFAntiPiracy Jailbreak checks.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
-        "name": "No SFAntiPiracy detection"
+        "name": "No SFAntiPiracy detection",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_piracy_check",
         "description": "This app does not perform SFAntiPiracy Piracy checks.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
-        "name": "No SFAntiPiracy detection"
+        "name": "No SFAntiPiracy detection",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     },
     {
         "key": "ios_mach_ports",
         "description": "This app does not have anti-debugger code using Mach Exception Ports.",
         "severity": "INFO",
-        "type": "VULNERABILITY",
-        "name": "No anti-debugger protection"
+        "name": "No anti-debugger protection",
+        "type": "SECURITY_HOTSPOT",
+        "debt": {
+            "offset": "0min",
+            "function": "CONSTANT_ISSUE"
+        }
     }
 ]

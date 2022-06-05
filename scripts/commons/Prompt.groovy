@@ -79,7 +79,7 @@ class Prompt {
         def error = false
         try {
             def intAnswer = Integer.parseInt(answer)
-            if (intAnswer < 1) {
+            if (intAnswer < 0) {
                 error = true
             } else {
                 return "${intAnswer}min"
