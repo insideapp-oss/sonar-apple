@@ -2341,5 +2341,16 @@
             "offset": "5min",
             "function": "CONSTANT_ISSUE"
         }
+    },
+    {
+        "key": "void_function_in_ternary",
+        "name": "Void Function in Ternary",
+        "description": "Using ternary to call Void functions should be avoided.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     }
 ]
