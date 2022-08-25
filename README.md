@@ -23,12 +23,12 @@ The plugin is designed to support Swift 5 syntax.
 | Feature             | Swift                                                                                                                           | Objective-C                                                  |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | Size                | YES                                                                                                                             | YES                                                          |
-| Issues              | [SwiftLint 0.47.1](https://github.com/realm/SwiftLint) rules <br/> [Periphery](https://github.com/peripheryapp/periphery) rules | [OCLint 22.02](https://oclint.org/) rules                    |
+| Issues              | [SwiftLint 0.48.0](https://github.com/realm/SwiftLint) rules <br/> [Periphery](https://github.com/peripheryapp/periphery) rules | [OCLint 22.02](https://oclint.org/) rules                    |
 | Tests               | YES                                                                                                                             | YES                                                          |
 | Coverage            | YES                                                                                                                             | YES                                                          |
 | Complexity          | YES                                                                                                                             | YES                                                          |
 | Syntax highlighting | YES                                                                                                                             | YES                                                          |
-| Security            | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules                                                                    | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules |
+| Security            | [mobsfscan 0.11.0](https://github.com/MobSF/mobsfscan) rules                                                                    | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules |
 
 ## Requirements
 
