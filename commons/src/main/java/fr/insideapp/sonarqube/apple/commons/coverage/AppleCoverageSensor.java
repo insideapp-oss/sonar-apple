@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
+import org.buildobjects.process.ProcBuilder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -24,23 +25,29 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppleCoverageSensor implements Sensor {
     private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
-    public static final String REPORT_PATH_KEY = "sonar.apple.cobertura.reportPath";
 
-    private static final String DEFAULT_REPORT_PATH = "build/reports/";
+    private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
+    private static final int COMMAND_EXIT_CODE = 0;
+
+    private static final String COMMAND = "xcrun";
+    private static final String[] ARGS = new String[]{"xccov", "view", "--archive"};
+    private static final String RESULT_BUNDLE_PATH_KEY = "sonar.apple.coverage.resultBundlePath";
+    private static final String DEFAULT_RESULT_BUNDLE_PATH = "build/result.xcresult";
     private final SensorContext context;
 
     public AppleCoverageSensor(final SensorContext context) {
         this.context = context;
     }
 
-    private String reportPath() {
+    private String resultBundlePath() {
         return context.config()
-                .get(REPORT_PATH_KEY)
-                .orElse(DEFAULT_REPORT_PATH);
+                .get(RESULT_BUNDLE_PATH_KEY)
+                .orElse(DEFAULT_RESULT_BUNDLE_PATH);
     }
 
     @Override
@@ -53,14 +60,54 @@ public class AppleCoverageSensor implements Sensor {
 
     @Override
     public void execute(SensorContext context) {
-        CoberturaReportParser parser = new CoberturaReportParser(context);
-        String reportFileName = context.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
-        File reportsDir = new File(reportFileName);
 
-        if (!reportsDir.isDirectory()) {
-            LOGGER.warn("Coverage report directory not found at {}", reportsDir);
-        } else {
-            parser.collect(reportsDir);
+        String resultBundleLocation = resultBundlePath();
+
+        try {
+
+            // get the list of file with coverage data
+            String coverageFileList = new ProcBuilder(COMMAND)
+                    .withArgs(ARGS)
+                    .withArgs("--file-list")
+                    .withArgs(resultBundleLocation)
+                    .withTimeoutMillis(COMMAND_TIMEOUT)
+                    .withExpectedExitStatuses(COMMAND_EXIT_CODE)
+                    .run()
+                    .getOutputString();
+
+                computeCoverageDataForFiles(coverageFileList);
+
+        } catch (Exception e) {
+            LOGGER.error("The coverage file listing produced the following exception. This exception will be ignored. Exception:", e);
         }
+    }
+
+    private void computeCoverageDataForFiles(String coverageFileList) {
+        String resultBundleLocation = resultBundlePath();
+        String[] coverageFiles = coverageFileList.split(System.getProperty("line.separator"));
+        Map<String, String> coverageDataPerFile = new HashMap<>();
+
+        // for each file with coverage data, we extract the coverage data
+        for (String coverageFile : coverageFiles) {
+
+            try {
+                String coverageFileData = new ProcBuilder(COMMAND)
+                        .withArgs(ARGS)
+                        .withArgs("--file", coverageFile)
+                        .withArgs(resultBundleLocation)
+                        .withTimeoutMillis(COMMAND_TIMEOUT)
+                        .withExpectedExitStatuses(COMMAND_EXIT_CODE)
+                        .run()
+                        .getOutputString();
+                coverageDataPerFile.put(coverageFile, coverageFileData);
+
+            } catch (Exception e) {
+                LOGGER.error("The coverage file '{}' produced the following exception. This exception will be ignored. Exception:", coverageFile, e);
+            }
+        }
+
+        // parsing & reporting the coverage data
+        XCCovReportParser parser = new XCCovReportParser(context);
+        parser.collect(coverageDataPerFile);
     }
 }
