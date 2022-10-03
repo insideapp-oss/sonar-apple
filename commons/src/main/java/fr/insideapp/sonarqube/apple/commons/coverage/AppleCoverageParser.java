@@ -9,7 +9,6 @@ import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.util.Iterator;
 import java.util.Set;
 
 public class AppleCoverageParser {
@@ -28,10 +27,7 @@ public class AppleCoverageParser {
         Set<String> filesPath = coverageData.keySet();
         LOGGER.info("{} files have coverage data, parsing it", filesPath.size());
 
-        Iterator<String> iterator = filesPath.iterator();
-
-        while (iterator.hasNext()) {
-            String filePath = iterator.next();
+        for (String filePath : filesPath) {
             JSONArray linesCoverage = coverageData.getJSONArray(filePath);
 
             InputFile resource = getFile(filePath);
@@ -51,13 +47,10 @@ public class AppleCoverageParser {
                 if (isExecutable) {
                     // it is possible the execution count overflows the int limit
                     // if this is the case, we fall back to the maximum value available
-                    int hitsCount;
-                    try {
-                        hitsCount = lineCoverage.getInt("executionCount");
-                    } catch (NumberFormatException e) {
+                    int hitsCount = lineCoverage.getInt("executionCount");
+                    if (hitsCount < 0) {
                         hitsCount = Integer.MAX_VALUE;
                     }
-
                     // recording the line hit
                     newCoverage.lineHits(lineNumber, hitsCount);
                 }
