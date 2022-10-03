@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,7 +39,7 @@ public class AppleCoverageExtractorTest {
         JSONObject xccovJSON = extractor.extract(buildResult);
 
         // asserting
-        assertThat(xccovJSON.keySet().size()).isEqualTo(4);
+        assertThat(xccovJSON.keySet()).hasSize(4);
     }
 
 }

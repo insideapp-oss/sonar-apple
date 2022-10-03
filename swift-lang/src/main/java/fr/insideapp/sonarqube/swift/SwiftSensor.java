@@ -18,7 +18,6 @@
 package fr.insideapp.sonarqube.swift;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeAnalyzer;
-import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.swift.antlr.SwiftAntlrContext;
 import fr.insideapp.sonarqube.swift.antlr.SwiftHighlighterVisitor;
 import fr.insideapp.sonarqube.swift.antlr.SwiftCyclomaticComplexityVisitor;

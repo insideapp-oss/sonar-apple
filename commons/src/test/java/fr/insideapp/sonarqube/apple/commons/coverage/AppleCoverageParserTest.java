@@ -49,7 +49,7 @@ public class AppleCoverageParserTest {
 
         // asserting
         assertThat(context.lineHits(testFile.key(), 1)).isNull();
-        assertThat(context.lineHits(testFile.key(), 2)).isEqualTo(0);
+        assertThat(context.lineHits(testFile.key(), 2)).isZero();
         assertThat(context.lineHits(testFile.key(), 3)).isEqualTo(1);
         assertThat(context.lineHits(testFile.key(), 4)).isEqualTo(Integer.MAX_VALUE);
     }

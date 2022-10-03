@@ -25,6 +25,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -48,7 +49,7 @@ public class AppleCoverageExtractor {
 
     public JSONObject extract(File resultBundle) {
         // get the raw data of the build result
-        String xcresultData = new ProcBuilder("xcrun")
+        String xcresultData = new ProcBuilder(COMMAND)
                 .withArgs("xcresulttool", "get")
                 .withArgs( "--format", "json")
                 .withArgs("--path", resultBundle.getAbsolutePath())
@@ -75,7 +76,7 @@ public class AppleCoverageExtractor {
 
     private ArrayList<String> extractArchiveReferences(JSONObject xcresult) {
         JSONArray actionValues = xcresult.getJSONObject("actions").getJSONArray("_values");
-        ArrayList<String> archiveRefIDs = new ArrayList<String>();
+        ArrayList<String> archiveRefIDs = new ArrayList();
 
         for (int i = 0; i < actionValues.length(); i++) {
             JSONObject actionResult = actionValues.getJSONObject(i).getJSONObject("actionResult");
@@ -157,7 +158,11 @@ public class AppleCoverageExtractor {
                 }
             }
         }
-        directory.delete();
+        try {
+            Files.delete(directory.toPath());
+        } catch (Exception e) {
+            LOGGER.info("The file '{}' was not deleted. Exception: {}", directory.getAbsolutePath(), e);
+        }
     }
 
 }
