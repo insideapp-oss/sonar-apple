@@ -18,12 +18,15 @@ public class AppleCoverageExtractor {
     private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
     private static final int COMMAND_EXIT_CODE = 0;
 
-    private static final String TMP = "tmp";
-
-    private final SensorContext context;
+    private final String tmpFolderPath;
 
     public AppleCoverageExtractor(SensorContext context) {
-        this.context = context;
+        this.tmpFolderPath = context
+                .fileSystem()
+                .baseDir()
+                .getAbsolutePath()
+                .concat(File.separator)
+                .concat(UUID.randomUUID().toString());
     }
 
     public JSONObject extract(File resultBundle) {
@@ -42,15 +45,20 @@ public class AppleCoverageExtractor {
         // now we extract the archive references from the raw report
         // this is possible to have several archive, from a merged .xcresult bundle of multiple test plans
         ArrayList<String> archiveRefIDs = extractArchiveReferences(xcresultJSON);
+        // we need somewhere to put the temporary archive
+        createTemporaryDirectory();
         // exporting the archive reference we retrieve into a real archive we can read
         File coverageArchive = exportCoverageArchive(archiveRefIDs, resultBundle);
         // retrieve the detailed coverage data
-        return extractCoverageData(coverageArchive);
+        JSONObject coverageData = extractCoverageData(coverageArchive);
+        // cleaning
+        deleteDirectory(new File(tmpFolderPath));
+        return  coverageData;
     }
 
     private ArrayList<String> extractArchiveReferences(JSONObject xcresult) {
         JSONArray actionValues = xcresult.getJSONObject("actions").getJSONArray("_values");
-        ArrayList archiveRefIDs = new ArrayList<String>();
+        ArrayList<String> archiveRefIDs = new ArrayList<String>();
 
         for (int i = 0; i < actionValues.length(); i++) {
             JSONObject actionResult = actionValues.getJSONObject(i).getJSONObject("actionResult");
@@ -72,25 +80,12 @@ public class AppleCoverageExtractor {
 
     private File exportCoverageArchive(ArrayList<String> archiveReferences, File resultBundle) {
 
-        String tmpFolderPath = context
-                .fileSystem()
-                .baseDir()
-                .getAbsolutePath()
-                .concat(File.separator)
-                .concat(TMP);
-
-        // create the temporary directory if needed
-        File tmpFolder = new File(tmpFolderPath);
-        tmpFolder.mkdirs();
-
         // we use a new random UUID for the name
         // as writing to an existing .xccovarchive append the data
         String coverageArchivePath = tmpFolderPath
                 .concat(File.separator)
                 .concat(UUID.randomUUID().toString())
                 .concat(".xccovarchive");
-
-        LOGGER.info("Will export the coverage archive to '{}'", coverageArchivePath);
 
         // for each archive, we include it in a common coverage archive
         for (String archiveReference : archiveReferences) {
@@ -125,6 +120,27 @@ public class AppleCoverageExtractor {
                 .getOutputString();
 
         return new JSONObject(coverageData);
+    }
+
+    private void createTemporaryDirectory() {
+        // create the temporary directory if needed
+        File tmpFolder = new File(tmpFolderPath);
+        if (tmpFolder.exists()) {
+            deleteDirectory(tmpFolder);
+        }
+        tmpFolder.mkdir();
+    }
+
+    public void deleteDirectory(File directory) {
+        if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for(File file : files) {
+                    deleteDirectory(file);
+                }
+            }
+        }
+        directory.delete();
     }
 
 }
