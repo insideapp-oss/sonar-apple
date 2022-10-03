@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
-import org.buildobjects.process.ProcBuilder;
+import org.json.JSONObject;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -25,19 +25,13 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
 
 public class AppleCoverageSensor implements Sensor {
-    private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
 
-    private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
-    private static final int COMMAND_EXIT_CODE = 0;
-
-    private static final String COMMAND = "xcrun";
-    private static final String[] ARGS = new String[]{"xccov", "view", "--archive"};
-    private static final String RESULT_BUNDLE_PATH_KEY = "sonar.apple.coverage.resultBundlePath";
+    public static final String RESULT_BUNDLE_PATH_KEY = "sonar.apple.coverage.resultBundlePath";
     private static final String DEFAULT_RESULT_BUNDLE_PATH = "build/result.xcresult";
+    private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
     private final SensorContext context;
 
     public AppleCoverageSensor(final SensorContext context) {
@@ -61,53 +55,28 @@ public class AppleCoverageSensor implements Sensor {
     @Override
     public void execute(SensorContext context) {
 
-        String resultBundleLocation = resultBundlePath();
+        String resultBundleAbsolutePath = context
+                .fileSystem()
+                .baseDir()
+                .getAbsolutePath()
+                .concat(File.separator)
+                .concat(resultBundlePath());
+
+        File resultBundle = new File(resultBundleAbsolutePath);
 
         try {
+            // extracting the coverage data
+            AppleCoverageExtractor extractor = new AppleCoverageExtractor(context);
+            JSONObject coverageJSON = extractor.extract(resultBundle);
 
-            // get the list of file with coverage data
-            String coverageFileList = new ProcBuilder(COMMAND)
-                    .withArgs(ARGS)
-                    .withArgs("--file-list")
-                    .withArgs(resultBundleLocation)
-                    .withTimeoutMillis(COMMAND_TIMEOUT)
-                    .withExpectedExitStatuses(COMMAND_EXIT_CODE)
-                    .run()
-                    .getOutputString();
-
-                computeCoverageDataForFiles(coverageFileList);
+            // parsing & reporting the coverage data
+            AppleCoverageParser parser = new AppleCoverageParser(context);
+            parser.collect(coverageJSON);
 
         } catch (Exception e) {
-            LOGGER.error("The coverage file listing produced the following exception. This exception will be ignored. Exception:", e);
-        }
-    }
-
-    private void computeCoverageDataForFiles(String coverageFileList) {
-        String resultBundleLocation = resultBundlePath();
-        String[] coverageFiles = coverageFileList.split(System.getProperty("line.separator"));
-        Map<String, String> coverageDataPerFile = new HashMap<>();
-
-        // for each file with coverage data, we extract the coverage data
-        for (String coverageFile : coverageFiles) {
-
-            try {
-                String coverageFileData = new ProcBuilder(COMMAND)
-                        .withArgs(ARGS)
-                        .withArgs("--file", coverageFile)
-                        .withArgs(resultBundleLocation)
-                        .withTimeoutMillis(COMMAND_TIMEOUT)
-                        .withExpectedExitStatuses(COMMAND_EXIT_CODE)
-                        .run()
-                        .getOutputString();
-                coverageDataPerFile.put(coverageFile, coverageFileData);
-
-            } catch (Exception e) {
-                LOGGER.error("The coverage file '{}' produced the following exception. This exception will be ignored. Exception:", coverageFile, e);
-            }
+            LOGGER.error("Extracting & parsing the coverage data produced the following exception. This exception will be ignored. Exception:", e);
         }
 
-        // parsing & reporting the coverage data
-        XCCovReportParser parser = new XCCovReportParser(context);
-        parser.collect(coverageDataPerFile);
     }
+
 }
