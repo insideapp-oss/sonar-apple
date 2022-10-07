@@ -20,15 +20,16 @@ Let us know if you want to get involved.
 
 The plugin is designed to support Swift 5 syntax.
 
-| Feature             | Swift                                                                                                                           | Objective-C                                                  |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
-| Size                | YES                                                                                                                             | YES                                                          |
-| Issues              | [SwiftLint 0.48.0](https://github.com/realm/SwiftLint) rules <br/> [Periphery](https://github.com/peripheryapp/periphery) rules | [OCLint 22.02](https://oclint.org/) rules                    |
-| Tests               | YES                                                                                                                             | YES                                                          |
-| Coverage            | YES                                                                                                                             | YES                                                          |
-| Complexity          | YES                                                                                                                             | YES                                                          |
-| Syntax highlighting | YES                                                                                                                             | YES                                                          |
-| Security            | [mobsfscan 0.11.0](https://github.com/MobSF/mobsfscan) rules                                                                    | [mobsfscan 0.10.0](https://github.com/MobSF/mobsfscan) rules |
+| Feature             | Availability                                                                                                      |
+|---------------------|-------------------------------------------------------------------------------------------------------------------|
+| Tests               | ✅                                                                                                                 |
+| Coverage            | ✅                                                                                                                 |
+| Complexity          | Swift, Objective-C                                                                                                |
+| Dead code           | Swift ([Periphery](https://github.com/peripheryapp/periphery))                                                    |
+| Size                | Swift, Objective-C                                                                                                |
+| Syntax highlighting | Swift, Objective-C                                                                                                |
+| Issues              | Swift ([SwiftLint 0.48.0](https://github.com/realm/SwiftLint)), Objective-C ([OCLint 22.02](https://oclint.org/)) |
+| Security            | Swift, Objective-C ([mobsfscan 0.11.0](https://github.com/MobSF/mobsfscan))                                       |
 
 ## Requirements
 
@@ -42,12 +43,11 @@ The plugin was tested with Xcode 13+, but should work with older versions.
 
 Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
 
-### xcpretty and slather
+### xcpretty
 
 In order to generate reports from ``xcodebuild`` commands, extract command line tools are needed.
 
 - [xcpretty](https://github.com/xcpretty/xcpretty) generates test reports
-- [slather](https://github.com/SlatherOrg/slather) generates coverage reports
 
 ### SwiftLint
 
@@ -107,8 +107,9 @@ sonar.tests=iOSAppTests
 # Defaults to build/reports
 # sonar.apple.junit.reportsPath=
 
-# Path to coverage report (cobertura.xml)
-# sonar.apple.cobertura.reportPath=
+# Path to the result bundle (xcodebuild)
+# Defaults to build/result.xcresult
+# sonar.apple.coverage.resultBundlePath=
 
 # Path to xcodebuild.log file
 # Defaults to build
@@ -133,17 +134,15 @@ Use the following commands from the root folder to start an analysis:
 # Run tests with xcpretty to generate test report in build/reports/junit.xml
 # Also saves Xcode log to build/xcodebuild.log (this is necessary for Objective-C code analysis)
 # Don't forget to add -workspace to the build command if your project is part of a workspace
+# Don't forget to activate 'Gather coverage' option in the app scheme or add '-enableCodeCoverage YES' to the following command
 $ xcodebuild \
   -project MyApp.xcodeproj \
   -scheme MyApp \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   -derivedDataPath ./derivedData \
+  -resultBundlePath build/result.xcresult \
    clean test | xcpretty --report junit
-
-# Generate coverage report to build/reports/cobertura.xml
-# Don't forget to activate 'Gather coverage' option in the app scheme
-$ slather coverage --cobertura-xml --build-directory ./derivedData --output-directory build/reports --scheme MyApp MyApp.xcodeproj
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
 # Don't forget to add --workspace to the build command if your project is part of a workspace

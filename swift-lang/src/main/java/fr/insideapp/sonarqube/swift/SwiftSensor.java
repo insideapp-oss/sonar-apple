@@ -26,8 +26,12 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class SwiftSensor implements Sensor {
+
+    private static final Logger LOGGER = Loggers.get(SwiftSensor.class);
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
@@ -40,10 +44,13 @@ public class SwiftSensor implements Sensor {
     @Override
     public void execute(SensorContext sensorContext) {
         final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
-        // Analyse source files
+
+        LOGGER.info("Analyzing source files");
         new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.MAIN, antlrContext, sensorContext)
                 .analyze(new SwiftSourceLinesVisitor(), new SwiftHighlighterVisitor(), new SwiftCyclomaticComplexityVisitor());
-        // Analyse test files (highlighter only)
+
+        LOGGER.info("Analyzing test files");
+        // highlighter only
         new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.TEST, antlrContext, sensorContext)
                 .analyze(new SwiftHighlighterVisitor());
     }

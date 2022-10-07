@@ -107,7 +107,7 @@ public class ApplePlugin implements Plugin {
 
         // Coverage
         context.addExtension(
-                PropertyDefinition.builder(AppleCoverageSensor.REPORT_PATH_KEY)
+                PropertyDefinition.builder(AppleCoverageSensor.RESULT_BUNDLE_PATH_KEY)
                         .name("Coverage Report")
                         .description("Path to Apple coverage report file. The path may be either absolute or relative to the project base directory.")
                         .onQualifiers(Qualifiers.PROJECT)

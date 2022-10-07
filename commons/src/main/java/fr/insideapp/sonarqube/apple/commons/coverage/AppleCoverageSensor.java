@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
+import org.json.JSONObject;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -27,20 +28,20 @@ import org.sonar.api.utils.log.Loggers;
 import java.io.File;
 
 public class AppleCoverageSensor implements Sensor {
-    private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
-    public static final String REPORT_PATH_KEY = "sonar.apple.cobertura.reportPath";
 
-    private static final String DEFAULT_REPORT_PATH = "build/reports/";
+    public static final String RESULT_BUNDLE_PATH_KEY = "sonar.apple.coverage.resultBundlePath";
+    private static final String DEFAULT_RESULT_BUNDLE_PATH = "build/result.xcresult";
+    private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
     private final SensorContext context;
 
     public AppleCoverageSensor(final SensorContext context) {
         this.context = context;
     }
 
-    private String reportPath() {
+    private String resultBundlePath() {
         return context.config()
-                .get(REPORT_PATH_KEY)
-                .orElse(DEFAULT_REPORT_PATH);
+                .get(RESULT_BUNDLE_PATH_KEY)
+                .orElse(DEFAULT_RESULT_BUNDLE_PATH);
     }
 
     @Override
@@ -53,14 +54,29 @@ public class AppleCoverageSensor implements Sensor {
 
     @Override
     public void execute(SensorContext context) {
-        CoberturaReportParser parser = new CoberturaReportParser(context);
-        String reportFileName = context.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
-        File reportsDir = new File(reportFileName);
 
-        if (!reportsDir.isDirectory()) {
-            LOGGER.warn("Coverage report directory not found at {}", reportsDir);
-        } else {
-            parser.collect(reportsDir);
+        String resultBundleAbsolutePath = context
+                .fileSystem()
+                .baseDir()
+                .getAbsolutePath()
+                .concat(File.separator)
+                .concat(resultBundlePath());
+
+        File resultBundle = new File(resultBundleAbsolutePath);
+
+        try {
+            // extracting the coverage data
+            AppleCoverageExtractor extractor = new AppleCoverageExtractor(context);
+            JSONObject coverageJSON = extractor.extract(resultBundle);
+
+            // parsing & reporting the coverage data
+            AppleCoverageParser parser = new AppleCoverageParser(context);
+            parser.collect(coverageJSON);
+
+        } catch (Exception e) {
+            LOGGER.error("Extracting & parsing the coverage data produced the following exception. This exception will be ignored. Exception:", e);
         }
+
     }
+
 }

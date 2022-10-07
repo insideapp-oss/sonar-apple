@@ -1,0 +1,23 @@
+{
+    "SQApp/ContentView.swift":[
+        {
+            "isExecutable":false,
+            "line":1
+        },
+        {
+            "executionCount":0,
+            "isExecutable":true,
+            "line":2
+        },
+        {
+            "executionCount":1,
+            "isExecutable":true,
+            "line":3
+        },
+        {
+            "executionCount":2147483648,
+            "isExecutable":true,
+            "line":4
+        }
+    ]
+}
