@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.apple;
 
 import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
+import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
@@ -105,16 +106,16 @@ public class ApplePlugin implements Plugin {
         TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
 
-        // Coverage
+        // Xcode result bundle
         context.addExtension(
-                PropertyDefinition.builder(AppleCoverageSensor.RESULT_BUNDLE_PATH_KEY)
-                        .name("Coverage Report")
-                        .description("Path to Apple coverage report file. The path may be either absolute or relative to the project base directory.")
+                PropertyDefinition.builder(AppleResultSensor.RESULT_BUNDLE_PATH_KEY)
+                        .name("Xcode result bundle")
+                        .description("Path to Xcode result bundle file. The path may be either absolute or relative to the project base directory.")
                         .onQualifiers(Qualifiers.PROJECT)
                         .category(APPLE_CATEGORY)
-                        .subCategory(COVERAGE_SUBCATEGORY)
                         .build());
 
+        // Coverage
         context.addExtension(AppleCoverageSensor.class);
 
     }

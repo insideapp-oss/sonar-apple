@@ -17,31 +17,19 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
+import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import org.json.JSONObject;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
-
-public class AppleCoverageSensor implements Sensor {
-
-    public static final String RESULT_BUNDLE_PATH_KEY = "sonar.apple.coverage.resultBundlePath";
-    private static final String DEFAULT_RESULT_BUNDLE_PATH = "build/result.xcresult";
+public class AppleCoverageSensor extends AppleResultSensor {
     private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
-    private final SensorContext context;
 
     public AppleCoverageSensor(final SensorContext context) {
-        this.context = context;
-    }
-
-    private String resultBundlePath() {
-        return context.config()
-                .get(RESULT_BUNDLE_PATH_KEY)
-                .orElse(DEFAULT_RESULT_BUNDLE_PATH);
+        super(context);
     }
 
     @Override
@@ -54,20 +42,10 @@ public class AppleCoverageSensor implements Sensor {
 
     @Override
     public void execute(SensorContext context) {
-
-        String resultBundleAbsolutePath = context
-                .fileSystem()
-                .baseDir()
-                .getAbsolutePath()
-                .concat(File.separator)
-                .concat(resultBundlePath());
-
-        File resultBundle = new File(resultBundleAbsolutePath);
-
         try {
             // extracting the coverage data
             AppleCoverageExtractor extractor = new AppleCoverageExtractor(context);
-            JSONObject coverageJSON = extractor.extract(resultBundle);
+            JSONObject coverageJSON = extractor.extract(resultBundle());
 
             // parsing & reporting the coverage data
             AppleCoverageParser parser = new AppleCoverageParser(context);
