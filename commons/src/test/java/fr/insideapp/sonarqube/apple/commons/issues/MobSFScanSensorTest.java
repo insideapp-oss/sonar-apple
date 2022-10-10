@@ -23,14 +23,15 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MobSFScanSensorTest {
-
+    private MobSFScanRulesDefinition rulesDefinition;
     private MobSFScanSensor sensor;
     private final String SUFFIX = "SUFFIX";
     private final String LANG = "LANG";
 
     @Before
     public void prepare() {
-        sensor = new MobSFScanSensor() {
+        rulesDefinition = new MobSFScanRulesDefinition(LANG) {};
+        sensor = new MobSFScanSensor(rulesDefinition) {
             @Override
             public String nameSuffix() {
                 return SUFFIX;

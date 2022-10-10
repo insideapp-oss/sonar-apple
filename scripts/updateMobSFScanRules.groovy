@@ -66,7 +66,7 @@ def parseCategory(url) {
 
 LANGUAGE_RULES.forEach( (key, value) -> {
 
-    def updater = new RuleUpdater("${key}-lang/src/main/resources/mobsfscan-rules.json", {
+    def updater = new RuleUpdater("${key}-lang/src/main/resources/${key}-mobsfscan-rules.json", {
 
         def result = []
 

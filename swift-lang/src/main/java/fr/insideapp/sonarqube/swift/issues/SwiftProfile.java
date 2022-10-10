@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.swift.issues;
 
 import fr.insideapp.sonarqube.apple.commons.issues.*;
 import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
@@ -51,9 +52,10 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
         // MobSFScan rules (for Swift)
         try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(MobSFScanRulesDefinition.RULES_PATH);
+            MobSFScanRulesDefinition rulesDefinition = new MobSFScanSwiftRulesDefinition();
+            List<RepositoryRule> rules = repositoryRuleParser.parse(rulesDefinition.rulesPath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(MobSFScanRulesDefinition.builder(Swift.KEY), r.getKey());
+                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.getKey());
                 rule.overrideSeverity(r.getSeverity());
             }
         } catch (IOException e) {
