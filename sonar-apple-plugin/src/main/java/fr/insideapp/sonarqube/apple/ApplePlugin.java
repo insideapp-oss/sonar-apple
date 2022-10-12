@@ -94,14 +94,6 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
 
         // Tests
-        context.addExtension(
-                PropertyDefinition.builder(AppleTestsSensor.REPORT_PATH_KEY)
-                        .name("Unit Test Report")
-                        .description("Path to Apple unit test execution report file. The path may be either absolute or relative to the project base directory.")
-                        .onQualifiers(Qualifiers.PROJECT)
-                        .category(APPLE_CATEGORY)
-                        .subCategory(TESTS_SUBCATEGORY)
-                        .build());
         TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
         TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
         context.addExtension(AppleTestsSensor.class);

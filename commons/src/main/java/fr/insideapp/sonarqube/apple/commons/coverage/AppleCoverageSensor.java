@@ -54,7 +54,6 @@ public class AppleCoverageSensor extends AppleResultSensor {
         } catch (Exception e) {
             LOGGER.error("Extracting & parsing the coverage data produced the following exception. This exception will be ignored. Exception:", e);
         }
-
     }
 
 }

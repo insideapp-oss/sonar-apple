@@ -17,7 +17,18 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageExtractor;
+import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageParser;
+import fr.insideapp.sonarqube.apple.commons.result.AppleResultExtractor;
+import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
+import fr.insideapp.sonarqube.apple.commons.result.models.Record;
+import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
+import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.tests.old.JUnitReportParser;
+import org.json.JSONObject;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -25,34 +36,57 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class AppleTestsSensor implements Sensor {
+public class AppleTestsSensor extends AppleResultSensor {
 
     private static final Logger LOGGER = Loggers.get(AppleTestsSensor.class);
-    private static final String DEFAULT_REPORT_PATH = "build/reports/";
 
-    public static final String REPORT_PATH_KEY = "sonar.apple.junit.reportPath";
-
-    private final SensorContext context;
-
-    public AppleTestsSensor(SensorContext context) {
-        this.context = context;
-    }
-
-    protected String reportPath() {
-        return context.config()
-                .get(REPORT_PATH_KEY)
-                .orElse(DEFAULT_REPORT_PATH);
+    public AppleTestsSensor(final SensorContext context) {
+        super(context);
     }
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-        sensorDescriptor.name("Apple Tests").onlyOnLanguages("swift", "objc");
+        sensorDescriptor
+                .name("Apple Tests")
+                .onlyOnLanguages("swift", "objc")
+                .onlyOnFileType(InputFile.Type.TEST);
     }
 
     @Override
     public void execute(SensorContext sensorContext) {
-        JUnitReportParser surefireParser = new JUnitReportParser(context);
+        try {
+
+            // extracting the result record
+            AppleResultExtractor extractor = new AppleResultExtractor();
+            Record record = extractor.getInvocationRecord(resultBundle());
+
+            // extracting the test summaries
+            List<AppleTestSummary> testSummaries = record
+                    .actions
+                    .stream()
+                    .filter(action -> action.result.testsRef != null) // remove null values
+                    .map(action -> getTestPlanRunSummaries(extractor, action.result.testsRef))
+                    .filter(testPlanRunSummaries -> testPlanRunSummaries != null) // remove null values
+                    .flatMap(testPlanRunSummaries -> testPlanRunSummaries.summaries.stream())
+                    .flatMap(testPlanRunSummary -> testPlanRunSummary.testableSummaries.stream())
+                    .map(testableSummary -> new AppleTestSummary(testableSummary))
+                    .collect(Collectors.toList());
+
+            ObjectMapper objectMapper = new ObjectMapper()
+                    .enable(SerializationFeature.INDENT_OUTPUT);
+            System.out.println("summaries : " + objectMapper.writeValueAsString(testSummaries));
+
+            /*AppleCoverageParser parser = new AppleCoverageParser(context);
+            parser.collect(coverageJSON);*/
+
+        } catch (Exception e) {
+            LOGGER.error("Extracting & parsing the test data produced the following exception. This exception will be ignored. Exception:", e);
+        }
+
+        /*JUnitReportParser surefireParser = new JUnitReportParser(context);
         String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
         File reportsDir = new File(reportFileName);
 
@@ -60,6 +94,15 @@ public class AppleTestsSensor implements Sensor {
             LOGGER.warn("JUnit report directory not found at {}", reportsDir);
         } else {
             surefireParser.collect(reportsDir);
+        }*/
+    }
+
+    private ActionTestPlanRunSummaries getTestPlanRunSummaries(AppleResultExtractor extractor, TestsReference reference) {
+        try {
+            return extractor.getTestPlanRunSummaries(resultBundle(), reference);
+        } catch (Exception e) {
+            LOGGER.warn("Could not retrieve the test plan summaries for ID: {}. Exception: {}", reference.id, e);
+            return null;
         }
     }
 }
