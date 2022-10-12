@@ -22,6 +22,12 @@ import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
 
 public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
 
+    private MobSFScanRulesDefinition rulesDefinition;
+
+    protected MobSFScanSensor (MobSFScanRulesDefinition rulesDefinition) {
+        this.rulesDefinition = rulesDefinition;
+    }
+
     public String name() {
         return String.join(" ", "MobSFScan Sensor", nameSuffix());
     }
@@ -29,8 +35,8 @@ public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
     public abstract String nameSuffix();
 
     @Override
-    public String repository() {
-        return MobSFScanRulesDefinition.builder(language());
+    public final String repository() {
+        return rulesDefinition.repository();
     }
 
     @Override
