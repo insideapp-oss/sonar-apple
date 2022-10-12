@@ -50,7 +50,7 @@ public class AppleCoverageParser {
             InputFile resource = getFile(filePath);
             if (resource == null) {
                 // skipping coverage for this file, since it's unknown
-                return;
+                continue;
             }
 
             // building the new coverage object
