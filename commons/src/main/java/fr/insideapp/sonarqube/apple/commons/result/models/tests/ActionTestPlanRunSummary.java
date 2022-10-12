@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValuesDeserializer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActionTestPlanRunSummary {
 

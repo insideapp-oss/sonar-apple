@@ -11,11 +11,9 @@ import java.util.Stack;
 
 public class AppleTestSummary {
 
-    public String name;
     public List<AppleTestGroup> groups;
 
     public AppleTestSummary(ActionTestableSummary summary) {
-        this.name = summary.name;
         this.groups = new ArrayList<>();
 
         // this is the current stack to process

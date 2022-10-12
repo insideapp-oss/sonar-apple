@@ -6,7 +6,10 @@ import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestSummary;
+import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsParser;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
@@ -22,7 +25,10 @@ public class AppleResultExtractorTest {
 
         // setting up
         SensorContextTester context = SensorContextTester.create(new File("src/test/resources"));
-        File buildResult = new File("src/test/resources/coverage/build_result.xcresult");
+        File buildResult = new File("src/test/resources/tests/result.xcresult");
+
+        DefaultInputFile testFile = new TestInputFileBuilder("", "TestProject/TestProjectUITests/TestProjectUITests.swift").build();
+        context.fileSystem().add(testFile);
 
         // testing
         AppleResultExtractor extractor = new AppleResultExtractor();
@@ -50,6 +56,9 @@ public class AppleResultExtractorTest {
         ObjectMapper objectMapper = new ObjectMapper()
                 .enable(SerializationFeature.INDENT_OUTPUT);
         System.out.println("summaries : " + objectMapper.writeValueAsString(summaries));
+
+        AppleTestsParser parser = new AppleTestsParser(context);
+        parser.collect(summaries);
 
     }
 

@@ -7,7 +7,6 @@ import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValuesDeserializ
 import java.util.ArrayList;
 
 public class ActionTestPlanRunSummaries {
-
     @JsonProperty("summaries")
     @JsonDeserialize(using = ValuesDeserializer.class)
     public ArrayList<ActionTestPlanRunSummary> summaries;

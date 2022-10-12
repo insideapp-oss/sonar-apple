@@ -27,13 +27,9 @@ public class AppleTestCase {
         }
     }
 
-    public String name;
-    public Double duration;
     public Status status;
 
     public AppleTestCase(ActionTestMetadata metadata) {
-        this.name = metadata.name;
-        this.duration = metadata.duration;
         this.status = Status.builder(metadata.status);
     }
 

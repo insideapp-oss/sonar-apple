@@ -8,10 +8,6 @@ import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestG
 
 public class ActionTestableSummary {
 
-    @JsonProperty("name")
-    @JsonDeserialize(using = ValueDeserializer.class)
-    public String name;
-
     @JsonProperty("tests")
     @JsonDeserialize(using = ActionTestDeserializer.class)
     public ActionTestGroup tests;
