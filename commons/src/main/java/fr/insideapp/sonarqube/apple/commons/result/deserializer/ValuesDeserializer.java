@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ValuesDeserializer extends JsonDeserializer<List<?>> implements ContextualDeserializer {
+public class ValuesDeserializer extends JsonDeserializer<ArrayList<?>> implements ContextualDeserializer {
 
     private Class<?> clazz;
 
@@ -29,13 +29,13 @@ public class ValuesDeserializer extends JsonDeserializer<List<?>> implements Con
     }
 
     @Override
-    public List<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public ArrayList<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         ObjectCodec codec = jsonParser.getCodec();
         JsonNode tree = codec.readTree(jsonParser);
         // get the nested values
         JsonNode values = tree.get("_values");
         Iterator<JsonNode> iterator = values.iterator();
-        List records = new ArrayList<>();
+        ArrayList records = new ArrayList<>();
         while (iterator.hasNext()) {
             JsonNode value = iterator.next();
             records.add(codec.treeToValue(value, clazz));

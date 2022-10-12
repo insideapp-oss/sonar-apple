@@ -17,6 +17,9 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
+import fr.insideapp.sonarqube.apple.commons.tests.old.StaxParser;
+import fr.insideapp.sonarqube.apple.commons.tests.old.UnitTestClassReport;
+import fr.insideapp.sonarqube.apple.commons.tests.old.UnitTestIndex;
 import org.junit.Test;
 
 import javax.xml.stream.XMLStreamException;
