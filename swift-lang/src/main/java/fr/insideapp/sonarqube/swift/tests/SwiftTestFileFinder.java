@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.tests;
 
-import fr.insideapp.sonarqube.apple.commons.TestFileFinder;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.batch.fs.FilePredicate;
@@ -26,13 +26,19 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SwiftTestFileFinder implements TestFileFinder {
     private static final Logger LOGGER = Loggers.get(SwiftTestFileFinder.class);
 
     @Override
-    public InputFile getUnitTestResource(FileSystem fileSystem, String classname) {
-        String fileName = classname.replace('.', '/') + ".swift";
-        FilePredicate fp = fileSystem.predicates().hasPath(fileName);
+    public InputFile getUnitTestResource(FileSystem fileSystem, String relativePathWithoutExtension) {
+        List<String> elements = Arrays.asList(StringUtils.splitByWholeSeparator(relativePathWithoutExtension, "/"));
+        List<String> lastTwoElements = elements.subList(Math.max(elements.size() - 2, 0), elements.size());
+        String relativePath = StringUtils.join(lastTwoElements, "/");
+        String path = relativePath + ".swift";
+        FilePredicate fp = fileSystem.predicates().hasPath(path);
 
         if(fileSystem.hasFiles(fp)) {
             return fileSystem.inputFile(fp);
@@ -42,7 +48,7 @@ public class SwiftTestFileFinder implements TestFileFinder {
          * Most xcodebuild JUnit parsers don't include the path to the class in the class field, so search for it if it
          * wasn't found in the root.
          */
-        String lastFileNameComponents = StringUtils.substringAfterLast(fileName, "/");
+        String lastFileNameComponents = StringUtils.substringAfterLast(path, "/");
         if(!StringUtils.isEmpty(lastFileNameComponents)) {
             fp = fileSystem.predicates().and(
                 fileSystem.predicates().hasType(InputFile.Type.TEST),
@@ -58,7 +64,7 @@ public class SwiftTestFileFinder implements TestFileFinder {
             }
         }
 
-        LOGGER.info("Unable to locate Swift test source file for classname {}. Make sure your test class name matches its filename.", classname);
+        LOGGER.info("Unable to locate Swift test source file for path {}. Make sure your test class name matches its filename.", relativePathWithoutExtension);
         return null;
     }
 }

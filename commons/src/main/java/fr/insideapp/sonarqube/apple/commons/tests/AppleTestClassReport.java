@@ -11,14 +11,12 @@ public class AppleTestClassReport {
         SKIPPED,
     }
 
-    public String path;
 
-    public double duration;
-    public HashMap<Status, Integer> tests;
+    private long duration;
+    private HashMap<Status, Integer> tests;
 
     public AppleTestClassReport(AppleTestGroup group) {
-        this.path = group.path;
-        this.duration = group.duration;
+        this.duration = Double.valueOf(group.duration * 1000).longValue();
         this.tests = buildMap(group.testCases);
     }
 
@@ -26,7 +24,7 @@ public class AppleTestClassReport {
         return tests.get(status);
     }
 
-    public Double getDuration() {
+    public long getDuration() {
         return duration;
     }
 

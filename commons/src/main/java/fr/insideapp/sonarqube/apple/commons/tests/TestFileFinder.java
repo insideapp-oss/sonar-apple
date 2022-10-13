@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons;
+package fr.insideapp.sonarqube.apple.commons.tests;
 
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 
 public interface TestFileFinder {
-    InputFile getUnitTestResource(FileSystem fileSystem, String classname);
+    InputFile getUnitTestResource(FileSystem fileSystem, String relativePathWithoutExtension);
 }

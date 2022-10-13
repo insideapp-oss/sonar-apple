@@ -2,13 +2,12 @@ package fr.insideapp.sonarqube.apple.commons.result;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
-import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestSummary;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsParser;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
@@ -16,19 +15,18 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-
 public class AppleResultExtractorTest {
 
     @Test
     public void extract() throws Exception {
 
+        TestFileFinders.getInstance().reset();
+        TestFileFinders.getInstance().addFinder((fileSystem, classname) ->
+                new TestInputFileBuilder("", "TestProject/TestProjectUITests/TestProjectUITests.swift").setLanguage("swift").build());
+
         // setting up
         SensorContextTester context = SensorContextTester.create(new File("src/test/resources"));
         File buildResult = new File("src/test/resources/tests/result.xcresult");
-
-        DefaultInputFile testFile = new TestInputFileBuilder("", "TestProject/TestProjectUITests/TestProjectUITests.swift").build();
-        context.fileSystem().add(testFile);
 
         // testing
         AppleResultExtractor extractor = new AppleResultExtractor();
@@ -57,8 +55,8 @@ public class AppleResultExtractorTest {
                 .enable(SerializationFeature.INDENT_OUTPUT);
         System.out.println("summaries : " + objectMapper.writeValueAsString(summaries));
 
-        AppleTestsParser parser = new AppleTestsParser(context);
-        parser.collect(summaries);
+        //AppleTestsParser parser = new AppleTestsParser(context);
+        //parser.collect(summaries);
 
     }
 

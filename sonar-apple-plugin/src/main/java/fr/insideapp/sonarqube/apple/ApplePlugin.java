@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple;
 
-import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;

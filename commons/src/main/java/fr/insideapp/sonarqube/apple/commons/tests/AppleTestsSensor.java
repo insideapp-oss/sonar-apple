@@ -75,26 +75,12 @@ public class AppleTestsSensor extends AppleResultSensor {
                     .map(testableSummary -> new AppleTestSummary(testableSummary))
                     .collect(Collectors.toList());
 
-            ObjectMapper objectMapper = new ObjectMapper()
-                    .enable(SerializationFeature.INDENT_OUTPUT);
-            System.out.println("summaries : " + objectMapper.writeValueAsString(testSummaries));
-
-            /*AppleCoverageParser parser = new AppleCoverageParser(context);
-            parser.collect(coverageJSON);*/
+            AppleTestsParser parser = new AppleTestsParser(context);
+            parser.collect(testSummaries);
 
         } catch (Exception e) {
             LOGGER.error("Extracting & parsing the test data produced the following exception. This exception will be ignored. Exception:", e);
         }
-
-        /*JUnitReportParser surefireParser = new JUnitReportParser(context);
-        String reportFileName = sensorContext.fileSystem().baseDir().getAbsolutePath() + File.separator + reportPath();
-        File reportsDir = new File(reportFileName);
-
-        if (!reportsDir.isDirectory()) {
-            LOGGER.warn("JUnit report directory not found at {}", reportsDir);
-        } else {
-            surefireParser.collect(reportsDir);
-        }*/
     }
 
     private ActionTestPlanRunSummaries getTestPlanRunSummaries(AppleResultExtractor extractor, TestsReference reference) {

@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.apple.commons.tests.old;
 
 import fr.insideapp.sonarqube.apple.commons.FileCollector;
-import fr.insideapp.sonarqube.apple.commons.TestFileFinders;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;

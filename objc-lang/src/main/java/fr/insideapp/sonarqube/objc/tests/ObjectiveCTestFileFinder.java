@@ -17,22 +17,28 @@
  */
 package fr.insideapp.sonarqube.objc.tests;
 
-import fr.insideapp.sonarqube.apple.commons.TestFileFinder;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
+import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ObjectiveCTestFileFinder implements TestFileFinder {
 
     private static final Logger LOGGER = Loggers.get(ObjectiveCTestFileFinder.class);
     @Override
-    public InputFile getUnitTestResource(FileSystem fileSystem, String classname) {
+    public InputFile getUnitTestResource(FileSystem fileSystem, String relativePathWithoutExtension) {
+        List<String> elements = Arrays.asList(StringUtils.splitByWholeSeparator(relativePathWithoutExtension, "/"));
+        List<String> lastTwoElements = elements.subList(Math.max(elements.size() - 2, 0), elements.size());
+        String relativePath = StringUtils.join(lastTwoElements, "/");
+        String path = relativePath + ".m";
+        FilePredicate fp = fileSystem.predicates().hasPath(path);
 
-        String fileName = classname.replace('.', '/') + ".m";
-
-        FilePredicate fp = fileSystem.predicates().hasPath(fileName);
         if(fileSystem.hasFiles(fp)){
             return fileSystem.inputFile(fp);
         }
@@ -43,7 +49,7 @@ public class ObjectiveCTestFileFinder implements TestFileFinder {
          */
         fp = fileSystem.predicates().and(
                 fileSystem.predicates().hasType(InputFile.Type.TEST),
-                fileSystem.predicates().matchesPathPattern("**/" + fileName.replace("_", "+"))
+                fileSystem.predicates().matchesPathPattern(path.replace("_", "+"))
         );
 
         if(fileSystem.hasFiles(fp)){
@@ -54,7 +60,7 @@ public class ObjectiveCTestFileFinder implements TestFileFinder {
             return fileSystem.inputFiles(fp).iterator().next();
         }
 
-        LOGGER.info("Unable to locate Objective-C test source file for classname {}. Make sure your test class name matches its filename.", classname);
+        LOGGER.info("Unable to locate Objective-C test source file for path {}. Make sure your test class name matches its filename.", relativePathWithoutExtension);
         return null;
     }
 }
