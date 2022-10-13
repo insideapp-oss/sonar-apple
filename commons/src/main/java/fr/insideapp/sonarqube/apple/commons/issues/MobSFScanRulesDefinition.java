@@ -24,14 +24,28 @@ import java.io.File;
 public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
 
     private static String repositoryKey = "MobSFScan";
-    public static final String RULES_PATH = File.separator + "mobsfscan-rules.json";
+
+    private String language;
 
     protected MobSFScanRulesDefinition(String language) {
-        super(builder(language), builder(language), language, RULES_PATH);
+        super(repository(language), repository(language), language, rulesPath(language));
+        this.language = language;
     }
 
-    public static String builder(String language) {
+    public final String repository() {
+        return MobSFScanRulesDefinition.repository(language);
+    }
+
+    public final String rulesPath() {
+        return MobSFScanRulesDefinition.rulesPath(language);
+    }
+
+    private static String repository(String language) {
         return repositoryKey + StringUtils.capitalize(language);
+    }
+
+    private static String rulesPath(String language) {
+        return File.separator + language + "-mobsfscan-rules.json";
     }
 
 }
