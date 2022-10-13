@@ -26,7 +26,7 @@ public class AppleResultExtractorTest {
 
         // setting up
         SensorContextTester context = SensorContextTester.create(new File("src/test/resources"));
-        File buildResult = new File("src/test/resources/tests/result.xcresult");
+        File buildResult = new File("src/test/resources/coverage/build_result.xcresult");
 
         // testing
         AppleResultExtractor extractor = new AppleResultExtractor();
