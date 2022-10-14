@@ -2,63 +2,64 @@ package fr.insideapp.sonarqube.apple.commons.result;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
+import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
-import fr.insideapp.sonarqube.apple.commons.tests.AppleTestSummary;
-import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsParser;
+import org.apache.commons.io.FileUtils;
+import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppleResultExtractorTest {
 
-    @Test
-    public void extract() throws Exception {
+    private static final String BASE_DIR = "src/test/resources/result";
+    private static final String XCRESULT = "build_result.xcresult";
 
-        /*TestFileFinders.getInstance().reset();
-        TestFileFinders.getInstance().addFinder((fileSystem, classname) ->
-                new TestInputFileBuilder("", "TestProject/TestProjectUITests/TestProjectUITests.swift").setLanguage("swift").build());*/
+    private static final String RECORD = "record.json";
+    private static final String TEST_PLAN_RUN_SUMMARIES = "testPlanRunSummaries.json";
 
-        // setting up
-        SensorContextTester context = SensorContextTester.create(new File("src/test/resources"));
-        File buildResult = new File("src/test/resources/coverage/build_result.xcresult");
+    private AppleResultExtractor extractor;
+    private File xcResultFile;
+    private File recordFile;
+    private File testPlanRunSummariesFile;
 
-        // testing
-        AppleResultExtractor extractor = new AppleResultExtractor();
-        Record record = extractor.getInvocationRecord(buildResult);
+    private ObjectMapper objectMapper;
 
-        /*List<AppleTestSummary> summaries = record
-                .actions
-                .stream()
-                .filter(action -> action.result.testsRef != null)
-                .map(action -> {
-                    TestsReference ref = action.result.testsRef;
-                    // TODO: do a function with this try catch
-                    try {
-                        return extractor.getTestPlanRunSummaries(buildResult, ref);
-                    } catch (Exception e) {
-                        return null;
-                    }
-                })
-                .filter(testPlanRunSummaries -> testPlanRunSummaries != null)
-                .flatMap(testPlanRunSummaries -> testPlanRunSummaries.summaries.stream())
-                .flatMap(testPlanRunSummary -> testPlanRunSummary.testableSummaries.stream())
-                .map(testableSummary -> { return new AppleTestSummary(testableSummary); })
-                .collect(Collectors.toList());
-
-        ObjectMapper objectMapper = new ObjectMapper()
-                .enable(SerializationFeature.INDENT_OUTPUT);
-        System.out.println("summaries : " + objectMapper.writeValueAsString(summaries));*/
-
-        //AppleTestsParser parser = new AppleTestsParser(context);
-        //parser.collect(summaries);
-
+    @Before
+    public void prepare() {
+        extractor = new AppleResultExtractor();
+        xcResultFile = new File(BASE_DIR + "/" + XCRESULT);
+        recordFile = new File(BASE_DIR + "/" + RECORD);
+        testPlanRunSummariesFile = new File(BASE_DIR + "/" + TEST_PLAN_RUN_SUMMARIES);
+        objectMapper = new ObjectMapper();
     }
 
+    @Test
+    public void getInvocationRecord() throws Exception {
+        // testing
+        Record record = extractor.getInvocationRecord(xcResultFile);
+        // asserting
+        assertThat(record.actions).hasSize(1);
+        String recordJSON = objectMapper.writeValueAsString(record);
+        String expectedRecordJSON = FileUtils.readFileToString(recordFile, Charset.defaultCharset());
+        assertThat(recordJSON).isEqualTo(expectedRecordJSON);
+    }
+
+    @Test
+    public void getTestPlanRunSummaries() throws Exception {
+        // testing
+        TestsReference testsReference = new TestsReference("0~m9DIsSMOze2hPaUjj05tADpExiLKX76uGKA8oO8pp61yQVf9PI8YVbMmPmM17yweqkmrgRVbDkjyPqnTCSbxsA==");
+        ActionTestPlanRunSummaries testPlanRunSummaries = extractor.getTestPlanRunSummaries(xcResultFile, testsReference);
+        // asserting
+        assertThat(testPlanRunSummaries.summaries).hasSize(1);
+        String testPlanRunSummariesJSON = objectMapper.writeValueAsString(testPlanRunSummaries);
+        String expectedTestPlanRunSummaries = FileUtils.readFileToString(testPlanRunSummariesFile, Charset.defaultCharset());
+        assertThat(testPlanRunSummariesJSON).isEqualTo(expectedTestPlanRunSummaries);
+    }
 
 }
