@@ -26,12 +26,16 @@ public class AppleTestsParser {
         testSummaries.forEach(testSummary -> {
             LOGGER.info("{} test group(s) to report", testSummary.groups.size());
             testSummary.groups.forEach(group -> {
+                LOGGER.debug("Collecting data for {} ({})", group.name, group.bundle);
                 InputFile resource = getUnitTestResource(group);
                 if (resource != null) {
                     AppleTestClassReport classReport = new AppleTestClassReport(group);
                     save(classReport, resource);
                 } else {
-                    LOGGER.debug("Resource not found for bundle {} and class {}", group.bundle, group.name);
+                    LOGGER.warn("Resource not found for bundle {} and class {}", group.bundle, group.name);
+                    LOGGER.warn("Make sure the class {} is located inside {} folder (nesting allowed)", group.bundle);
+                    LOGGER.warn("Make sure the bundle {} matches its folder name", group.bundle);
+                    LOGGER.warn("Make sure the class {} matches its file name", group.name);
                 }
             });
         });
@@ -43,9 +47,11 @@ public class AppleTestsParser {
     }
 
     private void save(AppleTestClassReport report, InputFile inputFile) {
-        int tests = report.getCount(AppleTestClassReport.Status.ALL) - report.getCount(AppleTestClassReport.Status.SKIPPED);
-        saveMeasure(inputFile, CoreMetrics.SKIPPED_TESTS, report.getCount(AppleTestClassReport.Status.SKIPPED));
-        saveMeasure(inputFile, CoreMetrics.TESTS, tests);
+        int allTests = report.getCount(AppleTestClassReport.Status.ALL);
+        LOGGER.debug("{} test(s) found for {}", allTests, inputFile.absolutePath());
+        int skippedTests = report.getCount(AppleTestClassReport.Status.SKIPPED);
+        saveMeasure(inputFile, CoreMetrics.TESTS, allTests - skippedTests);
+        saveMeasure(inputFile, CoreMetrics.SKIPPED_TESTS, skippedTests);
         saveMeasure(inputFile, CoreMetrics.TEST_FAILURES, report.getCount(AppleTestClassReport.Status.FAILED));
         saveMeasure(inputFile, CoreMetrics.TEST_EXECUTION_TIME, report.getDuration());
     }

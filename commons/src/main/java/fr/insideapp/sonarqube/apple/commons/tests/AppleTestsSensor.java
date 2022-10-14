@@ -57,9 +57,15 @@ public class AppleTestsSensor extends AppleResultSensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        // TODO: check if resultBundle() exist
-        try {
 
+        // Look for the Xcode result bundle file
+        if (!resultBundle().exists()) {
+            LOGGER.error("Failed to locate Xcode result bundle file.");
+            LOGGER.error("Expected location according to the configuration is {}", resultBundle().getAbsolutePath());
+            return;
+        }
+
+        try {
             // extracting the result record
             AppleResultExtractor extractor = new AppleResultExtractor();
             Record record = extractor.getInvocationRecord(resultBundle());
@@ -80,7 +86,8 @@ public class AppleTestsSensor extends AppleResultSensor {
             parser.collect(testSummaries);
 
         } catch (Exception e) {
-            LOGGER.error("Extracting & parsing the test data produced the following exception. This exception will be ignored. Exception:", e);
+            LOGGER.error("Extracting & parsing the test data failed.");
+            LOGGER.debug("{}", e);
         }
     }
 
@@ -88,7 +95,8 @@ public class AppleTestsSensor extends AppleResultSensor {
         try {
             return extractor.getTestPlanRunSummaries(resultBundle(), reference);
         } catch (Exception e) {
-            LOGGER.warn("Could not retrieve the test plan summaries for ID: {}. Exception: {}", reference.id, e);
+            LOGGER.error("Could not retrieve the test plan summaries for ID: {}.", reference.id);
+            LOGGER.debug("{}", e);
             return null;
         }
     }
