@@ -4,6 +4,7 @@ import fr.insideapp.sonarqube.apple.commons.result.models.tests.*;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTest;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestCase;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestGroup;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,22 +18,24 @@ public class AppleTestSummary {
         this.groups = new ArrayList<>();
 
         // this is the current stack to process
-        Stack<ActionTestGroup> highLevelGroups = new Stack<>();
-        highLevelGroups.push(summary.tests);
+        Stack<ImmutablePair<ActionTestSummary, ActionTestGroup>> highLevelGroups = new Stack<>();
+        highLevelGroups.push(new ImmutablePair(summary, summary.tests));
 
         while (!highLevelGroups.empty()) {
-            ActionTestGroup testGroup = highLevelGroups.pop();
-            List<ActionTestSummaryGroup> summaryGroups = testGroup.groups;
+            ImmutablePair<ActionTestSummary, ActionTestGroup> highLevelGroup = highLevelGroups.pop();
+            ActionTestSummary parent = highLevelGroup.getKey();
+            ActionTestGroup child = highLevelGroup.getValue();
+            List<ActionTestSummaryGroup> summaryGroups = child.groups;
             summaryGroups.forEach(summaryGroup -> {
                 ActionTest summarySubtests = summaryGroup.tests;
                 switch (summarySubtests.getType()) {
                     case GROUP:
                         ActionTestGroup summarySubtestsGroup = (ActionTestGroup)summarySubtests;
-                        highLevelGroups.push(summarySubtestsGroup);
+                        highLevelGroups.push(new ImmutablePair(parent, summarySubtestsGroup));
                         break;
                     case METADATA:
                         ActionTestCase summaryTestCase = (ActionTestCase)summarySubtests;
-                        AppleTestGroup appleTestGroup = new AppleTestGroup(summaryGroup, summaryTestCase.metadata);
+                        AppleTestGroup appleTestGroup = new AppleTestGroup(parent, summaryGroup, summaryTestCase.metadata);
                         groups.add(appleTestGroup);
                         break;
                 }

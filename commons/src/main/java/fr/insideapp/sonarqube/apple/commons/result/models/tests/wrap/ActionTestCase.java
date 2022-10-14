@@ -4,7 +4,7 @@ import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestMetada
 
 import java.util.List;
 
-public class ActionTestCase extends ActionTest {
+public class ActionTestCase implements ActionTest {
 
     public List<ActionTestMetadata> metadata;
 

@@ -20,9 +20,9 @@ public class AppleResultExtractorTest {
     @Test
     public void extract() throws Exception {
 
-        TestFileFinders.getInstance().reset();
+        /*TestFileFinders.getInstance().reset();
         TestFileFinders.getInstance().addFinder((fileSystem, classname) ->
-                new TestInputFileBuilder("", "TestProject/TestProjectUITests/TestProjectUITests.swift").setLanguage("swift").build());
+                new TestInputFileBuilder("", "TestProject/TestProjectUITests/TestProjectUITests.swift").setLanguage("swift").build());*/
 
         // setting up
         SensorContextTester context = SensorContextTester.create(new File("src/test/resources"));

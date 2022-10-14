@@ -28,39 +28,17 @@ import org.sonar.api.utils.log.Loggers;
 import java.util.Arrays;
 import java.util.List;
 
-public class ObjectiveCTestFileFinder implements TestFileFinder {
+public class ObjectiveCTestFileFinder extends TestFileFinder {
 
-    private static final Logger LOGGER = Loggers.get(ObjectiveCTestFileFinder.class);
-    @Override
-    public InputFile getUnitTestResource(FileSystem fileSystem, String relativePathWithoutExtension) {
-        List<String> elements = Arrays.asList(StringUtils.splitByWholeSeparator(relativePathWithoutExtension, "/"));
-        List<String> lastTwoElements = elements.subList(Math.max(elements.size() - 2, 0), elements.size());
-        String relativePath = StringUtils.join(lastTwoElements, "/");
-        String path = relativePath + ".m";
-        FilePredicate fp = fileSystem.predicates().hasPath(path);
+    public ObjectiveCTestFileFinder() {
+        // Swift.EXTENSIONS
+        super("m");
+    }
 
-        if(fileSystem.hasFiles(fp)){
-            return fileSystem.inputFile(fp);
-        }
-
-        /*
-         * Most xcodebuild JUnit parsers don't include the path to the class in the class field, so search for it if it
-         * wasn't found in the root.
-         */
-        fp = fileSystem.predicates().and(
+        /*fp = fileSystem.predicates().and(
                 fileSystem.predicates().hasType(InputFile.Type.TEST),
                 fileSystem.predicates().matchesPathPattern(path.replace("_", "+"))
-        );
+        );*/
 
-        if(fileSystem.hasFiles(fp)){
-            /*
-             * Lazily get the first file, since we wouldn't be able to determine the correct one from just the
-             * test class name in the event that there are multiple matches.
-             */
-            return fileSystem.inputFiles(fp).iterator().next();
-        }
 
-        LOGGER.info("Unable to locate Objective-C test source file for path {}. Make sure your test class name matches its filename.", relativePathWithoutExtension);
-        return null;
-    }
 }

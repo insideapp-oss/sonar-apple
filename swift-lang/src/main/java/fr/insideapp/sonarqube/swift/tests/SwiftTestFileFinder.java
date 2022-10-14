@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.swift.tests;
 
 import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
 
+import fr.insideapp.sonarqube.swift.Swift;
 import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
@@ -29,42 +30,11 @@ import org.sonar.api.utils.log.Loggers;
 import java.util.Arrays;
 import java.util.List;
 
-public class SwiftTestFileFinder implements TestFileFinder {
-    private static final Logger LOGGER = Loggers.get(SwiftTestFileFinder.class);
+public class SwiftTestFileFinder extends TestFileFinder {
 
-    @Override
-    public InputFile getUnitTestResource(FileSystem fileSystem, String relativePathWithoutExtension) {
-        List<String> elements = Arrays.asList(StringUtils.splitByWholeSeparator(relativePathWithoutExtension, "/"));
-        List<String> lastTwoElements = elements.subList(Math.max(elements.size() - 2, 0), elements.size());
-        String relativePath = StringUtils.join(lastTwoElements, "/");
-        String path = relativePath + ".swift";
-        FilePredicate fp = fileSystem.predicates().hasPath(path);
-
-        if(fileSystem.hasFiles(fp)) {
-            return fileSystem.inputFile(fp);
-        }
-
-        /*
-         * Most xcodebuild JUnit parsers don't include the path to the class in the class field, so search for it if it
-         * wasn't found in the root.
-         */
-        String lastFileNameComponents = StringUtils.substringAfterLast(path, "/");
-        if(!StringUtils.isEmpty(lastFileNameComponents)) {
-            fp = fileSystem.predicates().and(
-                fileSystem.predicates().hasType(InputFile.Type.TEST),
-                fileSystem.predicates().matchesPathPattern("**/" + lastFileNameComponents)
-            );
-
-            if(fileSystem.hasFiles(fp)) {
-                /*
-                 * Lazily get the first file, since we wouldn't be able to determine the correct one from just the
-                 * test class name in the event that there are multiple matches.
-                 */
-                return fileSystem.inputFiles(fp).iterator().next();
-            }
-        }
-
-        LOGGER.info("Unable to locate Swift test source file for path {}. Make sure your test class name matches its filename.", relativePathWithoutExtension);
-        return null;
+    public SwiftTestFileFinder() {
+        // Swift.EXTENSIONS
+        super("swift");
     }
+
 }

@@ -17,9 +17,42 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
+import org.apache.commons.lang3.StringUtils;
+import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
-public interface TestFileFinder {
-    InputFile getUnitTestResource(FileSystem fileSystem, String relativePathWithoutExtension);
+import java.util.Arrays;
+import java.util.List;
+
+public abstract class TestFileFinder {
+
+    private static final Logger LOGGER = Loggers.get(TestFileFinder.class);
+
+    private String extension;
+
+    public TestFileFinder(String extension) {
+        this.extension = extension;
+    }
+
+    public final InputFile getUnitTestResource(FileSystem fileSystem, String bundleName, String className) {
+        StringBuilder pathPatternBuilder = new StringBuilder(bundleName)
+                .append("/**/")
+                .append(className)
+                .append(".")
+                .append(extension);
+        String pathPattern = pathPatternBuilder.toString();
+
+        FilePredicate fileMatchesPredicate = fileSystem.predicates().matchesPathPattern(pathPattern);
+        if(fileSystem.hasFiles(fileMatchesPredicate)) {
+            /* Lazily get the first file, since we wouldn't be able to determine the correct one from just the
+             * test class name in the event that there are multiple matches. */
+            return fileSystem.inputFiles(fileMatchesPredicate).iterator().next();
+        } else {
+            return null;
+        }
+
+    }
 }

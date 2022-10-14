@@ -122,7 +122,8 @@ public class JUnitReportParser {
 
     @CheckForNull
     private InputFile getUnitTestResource(String className) {
-        return TestFileFinders.getInstance().getUnitTestResource(context.fileSystem(), className);
+        return null;
+        //return TestFileFinders.getInstance().getUnitTestResource(context.fileSystem(), className);
     }
 
     private static <T extends Serializable> void saveMeasure(SensorContext context, InputFile inputFile, Metric<T> metric, T value) {

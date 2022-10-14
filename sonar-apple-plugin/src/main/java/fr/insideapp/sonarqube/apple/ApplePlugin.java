@@ -93,11 +93,6 @@ public class ApplePlugin implements Plugin {
                         .build());
         context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
 
-        // Tests
-        TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
-        TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
-        context.addExtension(AppleTestsSensor.class);
-
         // Xcode result bundle
         context.addExtension(
                 PropertyDefinition.builder(AppleResultSensor.RESULT_BUNDLE_PATH_KEY)
@@ -109,6 +104,11 @@ public class ApplePlugin implements Plugin {
 
         // Coverage
         context.addExtension(AppleCoverageSensor.class);
+
+        // Tests
+        TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
+        TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
+        context.addExtension(AppleTestsSensor.class);
 
     }
 }

@@ -24,22 +24,20 @@ public class AppleTestsParser {
     public void collect(List<AppleTestSummary> testSummaries) {
         testSummaries.forEach(testSummary -> {
             testSummary.groups.forEach(group -> {
-                LOGGER.info("Will report measure for path: {}", group.path);
-                InputFile resource = getUnitTestResource(group.path);
+                InputFile resource = getUnitTestResource(group);
                 if (resource != null) {
-                    LOGGER.info("Will report measure for file: {}", resource.absolutePath());
                     AppleTestClassReport classReport = new AppleTestClassReport(group);
                     save(classReport, resource);
                 } else {
-                    LOGGER.warn("Resource not found: {}", group.path);
+                    LOGGER.debug("Resource not found for bundle {} and class {}", group.bundle, group.name);
                 }
             });
         });
     }
 
     @CheckForNull
-    private InputFile getUnitTestResource(String partialPath) {
-        return TestFileFinders.getInstance().getUnitTestResource(context.fileSystem(), partialPath);
+    private InputFile getUnitTestResource(AppleTestGroup group) {
+        return TestFileFinders.getInstance().getUnitTestResource(context.fileSystem(), group.bundle, group.name);
     }
 
     private void save(AppleTestClassReport report, InputFile inputFile) {

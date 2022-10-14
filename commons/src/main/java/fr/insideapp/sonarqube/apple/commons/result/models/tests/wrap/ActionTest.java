@@ -2,7 +2,7 @@ package fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public abstract class ActionTest {
+public interface ActionTest {
 
     public enum Type {
         @JsonProperty("ActionTestSummaryGroup")
@@ -11,7 +11,7 @@ public abstract class ActionTest {
         METADATA,
     }
 
-    abstract public Type getType();
+    Type getType();
 
 }
 

@@ -57,6 +57,7 @@ public class AppleTestsSensor extends AppleResultSensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
+        // TODO: check if resultBundle() exist
         try {
 
             // extracting the result record
