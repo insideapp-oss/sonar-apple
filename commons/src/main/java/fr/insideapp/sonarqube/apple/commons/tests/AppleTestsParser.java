@@ -1,5 +1,7 @@
 package fr.insideapp.sonarqube.apple.commons.tests;
 
+import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestClassReport;
+import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;

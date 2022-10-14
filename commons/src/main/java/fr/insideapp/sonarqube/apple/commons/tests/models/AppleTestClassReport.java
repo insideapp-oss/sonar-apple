@@ -1,4 +1,4 @@
-package fr.insideapp.sonarqube.apple.commons.tests;
+package fr.insideapp.sonarqube.apple.commons.tests.models;
 
 import java.util.HashMap;
 import java.util.List;

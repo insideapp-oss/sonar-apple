@@ -26,6 +26,8 @@ import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
+import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestableSummary;
+import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
 import fr.insideapp.sonarqube.apple.commons.tests.old.JUnitReportParser;
 import org.json.JSONObject;
 import org.sonar.api.batch.fs.InputFile;
@@ -67,21 +69,29 @@ public class AppleTestsSensor extends AppleResultSensor {
 
         try {
             // extracting the result record
-            AppleResultExtractor extractor = new AppleResultExtractor();
-            Record record = extractor.getInvocationRecord(resultBundle());
+            AppleResultExtractor resultExtractor = new AppleResultExtractor();
+            Record record = resultExtractor.getInvocationRecord(resultBundle());
 
-            // extracting the test summaries
-            List<AppleTestSummary> testSummaries = record
+            // getting the action test summaries
+            List<ActionTestableSummary> actionTestSummaries = record
                     .actions
                     .stream()
                     .filter(action -> action.result.testsRef != null) // remove null values
-                    .map(action -> getTestPlanRunSummaries(extractor, action.result.testsRef))
+                    .map(action -> getTestPlanRunSummaries(resultExtractor, action.result.testsRef))
                     .filter(testPlanRunSummaries -> testPlanRunSummaries != null) // remove null values
                     .flatMap(testPlanRunSummaries -> testPlanRunSummaries.summaries.stream())
                     .flatMap(testPlanRunSummary -> testPlanRunSummary.testableSummaries.stream())
-                    .map(testableSummary -> new AppleTestSummary(testableSummary))
                     .collect(Collectors.toList());
 
+            // extract the test summaries from the action test summaries
+            AppleTestsExtractor testsExtractor = new AppleTestsExtractor();
+            List<AppleTestSummary> testSummaries = actionTestSummaries
+                    .stream()
+                    .map(testableSummary -> testsExtractor.extract(testableSummary))
+                    .map(testGroups -> new AppleTestSummary(testGroups))
+                    .collect(Collectors.toList());
+
+            // collecting results
             AppleTestsParser parser = new AppleTestsParser(context);
             parser.collect(testSummaries);
 

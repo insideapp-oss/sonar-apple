@@ -32,7 +32,7 @@ public class AppleResultExtractorTest {
         AppleResultExtractor extractor = new AppleResultExtractor();
         Record record = extractor.getInvocationRecord(buildResult);
 
-        List<AppleTestSummary> summaries = record
+        /*List<AppleTestSummary> summaries = record
                 .actions
                 .stream()
                 .filter(action -> action.result.testsRef != null)
@@ -53,7 +53,7 @@ public class AppleResultExtractorTest {
 
         ObjectMapper objectMapper = new ObjectMapper()
                 .enable(SerializationFeature.INDENT_OUTPUT);
-        System.out.println("summaries : " + objectMapper.writeValueAsString(summaries));
+        System.out.println("summaries : " + objectMapper.writeValueAsString(summaries));*/
 
         //AppleTestsParser parser = new AppleTestsParser(context);
         //parser.collect(summaries);

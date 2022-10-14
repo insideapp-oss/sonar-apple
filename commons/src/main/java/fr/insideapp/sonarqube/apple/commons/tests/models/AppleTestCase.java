@@ -1,4 +1,4 @@
-package fr.insideapp.sonarqube.apple.commons.tests;
+package fr.insideapp.sonarqube.apple.commons.tests.models;
 
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestMetadata;
 
