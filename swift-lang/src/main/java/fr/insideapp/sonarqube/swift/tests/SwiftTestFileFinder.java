@@ -33,7 +33,6 @@ import java.util.List;
 public class SwiftTestFileFinder extends TestFileFinder {
 
     public SwiftTestFileFinder() {
-        // Swift.EXTENSIONS
         super("swift");
     }
 

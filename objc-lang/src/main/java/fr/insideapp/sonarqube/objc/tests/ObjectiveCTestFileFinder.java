@@ -31,14 +31,7 @@ import java.util.List;
 public class ObjectiveCTestFileFinder extends TestFileFinder {
 
     public ObjectiveCTestFileFinder() {
-        // Swift.EXTENSIONS
         super("m");
     }
-
-        /*fp = fileSystem.predicates().and(
-                fileSystem.predicates().hasType(InputFile.Type.TEST),
-                fileSystem.predicates().matchesPathPattern(path.replace("_", "+"))
-        );*/
-
 
 }

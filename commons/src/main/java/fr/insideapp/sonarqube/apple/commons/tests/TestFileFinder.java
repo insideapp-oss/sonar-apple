@@ -44,12 +44,22 @@ public abstract class TestFileFinder {
                 .append(".")
                 .append(extension);
         String pathPattern = pathPatternBuilder.toString();
-
         FilePredicate fileMatchesPredicate = fileSystem.predicates().matchesPathPattern(pathPattern);
+
+        StringBuilder fileNamePatternBuilder = new StringBuilder("**/")
+                .append(className)
+                .append(".")
+                .append(extension);
+        String fileNamePattern = fileNamePatternBuilder.toString();
+        FilePredicate fileNameMatchesPredicate = fileSystem.predicates().matchesPathPattern(fileNamePattern);
+
+        /* Lazily get the first file, since we wouldn't be able to determine the correct one from just the
+         * test class name in the event that there are multiple matches. */
+
         if(fileSystem.hasFiles(fileMatchesPredicate)) {
-            /* Lazily get the first file, since we wouldn't be able to determine the correct one from just the
-             * test class name in the event that there are multiple matches. */
             return fileSystem.inputFiles(fileMatchesPredicate).iterator().next();
+        } else if (fileSystem.hasFiles(fileNameMatchesPredicate)) {
+            return fileSystem.inputFiles(fileNameMatchesPredicate).iterator().next();
         } else {
             return null;
         }

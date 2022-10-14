@@ -22,7 +22,9 @@ public class AppleTestsParser {
     }
 
     public void collect(List<AppleTestSummary> testSummaries) {
+        LOGGER.info("{} test report(s) to handle", testSummaries.size());
         testSummaries.forEach(testSummary -> {
+            LOGGER.info("{} test group(s) to report", testSummary.groups.size());
             testSummary.groups.forEach(group -> {
                 InputFile resource = getUnitTestResource(group);
                 if (resource != null) {
