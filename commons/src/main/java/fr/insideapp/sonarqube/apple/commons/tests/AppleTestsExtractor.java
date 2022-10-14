@@ -8,16 +8,12 @@ import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestC
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestGroup;
 import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.json.JSONObject;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import java.util.UUID;
 
 public class AppleTestsExtractor {
 

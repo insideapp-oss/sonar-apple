@@ -1,7 +1,6 @@
 package fr.insideapp.sonarqube.apple.commons.result;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
@@ -10,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.Charset;
 
 import static org.assertj.core.api.Assertions.assertThat;
