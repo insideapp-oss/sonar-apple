@@ -47,6 +47,8 @@ public class AppleTestClassReport {
                 case SKIPPED:
                     increment(tests, Status.SKIPPED);
                     break;
+                default:
+                    break;
             }
         });
         return tests;
