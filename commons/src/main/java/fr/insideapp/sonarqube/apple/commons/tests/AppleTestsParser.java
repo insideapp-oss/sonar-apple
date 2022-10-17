@@ -35,7 +35,7 @@ public class AppleTestsParser {
                     save(classReport, resource);
                 } else {
                     LOGGER.warn("Resource not found for bundle {} and class {}", group.bundle, group.name);
-                    LOGGER.warn("Make sure the class {} is located inside {} folder (nesting allowed)", group.bundle);
+                    LOGGER.warn("Make sure the class {} is located inside {} folder (nesting allowed)", group.name, group.bundle);
                     LOGGER.warn("Make sure the bundle {} matches its folder name", group.bundle);
                     LOGGER.warn("Make sure the class {} matches its file name", group.name);
                 }

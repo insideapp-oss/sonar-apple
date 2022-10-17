@@ -17,15 +17,11 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
-import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
-import java.util.Arrays;
-import java.util.List;
 
 public abstract class TestFileFinder {
 
@@ -38,6 +34,9 @@ public abstract class TestFileFinder {
     }
 
     public final InputFile getUnitTestResource(FileSystem fileSystem, String bundleName, String className) {
+        LOGGER.debug("Bundle name = {}", bundleName);
+        LOGGER.debug("Class name = {}", className);
+
         StringBuilder pathPatternBuilder = new StringBuilder(bundleName)
                 .append("/**/")
                 .append(className)
@@ -65,4 +64,5 @@ public abstract class TestFileFinder {
         }
 
     }
+
 }

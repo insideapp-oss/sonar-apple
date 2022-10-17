@@ -3,7 +3,6 @@ package fr.insideapp.sonarqube.apple.commons.tests.models;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestMetadata;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestSummary;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestSummaryGroup;
-import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestCase;
 
 import java.util.List;
 import java.util.stream.Collectors;
