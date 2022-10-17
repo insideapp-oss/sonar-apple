@@ -11,12 +11,15 @@ public class AppleTestClassReport {
         SKIPPED,
     }
 
+    private static Double MILLISECONDS = 1000.0;
+
 
     private long duration;
     private HashMap<Status, Integer> tests;
 
     public AppleTestClassReport(AppleTestGroup group) {
-        this.duration = Double.valueOf(group.duration * 1000).longValue();
+        Double durationInMs = group.duration * MILLISECONDS;
+        this.duration = durationInMs.longValue();
         this.tests = buildMap(group.testCases);
     }
 
