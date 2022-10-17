@@ -37,8 +37,10 @@ public class ActionTestDeserializer extends JsonDeserializer<ActionTest> {
             switch (type) {
                 case GROUP:
                     groups.add(codec.treeToValue(value, ActionTestSummaryGroup.class));
+                    break;
                 case METADATA:
                     metadata.add(codec.treeToValue(value, ActionTestMetadata.class));
+                    break;
             }
         }
         if (!groups.isEmpty()) {
