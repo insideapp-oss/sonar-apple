@@ -24,8 +24,7 @@ public class ValuesDeserializer extends JsonDeserializer<ArrayList<?>> implement
     public JsonDeserializer<?> createContextual(DeserializationContext deserializationContext, BeanProperty beanProperty) throws JsonMappingException {
         JavaType type = beanProperty.getType();
         JavaType valueType = type.containedType(0);
-        Class<?> clazz = valueType.getRawClass();
-        return new ValuesDeserializer(clazz);
+        return new ValuesDeserializer(valueType.getRawClass());
     }
 
     @Override

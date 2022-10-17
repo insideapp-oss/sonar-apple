@@ -1,5 +1,6 @@
 package fr.insideapp.sonarqube.apple.commons.result;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
@@ -27,7 +28,7 @@ public class AppleResultExtractor {
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public Record getInvocationRecord(File resultBundle) throws Exception {
+    public Record getInvocationRecord(File resultBundle) throws JsonProcessingException {
         // get the raw data of the build result as JSON
         String xcresultData = xcrun()
                 .withArgs("xcresulttool", "get", "--format", "json")
@@ -37,12 +38,12 @@ public class AppleResultExtractor {
                 .run()
                 .getOutputString();
 
-        Record record = objectMapper.readValue(xcresultData, Record.class);
-        LOGGER.debug("Record actions : {}", record.actions.size());
-        return record;
+        Record xcResultRecord = objectMapper.readValue(xcresultData, Record.class);
+        LOGGER.debug("Record actions : {}", xcResultRecord.actions.size());
+        return xcResultRecord;
     }
 
-    public ActionTestPlanRunSummaries getTestPlanRunSummaries(File resultBundle, TestsReference testsReference) throws Exception {
+    public ActionTestPlanRunSummaries getTestPlanRunSummaries(File resultBundle, TestsReference testsReference) throws JsonProcessingException {
         // get the test plan data of the build result as JSON
         String xcresultData = xcrun()
                 .withArgs("xcresulttool", "get", "--format", "json")

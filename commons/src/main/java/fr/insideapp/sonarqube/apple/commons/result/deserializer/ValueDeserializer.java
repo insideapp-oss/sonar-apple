@@ -23,8 +23,7 @@ public class ValueDeserializer extends JsonDeserializer<Object> implements Conte
     @Override
     public JsonDeserializer<?> createContextual(DeserializationContext deserializationContext, BeanProperty beanProperty) throws JsonMappingException {
         JavaType type = deserializationContext.getContextualType();
-        Class<?> clazz = type.getRawClass();
-        return new ValueDeserializer(clazz);
+        return new ValueDeserializer(type.getRawClass());
     }
 
     @Override

@@ -76,7 +76,7 @@ public class AppleCoverageExtractor {
 
     private ArrayList<String> extractArchiveReferences(JSONObject xcresult) {
         JSONArray actionValues = xcresult.getJSONObject("actions").getJSONArray("_values");
-        ArrayList<String> archiveRefIDs = new ArrayList();
+        ArrayList<String> archiveRefIDs = new ArrayList<String>();
 
         for (int i = 0; i < actionValues.length(); i++) {
             JSONObject actionResult = actionValues.getJSONObject(i).getJSONObject("actionResult");

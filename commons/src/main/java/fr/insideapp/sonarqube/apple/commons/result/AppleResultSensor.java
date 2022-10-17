@@ -12,7 +12,7 @@ public abstract class AppleResultSensor implements Sensor {
 
     protected final SensorContext context;
 
-    public AppleResultSensor(final SensorContext context) {
+    protected AppleResultSensor(final SensorContext context) {
         this.context = context;
     }
 
