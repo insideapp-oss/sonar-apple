@@ -8,22 +8,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class AppleTestGroup {
+public final class AppleTestGroup {
 
-    public String bundle;
+    public final String bundle;
 
-    public String name;
+    public final String name;
 
-    public Double duration;
-    public List<AppleTestCase> testCases;
+    public final Double duration;
+    public final List<AppleTestCase> testCases;
 
-    public AppleTestGroup(ActionTestSummary parent, ActionTestSummaryGroup group, List<ActionTestMetadata> metadata) {
+    public AppleTestGroup(final ActionTestSummary parent, final ActionTestSummaryGroup group, final List<ActionTestMetadata> metadata) {
         this.bundle = parent.name;
         this.name = group.name;
         this.duration = group.duration;
         this.testCases = metadata
                 .stream()
-                .map(test -> new AppleTestCase(test))
+                .map(AppleTestCase::new)
                 .collect(Collectors.toList());
     }
 

@@ -2,7 +2,7 @@ package fr.insideapp.sonarqube.apple.commons.tests.models;
 
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestMetadata;
 
-public class AppleTestCase {
+public final class AppleTestCase {
 
     public enum Status {
         SUCCESS,
@@ -27,9 +27,9 @@ public class AppleTestCase {
         }
     }
 
-    public Status status;
+    public final Status status;
 
-    public AppleTestCase(ActionTestMetadata metadata) {
+    public AppleTestCase(final ActionTestMetadata metadata) {
         this.status = Status.builder(metadata.status);
     }
 

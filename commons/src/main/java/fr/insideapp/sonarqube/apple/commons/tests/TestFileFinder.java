@@ -29,7 +29,7 @@ public abstract class TestFileFinder {
 
     private String extension;
 
-    public TestFileFinder(String extension) {
+    protected TestFileFinder(String extension) {
         this.extension = extension;
     }
 
