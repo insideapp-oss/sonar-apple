@@ -17,7 +17,9 @@ import java.util.Stack;
 
 public class AppleTestsExtractor {
 
-    public AppleTestsExtractor() {}
+    public AppleTestsExtractor() {
+        // no parameter
+    }
 
     public List<AppleTestGroup> extract(ActionTestableSummary summary) {
         List<AppleTestGroup> testGroups = new ArrayList<>();
