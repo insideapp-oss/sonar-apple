@@ -16,9 +16,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class AppleTestsExtractor {
-
-    private static final Logger LOGGER = Loggers.get(fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageExtractor.class);
-
+    
     public AppleTestsExtractor() {}
 
     public List<AppleTestGroup> extract(ActionTestableSummary summary) {

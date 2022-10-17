@@ -37,7 +37,9 @@ public class AppleResultExtractor {
                 .run()
                 .getOutputString();
 
-        return objectMapper.readValue(xcresultData, Record.class);
+        Record record = objectMapper.readValue(xcresultData, Record.class);
+        LOGGER.debug("Record actions : {}", record.actions.size());
+        return record;
     }
 
     public ActionTestPlanRunSummaries getTestPlanRunSummaries(File resultBundle, TestsReference testsReference) throws Exception {
@@ -51,7 +53,9 @@ public class AppleResultExtractor {
                 .run()
                 .getOutputString();
 
-        return objectMapper.readValue(xcresultData, ActionTestPlanRunSummaries.class);
+        ActionTestPlanRunSummaries actionTestPlanRunSummaries = objectMapper.readValue(xcresultData, ActionTestPlanRunSummaries.class);
+        LOGGER.debug("Test plan summaries : {}", actionTestPlanRunSummaries.summaries.size());
+        return actionTestPlanRunSummaries;
     }
 
     // Private
