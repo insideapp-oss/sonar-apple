@@ -18,15 +18,6 @@
 package fr.insideapp.sonarqube.objc.tests;
 
 import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
-import org.apache.commons.lang3.StringUtils;
-import org.sonar.api.batch.fs.FilePredicate;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class ObjectiveCTestFileFinder extends TestFileFinder {
 

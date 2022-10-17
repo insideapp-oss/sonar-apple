@@ -18,7 +18,6 @@
 package fr.insideapp.sonarqube.objc.issues.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanSensor;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
