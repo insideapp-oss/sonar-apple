@@ -17,7 +17,10 @@
  */
 package fr.insideapp.sonarqube.apple.commons;
 
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
 import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -25,28 +28,61 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class TestFileFindersTest {
 
-    private static final String TEST_FILENAME = "test.swift";
+    private static final String BASE_DIR = "src/test/resources";
+
+    private static final String EXTENSION = "apple";
+
+
+    private static final String TEST_FOLDER = "folder";
+
+    private static final String TEST_FILENAME = "file";
+
+    private static final String TEST_FILENAME_WITH_EXT = TEST_FILENAME + "." + EXTENSION;
+
+    private DefaultFileSystem fileSystem;
+
+    private DefaultInputFile file;
+
+    @Before
+    public void prepare() {
+        fileSystem = new DefaultFileSystem(new File(BASE_DIR));
+        file = new TestInputFileBuilder("", TEST_FILENAME_WITH_EXT)
+                .setModuleBaseDir(Paths.get(BASE_DIR + "/" + TEST_FOLDER))
+                .setLanguage(EXTENSION)
+                .build();
+        fileSystem.add(file);
+
+        TestFileFinders.getInstance().reset();
+        TestFileFinder fileFinder = new TestFileFinder(EXTENSION) {};
+        TestFileFinders.getInstance().addFinder(fileFinder);
+    }
+
+    @After
+    public void cleanup() {
+        TestFileFinders.getInstance().reset();
+    }
 
     @Test
     public void getUnitTestResource() {
+        InputFile found = TestFileFinders.getInstance().getUnitTestResource(fileSystem, TEST_FOLDER, TEST_FILENAME);
 
-        DefaultFileSystem fs = new DefaultFileSystem(new File("."));
-        DefaultInputFile testFile = new TestInputFileBuilder("", TEST_FILENAME).setLanguage("swift").build();
-        fs.add(testFile);
-
-        /*TestFileFinders.getInstance().reset();
-        TestFileFinders.getInstance().addFinder((fileSystem, bundleName, className) -> testFile);
-
-        InputFile found = TestFileFinders.getInstance().getUnitTestResource(fs, "root", "test");
         assertThat(found).isNotNull();
-        assertThat(found.language()).isEqualTo("swift");
-        assertThat(found.filename()).isEqualTo(TEST_FILENAME);*/
+        assertThat(found.language()).isEqualTo(EXTENSION);
+        assertThat(found.filename()).isEqualTo(TEST_FILENAME_WITH_EXT);
 
+    }
+
+    @Test
+    public void getUnitTestResourceNotFound() {
+        InputFile notFound = TestFileFinders.getInstance().getUnitTestResource(fileSystem, TEST_FOLDER, "ThisFileIsNotFound");
+
+        assertThat(notFound).isNull();
     }
 
 }

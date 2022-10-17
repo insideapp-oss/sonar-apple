@@ -19,15 +19,11 @@ package fr.insideapp.sonarqube.apple.commons.tests;
 
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestFileFinders {
-
-    private static final Logger LOGGER = Loggers.get(TestFileFinders.class);
 
     private static TestFileFinders instance;
     private final List<TestFileFinder> finders = new ArrayList<>();

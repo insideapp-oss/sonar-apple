@@ -1,10 +1,6 @@
 package fr.insideapp.sonarqube.apple.commons.tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.insideapp.sonarqube.apple.commons.result.AppleResultExtractor;
-import fr.insideapp.sonarqube.apple.commons.result.models.Record;
-import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestableSummary;
 import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
 import org.apache.commons.io.FileUtils;
