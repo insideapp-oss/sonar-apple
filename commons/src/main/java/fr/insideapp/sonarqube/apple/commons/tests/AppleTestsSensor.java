@@ -30,6 +30,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AppleTestsSensor extends AppleResultSensor {
@@ -61,15 +62,15 @@ public class AppleTestsSensor extends AppleResultSensor {
         try {
             // extracting the result record
             AppleResultExtractor resultExtractor = new AppleResultExtractor();
-            Record record = resultExtractor.getInvocationRecord(resultBundle());
+            Record invocationRecord = resultExtractor.getInvocationRecord(resultBundle());
 
             // getting the action test summaries
-            List<ActionTestableSummary> actionTestSummaries = record
+            List<ActionTestableSummary> actionTestSummaries = invocationRecord
                     .actions
                     .stream()
-                    .filter(action -> action.result.testsRef != null) // remove null values
+                    .filter(action -> Objects.nonNull(action.result.testsRef)) // remove null values
                     .map(action -> getTestPlanRunSummaries(resultExtractor, action.result.testsRef))
-                    .filter(testPlanRunSummaries -> testPlanRunSummaries != null) // remove null values
+                    .filter(Objects::nonNull) // remove null values
                     .flatMap(testPlanRunSummaries -> testPlanRunSummaries.summaries.stream())
                     .flatMap(testPlanRunSummary -> testPlanRunSummary.testableSummaries.stream())
                     .collect(Collectors.toList());
@@ -78,8 +79,8 @@ public class AppleTestsSensor extends AppleResultSensor {
             AppleTestsExtractor testsExtractor = new AppleTestsExtractor();
             List<AppleTestSummary> testSummaries = actionTestSummaries
                     .stream()
-                    .map(testableSummary -> testsExtractor.extract(testableSummary))
-                    .map(testGroups -> new AppleTestSummary(testGroups))
+                    .map(testsExtractor::extract)
+                    .map(AppleTestSummary::new)
                     .collect(Collectors.toList());
 
             // collecting results

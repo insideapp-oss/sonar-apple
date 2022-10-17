@@ -8,12 +8,8 @@ import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestC
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.wrap.ActionTestGroup;
 import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class AppleTestsExtractor {
 
@@ -25,11 +21,11 @@ public class AppleTestsExtractor {
         List<AppleTestGroup> testGroups = new ArrayList<>();
 
         // this is the current stack to process
-        Stack<ImmutablePair<ActionTestSummary, ActionTestGroup>> actionTestGroups = new Stack<>();
+        Deque<ImmutablePair<ActionTestSummary, ActionTestGroup>> actionTestGroups = new LinkedList<ImmutablePair<ActionTestSummary, ActionTestGroup>>();
         // initial state
-        actionTestGroups.push(new ImmutablePair(summary, summary.tests));
+        actionTestGroups.push(new ImmutablePair<ActionTestSummary, ActionTestGroup>(summary, summary.tests));
         // while we got groups to process
-        while (!actionTestGroups.empty()) {
+        while (!actionTestGroups.isEmpty()) {
             ImmutablePair<ActionTestSummary, ActionTestGroup> pair = actionTestGroups.pop();
             // keeping a reference to the parent
             ActionTestSummary parent = pair.getKey();
@@ -44,7 +40,7 @@ public class AppleTestsExtractor {
                     // going further then, in future iteration
                     case GROUP:
                         ActionTestGroup summarySubtestsGroup = (ActionTestGroup)summaryTests;
-                        actionTestGroups.push(new ImmutablePair(parent, summarySubtestsGroup));
+                        actionTestGroups.push(new ImmutablePair<ActionTestSummary, ActionTestGroup>(parent, summarySubtestsGroup));
                         break;
                     // this is the last level
                     // we can keep references

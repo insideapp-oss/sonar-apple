@@ -4,9 +4,9 @@ import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestSummar
 
 import java.util.List;
 
-public class ActionTestGroup implements ActionTest {
+public final class ActionTestGroup implements ActionTest {
 
-    public List<ActionTestSummaryGroup> groups;
+    public final List<ActionTestSummaryGroup> groups;
 
     public ActionTestGroup(List<ActionTestSummaryGroup> groups) {
         this.groups = groups;

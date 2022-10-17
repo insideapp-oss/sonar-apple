@@ -50,7 +50,6 @@ public class AppleTestsParser {
 
     private void save(AppleTestClassReport report, InputFile inputFile) {
         int allTests = report.getCount(AppleTestClassReport.Status.ALL);
-        LOGGER.debug("{} test(s) found for {}", allTests, inputFile.absolutePath());
         int skippedTests = report.getCount(AppleTestClassReport.Status.SKIPPED);
         saveMeasure(inputFile, CoreMetrics.TESTS, allTests - skippedTests);
         saveMeasure(inputFile, CoreMetrics.SKIPPED_TESTS, skippedTests);
