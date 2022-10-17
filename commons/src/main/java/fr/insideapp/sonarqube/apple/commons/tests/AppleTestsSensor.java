@@ -17,27 +17,18 @@
  */
 package fr.insideapp.sonarqube.apple.commons.tests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageExtractor;
-import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageParser;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultExtractor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestableSummary;
-import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
-import fr.insideapp.sonarqube.apple.commons.tests.old.JUnitReportParser;
-import org.json.JSONObject;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
