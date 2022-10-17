@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class AppleTestsExtractor {
-    
+
     public AppleTestsExtractor() {}
 
     public List<AppleTestGroup> extract(ActionTestableSummary summary) {

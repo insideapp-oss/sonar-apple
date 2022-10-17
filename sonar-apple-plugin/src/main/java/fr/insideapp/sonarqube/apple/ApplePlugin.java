@@ -97,7 +97,7 @@ public class ApplePlugin implements Plugin {
         context.addExtension(
                 PropertyDefinition.builder(AppleResultSensor.RESULT_BUNDLE_PATH_KEY)
                         .name("Xcode result bundle")
-                        .description("Path to Xcode result bundle file. The path may be either absolute or relative to the project base directory.")
+                        .description("Path to Xcode result bundle file. The path is relative to the project base directory.")
                         .onQualifiers(Qualifiers.PROJECT)
                         .category(APPLE_CATEGORY)
                         .build());
