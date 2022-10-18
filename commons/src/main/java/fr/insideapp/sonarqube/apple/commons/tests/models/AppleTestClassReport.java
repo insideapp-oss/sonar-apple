@@ -1,7 +1,6 @@
 package fr.insideapp.sonarqube.apple.commons.tests.models;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 
 public class AppleTestClassReport {

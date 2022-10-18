@@ -21,9 +21,9 @@ public class AppleTestsExtractor {
         List<AppleTestGroup> testGroups = new ArrayList<>();
 
         // this is the current stack to process
-        Deque<ImmutablePair<ActionTestSummary, ActionTestGroup>> actionTestGroups = new LinkedList<ImmutablePair<ActionTestSummary, ActionTestGroup>>();
+        Deque<ImmutablePair<ActionTestSummary, ActionTestGroup>> actionTestGroups = new LinkedList<>();
         // initial state
-        actionTestGroups.push(new ImmutablePair<ActionTestSummary, ActionTestGroup>(summary, summary.tests));
+        actionTestGroups.push(new ImmutablePair<>(summary, summary.tests));
         // while we got groups to process
         while (!actionTestGroups.isEmpty()) {
             ImmutablePair<ActionTestSummary, ActionTestGroup> pair = actionTestGroups.pop();
@@ -40,7 +40,7 @@ public class AppleTestsExtractor {
                     // going further then, in future iteration
                     case GROUP:
                         ActionTestGroup summarySubtestsGroup = (ActionTestGroup)summaryTests;
-                        actionTestGroups.push(new ImmutablePair<ActionTestSummary, ActionTestGroup>(parent, summarySubtestsGroup));
+                        actionTestGroups.push(new ImmutablePair<>(parent, summarySubtestsGroup));
                         break;
                     // this is the last level
                     // we can keep references
