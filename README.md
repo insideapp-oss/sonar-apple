@@ -43,6 +43,12 @@ The plugin was tested with Xcode 13+, but should work with older versions.
 
 Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
 
+### xcpretty
+
+xcpretty is used to generate a JSON Compilation Database from ``xcodebuild`` log.
+
+See install instructions [here](https://github.com/xcpretty/xcpretty).
+
 ### SwiftLint
 
 SwiftLint is used to analyse Swift source files.
