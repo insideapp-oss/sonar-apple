@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class MobSFScanSwiftSensor extends MobSFScanSensor {
 
-    protected MobSFScanSwiftSensor() {
+    public MobSFScanSwiftSensor() {
         super(new MobSFScanSwiftRulesDefinition());
     }
     @Override

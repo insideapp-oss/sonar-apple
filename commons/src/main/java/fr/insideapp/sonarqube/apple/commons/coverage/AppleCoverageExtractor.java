@@ -27,6 +27,7 @@ import org.sonar.api.utils.log.Loggers;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class AppleCoverageExtractor {
@@ -62,7 +63,7 @@ public class AppleCoverageExtractor {
         JSONObject xcresultJSON = new JSONObject(xcresultData);
         // now we extract the archive references from the raw report
         // this is possible to have several archive, from a merged .xcresult bundle of multiple test plans
-        ArrayList<String> archiveRefIDs = extractArchiveReferences(xcresultJSON);
+        List<String> archiveRefIDs = extractArchiveReferences(xcresultJSON);
         // we need somewhere to put the temporary archive
         createTemporaryDirectory();
         // exporting the archive reference we retrieve into a real archive we can read
@@ -74,9 +75,9 @@ public class AppleCoverageExtractor {
         return  coverageData;
     }
 
-    private ArrayList<String> extractArchiveReferences(JSONObject xcresult) {
+    private List<String> extractArchiveReferences(JSONObject xcresult) {
         JSONArray actionValues = xcresult.getJSONObject("actions").getJSONArray("_values");
-        ArrayList<String> archiveRefIDs = new ArrayList();
+        List<String> archiveRefIDs = new ArrayList<>();
 
         for (int i = 0; i < actionValues.length(); i++) {
             JSONObject actionResult = actionValues.getJSONObject(i).getJSONObject("actionResult");
@@ -96,7 +97,7 @@ public class AppleCoverageExtractor {
         return archiveRefIDs;
     }
 
-    private File exportCoverageArchive(ArrayList<String> archiveReferences, File resultBundle) {
+    private File exportCoverageArchive(List<String> archiveReferences, File resultBundle) {
 
         // we use a new random UUID for the name
         // as writing to an existing .xccovarchive append the data

@@ -37,7 +37,7 @@ public class ObjectiveCTestFileFinderTest {
         fs.add(testFile);
 
         ObjectiveCTestFileFinder finder = new ObjectiveCTestFileFinder();
-        InputFile found = finder.getUnitTestResource(fs, "objc/main");
+        InputFile found = finder.getUnitTestResource(fs, "objc", "main");
         assertThat(found).isNotNull();
         assertThat(found.filename()).isEqualTo("main.m");
 
@@ -49,7 +49,7 @@ public class ObjectiveCTestFileFinderTest {
         DefaultFileSystem fs = new DefaultFileSystem(new File("src/test/resources"));
 
         ObjectiveCTestFileFinder finder = new ObjectiveCTestFileFinder();
-        InputFile found = finder.getUnitTestResource(fs, "objc/main");
+        InputFile found = finder.getUnitTestResource(fs, "objc", "main");
         assertThat(found).isNull();
 
     }

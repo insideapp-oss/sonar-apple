@@ -45,9 +45,9 @@ Install sonar-scanner as explained in the [official documentation]((https://docs
 
 ### xcpretty
 
-In order to generate reports from ``xcodebuild`` commands, extract command line tools are needed.
+xcpretty is used to generate a JSON Compilation Database from ``xcodebuild`` log.
 
-- [xcpretty](https://github.com/xcpretty/xcpretty) generates test reports
+See install instructions [here](https://github.com/xcpretty/xcpretty).
 
 ### SwiftLint
 
@@ -101,23 +101,23 @@ sonar.projectVersion=1.0
 # Path is relative to the sonar-project.properties file. Defaults to .
 # Use commas to specify more than one folder.
 sonar.sources=iOSApp
+# Tests source code location.
+# Path is relative to the sonar-project.properties file. Defaults to empty.
+# Use commas to specify more than one folder.
 sonar.tests=iOSAppTests
 
-# Path to test report (junit.xml)
-# Defaults to build/reports
-# sonar.apple.junit.reportsPath=
-
-# Path to the result bundle (xcodebuild)
+# Path to the Xcode result bundle file. 
+# The path is relative to the project base directory.
 # Defaults to build/result.xcresult
-# sonar.apple.coverage.resultBundlePath=
+# sonar.apple.resultBundlePath=custom/path/to/file.xcresult
 
 # Path to xcodebuild.log file
 # Defaults to build
-# sonar.apple.xcodebuild.logPath=
+# sonar.apple.xcodebuild.logPath=custom/path/to/file.log
 
 # Path to periphery.log file
 # Defaults to build
-# sonar.apple.periphery.logPath=
+# sonar.apple.periphery.logPath=custom/path/to/file.log
 
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
@@ -131,8 +131,7 @@ Use the following commands from the root folder to start an analysis:
 
 ```bash
 
-# Run tests with xcpretty to generate test report in build/reports/junit.xml
-# Also saves Xcode log to build/xcodebuild.log (this is necessary for Objective-C code analysis)
+# Run tests 
 # Don't forget to add -workspace to the build command if your project is part of a workspace
 # Don't forget to activate 'Gather coverage' option in the app scheme or add '-enableCodeCoverage YES' to the following command
 $ xcodebuild \
@@ -142,7 +141,7 @@ $ xcodebuild \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   -derivedDataPath ./derivedData \
   -resultBundlePath build/result.xcresult \
-   clean test | xcpretty --report junit
+   clean test
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
 # Don't forget to add --workspace to the build command if your project is part of a workspace
@@ -162,10 +161,10 @@ $ xcodebuild \
   -scheme MyApp \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log | xcpretty --report junit
-
+   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log
   
 # Run the analysis and publish to the SonarQube server
+# Don't forget to specify `sonar.host.url` and `sonar.login` in `sonar-project.properties` or supply it to the following command.
 $ sonar-scanner
 ```
 
