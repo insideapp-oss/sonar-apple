@@ -47,13 +47,9 @@ public class ApplePlugin implements Plugin {
 
     public static final String APPLE_CATEGORY = "Apple";
 
-    public static final String TESTS_SUBCATEGORY = "Tests";
-
     public static final String OCLINT_SUBCATEGORY = "OCLint";
 
     public static final String PERIPHERY_SUBCATEGORY = "Periphery";
-
-    public static final String COVERAGE_SUBCATEGORY = "Coverage";
 
     @Override
     public void define(Context context) {
@@ -84,9 +80,10 @@ public class ApplePlugin implements Plugin {
 
         // OCLint
         context.addExtension(
-                PropertyDefinition.builder(OCLintSensor.LOG_PATH_KEY)
-                        .name("xcodebuild log")
-                        .description("Path to xcodebuild log file. The path may be either absolute or relative to the project base directory.")
+                PropertyDefinition.builder(OCLintSensor.JSON_COMPILATION_DATABASE_KEY)
+                        .name("JSON Compilation Database path")
+                        .description("Path to JSON Compilation Database folder. The path may be either absolute or relative to the project base directory.")
+                        .defaultValue(OCLintSensor.JSON_COMPILATION_DATABASE_KEY)
                         .onQualifiers(Qualifiers.PROJECT)
                         .category(APPLE_CATEGORY)
                         .subCategory(OCLINT_SUBCATEGORY)

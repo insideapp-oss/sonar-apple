@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
@@ -34,6 +35,9 @@ public class OCLintSensorTest {
         OCLintSensor sensor = new OCLintSensor(context);
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
         sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("OCLint sensor");
+        assertThat(descriptor.name()).isEqualTo("OCLint Sensor");
+
+        assertThat(descriptor.languages()).hasSize(1);
+        assertThat(descriptor.languages()).element(0).isEqualTo(ObjectiveC.KEY);
     }
 }

@@ -38,7 +38,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OCLintSensor implements Sensor {
+public final class OCLintSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
 
@@ -48,27 +48,27 @@ public class OCLintSensor implements Sensor {
 
     private static final int COMMAND_TIMEOUT = 30 * 60 * 1000;
 
-    private static final String DEFAULT_LOG_PATH = "build";
-
-    public static final String LOG_PATH_KEY = "sonar.apple.xcodebuild.logPath";
-
     public static final String LOG_FILENAME = "xcodebuild.log";
+
+    public static final String JSON_COMPILATION_DATABASE_KEY = "sonar.apple.jsonCompilationDatabasePath";
+    public static final String DEFAULT_JSON_COMPILATION_DATABASE_PATH = "build/json_compilation_database";
 
     private final SensorContext context;
 
-    public OCLintSensor(SensorContext context) {
-        this.context = context;
-    }
+    protected OCLintSensor(final SensorContext context) { this.context = context; }
 
-    protected String logPath() {
+    private String logPath() {
         return context.config()
-                .get(LOG_PATH_KEY)
-                .orElse(DEFAULT_LOG_PATH);
+                .get(JSON_COMPILATION_DATABASE_KEY)
+                .orElse(DEFAULT_JSON_COMPILATION_DATABASE_PATH);
     }
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-        sensorDescriptor.onlyOnLanguage(ObjectiveC.KEY).name("OCLint sensor").onlyOnFileType(InputFile.Type.MAIN);
+        sensorDescriptor
+                .onlyOnLanguage(ObjectiveC.KEY)
+                .name("OCLint Sensor")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
