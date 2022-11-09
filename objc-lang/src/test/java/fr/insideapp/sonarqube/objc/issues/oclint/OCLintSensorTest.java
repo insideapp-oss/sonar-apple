@@ -68,8 +68,9 @@ public class OCLintSensorTest {
 
     @Test
     public void executeSuccess() {
+        // TODO
         assertContainer(new Container(
-                "compilation_database"
+                "compilation_database/twoFiles"
         ));
     }
 
