@@ -43,12 +43,6 @@ The plugin was tested with Xcode 13+, but should work with older versions.
 
 Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
 
-### xcpretty
-
-xcpretty is used to generate a JSON Compilation Database from ``xcodebuild`` log.
-
-See install instructions [here](https://github.com/xcpretty/xcpretty).
-
 ### SwiftLint
 
 SwiftLint is used to analyse Swift source files.
@@ -119,6 +113,11 @@ sonar.tests=iOSAppTests
 # Defaults to build
 # sonar.apple.periphery.logPath=custom/path/to/file.log
 
+# Path to the JSON Compilation Database folder
+# The path is relative to the project base directory.
+# Defaults to build/json_compilation_database
+# sonar.apple.jsonCompilationDatabasePath=custom/path/to/folder
+
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
 ```
@@ -131,9 +130,20 @@ Use the following commands from the root folder to start an analysis:
 
 ```bash
 
-# Run tests 
+# Don't forget to add -workspace to the build command if your project is part of a workspace
+
+# Clean
+$ xcodebuild \
+  -project MyApp.xcodeproj \
+  -scheme MyApp \
+  -sdk iphonesimulator \
+  -derivedDataPath ./derivedData \
+   clean
+
 # Don't forget to add -workspace to the build command if your project is part of a workspace
 # Don't forget to activate 'Gather coverage' option in the app scheme or add '-enableCodeCoverage YES' to the following command
+
+# Run tests 
 $ xcodebuild \
   -project MyApp.xcodeproj \
   -scheme MyApp \
@@ -141,7 +151,8 @@ $ xcodebuild \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   -derivedDataPath ./derivedData \
   -resultBundlePath build/result.xcresult \
-   clean test
+  OTHER_CFLAGS="\$(inherited) -gen-cdb-fragment-path build/compilation_database" \
+  test
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
 # Don't forget to add --workspace to the build command if your project is part of a workspace
@@ -154,15 +165,6 @@ $ periphery scan \
   --format xcode \
   --quiet | tee build/periphery.log
 
-# This rebuild is required to perform Objective-C issue analysis
-# Skip it if your project doe not use Objective-C, or if you do want to report Objective-C issues
-$ xcodebuild \
-  -project MyApp.xcodeproj \
-  -scheme MyApp \
-  -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log
-  
 # Run the analysis and publish to the SonarQube server
 # Don't forget to specify `sonar.host.url` and `sonar.login` in `sonar-project.properties` or supply it to the following command.
 $ sonar-scanner

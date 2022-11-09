@@ -83,7 +83,7 @@ public class ApplePlugin implements Plugin {
                 PropertyDefinition.builder(OCLintSensor.JSON_COMPILATION_DATABASE_KEY)
                         .name("JSON Compilation Database path")
                         .description("Path to JSON Compilation Database folder. The path may be either absolute or relative to the project base directory.")
-                        .defaultValue(OCLintSensor.JSON_COMPILATION_DATABASE_KEY)
+                        .defaultValue(OCLintSensor.DEFAULT_JSON_COMPILATION_DATABASE_PATH)
                         .onQualifiers(Qualifiers.PROJECT)
                         .category(APPLE_CATEGORY)
                         .subCategory(OCLINT_SUBCATEGORY)
