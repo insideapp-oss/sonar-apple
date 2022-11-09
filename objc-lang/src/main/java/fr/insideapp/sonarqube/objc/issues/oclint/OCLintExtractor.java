@@ -1,11 +1,17 @@
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import org.buildobjects.process.ProcBuilder;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
+
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 public class OCLintExtractor {
 
@@ -14,20 +20,29 @@ public class OCLintExtractor {
     private static final int COMMAND_EXIT_CODE = 0;
     private final SensorContext context;
 
+    private ObjectMapper objectMapper;
+
     public OCLintExtractor(SensorContext context) {
         this.context = context;
+        objectMapper = new ObjectMapper()
+                .disable(FAIL_ON_UNKNOWN_PROPERTIES)
+                .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public void extract(File compileCommandsFolder) {
-        String oclintReport = new ProcBuilder("oclint-json-compilation-database")
+    public OCLintReport extract(File compileCommandsFolder) throws JsonProcessingException {
+        String jsonReport = new ProcBuilder("oclint-json-compilation-database")
                 .withArgs(buildSourceArguments())
                 .withArgs("-p", compileCommandsFolder.getAbsolutePath())
-                .withArgs("--", "-report-type", "json")
+                .withArgs("--")
+                .withArgs("-report-type", "json")
                 .withTimeoutMillis(COMMAND_TIMEOUT)
                 .withExpectedExitStatuses(COMMAND_EXIT_CODE)
                 .run()
                 .getOutputString();
 
+        OCLintReport oclintReport = objectMapper.readValue(jsonReport, OCLintReport.class);
+        LOGGER.info("OCLint found {} violation(s)", oclintReport.violations.length);
+        return oclintReport;
     }
 
     private String[] buildSourceArguments() {
