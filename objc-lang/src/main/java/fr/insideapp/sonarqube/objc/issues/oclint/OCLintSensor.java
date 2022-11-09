@@ -17,15 +17,10 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.apple.commons.ExtensionFileFilter;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
-import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.RegExUtils;
-import org.buildobjects.process.ProcBuilder;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -34,26 +29,11 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public final class OCLintSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
-
-    private static final String XCPRETTY_COMMAND = "xcpretty";
-
-    private static final String OCLINT_COMMAND = "oclint-json-compilation-database";
-
-    private static final int COMMAND_TIMEOUT = 30 * 60 * 1000;
-    private static final int COMMAND_EXIT_CODE = 0;
-
-    public static final String LOG_FILENAME = "xcodebuild.log";
 
     public static final String JSON_COMPILATION_DATABASE_KEY = "sonar.apple.jsonCompilationDatabasePath";
     public static final String DEFAULT_JSON_COMPILATION_DATABASE_PATH = "build/json_compilation_database";
@@ -73,7 +53,10 @@ public final class OCLintSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
+        checkPrerequisites();
+    }
 
+    private void checkPrerequisites() {
         File jsonCompilationDatabaseFolder = jsonCompilationDatabase();
 
         // Look for the JSON Compilation Database folder
@@ -90,26 +73,46 @@ public final class OCLintSensor implements Sensor {
             return;
         }
 
+        buildCompileCommands(jsonCompilationDatabaseFolder);
+    }
+
+    private void buildCompileCommands(File jsonCompilationDatabaseFolder) {
         // Building the JSON Database
         OCLintJSONDatabaseBuilder builder = new OCLintJSONDatabaseBuilder();
         String compileCommands = builder.build(jsonCompilationDatabaseFolder);
+        writeCompileCommands(compileCommands);
+    }
 
+    private void writeCompileCommands(String compileCommands) {
         // Write to the final file
         File jsonCompilationCommandsFile = jsonCompilationCommands();
         jsonCompilationCommandsFile.getParentFile().mkdirs();
         try (FileWriter jsonCompilationCommandsFileWriter = new FileWriter(jsonCompilationCommandsFile)) {
             jsonCompilationCommandsFileWriter.write(compileCommands);
+            extractReport(jsonCompilationCommandsFile);
         } catch (IOException e) {
             LOGGER.error("Failed to write the JSON Compilation Database to the file. Exception: {}", e);
+            LOGGER.debug("{}", e);
         }
+    }
 
-        /*try {
-            List<ReportIssue> issues = runAnalysis();
-            ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY);
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }*/
+    private void extractReport(File jsonCompilationCommandsFile) {
+        // Extract
+        OCLintExtractor extractor = new OCLintExtractor(context);
+        try {
+            OCLintReport report = extractor.extract(jsonCompilationCommandsFile.getParentFile());
+            parseReport(report);
+        } catch (Exception e) {
+            LOGGER.error("Extracting the JSON Database (OCLint) failed.");
+            LOGGER.debug("{}", e);
+        }
+    }
+
+    private void parseReport(OCLintReport report) {
+        // Parse issues
+        List<ReportIssue> issues = new OCLintReportParser().collect(report);
+        ReportIssueRecorder issueRecorder = new ReportIssueRecorder(context);
+        issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY);
     }
 
     private String jsonCompilationDatabasePath() {
@@ -138,58 +141,4 @@ public final class OCLintSensor implements Sensor {
         return new File(jsonCompilationCommandsAbsolutePath);
     }
 
-    private List<ReportIssue> runAnalysis() throws IOException {
-
-        // Look for xcodebuild.log file
-        File xcodebuildLogFile = new File(jsonCompilationDatabasePath(), LOG_FILENAME);
-        if (!xcodebuildLogFile.exists()) {
-            LOGGER.error("Failed to locate xcodebuild.log file at {}", xcodebuildLogFile.getAbsolutePath());
-            return new ArrayList<>();
-        }
-
-        File compileCommandsFile = null;
-        try (InputStream is = new FileInputStream((xcodebuildLogFile))) {
-
-            // Generate compile_commands.json
-            compileCommandsFile = new File("compile_commands.json");
-            String xcodebuildContent = IOUtils.toString(is, StandardCharsets.UTF_8);
-            LOGGER.info("Running '{} -r json-compilation-database {}'...", XCPRETTY_COMMAND, compileCommandsFile.getAbsolutePath());
-            ProcBuilder.filter(xcodebuildContent, XCPRETTY_COMMAND, "-r", "json-compilation-database", "-o", compileCommandsFile.getAbsolutePath());
-
-            // Run OCLint
-            final String sourcesInput = context.config().get("sonar.sources").orElse(".");
-            String[] sources = sourcesInput.split(",");
-            String[] sourceArgs = new String[sources.length * 2];
-            for (int i = 0; i < sources.length; i++) {
-                sourceArgs[i * 2] = "--include";
-                sourceArgs[i * 2 + 1] = String.format("./%s", sources[i]);
-            }
-            LOGGER.info("Running '{} {} -- -report-type json'...", OCLINT_COMMAND, String.join(" ", sourceArgs));
-            String output = new ProcBuilder(OCLINT_COMMAND, sourceArgs)
-                    .withArgs("--", "-report-type", "json")
-                    .withTimeoutMillis(COMMAND_TIMEOUT)
-                    .ignoreExitStatus()
-                    .run()
-                    .getOutputString();
-
-            if (output.isEmpty()) {
-                LOGGER.warn("Failed to run OCLint analysis, please check your build parameters");
-                return new ArrayList<>();
-            } else {
-                // Parse issues
-                List<ReportIssue> issues = new ArrayList<>();
-                        //new OCLintReportParser().parse(output);
-                LOGGER.info("Found issues: {}", issues.size());
-                return issues;
-            }
-
-        } catch (Exception e) {
-            throw new IOException(e);
-        } finally {
-
-            if (compileCommandsFile != null) {
-                Files.delete(compileCommandsFile.toPath());
-            }
-        }
-    }
 }
