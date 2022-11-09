@@ -177,7 +177,8 @@ public final class OCLintSensor implements Sensor {
                 return new ArrayList<>();
             } else {
                 // Parse issues
-                List<ReportIssue> issues = new OCLintReportParser().parse(output);
+                List<ReportIssue> issues = new ArrayList<>();
+                        //new OCLintReportParser().parse(output);
                 LOGGER.info("Found issues: {}", issues.size());
                 return issues;
             }

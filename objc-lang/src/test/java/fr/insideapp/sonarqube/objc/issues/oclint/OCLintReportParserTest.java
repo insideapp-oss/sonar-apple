@@ -17,34 +17,66 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestableSummary;
+import fr.insideapp.sonarqube.apple.commons.tests.*;
+import fr.insideapp.sonarqube.apple.commons.tests.models.AppleTestGroup;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.measures.CoreMetrics;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class OCLintReportParserTest {
 
-    private static final String REPORT_PATH = "/oclint-report.json";
+    private static final String REPORT_PATH = "src/test/resources/oclint/parser/oclint-report.json";
+
+    private OCLintReportParser parser;
+    private ObjectMapper objectMapper;
+
+    @Before
+    public void prepare() {
+        parser = new OCLintReportParser();
+        objectMapper = new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES);
+    }
 
     @Test
-    public void parse() throws IOException {
+    public void collect() throws IOException {
 
-        OCLintReportParser parser = new OCLintReportParser();
-        String text = IOUtils.toString(Objects.requireNonNull(this.getClass().getResourceAsStream(REPORT_PATH)), StandardCharsets.UTF_8);
-        List<ReportIssue> issues = parser.parse(text);
 
+        // Data setup
+        File jsonFile = new File(REPORT_PATH);
+        String jsonFileContent = FileUtils.readFileToString(jsonFile, Charset.defaultCharset());
+        OCLintReport report = objectMapper.readValue(jsonFileContent, OCLintReport.class);
+
+        // Running our code
+        List<ReportIssue> issues = parser.collect(report);
+
+        // Asserting
         assertThat(issues).hasSize(1);
 
-        ReportIssue issue1 = issues.get(0);
-        assertThat(issue1.getFilePath()).isEqualTo("/SQApp/SQApp/Greeting.m");
-        assertThat(issue1.getRuleId()).isEqualTo("short-variable-name");
-        assertThat(issue1.getMessage()).isEqualTo("Length of variable name `s` is 1, which is shorter than the threshold of 3");
-        assertThat(issue1.getLineNumber()).isEqualTo(18);
+        ReportIssue issue = issues.get(0);
+        assertThat(issue.getFilePath()).isEqualTo("/SQApp/SQApp/Greeting.m");
+        assertThat(issue.getRuleId()).isEqualTo("short-variable-name");
+        assertThat(issue.getMessage()).isEqualTo("Length of variable name `s` is 1, which is shorter than the threshold of 3");
+        assertThat(issue.getLineNumber()).isEqualTo(18);
+
     }
+
 }
