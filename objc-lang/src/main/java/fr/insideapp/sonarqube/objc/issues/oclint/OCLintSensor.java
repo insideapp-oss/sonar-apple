@@ -87,8 +87,10 @@ public final class OCLintSensor implements Sensor {
         // Write to the final file
         File jsonCompilationCommandsFile = jsonCompilationCommands();
         jsonCompilationCommandsFile.getParentFile().mkdirs();
-        try (FileWriter jsonCompilationCommandsFileWriter = new FileWriter(jsonCompilationCommandsFile)) {
+        try {
+            FileWriter jsonCompilationCommandsFileWriter = new FileWriter(jsonCompilationCommandsFile);
             jsonCompilationCommandsFileWriter.write(compileCommands);
+            jsonCompilationCommandsFileWriter.close();
             extractReport(jsonCompilationCommandsFile);
         } catch (IOException e) {
             LOGGER.error("Failed to write the JSON Compilation Database to the file. Exception: {}", e);

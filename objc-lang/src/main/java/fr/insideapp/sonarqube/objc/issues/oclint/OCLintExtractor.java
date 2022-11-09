@@ -51,7 +51,7 @@ public class OCLintExtractor {
         final String[] sourceArgs = new String[sources.length * 2];
         for (int i = 0; i < sources.length; i++) {
             sourceArgs[i * 2] = "--include";
-            sourceArgs[i * 2 + 1] = String.format("%s", sources[i]);
+            sourceArgs[i * 2 + 1] = String.format("./%s", sources[i]);
         }
         return sourceArgs;
     }
