@@ -33,46 +33,60 @@ The plugin is designed to support Swift 5 syntax.
 
 ## Requirements
 
-### Xcode
+### Mandatory
 
-Download Xcode from [Apple Developer](https://developer.apple.com/download/).
+#### Xcode
 
-The plugin was tested with Xcode 13+, but should work with older versions.
+Xcode is required in order to build the project and run tests.
+You can download it from [Apple Developer](https://developer.apple.com/download/), but we strongly recommend to use a version manager such as [xcinfo](https://github.com/xcodereleases/xcinfo).
 
-### sonar-scanner (requires Java)
+> **Note**
+> The plugin was tested with Xcode 13+, but should work with older versions (down to Xcode 11).
 
-Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
+#### sonar-scanner
 
-### SwiftLint
+sonar-scanner is required to run this plugin, build and send the metrics to Sonar.  
+You can install it as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)), but we strongly recommend to install it with [Homebrew](https://github.com/Homebrew/brew).
+
+> **Note**
+> sonar-scanner requires Java.
+> We recommend to use a Java environment manager such as `jenv` to install OCLint to control the version.
+
+### Optional
+
+#### SwiftLint
 
 SwiftLint is used to analyse Swift source files.
+You can install it as explained in [here](https://github.com/realm/SwiftLint).
 
-See install instructions [here](https://github.com/realm/SwiftLint).
+> **Warning**
+> Without SwiftLint many issues will not be detected. This may decrease the quality of the analysis.  
 
-### OCLint
+#### OCLint
 
 OCLint is used to analyse Objective-C source files.
+You can install it as explained in [here](https://docs.oclint.org/en/stable/intro/homebrew.html).
 
-See install instructions [here](https://docs.oclint.org/en/stable/intro/homebrew.html).
+> **Note**
+> We recommend to use a `Gemfile` to install OCLint to control the version.
 
-Important: after initial installation, macOS will block usage of OCLint libraries. In order to get rid of the manual verification of each of them, use the following commands:
+> **Warning**
+> Important: after initial installation, macOS will block usage of OCLint libraries. In order to get rid of the manual verification of each of them, use the following commands:
+>
+> ```bash
+> $ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
+> $ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
+> ```
 
-```bash
-$ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
-$ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
-```
-
-### mobsfscan
+#### mobsfscan
 
 mobsfscan is used to analyse Swift & Objective-C source files to find insecure code patterns.
+You can install it as explained in [here](https://github.com/MobSF/mobsfscan).
 
-See install instructions [here](https://github.com/MobSF/mobsfscan).
-
-### Periphery
+#### Periphery
 
 Periphery is used to analyse Swift source files to find unused code.
-
-See install instructions [here](https://github.com/peripheryapp/periphery).
+You can install it as explained in [here](https://github.com/peripheryapp/periphery).
 
 ## Installation (on the server)
 
@@ -105,10 +119,6 @@ sonar.tests=iOSAppTests
 # Defaults to build/result.xcresult
 # sonar.apple.resultBundlePath=custom/path/to/file.xcresult
 
-# Path to xcodebuild.log file
-# Defaults to build
-# sonar.apple.xcodebuild.logPath=custom/path/to/file.log
-
 # Path to periphery.log file
 # Defaults to build
 # sonar.apple.periphery.logPath=custom/path/to/file.log
@@ -138,6 +148,7 @@ $ xcodebuild \
   -scheme MyApp \
   -sdk iphonesimulator \
   -derivedDataPath ./derivedData \
+  -quiet \
    clean
 
 # Don't forget to add -workspace to the build command if your project is part of a workspace
@@ -152,6 +163,7 @@ $ xcodebuild \
   -derivedDataPath ./derivedData \
   -resultBundlePath build/result.xcresult \
   OTHER_CFLAGS="\$(inherited) -gen-cdb-fragment-path build/compilation_database" \
+  -quiet \
   test
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
