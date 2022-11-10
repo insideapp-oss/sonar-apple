@@ -38,15 +38,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 public class OCLintSensorTest {
 
-    private static class Container {
-        final String jsonCompilationDatabasePath;
-
-        public Container(String jsonCompilationDatabasePath) {
-            this.jsonCompilationDatabasePath = jsonCompilationDatabasePath;
-        }
-    }
-
-    private static final String BASE_DIR = "src/test/resources/oclint";
+    private static final String BASE_DIR = "src/test/resources/oclint/sensor";
 
     private SensorContextTester context;
     private OCLintSensor sensor;
@@ -64,27 +56,6 @@ public class OCLintSensorTest {
         assertThat(defaultSensorDescriptor.name()).isEqualTo("OCLint Sensor");
         assertThat(defaultSensorDescriptor.languages()).hasSize(1);
         assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(ObjectiveC.KEY);
-    }
-
-    @Test
-    public void executeSuccess() {
-        // TODO
-        assertContainer(new Container(
-                "compilation_database/twoFiles"
-        ));
-    }
-
-    private void assertContainer(Container container) {
-        // update setting to get a custom location for JSON Compilation Database path
-        MapSettings settings = new MapSettings();
-        settings.setProperty(OCLintSensor.JSON_COMPILATION_DATABASE_KEY, container.jsonCompilationDatabasePath);
-        context.setSettings(settings);
-
-        // Running our code
-        sensor.execute(context);
-
-        // TODO: add assertions
-
     }
 
 }
