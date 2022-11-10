@@ -17,8 +17,8 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverage;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverageMetadata;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -26,7 +26,7 @@ import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.util.Set;
+import java.util.List;
 
 public class AppleCoverageParser {
 
@@ -38,16 +38,11 @@ public class AppleCoverageParser {
         this.context = context;
     }
 
-    public void collect(JSONObject coverageData) {
+    public void collect(List<ActionCodeCoverage> codeCoverages) {
+        LOGGER.info("{} files have coverage data, parsing it", codeCoverages.size());
 
-        // keys are file path
-        Set<String> filesPath = coverageData.keySet();
-        LOGGER.info("{} files have coverage data, parsing it", filesPath.size());
-
-        for (String filePath : filesPath) {
-            JSONArray linesCoverage = coverageData.getJSONArray(filePath);
-
-            InputFile resource = getFile(filePath);
+        for (ActionCodeCoverage codeCoverage : codeCoverages) {
+            InputFile resource = getFile(codeCoverage.filePath);
             if (resource == null) {
                 // skipping coverage for this file, since it's unknown
                 continue;
@@ -57,19 +52,16 @@ public class AppleCoverageParser {
             NewCoverage newCoverage = context.newCoverage();
             newCoverage.onFile(resource);
 
-            for (int i = 0; i < linesCoverage.length(); i++) {
-                JSONObject lineCoverage = linesCoverage.getJSONObject(i);
-                int lineNumber = lineCoverage.getInt("line");
-                boolean isExecutable = lineCoverage.getBoolean("isExecutable");
-                if (isExecutable) {
+            for (ActionCodeCoverageMetadata metadata : codeCoverage.coverageMetadata) {
+                if (metadata.isExecutable) {
                     // it is possible the execution count overflows the int limit
                     // if this is the case, we fall back to the maximum value available
-                    int hitsCount = lineCoverage.getInt("executionCount");
+                    int hitsCount = metadata.hitsCount.intValue();
                     if (hitsCount < 0) {
                         hitsCount = Integer.MAX_VALUE;
                     }
                     // recording the line hit
-                    newCoverage.lineHits(lineNumber, hitsCount);
+                    newCoverage.lineHits(metadata.lineNumber, hitsCount);
                 }
             }
 

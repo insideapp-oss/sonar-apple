@@ -15,15 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.result.models;
+package fr.insideapp.sonarqube.apple.commons.result.models.coverage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-public class ActionResult {
+import java.util.List;
+import java.util.Map;
 
-    @JsonProperty("testsRef")
-    public Reference testsRef;
+public class ActionCodeCoverage {
 
-    @JsonProperty("coverage")
-    public Coverage coverage;
+    public String filePath;
+
+    public List<ActionCodeCoverageMetadata> coverageMetadata;
+
+    public ActionCodeCoverage(Map.Entry<String, List<ActionCodeCoverageMetadata>> entry) {
+        this.filePath = entry.getKey();
+        this.coverageMetadata = entry.getValue();
+    }
 
 }

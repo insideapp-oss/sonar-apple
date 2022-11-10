@@ -18,12 +18,10 @@
 package fr.insideapp.sonarqube.apple.commons.result.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-public class ActionResult {
 
-    @JsonProperty("testsRef")
-    public Reference testsRef;
+public class Coverage {
 
-    @JsonProperty("coverage")
-    public Coverage coverage;
+    @JsonProperty("archiveRef")
+    public Reference archiveReference;
 
 }
