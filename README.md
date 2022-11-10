@@ -139,23 +139,11 @@ For a complete list of available options, please refer to the [SonarQube documen
 Use the following commands from the root folder to start an analysis:
 
 ```bash
-
-# Don't forget to add -workspace to the build command if your project is part of a workspace
-
-# Clean
-$ xcodebuild \
-  -project MyApp.xcodeproj \
-  -scheme MyApp \
-  -sdk iphonesimulator \
-  -derivedDataPath ./derivedData \
-  -quiet \
-   clean
-
 # Don't forget to add -workspace to the build command if your project is part of a workspace
 # Don't forget to activate 'Gather coverage' option in the app scheme or add '-enableCodeCoverage YES' to the following command
 
 # Run tests 
-$ xcodebuild \
+$ xcrun xcodebuild \
   -project MyApp.xcodeproj \
   -scheme MyApp \
   -sdk iphonesimulator \
@@ -164,7 +152,7 @@ $ xcodebuild \
   -resultBundlePath build/result.xcresult \
   OTHER_CFLAGS="\$(inherited) -gen-cdb-fragment-path build/compilation_database" \
   -quiet \
-  test
+  clean test
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
 # Don't forget to add --workspace to the build command if your project is part of a workspace
