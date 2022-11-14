@@ -44,6 +44,7 @@ public class ValuesDeserializer extends JsonDeserializer<ArrayList<?>> implement
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public ArrayList<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         ObjectCodec codec = jsonParser.getCodec();
         JsonNode tree = codec.readTree(jsonParser);
