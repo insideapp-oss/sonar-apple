@@ -41,14 +41,14 @@ public class OCLintReportParser {
 
         return Arrays.asList(report.violations)
                 .stream()
-                .map(violation -> {
-                    return new ReportIssue(
+                .map(violation ->
+                    new ReportIssue(
                             violation.rule,
                             violation.message,
                             violation.path,
                             violation.line
-                    );
-                })
+                    )
+                )
                 .collect(Collectors.toList());
     }
 
