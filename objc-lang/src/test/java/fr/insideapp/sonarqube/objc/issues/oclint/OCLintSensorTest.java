@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 public class OCLintSensorTest {
 
-    private static final String BASE_DIR = "src/test/resources/oclint/sensor";
+    private static final String BASE_DIR = "src/test/resources/oclint";
 
     private SensorContextTester context;
     private OCLintSensor sensor;
