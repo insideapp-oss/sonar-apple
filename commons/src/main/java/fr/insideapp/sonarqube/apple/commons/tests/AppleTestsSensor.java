@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.apple.commons.tests;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultExtractor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
-import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
+import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestableSummary;
 import org.sonar.api.batch.fs.InputFile;
@@ -93,7 +93,7 @@ public class AppleTestsSensor extends AppleResultSensor {
         }
     }
 
-    private ActionTestPlanRunSummaries getTestPlanRunSummaries(AppleResultExtractor extractor, TestsReference reference) {
+    private ActionTestPlanRunSummaries getTestPlanRunSummaries(AppleResultExtractor extractor, Reference reference) {
         try {
             return extractor.getTestPlanRunSummaries(resultBundle(), reference);
         } catch (Exception e) {

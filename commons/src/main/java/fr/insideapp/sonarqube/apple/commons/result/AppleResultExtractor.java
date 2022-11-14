@@ -18,16 +18,24 @@
 package fr.insideapp.sonarqube.apple.commons.result;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverage;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverageMetadata;
 import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
-import fr.insideapp.sonarqube.apple.commons.result.models.TestsReference;
+import org.apache.commons.io.FileUtils;
 import org.buildobjects.process.ProcBuilder;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
@@ -60,7 +68,7 @@ public class AppleResultExtractor {
         return xcResultRecord;
     }
 
-    public ActionTestPlanRunSummaries getTestPlanRunSummaries(File resultBundle, TestsReference testsReference) throws JsonProcessingException {
+    public ActionTestPlanRunSummaries getTestPlanRunSummaries(File resultBundle, Reference testsReference) throws JsonProcessingException {
         // get the test plan data of the build result as JSON
         String xcresultData = xcrun()
                 .withArgs("xcresulttool", "get", "--format", "json")
@@ -76,7 +84,60 @@ public class AppleResultExtractor {
         return actionTestPlanRunSummaries;
     }
 
+    public List<ActionCodeCoverage> getCoverage(File resultBundle, List<Reference> archiveReferences) throws IOException {
+        File resultBundlerParentFolder = resultBundle.getParentFile();
+        File coverageArchive = new File(resultBundlerParentFolder, "coverage.xccovarchive");
+        // we delete (to be sure) as writing to an existing .xccovarchive append the data
+        FileUtils.deleteDirectory(coverageArchive);
+        // exporting the archive references into a real archive we can read
+        exportCoverageArchive(archiveReferences, resultBundle, coverageArchive);
+        // get the raw data of the build result as JSON
+        try {
+            String coverageData = xcrun()
+                    .withArgs("xccov", "view")
+                    .withArgs("--archive", "--json")
+                    .withArgs(coverageArchive.getAbsolutePath())
+                    .withTimeoutMillis(COMMAND_TIMEOUT)
+                    .withExpectedExitStatuses(COMMAND_EXIT_CODE)
+                    .run()
+                    .getOutputString();
+
+            Map<String, List<ActionCodeCoverageMetadata>> mappedCoverageData = objectMapper.readValue(coverageData, new TypeReference<>() {});
+            LOGGER.debug("Coverage data : {}", mappedCoverageData.size());
+
+            return mappedCoverageData
+                    .entrySet()
+                    .stream()
+                    .map(ActionCodeCoverage::new)
+                    .collect(Collectors.toList());
+
+        } finally {
+            // cleanup anyway
+            FileUtils.deleteDirectory(coverageArchive);
+        }
+    }
+
     // Private
+
+    private void exportCoverageArchive(List<Reference> archiveReferences, File resultBundle, File coverageArchive) {
+        // for each archive, we include it in a common coverage archive
+        for (Reference archiveReference : archiveReferences) {
+            try {
+                xcrun()
+                        .withArgs("xcresulttool", "export")
+                        .withArgs("--type", "directory")
+                        .withArgs("--path", resultBundle.getAbsolutePath())
+                        .withArgs("--id", archiveReference.id)
+                        .withArgs("--output-path", coverageArchive.getAbsolutePath())
+                        .withTimeoutMillis(COMMAND_TIMEOUT)
+                        .withExpectedExitStatuses(COMMAND_EXIT_CODE)
+                        .run();
+            } catch (Exception e) {
+                LOGGER.error("The export for the coverage archive '{}' produced an exception. This exception will be ignored.", archiveReference);
+                LOGGER.debug("Exception: {}", e);
+            }
+        }
+    }
 
     private ProcBuilder xcrun() {
         return new ProcBuilder("xcrun");

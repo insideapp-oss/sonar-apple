@@ -17,8 +17,12 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverage;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverageMetadata;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -27,25 +31,43 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppleCoverageParserTest {
 
+    private static final String BASE_DIR = "src/test/resources/coverage";
+    private SensorContextTester context;
+    private AppleCoverageParser parser;
+
+    private ObjectMapper objectMapper;
+    @Before
+    public void prepare() {
+        context = SensorContextTester.create(new File(BASE_DIR));
+        parser = new AppleCoverageParser(context);
+        objectMapper = new ObjectMapper();
+    }
+
     @Test
     public void collect() throws IOException {
 
         // setting up
-        SensorContextTester context = SensorContextTester.create(new File("src/test/resources"));
         DefaultInputFile testFile = new TestInputFileBuilder("", "SQApp/ContentView.swift").setLanguage("swift").setLines(500).build();
         context.fileSystem().add(testFile);
-        File xccov = new File("src/test/resources/coverage/xccov.json");
-        String data = FileUtils.readFileToString(xccov, StandardCharsets.UTF_8);
-        JSONObject xccovJSON = new JSONObject(data);
+        File xccov = new File(BASE_DIR, "xccov.json");
+        String xccovData = FileUtils.readFileToString(xccov, StandardCharsets.UTF_8);
+        Map<String, List<ActionCodeCoverageMetadata>> mappedCoverageData = objectMapper.readValue(xccovData, new TypeReference<>() {});
+        List<ActionCodeCoverage> codeCoverages = mappedCoverageData
+                .entrySet()
+                .stream()
+                .map(ActionCodeCoverage::new)
+                .collect(Collectors.toList());
 
         // testing
-        AppleCoverageParser parser = new AppleCoverageParser(context);
-        parser.collect(xccovJSON);
+        parser.collect(codeCoverages);
 
         // asserting
         assertThat(context.lineHits(testFile.key(), 1)).isNull();

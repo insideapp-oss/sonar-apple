@@ -17,13 +17,20 @@
  */
 package fr.insideapp.sonarqube.apple.commons.coverage;
 
+import fr.insideapp.sonarqube.apple.commons.result.AppleResultExtractor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
-import org.json.JSONObject;
+import fr.insideapp.sonarqube.apple.commons.result.models.Record;
+import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
+import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverage;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AppleCoverageSensor extends AppleResultSensor {
     private static final Logger LOGGER = Loggers.get(AppleCoverageSensor.class);
@@ -42,14 +49,39 @@ public class AppleCoverageSensor extends AppleResultSensor {
 
     @Override
     public void execute(SensorContext context) {
+
+        // Look for the Xcode result bundle file
+        if (!resultBundle().exists()) {
+            LOGGER.error("Failed to locate Xcode result bundle file.");
+            LOGGER.error("Expected location according to the configuration is {}", resultBundle().getAbsolutePath());
+            return;
+        }
+
         try {
-            // extracting the coverage data
-            AppleCoverageExtractor extractor = new AppleCoverageExtractor(context);
-            JSONObject coverageJSON = extractor.extract(resultBundle());
+
+            // extracting the result record
+            AppleResultExtractor resultExtractor = new AppleResultExtractor();
+            Record invocationRecord = resultExtractor.getInvocationRecord(resultBundle());
+
+            // getting the coverage archive references
+            // it is possible to have several archive, from a merged .xcresult bundle of multiple test plans
+            List<Reference> archiveReferences = invocationRecord
+                    .actions
+                    .stream()
+                    .map(action -> action.result.coverage)
+                    .filter(Objects::nonNull) // remove null values
+                    .map(coverage -> coverage.archiveReference)
+                    .filter(Objects::nonNull) // remove null values
+                    .collect(Collectors.toList());
+
+            LOGGER.info("Found {} coverage archive reference(s)", archiveReferences.size());
+
+            // retrieve the coverage from the result bundle for each references
+            List<ActionCodeCoverage> codeCoverages = resultExtractor.getCoverage(resultBundle(), archiveReferences);
 
             // parsing & reporting the coverage data
             AppleCoverageParser parser = new AppleCoverageParser(context);
-            parser.collect(coverageJSON);
+            parser.collect(codeCoverages);
 
         } catch (Exception e) {
             LOGGER.error("Extracting & parsing the coverage data produced the following exception. This exception will be ignored. Exception:", e);

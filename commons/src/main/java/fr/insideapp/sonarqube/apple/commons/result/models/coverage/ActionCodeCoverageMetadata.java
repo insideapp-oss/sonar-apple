@@ -15,15 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.result.models;
+package fr.insideapp.sonarqube.apple.commons.result.models.coverage;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-public class ActionResult {
 
-    @JsonProperty("testsRef")
-    public Reference testsRef;
+public class ActionCodeCoverageMetadata {
 
-    @JsonProperty("coverage")
-    public Coverage coverage;
+    @JsonProperty("isExecutable")
+    public boolean isExecutable;
+
+    @JsonProperty("line")
+    public int lineNumber;
+
+    @JsonProperty("executionCount")
+    public Long hitsCount;
 
 }
+

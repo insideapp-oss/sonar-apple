@@ -17,13 +17,19 @@
  */
 package fr.insideapp.sonarqube.apple.commons.result.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-public class ActionResult {
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValueDeserializer;
 
-    @JsonProperty("testsRef")
-    public Reference testsRef;
+public class Reference {
 
-    @JsonProperty("coverage")
-    public Coverage coverage;
+    @JsonProperty("id")
+    @JsonDeserialize(using = ValueDeserializer.class)
+    public String id;
+    @JsonCreator
+    public Reference(@JsonProperty("id") @JsonDeserialize(using = ValueDeserializer.class) String id) {
+        this.id = id;
+    }
 
 }
