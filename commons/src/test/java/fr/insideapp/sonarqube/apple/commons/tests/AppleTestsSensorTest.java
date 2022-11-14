@@ -105,7 +105,7 @@ public class AppleTestsSensorTest {
     private void assertContainer(Container container) {
         // update setting to get a custom location for Xcode result bundle path
         MapSettings settings = new MapSettings();
-        settings.setProperty(AppleResultSensor.RESULT_BUNDLE_PATH_KEY, "sensor.xcresult");
+        settings.setProperty(AppleResultSensor.RESULT_BUNDLE_PATH_KEY, container.resultBundlePath);
         context.setSettings(settings);
 
         String fullFileNamePath = container.fileNamePath + "." + EXTENSION;

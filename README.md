@@ -33,52 +33,60 @@ The plugin is designed to support Swift 5 syntax.
 
 ## Requirements
 
-### Xcode
+### Mandatory
 
-Download Xcode from [Apple Developer](https://developer.apple.com/download/).
+#### Xcode
 
-The plugin was tested with Xcode 13+, but should work with older versions.
+Xcode is required in order to build the project and run tests.
+You can download it from [Apple Developer](https://developer.apple.com/download/), but we strongly recommend to use a version manager such as [xcinfo](https://github.com/xcodereleases/xcinfo).
 
-### sonar-scanner (requires Java)
+> **Note**
+> The plugin was tested with Xcode 13+, but should work with older versions (down to Xcode 11).
 
-Install sonar-scanner as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)).
+#### sonar-scanner
 
-### xcpretty
+sonar-scanner is required to run this plugin, build and send the metrics to Sonar.  
+You can install it as explained in the [official documentation]((https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)), but we strongly recommend to install it with [Homebrew](https://github.com/Homebrew/brew).
 
-xcpretty is used to generate a JSON Compilation Database from ``xcodebuild`` log.
+> **Note**
+> sonar-scanner requires Java.
+> We recommend to use a Java environment manager such as `jenv` to install OCLint to control the version.
 
-See install instructions [here](https://github.com/xcpretty/xcpretty).
+### Optional
 
-### SwiftLint
+#### SwiftLint
 
 SwiftLint is used to analyse Swift source files.
+You can install it as explained in [here](https://github.com/realm/SwiftLint).
 
-See install instructions [here](https://github.com/realm/SwiftLint).
+> **Warning**
+> Without SwiftLint many issues will not be detected. This may decrease the quality of the analysis.  
 
-### OCLint
+#### OCLint
 
 OCLint is used to analyse Objective-C source files.
+You can install it as explained in [here](https://docs.oclint.org/en/stable/intro/homebrew.html).
 
-See install instructions [here](https://docs.oclint.org/en/stable/intro/homebrew.html).
+> **Note**
+> We recommend to use a `Gemfile` to install OCLint to control the version.
 
-Important: after initial installation, macOS will block usage of OCLint libraries. In order to get rid of the manual verification of each of them, use the following commands:
+> **Warning**
+> Important: after initial installation, macOS will block usage of OCLint libraries. In order to get rid of the manual verification of each of them, use the following commands:
+>
+> ```bash
+> $ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
+> $ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
+> ```
 
-```bash
-$ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
-$ sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
-```
-
-### mobsfscan
+#### mobsfscan
 
 mobsfscan is used to analyse Swift & Objective-C source files to find insecure code patterns.
+You can install it as explained in [here](https://github.com/MobSF/mobsfscan).
 
-See install instructions [here](https://github.com/MobSF/mobsfscan).
-
-### Periphery
+#### Periphery
 
 Periphery is used to analyse Swift source files to find unused code.
-
-See install instructions [here](https://github.com/peripheryapp/periphery).
+You can install it as explained in [here](https://github.com/peripheryapp/periphery).
 
 ## Installation (on the server)
 
@@ -111,13 +119,14 @@ sonar.tests=iOSAppTests
 # Defaults to build/result.xcresult
 # sonar.apple.resultBundlePath=custom/path/to/file.xcresult
 
-# Path to xcodebuild.log file
-# Defaults to build
-# sonar.apple.xcodebuild.logPath=custom/path/to/file.log
-
 # Path to periphery.log file
 # Defaults to build
 # sonar.apple.periphery.logPath=custom/path/to/file.log
+
+# Path to the JSON Compilation Database folder
+# The path is relative to the project base directory.
+# Defaults to build/json_compilation_database
+# sonar.apple.jsonCompilationDatabasePath=custom/path/to/folder
 
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
@@ -130,18 +139,20 @@ For a complete list of available options, please refer to the [SonarQube documen
 Use the following commands from the root folder to start an analysis:
 
 ```bash
-
-# Run tests 
 # Don't forget to add -workspace to the build command if your project is part of a workspace
 # Don't forget to activate 'Gather coverage' option in the app scheme or add '-enableCodeCoverage YES' to the following command
-$ xcodebuild \
+
+# Run tests 
+$ xcrun xcodebuild \
   -project MyApp.xcodeproj \
   -scheme MyApp \
   -sdk iphonesimulator \
   -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
   -derivedDataPath ./derivedData \
   -resultBundlePath build/result.xcresult \
-   clean test
+  OTHER_CFLAGS="\$(inherited) -gen-cdb-fragment-path build/compilation_database" \
+  -quiet \
+  clean test
 
 # Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
 # Don't forget to add --workspace to the build command if your project is part of a workspace
@@ -154,15 +165,6 @@ $ periphery scan \
   --format xcode \
   --quiet | tee build/periphery.log
 
-# This rebuild is required to perform Objective-C issue analysis
-# Skip it if your project doe not use Objective-C, or if you do want to report Objective-C issues
-$ xcodebuild \
-  -project MyApp.xcodeproj \
-  -scheme MyApp \
-  -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-   COMPILER_INDEX_STORE_ENABLE=NO clean test | tee build/xcodebuild.log
-  
 # Run the analysis and publish to the SonarQube server
 # Don't forget to specify `sonar.host.url` and `sonar.login` in `sonar-project.properties` or supply it to the following command.
 $ sonar-scanner

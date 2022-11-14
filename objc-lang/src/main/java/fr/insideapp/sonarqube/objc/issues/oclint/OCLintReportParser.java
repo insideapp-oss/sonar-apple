@@ -18,35 +18,38 @@
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONArray;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONObject;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONValue;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class OCLintReportParser implements ReportParser {
-    @Override
-    public List<ReportIssue> parse(String input) {
-        List<ReportIssue> issues = new ArrayList<>();
+public class OCLintReportParser {
 
-        JSONObject jsonReport = (JSONObject) JSONValue.parse(input);
-        if (jsonReport != null) {
-            JSONArray jsonViolations = (JSONArray) jsonReport.get("violation");
-            if (jsonViolations != null) {
-                for (Object obj : jsonViolations) {
-                    JSONObject jsonViolation = (JSONObject) obj;
+    private static final Logger LOGGER = Loggers.get(OCLintReportParser.class);
 
-                    String filePath = (String) jsonViolation.get("path");
-                    int lineNum = ((Long) jsonViolation.get("startLine")).intValue();
-                    String message = (String) jsonViolation.get("message");
-                    String ruleId = ((String) jsonViolation.get("rule")).replace(" ", "-");
-                    issues.add(new ReportIssue(ruleId, message, filePath, lineNum));
-                }
-            }
+    public List<ReportIssue> collect(OCLintReport report) {
+        if (report.violations == null) {
+            LOGGER.info("No OCLint violations to handle");
+            return new ArrayList<>();
         }
 
-        return issues;
+        LOGGER.info("{} OCLint violation(s) to handle", report.violations.length);
+
+        return Arrays.asList(report.violations)
+                .stream()
+                .map(violation ->
+                    new ReportIssue(
+                            violation.rule,
+                            violation.message,
+                            violation.path,
+                            violation.line
+                    )
+                )
+                .collect(Collectors.toList());
     }
+
 }

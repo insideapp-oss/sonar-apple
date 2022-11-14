@@ -17,23 +17,45 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
+import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
+import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
+import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.measures.CoreMetrics;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 public class OCLintSensorTest {
 
+    private static final String BASE_DIR = "src/test/resources/oclint";
+
+    private SensorContextTester context;
+    private OCLintSensor sensor;
+
+    @Before
+    public void prepare() {
+        context = SensorContextTester.create(new File(BASE_DIR));
+        sensor = new OCLintSensor(context);
+    }
+
     @Test
     public void describe() {
-
-        SensorContextTester context = SensorContextTester.create(new File("."));
-        OCLintSensor sensor = new OCLintSensor(context);
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("OCLint sensor");
+        DefaultSensorDescriptor defaultSensorDescriptor = new DefaultSensorDescriptor();
+        sensor.describe(defaultSensorDescriptor);
+        assertThat(defaultSensorDescriptor.name()).isEqualTo("OCLint Sensor");
+        assertThat(defaultSensorDescriptor.languages()).hasSize(1);
+        assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(ObjectiveC.KEY);
     }
+
 }

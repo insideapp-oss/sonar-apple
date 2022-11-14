@@ -33,3 +33,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### OCLint Tests ###
+objc-lang/src/test/resources/oclint/build
