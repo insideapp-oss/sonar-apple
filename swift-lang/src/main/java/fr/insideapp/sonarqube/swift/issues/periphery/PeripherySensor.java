@@ -67,8 +67,8 @@ public class PeripherySensor implements Sensor {
 
         try {
             List<ReportIssue> issues = runAnalysis();
-            ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.recordIssues(issues, PeripheryRulesDefinition.REPOSITORY_KEY);
+            ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
+            issueRecorder.recordIssues(issues, PeripheryRulesDefinition.REPOSITORY_KEY, sensorContext);
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

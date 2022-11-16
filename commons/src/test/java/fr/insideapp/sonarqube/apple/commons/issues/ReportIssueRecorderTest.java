@@ -50,8 +50,8 @@ public class ReportIssueRecorderTest {
         List<ReportIssue> issues = new ArrayList<>();
         issues.add(new ReportIssue("ruleId", "message", testFile.path().toString(), 3));
 
-        ReportIssueRecorder recorder = new ReportIssueRecorder(context);
-        recorder.recordIssues(issues, "TestRepo");
+        ReportIssueRecorder recorder = new ReportIssueRecorder();
+        recorder.recordIssues(issues, "TestRepo", context);
 
         assertThat(context.allIssues()).hasSize(1);
 

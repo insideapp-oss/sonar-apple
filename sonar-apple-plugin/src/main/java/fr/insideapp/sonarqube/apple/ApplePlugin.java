@@ -17,6 +17,8 @@
  */
 package fr.insideapp.sonarqube.apple;
 
+import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
@@ -26,8 +28,7 @@ import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.issues.ObjectiveCProfile;
 import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
 import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCSensor;
-import fr.insideapp.sonarqube.objc.issues.oclint.OCLintRulesDefinition;
-import fr.insideapp.sonarqube.objc.issues.oclint.OCLintSensor;
+import fr.insideapp.sonarqube.objc.issues.oclint.*;
 import fr.insideapp.sonarqube.objc.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.SwiftSensor;
@@ -42,12 +43,18 @@ import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
 import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.List;
 
 public class ApplePlugin implements Plugin {
 
-    public static final String APPLE_CATEGORY = "Apple";
+    private static final Logger LOGGER = Loggers.get(ApplePlugin.class);
 
-    public static final String OCLINT_SUBCATEGORY = "OCLint";
+    public static final String APPLE_CATEGORY = "Apple";
 
     public static final String PERIPHERY_SUBCATEGORY = "Periphery";
 
@@ -59,6 +66,9 @@ public class ApplePlugin implements Plugin {
 
         // Objective-C language support
         context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
+
+        // Issues reporter
+        context.addExtension(ReportIssueRecorder.class);
 
         // SwiftLint
         context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
@@ -78,17 +88,9 @@ public class ApplePlugin implements Plugin {
                         .build());
         context.addExtensions(PeripherySensor.class, PeripheryRulesDefinition.class);
 
-        // OCLint
-        context.addExtension(
-                PropertyDefinition.builder(OCLintSensor.JSON_COMPILATION_DATABASE_KEY)
-                        .name("JSON Compilation Database path")
-                        .description("Path to JSON Compilation Database folder. The path may be either absolute or relative to the project base directory.")
-                        .defaultValue(OCLintSensor.DEFAULT_JSON_COMPILATION_DATABASE_PATH)
-                        .onQualifiers(Qualifiers.PROJECT)
-                        .category(APPLE_CATEGORY)
-                        .subCategory(OCLINT_SUBCATEGORY)
-                        .build());
-        context.addExtensions(OCLintSensor.class, OCLintRulesDefinition.class);
+        register(context,
+                OCLintExtensionProvider.class  // OCLint
+        );
 
         // Xcode result bundle
         context.addExtension(
@@ -107,5 +109,17 @@ public class ApplePlugin implements Plugin {
         TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
         context.addExtension(AppleTestsSensor.class);
 
+    }
+
+    private void register(Context context, Class<? extends ExtensionProvider>... providersClazz) {
+        for (Class<? extends ExtensionProvider> providerClazz : providersClazz) {
+            try {
+                ExtensionProvider provider = providerClazz.getDeclaredConstructor().newInstance();
+                context.addExtensions(provider.extensions());
+            } catch (Exception e) {
+                LOGGER.info("An error occurred when trying to register '{}'", providerClazz.getCanonicalName());
+                LOGGER.debug("Exception: {}", e);
+            }
+        }
     }
 }

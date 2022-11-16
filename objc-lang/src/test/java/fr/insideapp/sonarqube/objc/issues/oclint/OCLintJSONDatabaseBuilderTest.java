@@ -17,6 +17,9 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintJSONDatabaseBuilder;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,15 +40,15 @@ public class OCLintJSONDatabaseBuilderTest {
         }
     }
 
-    private static final String BASE_DIR = "src/test/resources/oclint/compilation_database";
+    private static final String BASE_DIR = "/oclint/compilation_database";
 
-    private OCLintJSONDatabaseBuilder builder;
+    private OCLintJSONDatabaseBuildable builder;
     private File baseFolder;
 
     @Before
     public void prepare() {
         builder = new OCLintJSONDatabaseBuilder();
-        baseFolder = new File(BASE_DIR);
+        baseFolder = FileUtils.toFile(getClass().getResource(BASE_DIR));
     }
 
     @Test

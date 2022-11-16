@@ -15,11 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint;
+package fr.insideapp.sonarqube.objc.issues.oclint.implementations;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionFileFilter;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RegExUtils;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -30,7 +32,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-public final class OCLintJSONDatabaseBuilder {
+@ScannerSide
+public final class OCLintJSONDatabaseBuilder implements OCLintJSONDatabaseBuildable {
 
     private static final Pattern CLEAN_PATTERN = Pattern.compile("(\"-index-store-path.*DataStore\", |\"-index-unit-output-path.*\\.o\", )");
 
