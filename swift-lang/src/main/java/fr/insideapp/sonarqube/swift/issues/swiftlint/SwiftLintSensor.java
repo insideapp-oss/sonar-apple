@@ -17,40 +17,48 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.swift.Swift;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
-public class SwiftLintSensor extends RunningSourcesCLISensor {
+import java.util.List;
+import java.util.stream.Collectors;
 
-    @Override
-    public String name() {
-        return "SwiftLint Sensor";
+public class SwiftLintSensor implements Sensor {
+
+    private static final Logger LOGGER = Loggers.get(SwiftLintSensor.class);
+
+    private final SwiftLintRunnable runner;
+
+    public SwiftLintSensor(
+            SwiftLintRunnable runner
+    ) {
+        this.runner = runner;
     }
 
     @Override
-    public String language() {
-        return Swift.KEY;
+    public void describe(SensorDescriptor sensorDescriptor) {
+        sensorDescriptor
+                .onlyOnLanguage(Swift.KEY)
+                .name("SwiftLint Sensor")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
-    public String repository() {
-        return SwiftLintRulesDefinition.REPOSITORY_KEY;
-    }
-
-    @Override
-    public ReportParser reportParser() {
-        return new SwiftLintReportParser();
-    }
-
-    @Override
-    public String command() {
-        return "swiftlint";
-    }
-
-    @Override
-    public String[] commandOptions(String source) {
-        return new String[]{"--path", source};
+    public void execute(SensorContext sensorContext) {
+        List<String> outputs = runner.run();
+        // TODO: migrate this parser to a JSON with Jackson ones
+        SwiftLintReportParser parser = new SwiftLintReportParser();
+        List<ReportIssue> issues = outputs.stream().map(parser::parse).flatMap(List::stream).collect(Collectors.toList());
+        LOGGER.info("Found {} SwiftLint issue(s)", issues.size());
+        ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
+        issueRecorder.recordIssues(issues, SwiftLintRulesDefinition.REPOSITORY_KEY, sensorContext);
     }
 
 }

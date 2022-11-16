@@ -17,22 +17,40 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
+
+import java.io.File;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SwiftLintSensorTest {
 
+    private static final String BASE_DIR = "/swift";
+    private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
+
     private SwiftLintSensor sensor;
+    private Configuration configuration;
+    private SensorContextTester context;
 
     @Before
     public void prepare() {
-        sensor = new SwiftLintSensor();
+        configuration = mock(Configuration.class);
+        context = SensorContextTester.create(baseDir);
+        sensor = new SwiftLintSensor(
+                new SwiftLintRunner(configuration)
+        );
     }
 
-    @Test
+    /*@Test
     public void language() {
         assertThat(sensor.language()).isEqualTo("swift");
     }
@@ -60,12 +78,24 @@ public class SwiftLintSensorTest {
     @Test
     public void commandOptions() {
         assertThat(sensor.commandOptions("FOLDER")).isEqualTo(new String[]{"--path", "FOLDER"});
-    }
+    }*/
 
     @Test
     public void describe() {
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
         sensor.describe(descriptor);
         assertThat(descriptor.name()).isEqualTo("SwiftLint Sensor");
+        // TODO: complete the asserts
     }
+
+    @Test
+    public void execute() {
+        // prepare
+        when(configuration.get(anyString())).thenReturn(Optional.of(new File(baseDir, "source_lines_visitor").getAbsolutePath()));
+        // test
+        sensor.execute(context);
+        // assert
+        // TODO: assert
+    }
+
 }

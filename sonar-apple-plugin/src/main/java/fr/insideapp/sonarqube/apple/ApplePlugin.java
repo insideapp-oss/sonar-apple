@@ -37,6 +37,7 @@ import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefiniti
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripherySensor;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintSensor;
 import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
@@ -45,10 +46,6 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.List;
 
 public class ApplePlugin implements Plugin {
 
@@ -70,9 +67,6 @@ public class ApplePlugin implements Plugin {
         // Issues reporter
         context.addExtension(ReportIssueRecorder.class);
 
-        // SwiftLint
-        context.addExtensions(SwiftLintSensor.class, SwiftLintRulesDefinition.class);
-
         // MobSFScan (Swift & Objective-C)
         context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
         context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
@@ -89,6 +83,7 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(PeripherySensor.class, PeripheryRulesDefinition.class);
 
         register(context,
+                SwiftLintExtensionProvider.class, // SwiftLint
                 OCLintExtensionProvider.class  // OCLint
         );
 
