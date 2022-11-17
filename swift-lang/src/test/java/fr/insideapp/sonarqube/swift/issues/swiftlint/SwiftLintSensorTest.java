@@ -17,85 +17,112 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParsable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunnable;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.Configuration;
+import org.sonar.api.batch.sensor.issue.Issue;
 
 import java.io.File;
-import java.util.Optional;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SwiftLintSensorTest {
 
-    private static final String BASE_DIR = "/swift";
+    private static final String BASE_DIR = "/swift/swiftlint";
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private SwiftLintSensor sensor;
-    private Configuration configuration;
     private SensorContextTester context;
+    private SwiftLintRunnable runner;
+    private SwiftLintReportParsable parser;
+    private SwiftLintReportIssueMappable mapper;
 
     @Before
     public void prepare() {
-        configuration = mock(Configuration.class);
         context = SensorContextTester.create(baseDir);
+        runner = mock(SwiftLintRunnable.class);
+        parser = mock(SwiftLintReportParsable.class);
+        mapper = mock(SwiftLintReportIssueMappable.class);
         sensor = new SwiftLintSensor(
-                new SwiftLintRunner(configuration)
+                runner,
+                parser,
+                mapper
         );
     }
 
-    /*@Test
-    public void language() {
-        assertThat(sensor.language()).isEqualTo("swift");
-    }
-
-    @Test
-    public void name() {
-        assertThat(sensor.name()).isEqualTo("SwiftLint Sensor");
-    }
-
-    @Test
-    public void repository() {
-        assertThat(sensor.repository()).isEqualTo("SwiftLint");
-    }
-
-    @Test
-    public void reportParser() {
-        assertThat(sensor.reportParser()).isInstanceOf(SwiftLintReportParser.class);
-    }
-
-    @Test
-    public void command() {
-        assertThat(sensor.command()).isEqualTo("swiftlint");
-    }
-
-    @Test
-    public void commandOptions() {
-        assertThat(sensor.commandOptions("FOLDER")).isEqualTo(new String[]{"--path", "FOLDER"});
-    }*/
-
     @Test
     public void describe() {
-        DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-        sensor.describe(descriptor);
-        assertThat(descriptor.name()).isEqualTo("SwiftLint Sensor");
-        // TODO: complete the asserts
+        // prepare
+        DefaultSensorDescriptor defaultSensorDescriptor = new DefaultSensorDescriptor();
+        // test
+        sensor.describe(defaultSensorDescriptor);
+        // assert
+        assertThat(defaultSensorDescriptor.name()).isEqualTo("SwiftLint Sensor");
+        assertThat(defaultSensorDescriptor.languages()).hasSize(1);
+        assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(Swift.KEY);
+        assertThat(defaultSensorDescriptor.type()).isEqualTo(InputFile.Type.MAIN);
     }
 
     @Test
-    public void execute() {
+    public void execute_noIssue() {
         // prepare
-        when(configuration.get(anyString())).thenReturn(Optional.of(new File(baseDir, "source_lines_visitor").getAbsolutePath()));
+        when(runner.run()).thenReturn(List.of());
+        when(parser.parse(anyString())).thenReturn(List.of());
+        when(mapper.map(any())).thenReturn(Set.of());
         // test
         sensor.execute(context);
         // assert
-        // TODO: assert
+        assertThat(context.allIssues()).isEmpty();
+    }
+
+    @Test
+    public void execute_oneIssue() {
+        // prepare
+        DefaultInputFile testFile = new TestInputFileBuilder("", "Greeting.swift")
+                .setModuleBaseDir(Paths.get(BASE_DIR))
+                .setLanguage(Swift.KEY)
+                .setLines(10)
+                .setOriginalLineEndOffsets(new int[10])
+                .setOriginalLineStartOffsets(new int[10])
+                .build();
+        ReportIssue issue = new ReportIssue(
+                "trailing_whitespace",
+                "Lines should not have trailing whitespace",
+                testFile.path().toString(),
+                5
+        );
+        context.fileSystem().add(testFile);
+        when(runner.run()).thenReturn(List.of());
+        when(parser.parse(anyString())).thenReturn(List.of());
+        when(mapper.map(any())).thenReturn(Set.of(issue));
+        // test
+        sensor.execute(context);
+        // assert
+        List<Issue> issues = new ArrayList<>(context.allIssues());
+        assertThat(issues).hasSize(1);
+        Issue issue1 = issues.get(0);
+        assertThat(issue1.ruleKey().rule()).isEqualTo("trailing_whitespace");
+        assertThat(issue1.primaryLocation().message()).isEqualTo("Lines should not have trailing whitespace");
+        assertThat(issue1.primaryLocation().inputComponent().key()).isEqualTo(":Greeting.swift");
+        assertThat(issue1.primaryLocation().textRange().start().line()).isEqualTo(5);
     }
 
 }

@@ -1,4 +1,4 @@
-package fr.insideapp.sonarqube.apple.commons;
+package fr.insideapp.sonarqube.apple.commons.cli;
 
 import org.buildobjects.process.ProcBuilder;
 import org.sonar.api.config.Configuration;
@@ -11,20 +11,20 @@ import java.util.Set;
 
 public abstract class CommandLineToolBuilder {
 
-    private static final Logger LOGGER = Loggers.get(RunningSourcesCLISensor.class);
+    private static final Logger LOGGER = Loggers.get(CommandLineToolBuilder.class);
     private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
     private static final Integer DEFAULT_COMMAND_EXIT_CODE = 0;
 
     private final Configuration configuration;
 
-    private final ProcBuilder command;
+    private final String command;
 
     public CommandLineToolBuilder(
             Configuration configuration,
             String command
     ) {
         this.configuration = configuration;
-        this.command = new ProcBuilder(command);
+        this.command = command;
     }
 
     protected Integer[] exitCodes() {
@@ -36,13 +36,12 @@ public abstract class CommandLineToolBuilder {
     }
 
     protected final ProcBuilder build(String[] options) {
-        ProcBuilder builtCommand = command
+        ProcBuilder builtCommand = new ProcBuilder(command)
                 .withArgs(options)
                 .withTimeoutMillis(COMMAND_TIMEOUT)
                 .withExpectedExitStatuses(Set.of(exitCodes()));
-        LOGGER.info("Command that will be executed: `{}", builtCommand.getCommandLine());
+        LOGGER.debug("Command that will be executed: {}", builtCommand.getCommandLine());
         return builtCommand;
     }
 
 }
-

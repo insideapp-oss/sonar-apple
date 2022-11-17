@@ -17,21 +17,27 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.objc.helper.ExtensionProviderTestHelper;
+import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class OCLintExtensionProviderTest extends ExtensionProviderTestHelper<OCLintExtensionProvider> {
+public final class OCLintExtensionProviderTest {
 
     private MapSettings settings;
+    private ExtensionProvider provider;
 
     @Before
     public void prepare() {
-        setup(new OCLintExtensionProvider(), 6);
+        provider = new OCLintExtensionProvider();
         settings = new MapSettings();
+    }
+
+    @Test
+    public void extensions() {
+        assertThat(provider.extensions()).hasSize(6);
     }
 
     @Test

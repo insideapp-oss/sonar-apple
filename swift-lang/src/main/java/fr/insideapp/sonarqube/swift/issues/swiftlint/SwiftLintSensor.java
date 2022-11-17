@@ -20,27 +20,34 @@ package fr.insideapp.sonarqube.swift.issues.swiftlint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParsable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunnable;
+
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SwiftLintSensor implements Sensor {
 
-    private static final Logger LOGGER = Loggers.get(SwiftLintSensor.class);
-
     private final SwiftLintRunnable runner;
+    private final SwiftLintReportParsable parser;
+
+    private final SwiftLintReportIssueMappable mapper;
 
     public SwiftLintSensor(
-            SwiftLintRunnable runner
+            SwiftLintRunnable runner,
+            SwiftLintReportParsable parser,
+            SwiftLintReportIssueMappable mapper
     ) {
         this.runner = runner;
+        this.parser = parser;
+        this.mapper = mapper;
     }
 
     @Override
@@ -53,25 +60,14 @@ public class SwiftLintSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        List<String> outputs = executeRunner();
-        if (outputs == null) { return; }
-        // TODO: migrate this parser to a JSON with Jackson ones
-        SwiftLintReportParser parser = new SwiftLintReportParser();
-        List<ReportIssue> issues = outputs.stream().map(parser::parse).flatMap(List::stream).collect(Collectors.toList());
-        LOGGER.info("Found {} SwiftLint issue(s)", issues.size());
+        List<String> outputs = runner.run();
+        List<SwiftLintIssue> issues = outputs.stream()
+                .map(parser::parse)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
-        issueRecorder.recordIssues(issues, SwiftLintRulesDefinition.REPOSITORY_KEY, sensorContext);
-    }
-
-    @Nullable
-    private List<String> executeRunner() {
-        try {
-            return runner.run();
-        } catch (Exception e) {
-            LOGGER.error("Running SwiftLint failed.");
-            LOGGER.debug("{}", e);
-            return null;
-        }
+        issueRecorder.recordIssues(reportIssues, SwiftLintRulesDefinition.REPOSITORY_KEY, sensorContext);
     }
 
 }

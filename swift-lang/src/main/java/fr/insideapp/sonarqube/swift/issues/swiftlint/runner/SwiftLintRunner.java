@@ -1,6 +1,6 @@
-package fr.insideapp.sonarqube.swift.issues.swiftlint;
+package fr.insideapp.sonarqube.swift.issues.swiftlint.runner;
 
-import fr.insideapp.sonarqube.apple.commons.MultiCommandLineToolBuilder;
+import fr.insideapp.sonarqube.apple.commons.cli.MultiCommandLineToolBuilder;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
 
@@ -13,8 +13,7 @@ public final class SwiftLintRunner extends MultiCommandLineToolBuilder implement
 
     @Override
     protected String[] options(String source) {
-        // TODO: "--reporter", "json"
-        return new String[]{"lint", "--quiet", source};
+        return new String[]{"lint", "--quiet", "--reporter", "json", source};
     }
 
     @Override
