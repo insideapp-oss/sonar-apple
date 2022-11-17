@@ -27,6 +27,7 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,13 +53,25 @@ public class SwiftLintSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        List<String> outputs = runner.run();
+        List<String> outputs = executeRunner();
+        if (outputs == null) { return; }
         // TODO: migrate this parser to a JSON with Jackson ones
         SwiftLintReportParser parser = new SwiftLintReportParser();
         List<ReportIssue> issues = outputs.stream().map(parser::parse).flatMap(List::stream).collect(Collectors.toList());
         LOGGER.info("Found {} SwiftLint issue(s)", issues.size());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         issueRecorder.recordIssues(issues, SwiftLintRulesDefinition.REPOSITORY_KEY, sensorContext);
+    }
+
+    @Nullable
+    private List<String> executeRunner() {
+        try {
+            return runner.run();
+        } catch (Exception e) {
+            LOGGER.error("Running SwiftLint failed.");
+            LOGGER.debug("{}", e);
+            return null;
+        }
     }
 
 }

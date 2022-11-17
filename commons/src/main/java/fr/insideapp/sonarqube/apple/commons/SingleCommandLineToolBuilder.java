@@ -12,10 +12,11 @@ public abstract class SingleCommandLineToolBuilder extends CommandLineToolBuilde
 
     public abstract String[] options(List<String> sources);
 
-    public final String run() {
+    @Override
+    public String run() throws Exception {
         return build(options(sources()))
                 .run()
                 .getOutputString();
-
     }
+
 }

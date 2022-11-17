@@ -13,7 +13,8 @@ public abstract class MultiCommandLineToolBuilder extends CommandLineToolBuilder
 
     protected abstract String[] options(String source);
 
-    public final List<String> run() {
+    @Override
+    public List<String> run() throws Exception {
         List<String> outputs = new ArrayList<>();
         for (String source : sources()) {
             outputs.add(build(options(source)).run().getOutputString());
