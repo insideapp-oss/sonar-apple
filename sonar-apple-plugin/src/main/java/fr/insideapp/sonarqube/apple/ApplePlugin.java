@@ -38,8 +38,6 @@ import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripherySensor;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintSensor;
 import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
 import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
