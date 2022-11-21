@@ -17,32 +17,36 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintExtractor;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.config.internal.MapSettings;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OCLintRulesDefinitionTest {
+public final class OCLintExtractorTest {
 
-    private JSONRulesDefinition rulesDefinition;
-    private RulesDefinition.Context context;
+    private OCLintExtractor extractor;
 
     @Before
     public void prepare() {
-        rulesDefinition = new OCLintRulesDefinition();
-        context = new RulesDefinition.Context();
+        MapSettings settings = new MapSettings();
+        settings.setProperty("sonar.sources", "folder");
+        DefaultFileSystem fileSystem = new DefaultFileSystem(new File("/oclint/extractor"));
+        extractor = new OCLintExtractor(settings.asConfig(), fileSystem);
     }
 
     @Test
-    public void define() {
-        rulesDefinition.define(context);
-
-        RulesDefinition.Repository repository = context.repository("OCLint");
-        assertThat(repository).isNotNull();
-        assertThat(repository.name()).isEqualTo("OCLint");
-        assertThat(repository.language()).isEqualTo("objc");
-        assertThat(repository.rules()).hasSize(72);
+    public void buildSourceArguments() {
+        List<String> arguments = Arrays.asList(extractor.buildSourceArguments());
+        assertThat(arguments).hasSize(2);
+        assertThat(arguments).element(0).isEqualTo("--include");
+        assertThat(arguments).element(1).isEqualTo("/oclint/extractor/folder/.*\\.(h|m|mm)");
     }
+
 }

@@ -19,6 +19,8 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintReportParser;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -57,9 +59,9 @@ public class OCLintReportParserTest {
         }
     }
 
-    private static final String BASE_DIR = "src/test/resources/oclint/parser";
+    private static final String BASE_DIR = "/oclint/parser";
 
-    private OCLintReportParser parser;
+    private OCLintReportParsable parser;
     private ObjectMapper objectMapper;
 
     private File baseFolder;
@@ -67,7 +69,7 @@ public class OCLintReportParserTest {
     @Before
     public void prepare() {
         parser = new OCLintReportParser();
-        baseFolder = new File(BASE_DIR);
+        baseFolder = FileUtils.toFile(getClass().getResource(BASE_DIR));
         objectMapper = new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES);
     }
 

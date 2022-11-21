@@ -60,8 +60,8 @@ public abstract class RunningSourcesCLISensor implements Sensor {
     public void execute(SensorContext sensorContext) {
         try {
             List<ReportIssue> issues = runAnalysis(sensorContext);
-            ReportIssueRecorder issueRecorder = new ReportIssueRecorder(sensorContext);
-            issueRecorder.recordIssues(issues, repository());
+            ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
+            issueRecorder.recordIssues(issues, repository(), sensorContext);
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

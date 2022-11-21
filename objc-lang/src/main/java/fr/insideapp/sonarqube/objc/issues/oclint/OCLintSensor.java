@@ -20,11 +20,16 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -35,13 +40,29 @@ public final class OCLintSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
 
-    public static final String JSON_COMPILATION_DATABASE_KEY = "sonar.apple.jsonCompilationDatabasePath";
-    public static final String DEFAULT_JSON_COMPILATION_DATABASE_PATH = "build/json_compilation_database";
-
     private static final String COMPILE_COMMANDS_PATH = "build/compile_commands.json";
-    private final SensorContext context;
+    private final Configuration configuration;
+    private final FileSystem fileSystem;
+    private final OCLintJSONDatabaseBuildable builder;
+    private final OCLintExtractable extractor;
+    private final ReportIssueRecorder issueRecorder;
 
-    protected OCLintSensor(final SensorContext context) { this.context = context; }
+    private final OCLintReportParsable parser;
+    OCLintSensor(
+            final Configuration configuration,
+            final FileSystem fileSystem,
+            final OCLintJSONDatabaseBuildable builder,
+            final OCLintExtractable extractor,
+            final OCLintReportParsable parser,
+            final ReportIssueRecorder issueRecorder
+    ) {
+        this.configuration = configuration;
+        this.fileSystem = fileSystem;
+        this.builder = builder;
+        this.extractor = extractor;
+        this.parser = parser;
+        this.issueRecorder = issueRecorder;
+    }
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
@@ -53,37 +74,36 @@ public final class OCLintSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        checkPrerequisites();
+        File jsonCompilationDatabase = retrieveJsonCompilationDatabase();
+        if (jsonCompilationDatabase == null) { return; }
+        File jsonCompilationCommandsFile = buildCompileCommands(jsonCompilationDatabase);
+        OCLintReport report = extractReport(jsonCompilationCommandsFile);
+        if (report == null) { return; }
+        parseReport(report, sensorContext);
     }
 
-    private void checkPrerequisites() {
+    private File retrieveJsonCompilationDatabase() {
         File jsonCompilationDatabaseFolder = jsonCompilationDatabase();
 
         // Look for the JSON Compilation Database folder
         if (!jsonCompilationDatabaseFolder.exists()) {
             LOGGER.error("Failed to locate JSON Compilation Database folder.");
             LOGGER.error("Expected location according to the configuration is {}", jsonCompilationDatabaseFolder.getAbsolutePath());
-            return;
+            return null;
         }
 
         // Make sure the JSON Compilation Database is a folder
         if (!jsonCompilationDatabaseFolder.isDirectory()) {
             LOGGER.error("The JSON Compilation Database is not a folder. Expecting one.");
             LOGGER.error("JSON Compilation Database path according to the configuration is {}", jsonCompilationDatabaseFolder.getAbsolutePath());
-            return;
+            return null;
         }
-
-        buildCompileCommands(jsonCompilationDatabaseFolder);
+        return jsonCompilationDatabaseFolder;
     }
 
-    private void buildCompileCommands(File jsonCompilationDatabaseFolder) {
+    private File buildCompileCommands(File jsonCompilationDatabaseFolder) {
         // Building the JSON Database
-        OCLintJSONDatabaseBuilder builder = new OCLintJSONDatabaseBuilder();
         String compileCommands = builder.build(jsonCompilationDatabaseFolder);
-        writeCompileCommands(compileCommands);
-    }
-
-    private void writeCompileCommands(String compileCommands) {
         // Write to the final file
         File jsonCompilationCommandsFile = jsonCompilationCommands();
         jsonCompilationCommandsFile.getParentFile().mkdirs();
@@ -92,57 +112,33 @@ public final class OCLintSensor implements Sensor {
         } catch (IOException e) {
             LOGGER.error("Failed to write the JSON Compilation Database to the file. Exception: {}", e);
             LOGGER.debug("{}", e);
-            // in case of failure we exit early
-            return;
         }
-        // the extraction takes place after the try/catch block
-        // this allows the FileWriter to automatically close the file, in any case
-        extractReport(jsonCompilationCommandsFile);
+        return jsonCompilationCommandsFile;
     }
 
-    private void extractReport(File jsonCompilationCommandsFile) {
+    private OCLintReport extractReport(File jsonCompilationCommandsFile) {
         // Extract
-        OCLintExtractor extractor = new OCLintExtractor(context);
         try {
-            OCLintReport report = extractor.extract(jsonCompilationCommandsFile.getParentFile());
-            parseReport(report);
+            return extractor.extract(jsonCompilationCommandsFile.getParentFile());
         } catch (Exception e) {
             LOGGER.error("Extracting the JSON Database (OCLint) failed.");
             LOGGER.debug("{}", e);
+            return null;
         }
     }
 
-    private void parseReport(OCLintReport report) {
+    private void parseReport(OCLintReport report, SensorContext context) {
         // Parse issues
-        List<ReportIssue> issues = new OCLintReportParser().collect(report);
-        ReportIssueRecorder issueRecorder = new ReportIssueRecorder(context);
-        issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY);
-    }
-
-    private String jsonCompilationDatabasePath() {
-        return context.config()
-                .get(JSON_COMPILATION_DATABASE_KEY)
-                .orElse(DEFAULT_JSON_COMPILATION_DATABASE_PATH);
+        List<ReportIssue> issues = parser.collect(report);
+        issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY, context);
     }
 
     private File jsonCompilationDatabase() {
-        String jsonCompilationDatabaseAbsolutePath = context
-                .fileSystem()
-                .baseDir()
-                .getAbsolutePath()
-                .concat(File.separator)
-                .concat(jsonCompilationDatabasePath());
-        return new File(jsonCompilationDatabaseAbsolutePath);
+        return new File(fileSystem.baseDir(), OCLintExtensionProvider.jsonCompilationDatabasePath(configuration));
     }
 
     private File jsonCompilationCommands() {
-        String jsonCompilationCommandsAbsolutePath = context
-                .fileSystem()
-                .baseDir()
-                .getAbsolutePath()
-                .concat(File.separator)
-                .concat(COMPILE_COMMANDS_PATH);
-        return new File(jsonCompilationCommandsAbsolutePath);
+        return new File(fileSystem.baseDir(), COMPILE_COMMANDS_PATH);
     }
 
 }

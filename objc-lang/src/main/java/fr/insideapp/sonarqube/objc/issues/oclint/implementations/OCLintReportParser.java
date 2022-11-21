@@ -15,10 +15,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint;
+package fr.insideapp.sonarqube.objc.issues.oclint.implementations;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -26,8 +28,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-public class OCLintReportParser {
+@ScannerSide
+public class OCLintReportParser implements OCLintReportParsable {
 
     private static final Logger LOGGER = Loggers.get(OCLintReportParser.class);
 
@@ -39,8 +41,7 @@ public class OCLintReportParser {
 
         LOGGER.info("{} OCLint violation(s) to handle", report.violations.length);
 
-        return Arrays.asList(report.violations)
-                .stream()
+        return Arrays.stream(report.violations)
                 .map(violation ->
                     new ReportIssue(
                             violation.rule,

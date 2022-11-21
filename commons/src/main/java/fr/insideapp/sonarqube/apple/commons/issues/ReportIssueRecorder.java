@@ -26,21 +26,18 @@ import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.batch.sensor.issue.internal.DefaultIssueLocation;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.util.List;
 
-public class ReportIssueRecorder {
+@ScannerSide
+public final class ReportIssueRecorder {
 
     private static final Logger LOGGER = Loggers.get(ReportIssueRecorder.class);
-    private final SensorContext sensorContext;
 
-    public ReportIssueRecorder(SensorContext sensorContext) {
-        this.sensorContext = sensorContext;
-    }
-
-    public void recordIssues(List<ReportIssue> issues, String repository) {
+    public void recordIssues(List<ReportIssue> issues, String repository, SensorContext sensorContext) {
 
         final FileSystem fs = sensorContext.fileSystem();
         final FilePredicates predicates = fs.predicates();

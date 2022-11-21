@@ -15,15 +15,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint;
+package fr.insideapp.sonarqube.objc.issues.oclint.implementations;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import org.buildobjects.process.ProcBuilder;
-import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -33,23 +35,26 @@ import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
-public class OCLintExtractor {
+@ScannerSide
+public final class OCLintExtractor implements OCLintExtractable {
 
     private static final Logger LOGGER = Loggers.get(OCLintExtractor.class);
     private static final int COMMAND_TIMEOUT = 30 * 60 * 1000;
     private static final int COMMAND_EXIT_CODE = 0;
-    private final SensorContext context;
+    private final Configuration configuration;
+    private final FileSystem fileSystem;
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    public OCLintExtractor(SensorContext context) {
-        this.context = context;
-        objectMapper = new ObjectMapper()
+    public OCLintExtractor(final Configuration configuration, final FileSystem fileSystem) {
+        this.configuration = configuration;
+        this.fileSystem = fileSystem;
+        this.objectMapper = new ObjectMapper()
                 .disable(FAIL_ON_UNKNOWN_PROPERTIES)
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public OCLintReport extract(File compileCommandsFolder) throws JsonProcessingException {
+    public OCLintReport extract(final File compileCommandsFolder) throws Exception {
         String jsonReport = new ProcBuilder("oclint-json-compilation-database")
                 .withArgs(buildSourceArguments())
                 .withArgs("-p", compileCommandsFolder.getAbsolutePath())
@@ -65,14 +70,14 @@ public class OCLintExtractor {
         return oclintReport;
     }
 
-    private String[] buildSourceArguments() {
+    public String[] buildSourceArguments() {
         // Retrieve all the sources specified
-        final String sourcesInput = context.config().get("sonar.sources").orElse(".");
+        final String sourcesInput = configuration.get("sonar.sources").orElse(".");
         // Retrieve all the file extensions for Objective-C
         String fileExtensions = Arrays.stream(ObjectiveC.EXTENSIONS).collect(Collectors.joining("|"));
         final String[] sources = sourcesInput.split(",");
         final String[] sourceArgs = new String[sources.length * 2];
-        final File baseDirectory = context.fileSystem().baseDir();
+        final File baseDirectory = fileSystem.baseDir();
         // Build parameters for each source
         for (int i = 0; i < sources.length; i++) {
             sourceArgs[i * 2] = "--include";

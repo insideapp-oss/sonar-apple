@@ -15,32 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple;
+package fr.insideapp.sonarqube.objc.helper;
 
+import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Test;
-import org.sonar.api.Plugin;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApplePluginTest {
+public abstract class ExtensionProviderTestHelper<EP extends ExtensionProvider> {
+
+    protected EP provider;
+    private int expectedExtensionCount;
+
+    protected void setup(EP provider, int expectedExtensionCount)  {
+        this.provider = provider;
+        this.expectedExtensionCount = expectedExtensionCount;
+    }
 
     @Test
-    public void define() {
-
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        Plugin.Context context = new Plugin.Context(sonarRuntime);
-
-
-        ApplePlugin plugin = new ApplePlugin();
-        plugin.define(context);
-
-        assertThat(context.getExtensions()).hasSize(25);
-
-
+    public void extensions() {
+        assertThat(provider.extensions()).hasSize(expectedExtensionCount);
     }
+
 }

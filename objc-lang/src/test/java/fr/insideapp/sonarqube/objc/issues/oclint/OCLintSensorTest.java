@@ -17,45 +17,159 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
-import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
-import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinder;
-import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.helper.ExceptionHelper;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 public class OCLintSensorTest {
 
-    private static final String BASE_DIR = "src/test/resources/oclint";
+    private static final String BASE_DIR = "/oclint/sensor";
+    private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private SensorContextTester context;
+    private Configuration configuration;
+    private OCLintJSONDatabaseBuildable builder;
+    private OCLintExtractable extractor;
+    private OCLintReportParsable parser;
+
     private OCLintSensor sensor;
 
     @Before
     public void prepare() {
-        context = SensorContextTester.create(new File(BASE_DIR));
-        sensor = new OCLintSensor(context);
+        configuration = mock(Configuration.class);
+        builder = mock(OCLintJSONDatabaseBuildable.class);
+        extractor = mock(OCLintExtractable.class);
+        parser = mock(OCLintReportParsable.class);
+        context = SensorContextTester.create(baseDir);
+        sensor = new OCLintSensor(
+                configuration,
+                context.fileSystem(),
+                builder,
+                extractor,
+                parser,
+                new ReportIssueRecorder()
+        );
     }
 
     @Test
     public void describe() {
+        // prepare
         DefaultSensorDescriptor defaultSensorDescriptor = new DefaultSensorDescriptor();
+        // test
         sensor.describe(defaultSensorDescriptor);
+        // assert
         assertThat(defaultSensorDescriptor.name()).isEqualTo("OCLint Sensor");
         assertThat(defaultSensorDescriptor.languages()).hasSize(1);
         assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(ObjectiveC.KEY);
+    }
+
+    @Test
+    public void jsonCompilationDatabaseFolder_does_not_exist() throws Exception {
+        // prepare
+        when(configuration.get(anyString())).thenReturn(Optional.of("nonExistingPath"));
+        // test
+        sensor.execute(context);
+        // assert
+        verify(builder, never()).build(any());
+        verify(extractor, never()).extract(any());
+        verify(parser, never()).collect(any());
+        assertThat(context.allIssues()).isEmpty();
+    }
+
+    @Test
+    public void jsonCompilationDatabaseFolder_not_a_directory() throws Exception {
+        // prepare
+        when(configuration.get(anyString())).thenReturn(Optional.of("notAFolder"));
+        // test
+        sensor.execute(context);
+        // assert
+        verify(builder, never()).build(any());
+        verify(extractor, never()).extract(any());
+        verify(parser, never()).collect(any());
+        assertThat(context.allIssues()).isEmpty();
+    }
+
+    @Test
+    public void extractReport_throw() throws Exception {
+        // prepare
+        when(configuration.get(anyString())).thenReturn(Optional.of(""));
+        when(builder.build(any())).thenReturn("");
+        when(extractor.extract(any())).thenThrow(ExceptionHelper.build());
+        // test
+        sensor.execute(context);
+        // assert
+        verify(parser, never()).collect(any());
+        assertThat(context.allIssues()).isEmpty();
+    }
+
+    @Test
+    public void parseReport_noIssue() throws Exception {
+        // prepare
+        when(configuration.get(anyString())).thenReturn(Optional.of(""));
+        when(builder.build(any())).thenReturn("");
+        when(extractor.extract(any())).thenReturn(new OCLintReport());
+        when(parser.collect(any())).thenReturn(new ArrayList<>());
+        // test
+        sensor.execute(context);
+        // assert
+        assertThat(context.allIssues()).isEmpty();
+    }
+
+    @Test
+    public void parseReport_oneIssue() throws Exception {
+        // prepare
+        DefaultInputFile testFile = new TestInputFileBuilder("", "Greeting.m")
+                .setModuleBaseDir(Paths.get(BASE_DIR))
+                .setLanguage(ObjectiveC.KEY)
+                .setLines(10)
+                .setOriginalLineEndOffsets(new int[10])
+                .setOriginalLineStartOffsets(new int[10])
+                .build();
+        ReportIssue issue = new ReportIssue(
+                "short-variable-name",
+                "Length of variable name `s` is 1, which is shorter than the threshold of 3",
+                testFile.path().toString(),
+                5
+        );
+        context.fileSystem().add(testFile);
+        when(configuration.get(anyString())).thenReturn(Optional.of(""));
+        when(builder.build(any())).thenReturn("");
+        when(extractor.extract(any())).thenReturn(new OCLintReport());
+        when(parser.collect(any())).thenReturn(Arrays.asList(issue));
+        // test
+        sensor.execute(context);
+        // assert
+        List<Issue> issues = context.allIssues().stream().collect(Collectors.toList());
+        assertThat(issues).hasSize(1);
+        Issue issue1 = issues.get(0);
+        assertThat(issue1.ruleKey().rule()).isEqualTo("short-variable-name");
+        assertThat(issue1.primaryLocation().message()).isEqualTo("Length of variable name `s` is 1, which is shorter than the threshold of 3");
+        assertThat(issue1.primaryLocation().inputComponent().key()).isEqualTo(":Greeting.m");
+        assertThat(issue1.primaryLocation().textRange().start().line()).isEqualTo(5);
     }
 
 }
