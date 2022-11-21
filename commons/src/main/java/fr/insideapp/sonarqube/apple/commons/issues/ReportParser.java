@@ -21,5 +21,5 @@ import java.util.List;
 
 public interface ReportParser {
 
-    public List<ReportIssue> parse(String input);
+    List<ReportIssue> parse(String input);
 }

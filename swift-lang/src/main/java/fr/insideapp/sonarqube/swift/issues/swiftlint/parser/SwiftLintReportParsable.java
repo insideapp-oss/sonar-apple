@@ -15,21 +15,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.issues.swiftlint;
+package fr.insideapp.sonarqube.swift.issues.swiftlint.parser;
 
-import fr.insideapp.sonarqube.swift.issues.RegexReportParser;
+import fr.insideapp.sonarqube.apple.commons.interfaces.ReportParsable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
+import org.sonar.api.scanner.ScannerSide;
 
-import java.util.regex.Matcher;
+import java.util.List;
 
-public class SwiftLintReportParser extends RegexReportParser {
-
-    public SwiftLintReportParser() {
-        super("(.*.swift):(\\w+):(\\w+): (warning|error): (.*) \\((\\w+)\\)");
-    }
-
-    @Override
-    public String ruleId(Matcher matcher) {
-        return matcher.group(6);
-    }
-
+@ScannerSide
+public interface SwiftLintReportParsable extends ReportParsable<List<SwiftLintIssue>> {
 }

@@ -17,38 +17,115 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-
-import fr.insideapp.sonarqube.swift.issues.ReportParserTestHelper;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParser;
+import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SwiftLintReportParserTest {
+public final class SwiftLintReportParserTest {
 
-    private static final String FILE_PATH = "/SQApp/SQApp/SQAppApp.swift";
+    private static class Container {
+        final String reportFileName;
+        final List<Violation> violations;
+        public Container(String reportFileName, List<Violation> violations) {
+            this.reportFileName = reportFileName;
+            this.violations = violations;
+        }
+    }
+
+    private static class Violation {
+        final String rule;
+        final String message;
+
+        final String path;
+
+        final int line;
+
+        final int character;
+        public Violation(String path, String rule, String message, int line, int character) {
+            this.path = path;
+            this.rule = rule;
+            this.message = message;
+            this.line = line;
+            this.character = character;
+        }
+    }
+
+    private static final String BASE_DIR = "/swift/swiftlint";
+    private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
+
+    private SwiftLintReportParser parser;
+
+    @Before
+    public void prepare() {
+        parser = new SwiftLintReportParser();
+    }
 
     @Test
-    public void parse() {
-
-        String input = "/SQApp/SQApp/SQAppApp.swift:23:1: warning: Trailing Whitespace Violation: Lines should not have trailing whitespace. (trailing_whitespace)\n" +
-                "/SQApp/SQApp/SQAppApp.swift:17:9: warning: Unused Setter Value Violation: Setter value is not used. (unused_setter_value)";
-
-        SwiftLintReportParser parser = new SwiftLintReportParser();
-
-        List<ReportIssue> issues = parser.parse(input);
-        assertThat(issues).hasSize(2);
-
-        ReportParserTestHelper.assertFilePath(issues.get(0), FILE_PATH);
-        ReportParserTestHelper.assertLineNumber(issues.get(0), 23);
-        ReportParserTestHelper.assertRuleId(issues.get(0), "trailing_whitespace");
-        ReportParserTestHelper.assertMessage(issues.get(0), "Trailing Whitespace Violation: Lines should not have trailing whitespace.");
-
-        ReportParserTestHelper.assertFilePath(issues.get(1), FILE_PATH);
-        ReportParserTestHelper.assertLineNumber(issues.get(1), 17);
-        ReportParserTestHelper.assertRuleId(issues.get(1), "unused_setter_value");
-        ReportParserTestHelper.assertMessage(issues.get(1), "Unused Setter Value Violation: Setter value is not used.");
+    public void parse_empty() throws IOException {
+        assertContainer(new Container(
+                "empty.json",
+                new ArrayList<>()
+        ));
     }
+
+    @Test
+    public void parse_invalid_empty() throws IOException {
+        assertContainer(new Container(
+                "invalid.json",
+                new ArrayList<>()
+        ));
+    }
+
+    @Test
+    public void parse_one() throws IOException {
+        List<Violation> violations = new ArrayList<>() {
+            {
+                add(new Violation(
+                        "path/to/file.swift",
+                        "trailing_whitespace",
+                        "Lines should not have trailing whitespace",
+                        15,
+                        17
+                ));
+            }
+        };
+        assertContainer(new Container(
+                "oneIssue.json",
+                violations
+        ));
+    }
+
+    private void assertContainer(Container container) throws IOException {
+        // Data setup
+        File jsonFile = new File(baseDir, container.reportFileName);
+        String jsonFileContent = FileUtils.readFileToString(jsonFile, Charset.defaultCharset());
+
+        // Running our code
+        List<SwiftLintIssue> swiftLintIssues = parser.parse(jsonFileContent);
+
+        // Asserting
+        Assertions.assertThat(swiftLintIssues).hasSize(container.violations.size());
+
+        for (int i = 0; i < swiftLintIssues.size(); i++) {
+            SwiftLintIssue issue = swiftLintIssues.get(i);
+            Violation violation = container.violations.get(i);
+            assertThat(issue.filePath).isEqualTo(violation.path);
+            assertThat(issue.ruleIdentifier).isEqualTo(violation.rule);
+            assertThat(issue.message).isEqualTo(violation.message);
+            assertThat(issue.lineNumber).isEqualTo(violation.line);
+            assertThat(issue.characterNumber).isEqualTo(violation.character);
+        }
+    }
+
 }

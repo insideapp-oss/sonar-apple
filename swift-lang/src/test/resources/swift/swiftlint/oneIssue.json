@@ -1,0 +1,11 @@
+[
+    {
+        "character" : 17,
+        "file" : "path/to/file.swift",
+        "line" : 15,
+        "reason" : "Lines should not have trailing whitespace",
+        "rule_id" : "trailing_whitespace",
+        "severity" : "Warning",
+        "type" : "Trailing Whitespace"
+    }
+]

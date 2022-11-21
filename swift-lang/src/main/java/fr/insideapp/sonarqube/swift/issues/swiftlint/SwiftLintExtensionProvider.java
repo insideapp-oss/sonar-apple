@@ -15,32 +15,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple;
+package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import org.junit.Test;
-import org.sonar.api.Plugin;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
+import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMapper;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParser;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunner;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import java.util.Arrays;
+import java.util.List;
 
-public class ApplePluginTest {
+public final class SwiftLintExtensionProvider implements ExtensionProvider {
 
-    @Test
-    public void define() {
-
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        Plugin.Context context = new Plugin.Context(sonarRuntime);
-
-
-        ApplePlugin plugin = new ApplePlugin();
-        plugin.define(context);
-
-        assertThat(context.getExtensions()).hasSize(28);
-
-
+    public List<Object> extensions() {
+        return Arrays.asList(
+                SwiftLintRulesDefinition.class,
+                SwiftLintRunner.class,
+                SwiftLintReportParser.class,
+                SwiftLintReportIssueMapper.class,
+                SwiftLintSensor.class
+        );
     }
+
+
 }

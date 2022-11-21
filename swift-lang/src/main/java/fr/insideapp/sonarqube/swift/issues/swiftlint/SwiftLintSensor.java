@@ -17,40 +17,57 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParsable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunnable;
 
-public class SwiftLintSensor extends RunningSourcesCLISensor {
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
-    @Override
-    public String name() {
-        return "SwiftLint Sensor";
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SwiftLintSensor implements Sensor {
+
+    private final SwiftLintRunnable runner;
+    private final SwiftLintReportParsable parser;
+
+    private final SwiftLintReportIssueMappable mapper;
+
+    public SwiftLintSensor(
+            SwiftLintRunnable runner,
+            SwiftLintReportParsable parser,
+            SwiftLintReportIssueMappable mapper
+    ) {
+        this.runner = runner;
+        this.parser = parser;
+        this.mapper = mapper;
     }
 
     @Override
-    public String language() {
-        return Swift.KEY;
+    public void describe(SensorDescriptor sensorDescriptor) {
+        sensorDescriptor
+                .onlyOnLanguage(Swift.KEY)
+                .name("SwiftLint Sensor")
+                .onlyOnFileType(InputFile.Type.MAIN);
     }
 
     @Override
-    public String repository() {
-        return SwiftLintRulesDefinition.REPOSITORY_KEY;
-    }
-
-    @Override
-    public ReportParser reportParser() {
-        return new SwiftLintReportParser();
-    }
-
-    @Override
-    public String command() {
-        return "swiftlint";
-    }
-
-    @Override
-    public String[] commandOptions(String source) {
-        return new String[]{"--path", source};
+    public void execute(SensorContext sensorContext) {
+        List<String> outputs = runner.run();
+        List<SwiftLintIssue> issues = outputs.stream()
+                .map(parser::parse)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
+        ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
+        issueRecorder.recordIssues(reportIssues, SwiftLintRulesDefinition.REPOSITORY_KEY, sensorContext);
     }
 
 }

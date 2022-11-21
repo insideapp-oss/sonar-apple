@@ -15,26 +15,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.helper;
+package fr.insideapp.sonarqube.swift.issues.swiftlint.runner;
 
-import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
-import org.junit.Test;
+import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
+import org.sonar.api.scanner.ScannerSide;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
 
-public abstract class ExtensionProviderTestHelper<EP extends ExtensionProvider> {
-
-    protected EP provider;
-    private int expectedExtensionCount;
-
-    protected void setup(EP provider, int expectedExtensionCount)  {
-        this.provider = provider;
-        this.expectedExtensionCount = expectedExtensionCount;
-    }
-
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(expectedExtensionCount);
-    }
-
-}
+@ScannerSide
+public interface SwiftLintRunnable extends CommandLineToolRunnable<List<String>> {}

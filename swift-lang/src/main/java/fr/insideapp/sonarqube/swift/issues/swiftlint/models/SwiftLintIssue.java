@@ -15,32 +15,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple;
+package fr.insideapp.sonarqube.swift.issues.swiftlint.models;
 
-import org.junit.Test;
-import org.sonar.api.Plugin;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+public final class SwiftLintIssue {
 
-public class ApplePluginTest {
+    @JsonProperty("rule_id")
+    public String ruleIdentifier;
 
-    @Test
-    public void define() {
+    @JsonProperty("reason")
+    public String message;
 
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        Plugin.Context context = new Plugin.Context(sonarRuntime);
+    @JsonProperty("file")
+    public String filePath;
 
+    @JsonProperty("line")
+    public Integer lineNumber;
 
-        ApplePlugin plugin = new ApplePlugin();
-        plugin.define(context);
+    @JsonProperty("character")
+    public Integer characterNumber;
 
-        assertThat(context.getExtensions()).hasSize(28);
-
-
-    }
 }

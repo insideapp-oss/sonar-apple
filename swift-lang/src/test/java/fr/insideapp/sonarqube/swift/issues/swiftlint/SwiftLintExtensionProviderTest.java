@@ -15,43 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint;
+package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class OCLintExtensionProviderTest {
+public final class SwiftLintExtensionProviderTest {
 
-    private MapSettings settings;
     private ExtensionProvider provider;
 
     @Before
     public void prepare() {
-        provider = new OCLintExtensionProvider();
-        settings = new MapSettings();
+        provider = new SwiftLintExtensionProvider();
     }
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(6);
-    }
-
-    @Test
-    public void jsonCompilationDatabasePath_default() {
-        String jsonCompilationDatabasePath = OCLintExtensionProvider.jsonCompilationDatabasePath(settings.asConfig());
-        assertThat(jsonCompilationDatabasePath).isEqualTo("build/json_compilation_database");
-    }
-
-    @Test
-    public void jsonCompilationDatabasePath_specified() {
-        String expectedCustomPath = "this/is/a/path";
-        settings.setProperty("sonar.apple.jsonCompilationDatabasePath", expectedCustomPath);
-        String jsonCompilationDatabasePath = OCLintExtensionProvider.jsonCompilationDatabasePath(settings.asConfig());
-        assertThat(jsonCompilationDatabasePath).isEqualTo(expectedCustomPath);
+        assertThat(provider.extensions()).hasSize(5);
     }
 
 }
