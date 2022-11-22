@@ -51,8 +51,13 @@ public final class ReportIssueRecorder {
                     .newIssue()
                     .forRule(RuleKey.of(repository, issue.getRuleId()));
             // The location of the issue to be record
-            NewIssueLocation sonarIssueLocation = new DefaultIssueLocation()
-                    .message(issue.getMessage());
+            NewIssueLocation sonarIssueLocation = new DefaultIssueLocation();
+
+            // Adding message if any
+            String message = issue.getMessage();
+            if (message != null) {
+                sonarIssueLocation = sonarIssueLocation.message(issue.getMessage());
+            }
 
             final String filePath = issue.getFilePath();
             // We have a file location associated with the generated issue

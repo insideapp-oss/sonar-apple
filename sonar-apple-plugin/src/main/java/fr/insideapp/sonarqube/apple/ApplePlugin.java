@@ -35,6 +35,7 @@ import fr.insideapp.sonarqube.swift.SwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.SwiftProfile;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftSensor;
+import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripherySensor;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
@@ -50,8 +51,6 @@ public class ApplePlugin implements Plugin {
     private static final Logger LOGGER = Loggers.get(ApplePlugin.class);
 
     public static final String APPLE_CATEGORY = "Apple";
-
-    public static final String PERIPHERY_SUBCATEGORY = "Periphery";
 
     @Override
     public void define(Context context) {
@@ -69,19 +68,9 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
         context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
 
-        // Periphery
-        context.addExtension(
-                PropertyDefinition.builder(PeripherySensor.LOG_PATH_KEY)
-                        .name("periphery log")
-                        .description("Path to periphery log file. The path may be either absolute or relative to the project base directory.")
-                        .onQualifiers(Qualifiers.PROJECT)
-                        .category(APPLE_CATEGORY)
-                        .subCategory(PERIPHERY_SUBCATEGORY)
-                        .build());
-        context.addExtensions(PeripherySensor.class, PeripheryRulesDefinition.class);
-
         register(context,
                 SwiftLintExtensionProvider.class, // SwiftLint
+                PeripheryExtensionProvider.class, // Periphery
                 OCLintExtensionProvider.class  // OCLint
         );
 

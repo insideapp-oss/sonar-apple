@@ -17,37 +17,107 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.swift.issues.ReportParserTestHelper;
+import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssue;
+import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParser;
+import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PeripheryReportParserTest {
+public final class PeripheryReportParserTest {
 
-    private static final String FILE_PATH = "/SQApp/SQApp/SQAppApp.swift";
+    private static class Container {
+        final String reportFileName;
+        final List<PeripheryReportParserTest.Violation> violations;
+        public Container(String reportFileName, List<PeripheryReportParserTest.Violation> violations) {
+            this.reportFileName = reportFileName;
+            this.violations = violations;
+        }
+    }
+
+    private static class Violation {
+        final String rule;
+
+        final String path;
+
+        final int line;
+
+        public Violation(String path, String rule, int line) {
+            this.path = path;
+            this.rule = rule;
+            this.line = line;
+        }
+    }
+
+    private static final String BASE_DIR = "/swift/periphery";
+    private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
+
+    private PeripheryReportParser parser;
+
+    @Before
+    public void prepare() {
+        parser = new PeripheryReportParser();
+    }
 
     @Test
-    public void parse() {
-
-        String input = "/SQApp/SQApp/SQAppApp.swift:23:1: warning: Property 'myProperty' is assigned, but never used\n" +
-                "/SQApp/SQApp/SQAppApp.swift:17:9: warning: Function 'myFunction(param1:param2:)' is unused";
-
-        PeripheryReportParser parser = new PeripheryReportParser();
-
-        List<ReportIssue> issues = parser.parse(input);
-        assertThat(issues).hasSize(2);
-
-        ReportParserTestHelper.assertFilePath(issues.get(0), FILE_PATH);
-        ReportParserTestHelper.assertLineNumber(issues.get(0), 23);
-        ReportParserTestHelper.assertRuleId(issues.get(0), "unused");
-        ReportParserTestHelper.assertMessage(issues.get(0), "Property 'myProperty' is assigned, but never used");
-
-        ReportParserTestHelper.assertFilePath(issues.get(1), FILE_PATH);
-        ReportParserTestHelper.assertLineNumber(issues.get(1), 17);
-        ReportParserTestHelper.assertRuleId(issues.get(1), "unused");
-        ReportParserTestHelper.assertMessage(issues.get(1), "Function 'myFunction(param1:param2:)' is unused");
+    public void parse_empty() throws IOException {
+        assertContainer(new Container(
+                "empty.json",
+                new ArrayList<>()
+        ));
     }
+
+    @Test
+    public void parse_invalid_empty() throws IOException {
+        assertContainer(new Container(
+                "invalid.json",
+                new ArrayList<>()
+        ));
+    }
+
+    @Test
+    public void parse_one() throws IOException {
+        List<Violation> violations = new ArrayList<>() {
+            {
+                add(new Violation(
+                        "path/to/file.swift",
+                        "unused",
+                        12
+                ));
+            }
+        };
+        assertContainer(new Container(
+                "oneIssue.json",
+                violations
+        ));
+    }
+
+    private void assertContainer(Container container) throws IOException {
+        // Data setup
+        File jsonFile = new File(baseDir, container.reportFileName);
+        String jsonFileContent = FileUtils.readFileToString(jsonFile, Charset.defaultCharset());
+
+        // Running our code
+        List<PeripheryIssue> peripheryIssues = parser.parse(jsonFileContent);
+
+        // Asserting
+        Assertions.assertThat(peripheryIssues).hasSize(container.violations.size());
+
+        for (int i = 0; i < peripheryIssues.size(); i++) {
+            PeripheryIssue issue = peripheryIssues.get(i);
+            Violation violation = container.violations.get(i);
+            assertThat(issue.ruleIdentifier).isEqualTo(violation.rule);
+            assertThat(issue.location.path).isEqualTo(violation.path);
+            assertThat(issue.location.line).isEqualTo(violation.line);
+        }
+    }
+
 }

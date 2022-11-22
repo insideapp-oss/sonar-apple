@@ -23,13 +23,14 @@ import java.util.Objects;
 public class ReportIssue {
 
     private final String ruleId;
+    @Nullable
     private final String message;
     @Nullable
     private final String filePath;
     @Nullable
     private final Integer lineNumber;
 
-    public ReportIssue(String ruleId, String message, @Nullable String filePath, @Nullable Integer lineNumber) {
+    public ReportIssue(String ruleId, @Nullable String message, @Nullable String filePath, @Nullable Integer lineNumber) {
         this.ruleId = ruleId;
         this.message = message;
         this.filePath = filePath;

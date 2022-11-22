@@ -2,11 +2,44 @@
     {
         "key": "unused",
         "name": "Unused",
-        "severity": "MAJOR",
-        "description": "This code is never unused",
+        "severity": "MINOR",
+        "description": "This code is never used.",
         "debt": {
             "function": "CONSTANT_ISSUE",
-            "offset": "1min"
+            "offset": "5min"
+        },
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "assignOnlyProperty",
+        "name": "Assign only",
+        "severity": "MINOR",
+        "description": "This code is assigned, but never used.",
+        "debt": {
+            "function": "CONSTANT_ISSUE",
+            "offset": "5min"
+        },
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "redundantProtocol",
+        "name": "Redundant protocol",
+        "severity": "MINOR",
+        "description": "This protocol is redundant as it's never used as an existential type.",
+        "debt": {
+            "function": "CONSTANT_ISSUE",
+            "offset": "5min"
+        },
+        "type": "CODE_SMELL"
+    },
+    {
+        "key": "redundantPublicAccessibility",
+        "name": "Redundant protocol",
+        "severity": "MINOR",
+        "description": "This code is declared public, but not used outside of its module.",
+        "debt": {
+            "function": "CONSTANT_ISSUE",
+            "offset": "5min"
         },
         "type": "CODE_SMELL"
     }
