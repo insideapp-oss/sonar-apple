@@ -1,7 +1,7 @@
 package fr.insideapp.sonarqube.swift.issues.periphery.runner;
 
 import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
-import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolBuilder;
+import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolRunner;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
@@ -12,14 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @ScannerSide
-public final class PeripheryRunner extends SingleCommandLineToolBuilder implements PeripheryRunnable {
+public final class PeripheryRunner extends SingleCommandLineToolRunner implements PeripheryRunnable {
+
+    private final Configuration configuration;
 
     public PeripheryRunner(Configuration configuration) {
-        super(configuration, "periphery");
+        super("periphery");
+        this.configuration = configuration;
     }
 
     @Override
-    protected String[] options(List<String> sources) {
+    protected String[] options() {
         List<String> options = new ArrayList<>();
         options.add("scan");
         options.addAll(xcode());

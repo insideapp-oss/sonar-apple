@@ -17,20 +17,30 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint.runner;
 
-import fr.insideapp.sonarqube.apple.commons.cli.MultiCommandLineToolBuilder;
-import org.sonar.api.config.Configuration;
+import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
+import fr.insideapp.sonarqube.apple.commons.cli.MultiCommandLineToolRunner;
 import org.sonar.api.scanner.ScannerSide;
 
-@ScannerSide
-public final class SwiftLintRunner extends MultiCommandLineToolBuilder implements SwiftLintRunnable {
+import java.util.ArrayList;
+import java.util.List;
 
-    public SwiftLintRunner(Configuration configuration) {
-        super(configuration, "swiftlint");
+@ScannerSide
+public final class SwiftLintRunner extends MultiCommandLineToolRunner implements SwiftLintRunnable {
+
+    private final SonarProjectConfiguration configuration;
+
+    public SwiftLintRunner(final SonarProjectConfiguration configuration) {
+        super("swiftlint");
+        this.configuration = configuration;
     }
 
     @Override
-    protected String[] options(String source) {
-        return new String[]{"lint", "--quiet", "--reporter", "json", source};
+    protected List<String[]> multiOptions() {
+        List<String[]> options = new ArrayList<>();
+        for (String source: configuration.sources()) {
+            options.add(new String[]{"lint", "--quiet", "--reporter", "json", source});
+        }
+        return options;
     }
 
     @Override
