@@ -61,14 +61,12 @@ public final class PeripheryExtensionProvider implements ExtensionProvider {
         );
     }
 
-    public static Optional<String> schemes(Configuration configuration) {
-        return configuration
-                .get(SCHEMES_KEY);
+    public static List<String> schemes(Configuration configuration) {
+        return Arrays.asList(configuration.getStringArray(SCHEMES_KEY));
     }
 
-    public static Optional<String> targets(Configuration configuration) {
-        return configuration
-                .get(TARGETS_KEY);
+    public static List<String> targets(Configuration configuration) {
+        return Arrays.asList(configuration.getStringArray(TARGETS_KEY));
     }
 
     public static Optional<String> indexStorePath(Configuration configuration) {

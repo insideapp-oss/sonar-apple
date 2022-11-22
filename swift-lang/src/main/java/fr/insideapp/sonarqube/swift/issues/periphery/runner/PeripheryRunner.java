@@ -49,10 +49,10 @@ public final class PeripheryRunner extends SingleCommandLineToolBuilder implemen
 
     private List<String> schemes() {
         List<String> options = new ArrayList<>();
-        Optional<String> schemes = PeripheryExtensionProvider.schemes(configuration);
-        if (schemes.isPresent()) {
+        List<String> schemes = PeripheryExtensionProvider.schemes(configuration);
+        if (!schemes.isEmpty()) {
             options.add("--schemes");
-            options.addAll(Arrays.asList(schemes.get().split(",")));
+            options.addAll(schemes);
         } else {
             // no op
             // for example Swift Package
@@ -62,10 +62,10 @@ public final class PeripheryRunner extends SingleCommandLineToolBuilder implemen
 
     private List<String> targets() {
         List<String> options = new ArrayList<>();
-        Optional<String> targets = PeripheryExtensionProvider.targets(configuration);
-        if (targets.isPresent()) {
+        List<String> targets = PeripheryExtensionProvider.targets(configuration);
+        if (!targets.isEmpty()) {
             options.add("--targets");
-            options.addAll(Arrays.asList(targets.get().split(",")));
+            options.addAll(targets);
         } else {
             // no op
             // for example Swift Package
