@@ -32,7 +32,7 @@ public abstract class CommandLineToolBuilder {
     private static final int COMMAND_TIMEOUT = 10 * 60 * 1000;
     private static final Integer DEFAULT_COMMAND_EXIT_CODE = 0;
 
-    private final Configuration configuration;
+    protected final Configuration configuration;
 
     private final String command;
 

@@ -23,28 +23,25 @@ import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMappable;
 import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssue;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParsable;
-import org.apache.commons.io.FileUtils;
+import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunnable;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class PeripherySensor implements Sensor {
 
-    private static final Logger LOGGER = Loggers.get(PeripherySensor.class);
-
     private final Configuration configuration;
     private final FileSystem fileSystem;
+
+    private final PeripheryRunnable runner;
 
     private final PeripheryReportParsable parser;
 
@@ -53,16 +50,16 @@ public class PeripherySensor implements Sensor {
     public PeripherySensor(
             final Configuration configuration,
             final FileSystem fileSystem,
+            final PeripheryRunnable runner,
             final PeripheryReportParsable parser,
             final PeripheryReportIssueMappable mapper
     ) {
         this.configuration = configuration;
         this.fileSystem = fileSystem;
+        this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
     }
-
-
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
@@ -74,46 +71,15 @@ public class PeripherySensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        File peripheryLogFile = retrievePeripheryLog();
-        if (peripheryLogFile == null) { return; }
-        String peripheryLog = readPeripheryLog(peripheryLogFile);
-        if (peripheryLog == null) { return; }
+        String output = runner.run();
         List<PeripheryIssue> issues = parser
-                .parse(peripheryLog)
+                .parse(output)
                 .stream()
                 .filter(issue -> Objects.nonNull(issue.location)) // remove null values
                 .collect(Collectors.toList());
         List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         issueRecorder.recordIssues(reportIssues, PeripheryRulesDefinition.REPOSITORY_KEY, sensorContext);
-    }
-
-    private File retrievePeripheryLog() {
-        File peripheryLogFile = peripheryLog();
-
-        // Look for the Periphery log file
-        if (!peripheryLogFile.exists()) {
-            LOGGER.error("Failed to locate Periphery log file.");
-            LOGGER.error("Expected location according to the configuration is {}", peripheryLogFile.getAbsolutePath());
-            return null;
-        }
-
-        return peripheryLogFile;
-    }
-
-    private File peripheryLog() {
-        return new File(fileSystem.baseDir(), PeripheryExtensionProvider.peripheryLogPath(configuration));
-    }
-
-    private String readPeripheryLog(File peripheryLogFile) {
-        String peripheryLog = null;
-        try {
-            peripheryLog = FileUtils.readFileToString(peripheryLogFile, StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            LOGGER.error("Failed to read Periphery log file.");
-            LOGGER.error("{}", e);
-        }
-        return peripheryLog;
     }
 
 }

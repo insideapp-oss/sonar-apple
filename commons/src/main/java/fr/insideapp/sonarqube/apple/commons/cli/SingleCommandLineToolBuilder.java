@@ -32,7 +32,7 @@ public abstract class SingleCommandLineToolBuilder extends CommandLineToolBuilde
         super(configuration, command);
     }
 
-    public abstract String[] options(List<String> sources);
+    protected abstract String[] options(List<String> sources);
 
     @Override
     public String run() {

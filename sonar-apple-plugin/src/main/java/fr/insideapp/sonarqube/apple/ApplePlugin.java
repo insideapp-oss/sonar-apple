@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple;
 
+import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
@@ -36,8 +37,6 @@ import fr.insideapp.sonarqube.swift.issues.SwiftProfile;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
-import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
-import fr.insideapp.sonarqube.swift.issues.periphery.PeripherySensor;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
 import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
 import org.sonar.api.Plugin;
@@ -69,6 +68,7 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
 
         register(context,
+                ApplePluginExtensionProvider.class,
                 SwiftLintExtensionProvider.class, // SwiftLint
                 PeripheryExtensionProvider.class, // Periphery
                 OCLintExtensionProvider.class  // OCLint

@@ -25,7 +25,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApplePluginTest {
 
@@ -39,7 +39,7 @@ public class ApplePluginTest {
         ApplePlugin plugin = new ApplePlugin();
         plugin.define(context);
 
-        assertThat(context.getExtensions()).hasSize(30);
+        assertThat(context.getExtensions()).hasSize(35);
 
 
     }
