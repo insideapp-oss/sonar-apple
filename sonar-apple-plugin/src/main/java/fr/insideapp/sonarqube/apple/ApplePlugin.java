@@ -59,7 +59,7 @@ public class ApplePlugin implements Plugin {
         context.addExtension(SonarProjectConfiguration.class);
 
         // Swift language support
-        context.addExtensions(Swift.class, SwiftSensor.class , SwiftProfile.class);
+        context.addExtensions(Swift.class, SwiftSensor.class, SwiftProfile.class);
 
         // Objective-C language support
         context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
@@ -100,6 +100,9 @@ public class ApplePlugin implements Plugin {
     private void register(Context context, Class<? extends ExtensionProvider>... providersClazz) {
         for (Class<? extends ExtensionProvider> providerClazz : providersClazz) {
             try {
+                // registering provider
+                context.addExtension(providerClazz);
+                // registering extensions
                 ExtensionProvider provider = providerClazz.getDeclaredConstructor().newInstance();
                 context.addExtensions(provider.extensions());
             } catch (Exception e) {

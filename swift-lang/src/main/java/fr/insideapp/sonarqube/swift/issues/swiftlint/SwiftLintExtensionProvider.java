@@ -21,10 +21,14 @@ import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMapper;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParser;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunner;
+import org.sonar.api.Plugin;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.scanner.ScannerSide;
 
 import java.util.Arrays;
 import java.util.List;
 
+@ScannerSide
 public final class SwiftLintExtensionProvider implements ExtensionProvider {
 
     public List<Object> extensions() {

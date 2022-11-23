@@ -24,11 +24,13 @@ import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintReportPar
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.scanner.ScannerSide;
 
 import java.util.Arrays;
 import java.util.List;
 
-public final class OCLintExtensionProvider implements ExtensionProvider {
+@ScannerSide
+public class OCLintExtensionProvider implements ExtensionProvider {
 
     private static final String JSON_COMPILATION_DATABASE_KEY = "sonar.apple.jsonCompilationDatabasePath";
     private static final String DEFAULT_JSON_COMPILATION_DATABASE_PATH = "build/json_compilation_database";
@@ -53,7 +55,7 @@ public final class OCLintExtensionProvider implements ExtensionProvider {
         );
     }
 
-    public static String jsonCompilationDatabasePath(Configuration configuration) {
+    public String jsonCompilationDatabasePath(Configuration configuration) {
         return configuration
                 .get(JSON_COMPILATION_DATABASE_KEY)
                 .orElse(DEFAULT_JSON_COMPILATION_DATABASE_PATH);

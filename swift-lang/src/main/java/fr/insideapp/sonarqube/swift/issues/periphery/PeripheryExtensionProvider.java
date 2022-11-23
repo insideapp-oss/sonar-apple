@@ -21,15 +21,18 @@ import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMapper;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParser;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunner;
+import org.sonar.api.Plugin;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.scanner.ScannerSide;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public final class PeripheryExtensionProvider implements ExtensionProvider {
+@ScannerSide
+public class PeripheryExtensionProvider implements ExtensionProvider {
 
     private static final String CATEGORY = "Periphery";
 
@@ -78,15 +81,15 @@ public final class PeripheryExtensionProvider implements ExtensionProvider {
         );
     }
 
-    public static List<String> schemes(Configuration configuration) {
+    public List<String> schemes(Configuration configuration) {
         return Arrays.asList(configuration.getStringArray(SCHEMES_KEY));
     }
 
-    public static List<String> targets(Configuration configuration) {
+    public List<String> targets(Configuration configuration) {
         return Arrays.asList(configuration.getStringArray(TARGETS_KEY));
     }
 
-    public static Optional<String> indexStorePath(Configuration configuration) {
+    public Optional<String> indexStorePath(Configuration configuration) {
         return configuration
                 .get(INDEX_STORE_PATH_KEY);
     }

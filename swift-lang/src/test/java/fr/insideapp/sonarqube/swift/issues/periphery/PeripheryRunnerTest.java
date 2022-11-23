@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
+import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,7 @@ import org.sonar.api.config.Configuration;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,15 +35,19 @@ import static org.mockito.Mockito.when;
 public final class PeripheryRunnerTest {
 
     private PeripheryRunner runner;
+
     private Configuration configuration;
+
+    private ApplePluginExtensionProvider applePluginExtensionProvider;
+    private PeripheryExtensionProvider peripheryExtensionProvider;
     private Class<? extends PeripheryRunner> clazz;
 
     @Before
     public void prepare() {
         configuration = mock(Configuration.class);
-        runner = new PeripheryRunner(
-                configuration
-        );
+        applePluginExtensionProvider = mock(ApplePluginExtensionProvider.class);
+        peripheryExtensionProvider = mock(PeripheryExtensionProvider.class);
+        runner = new PeripheryRunner(configuration, applePluginExtensionProvider, peripheryExtensionProvider);
         clazz = runner.getClass();
     }
 
@@ -51,8 +57,8 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
-        mockSchemes(new String[]{});
-        mockTargets(new String[]{});
+        mockSchemes(List.of());
+        mockTargets(List.of());
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -67,8 +73,8 @@ public final class PeripheryRunnerTest {
         Method options = clazz.getDeclaredMethod("options");
         options.setAccessible(true);
         mockWorkspace(Optional.of("MyProject.xcworkspace"));
-        mockSchemes(new String[]{});
-        mockTargets(new String[]{});
+        mockSchemes(List.of());
+        mockTargets(List.of());
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -85,8 +91,8 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.of("MyProject.xcodeproj"));
-        mockSchemes(new String[]{});
-        mockTargets(new String[]{});
+        mockSchemes(List.of());
+        mockTargets(List.of());
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -103,8 +109,8 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.of("MyProject.xcworkspace"));
         mockProject(Optional.of("MyProject.xcodeproj"));
-        mockSchemes(new String[]{});
-        mockTargets(new String[]{});
+        mockSchemes(List.of());
+        mockTargets(List.of());
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -121,8 +127,8 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
-        mockSchemes(new String[]{"MyScheme"});
-        mockTargets(new String[]{});
+        mockSchemes(List.of("MyScheme"));
+        mockTargets(List.of());
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -139,8 +145,8 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
-        mockSchemes(new String[]{});
-        mockTargets(new String[]{"MyTarget"});
+        mockSchemes(List.of());
+        mockTargets(List.of("MyTarget"));
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -157,8 +163,8 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
-        mockSchemes(new String[]{});
-        mockTargets(new String[]{});
+        mockSchemes(List.of());
+        mockTargets(List.of());
         mockIndexStorePath(Optional.of("/path/to/index/store"));
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
@@ -172,23 +178,23 @@ public final class PeripheryRunnerTest {
     // Private
 
     private void mockWorkspace(Optional<String> value) {
-        when(configuration.get("sonar.apple.workspace")).thenReturn(value);
+        when(applePluginExtensionProvider.workspace(configuration)).thenReturn(value);
     }
 
     private void mockProject(Optional<String> value) {
-        when(configuration.get("sonar.apple.project")).thenReturn(value);
+        when(applePluginExtensionProvider.project(configuration)).thenReturn(value);
     }
 
-    private void mockSchemes(String[] values) {
-        when(configuration.getStringArray("sonar.apple.periphery.schemes")).thenReturn(values);
+    private void mockSchemes(List<String> values) {
+        when(peripheryExtensionProvider.schemes(configuration)).thenReturn(values);
     }
 
-    private void mockTargets(String[] values) {
-        when(configuration.getStringArray("sonar.apple.periphery.targets")).thenReturn(values);
+    private void mockTargets(List<String> values) {
+        when(peripheryExtensionProvider.targets(configuration)).thenReturn(values);
     }
 
     private void mockIndexStorePath(Optional<String> value) {
-        when(configuration.get("sonar.apple.periphery.indexStorePath")).thenReturn(value);
+        when(peripheryExtensionProvider.indexStorePath(configuration)).thenReturn(value);
     }
 
 

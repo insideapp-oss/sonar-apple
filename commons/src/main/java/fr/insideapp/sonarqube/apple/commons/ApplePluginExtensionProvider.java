@@ -20,12 +20,14 @@ package fr.insideapp.sonarqube.apple.commons;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.scanner.ScannerSide;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public final class ApplePluginExtensionProvider implements ExtensionProvider {
+@ScannerSide
+public class ApplePluginExtensionProvider implements ExtensionProvider {
 
     private static final String WORKSPACE_PATH_KEY = "sonar.apple.workspace";
     private static final PropertyDefinition WORKSPACE_PATH_PROPERTY = PropertyDefinition
@@ -51,12 +53,12 @@ public final class ApplePluginExtensionProvider implements ExtensionProvider {
         );
     }
 
-    public static Optional<String> workspace(Configuration configuration) {
+    public Optional<String> workspace(Configuration configuration) {
         return configuration
                 .get(WORKSPACE_PATH_KEY);
     }
 
-    public static Optional<String> project(Configuration configuration) {
+    public Optional<String> project(Configuration configuration) {
         return configuration
                 .get(PROJECT_PATH_KEY);
     }
