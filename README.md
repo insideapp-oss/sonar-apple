@@ -114,19 +114,46 @@ sonar.sources=iOSApp
 # Use commas to specify more than one folder.
 sonar.tests=iOSAppTests
 
+## Apple ##
+
+# Xcode Workspace path.
+# Path to the project's .xcworkspace file.
+sonar.apple.workspace=iOSApp.xcworkspace
+
+# Xcode Project path.
+# Path to the project's .xcodeproj file.
+sonar.apple.project=iOSApp.xcodeproj
+
+## Coverage & Tests ##
+
 # Path to the Xcode result bundle file. 
 # The path is relative to the project base directory.
 # Defaults to build/result.xcresult
-# sonar.apple.resultBundlePath=custom/path/to/file.xcresult
+#sonar.apple.resultBundlePath=custom/path/to/file.xcresult
 
-# Path to periphery.log file
-# Defaults to build
-# sonar.apple.periphery.logPath=custom/path/to/file.log
+## Periphery ##
+
+# Xcode Schemes.
+# Use commas to specify more than one scheme.
+sonar.apple.periphery.schemes=MyiOSAppScheme
+
+# Xcode Targets.
+# Use commas to specify more than one target.
+sonar.apple.periphery.targets=MyiOSAppTarget
+
+# Index Store folder path.
+# This matches the parameter "-derivedDataPath" in xcodebuild (see below).
+# Warning: starting Xcode 14 the folder "Index" is renamed "Index.noindex".
+sonar.apple.periphery.indexStorePath=derivedData/Index/DataStore
+
+## OCLint ##
 
 # Path to the JSON Compilation Database folder
 # The path is relative to the project base directory.
 # Defaults to build/json_compilation_database
 # sonar.apple.jsonCompilationDatabasePath=custom/path/to/folder
+
+## Misc ##
 
 # Encoding of the source code. Default is default system encoding.
 sonar.sourceEncoding=UTF-8
@@ -153,17 +180,6 @@ $ xcrun xcodebuild \
   OTHER_CFLAGS="\$(inherited) -gen-cdb-fragment-path build/compilation_database" \
   -quiet \
   clean test
-
-# Saves Periphery log to build/periphery.log (this is necessary for Swift dead code analysis)
-# Don't forget to add --workspace to the build command if your project is part of a workspace
-$ periphery scan \
-  --project "MyApp.xcodeproj" \
-  --schemes "MyApp" \
-  --targets "MyApp" \
-  --skip-build \
-  --index-store-path ./derivedData/Index/DataStore \
-  --format xcode \
-  --quiet | tee build/periphery.log
 
 # Run the analysis and publish to the SonarQube server
 # Don't forget to specify `sonar.host.url` and `sonar.login` in `sonar-project.properties` or supply it to the following command.
