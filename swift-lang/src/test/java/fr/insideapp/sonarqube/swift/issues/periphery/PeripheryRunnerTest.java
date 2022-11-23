@@ -17,12 +17,14 @@ public final class PeripheryRunnerTest {
 
     private PeripheryRunner runner;
     private Configuration configuration;
-    private Class clazz;
+    private Class<? extends PeripheryRunner> clazz;
 
     @Before
     public void prepare() {
         configuration = mock(Configuration.class);
-        runner = new PeripheryRunner(configuration);
+        runner = new PeripheryRunner(
+                configuration
+        );
         clazz = runner.getClass();
     }
 
@@ -152,11 +154,11 @@ public final class PeripheryRunnerTest {
 
     // Private
 
-    private void mockWorkspace(Optional value) {
+    private void mockWorkspace(Optional<String> value) {
         when(configuration.get("sonar.apple.workspace")).thenReturn(value);
     }
 
-    private void mockProject(Optional value) {
+    private void mockProject(Optional<String> value) {
         when(configuration.get("sonar.apple.project")).thenReturn(value);
     }
 
@@ -168,7 +170,7 @@ public final class PeripheryRunnerTest {
         when(configuration.getStringArray("sonar.apple.periphery.targets")).thenReturn(values);
     }
 
-    private void mockIndexStorePath(Optional value) {
+    private void mockIndexStorePath(Optional<String> value) {
         when(configuration.get("sonar.apple.periphery.indexStorePath")).thenReturn(value);
     }
 

@@ -1,6 +1,7 @@
 package fr.insideapp.sonarqube.swift.issues.periphery.runner;
 
 import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
+import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolRunner;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import org.sonar.api.config.Configuration;
@@ -15,8 +16,9 @@ import java.util.Optional;
 public final class PeripheryRunner extends SingleCommandLineToolRunner implements PeripheryRunnable {
 
     private final Configuration configuration;
-
-    public PeripheryRunner(Configuration configuration) {
+    public PeripheryRunner(
+            final Configuration configuration
+    ) {
         super("periphery");
         this.configuration = configuration;
     }
@@ -28,10 +30,10 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
         options.addAll(xcode());
         options.addAll(schemes());
         options.addAll(targets());
-        options.addAll(Arrays.asList("--skip-build"));
+        options.add("--skip-build");
         options.addAll(indexStorePath());
         options.addAll(Arrays.asList("--format", "json"));
-        options.addAll(Arrays.asList("--quiet"));
+        options.add("--quiet");
         return options.stream().toArray(String[]::new);
     }
 
@@ -41,12 +43,7 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
         Optional<String> project = ApplePluginExtensionProvider.project(configuration);
         if (workspace.isPresent()) {
             options.addAll(Arrays.asList("--workspace", workspace.get()));
-        } else if (project.isPresent()) {
-            options.addAll(Arrays.asList("--project", project.get()));
-        } else {
-            // no op
-            // for example Swift Package
-        }
+        } else project.ifPresent(s -> options.addAll(Arrays.asList("--project", s)));
         return options;
     }
 
@@ -56,9 +53,6 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
         if (!schemes.isEmpty()) {
             options.add("--schemes");
             options.addAll(schemes);
-        } else {
-            // no op
-            // for example Swift Package
         }
         return options;
     }
@@ -69,9 +63,6 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
         if (!targets.isEmpty()) {
             options.add("--targets");
             options.addAll(targets);
-        } else {
-            // no op
-            // for example Swift Package
         }
         return options;
     }
@@ -79,9 +70,7 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
     private List<String> indexStorePath() {
         List<String> options = new ArrayList<>();
         Optional<String> indexStorePath = PeripheryExtensionProvider.indexStorePath(configuration);
-        if (indexStorePath.isPresent()) {
-            options.addAll(Arrays.asList("--index-store-path", indexStorePath.get()));
-        }
+        indexStorePath.ifPresent(s -> options.addAll(Arrays.asList("--index-store-path", s)));
         return options;
     }
 
