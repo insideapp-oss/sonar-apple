@@ -44,7 +44,7 @@ public final class ApplePluginExtensionProviderTest {
     @Test
     public void workspace_default() {
         Optional<String> workspace = ApplePluginExtensionProvider.workspace(settings.asConfig());
-        assertThat(workspace).isEqualTo(Optional.empty());
+        assertThat(workspace).isNotPresent();
     }
 
     @Test
@@ -52,14 +52,14 @@ public final class ApplePluginExtensionProviderTest {
         String expectedCustomWorkspace = "MyProject.xcworkspace";
         settings.setProperty("sonar.apple.workspace", expectedCustomWorkspace);
         Optional<String> workspace = ApplePluginExtensionProvider.workspace(settings.asConfig());
-        assertThat(workspace.isPresent()).isTrue();
-        assertThat(workspace.get()).isEqualTo(expectedCustomWorkspace);
+        assertThat(workspace).isPresent();
+        assertThat(workspace).contains(expectedCustomWorkspace);
     }
 
     @Test
     public void project_default() {
         Optional<String> project = ApplePluginExtensionProvider.project(settings.asConfig());
-        assertThat(project).isEqualTo(Optional.empty());
+        assertThat(project).isNotPresent();
     }
 
     @Test
@@ -67,8 +67,8 @@ public final class ApplePluginExtensionProviderTest {
         String expectedCustomProject = "MyProject.xcodeproj";
         settings.setProperty("sonar.apple.project", expectedCustomProject);
         Optional<String> project = ApplePluginExtensionProvider.project(settings.asConfig());
-        assertThat(project.isPresent()).isTrue();
-        assertThat(project.get()).isEqualTo(expectedCustomProject);
+        assertThat(project).isPresent();
+        assertThat(project).contains(expectedCustomProject);
     }
 
 }

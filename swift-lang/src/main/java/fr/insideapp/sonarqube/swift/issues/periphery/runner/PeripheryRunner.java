@@ -18,7 +18,6 @@
 package fr.insideapp.sonarqube.swift.issues.periphery.runner;
 
 import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
-import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolRunner;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import org.sonar.api.config.Configuration;

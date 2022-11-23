@@ -28,7 +28,7 @@ public abstract class MultiCommandLineToolRunner extends CommandLineToolRunner i
 
     private static final Logger LOGGER = Loggers.get(MultiCommandLineToolRunner.class);
 
-    public MultiCommandLineToolRunner(String command) {
+    protected MultiCommandLineToolRunner(String command) {
         super(command);
     }
 

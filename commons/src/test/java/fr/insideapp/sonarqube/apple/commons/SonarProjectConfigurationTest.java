@@ -46,7 +46,7 @@ public final class SonarProjectConfigurationTest {
         // test
         List<String> sources = projectConfiguration.sources();
         // assert
-        assertThat(sources).hasSize(0);
+        assertThat(sources).isEmpty();
     }
 
     @Test

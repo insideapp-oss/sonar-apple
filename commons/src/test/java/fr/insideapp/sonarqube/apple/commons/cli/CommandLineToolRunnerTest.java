@@ -45,8 +45,7 @@ public final class CommandLineToolRunnerTest {
         // test
         Integer[] exitCodes = runner.exitCodes();
         // assert
-        assertThat(exitCodes).hasSize(1);
-        assertThat(exitCodes).isEqualTo(new Integer[]{0});
+        assertThat(exitCodes).hasSize(1).isEqualTo(new Integer[]{0});
     }
 
     @Test
@@ -58,8 +57,7 @@ public final class CommandLineToolRunnerTest {
         // test
         Integer[] exitCodes = runner.exitCodes();
         // assert
-        assertThat(exitCodes).hasSize(2);
-        assertThat(exitCodes).isEqualTo(new Integer[]{1,2});
+        assertThat(exitCodes).hasSize(2).isEqualTo(new Integer[]{1,2});
     }
 
     @Test

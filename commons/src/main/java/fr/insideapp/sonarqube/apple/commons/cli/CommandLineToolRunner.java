@@ -30,7 +30,7 @@ public abstract class CommandLineToolRunner {
     private static final Integer DEFAULT_COMMAND_EXIT_CODE = 0;
     private final String command;
 
-    public CommandLineToolRunner(final String command) {
+    protected CommandLineToolRunner(final String command) {
         this.command = command;
     }
 
