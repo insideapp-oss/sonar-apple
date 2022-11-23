@@ -25,21 +25,17 @@ import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssue;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParsable;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunnable;
 
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class PeripherySensor implements Sensor {
-
-    private final Configuration configuration;
-    private final FileSystem fileSystem;
 
     private final PeripheryRunnable runner;
 
@@ -48,14 +44,10 @@ public class PeripherySensor implements Sensor {
     private final PeripheryReportIssueMappable mapper;
 
     public PeripherySensor(
-            final Configuration configuration,
-            final FileSystem fileSystem,
             final PeripheryRunnable runner,
             final PeripheryReportParsable parser,
             final PeripheryReportIssueMappable mapper
     ) {
-        this.configuration = configuration;
-        this.fileSystem = fileSystem;
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
@@ -77,7 +69,7 @@ public class PeripherySensor implements Sensor {
                 .stream()
                 .filter(issue -> Objects.nonNull(issue.location)) // remove null values
                 .collect(Collectors.toList());
-        List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
+        List<ReportIssue> reportIssues = new ArrayList<>(mapper.map(issues));
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         issueRecorder.recordIssues(reportIssues, PeripheryRulesDefinition.REPOSITORY_KEY, sensorContext);
     }

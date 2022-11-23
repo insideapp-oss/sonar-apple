@@ -6,7 +6,7 @@ public final class PeripheryIssueLocation {
 
     public final Integer line;
 
-    PeripheryIssueLocation(String path, Integer line) {
+    PeripheryIssueLocation(final String path, final Integer line) {
         this.path = path;
         this.line = line;
     }
