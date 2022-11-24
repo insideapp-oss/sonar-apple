@@ -3,20 +3,16 @@
     "key": "rule1",
     "name": "Rule 1",
     "severity": "MINOR",
+    "type": "CODE_SMELL",
     "description": "This is rule 1.",
-    "debt": {
-      "function": "CONSTANT_ISSUE",
-      "offset": "5min"
-    }
+    "debt": "5min"
   },
   {
     "key": "rule2",
     "name": "Rule 2",
     "severity": "MAJOR",
+    "type": "VULNERABILITY",
     "description": "This is rule 2.",
-    "debt": {
-      "function": "CONSTANT_ISSUE",
-      "offset": "15min"
-    }
+    "debt": "15min"
   }
 ]

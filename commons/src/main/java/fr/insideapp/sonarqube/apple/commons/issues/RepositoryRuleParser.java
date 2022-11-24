@@ -17,19 +17,25 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONArray;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONObject;
-import org.sonarsource.analyzer.commons.internal.json.simple.JSONValue;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+
 public class RepositoryRuleParser {
+
+    private final ObjectMapper objectMapper;
+
+    public RepositoryRuleParser() {
+        objectMapper = new ObjectMapper()
+                .disable(FAIL_ON_UNKNOWN_PROPERTIES)
+                .enable(SerializationFeature.INDENT_OUTPUT);
+    }
 
     public List<RepositoryRule> parse(String resourceName) throws IOException {
         InputStream is =  getClass().getResourceAsStream(resourceName);
@@ -37,26 +43,7 @@ public class RepositoryRuleParser {
             throw new IOException(String.format("JSON rule file not found in resources at %s", resourceName));
         }
         Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
-        List<RepositoryRule> repositoryRules = new ArrayList<>();
-        JSONArray jsonRules = (JSONArray) JSONValue.parse(reader);
-        if (jsonRules != null) {
-            for (Object obj : jsonRules) {
-                JSONObject jsonRule = (JSONObject) obj;
-                JSONObject jsonDebt = (JSONObject) jsonRule.get("debt");
-                RepositoryRuleDebt debt = null;
-                if (jsonDebt != null) {
-                    debt = new RepositoryRuleDebt((String) jsonDebt.get("function"), (String) jsonDebt.get("offset"));
-                }
-                RepositoryRule repositoryRule = new RepositoryRule(
-                        (String) jsonRule.get("key"),
-                        (String) jsonRule.get("name"),
-                        (String) jsonRule.get("severity"),
-                        (String) jsonRule.get("description"),
-                        (String) jsonRule.get("type"),
-                        debt);
-                repositoryRules.add(repositoryRule);
-            }
-        }
-        return repositoryRules;
+        return Arrays.asList(objectMapper.readValue(reader, RepositoryRule[].class));
     }
+
 }

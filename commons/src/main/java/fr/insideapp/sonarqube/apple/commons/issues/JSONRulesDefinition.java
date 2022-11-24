@@ -27,7 +27,6 @@ import java.util.List;
 
 public abstract class JSONRulesDefinition implements RulesDefinition {
 
-
     private static final Logger LOGGER = Loggers.get(JSONRulesDefinition.class);
 
     private final String repositoryKey;
@@ -48,38 +47,19 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
         RulesDefinition.NewRepository repository = context.createRepository(this.repositoryKey, this.language).setName(this.repositoryName);
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
         try {
-            List<RepositoryRule> repositoryRules = repositoryRuleParser.parse(jsonResourcePath);
-            for (RepositoryRule r : repositoryRules) {
+            List<RepositoryRule> rules = repositoryRuleParser.parse(jsonResourcePath);
+            for (RepositoryRule rule : rules) {
 
-                String type = r.getType();
-                if (type == null) {
-                    type = "CODE_SMELL";
-                    LOGGER.warn(String.format("Rule %s has no type, using CODE_SMELL as default", r.getKey()));
-                }
-
-                String severity = r.getSeverity();
-                if (severity == null) {
-                    severity = "MAJOR";
-                    LOGGER.warn(String.format("Rule %s has no severity, using MAJOR as default", r.getKey()));
-                }
-
-                RulesDefinition.NewRule nr = repository.createRule(r.getKey())
-                        .setName(r.getName())
-                        .setSeverity(severity)
-                        .setType(RuleType.valueOf(type))
-                        .setHtmlDescription(r.getDescription());
-
-                if (r.getDebt() != null) {
-                    nr.setDebtRemediationFunction(nr.debtRemediationFunctions().constantPerIssue(r.getDebt().getOffset()));
-                } else {
-                    LOGGER.warn(String.format("Rule %s has no debt information", r.getKey()));
-                }
-
+                RulesDefinition.NewRule newRule = repository.createRule(rule.key)
+                        .setName(rule.name)
+                        .setSeverity(rule.severity.name())
+                        .setType(RuleType.valueOf(rule.type.name()))
+                        .setHtmlDescription(rule.description);
+                newRule.setDebtRemediationFunction(newRule.debtRemediationFunctions().constantPerIssue(rule.debt));
             }
         } catch (IOException e) {
             LOGGER.error(String.format("Failed to load %s rules", this.repositoryName), e);
         }
-
         repository.done();
     }
 }

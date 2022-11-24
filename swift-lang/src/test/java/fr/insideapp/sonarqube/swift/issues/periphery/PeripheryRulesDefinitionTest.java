@@ -35,7 +35,7 @@ public class PeripheryRulesDefinitionTest {
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("Periphery");
         assertThat(repository.language()).isEqualTo("swift");
-        assertThat(repository.rules()).isNotEmpty();
+        assertThat(repository.rules()).hasSize(4);
 
 
     }
