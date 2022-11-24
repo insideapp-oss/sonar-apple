@@ -51,7 +51,14 @@ class RuleUpdater {
     def private writeRules(ArrayList<Rule> rules) {
         def generator = new groovy.json.JsonGenerator.Options().excludeNulls().build()
         def json = new groovy.json.JsonBuilder(generator)
-        json.call(rules)
+        json(rules) { rule ->
+            key rule.key
+            name rule.name
+            severity rule.severity
+            description rule.description
+            type rule.type
+            debt rule.debt
+        }
         file.text = groovy.json.JsonOutput.prettyPrint(json.toString())
     }
 
@@ -105,13 +112,13 @@ class RuleUpdater {
                     }
                     if (r.severity == null) {
                         List<String> severities = Arrays.asList(Rule.Severity.values().each{ s -> s.name() });
-                        def choice = new Prompt("Severity?", severities).promptChoice()
+                        def choice = new Prompt("Severity?", severities).promptChoice() as String
                         r.severity = Enum.valueOf(Rule.Severity.class, choice);
                         println r.severity.name().style(ConsoleString.Color.DEFAULT_BOLD)
                     }
                     if (r.type == null) {
                         List<String> types = Arrays.asList(Rule.Type.values().each{ s -> s.name() });
-                        def choice = new Prompt("Type?", types).promptChoice()
+                        def choice = new Prompt("Type?", types).promptChoice() as String
                         r.type = Enum.valueOf(Rule.Type.class, choice);
                         println r.Type.name().style(ConsoleString.Color.DEFAULT_BOLD)
                     }
