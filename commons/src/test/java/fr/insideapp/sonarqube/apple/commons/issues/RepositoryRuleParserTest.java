@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public final class RepositoryRuleParserTest {
 
-    RepositoryRuleParser parser;
+    private RepositoryRuleParser parser;
 
     @Before
     public void prepare() {
