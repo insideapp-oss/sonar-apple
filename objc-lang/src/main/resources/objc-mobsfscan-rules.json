@@ -5,10 +5,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Hardcoded Secret",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_load_html_string",
@@ -16,10 +13,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Unsafe WebView method",
-        "debt": {
-            "offset": "30min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "30min"
     },
     {
         "key": "ios_banned_api",
@@ -27,10 +21,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Banned API",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "ios_self_signed_ssl",
@@ -38,10 +29,7 @@
         "severity": "CRITICAL",
         "name": "Self Signed SSL",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_webview_ignore_ssl",
@@ -49,10 +37,7 @@
         "severity": "CRITICAL",
         "name": "WebView ignore SSL",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_app_logging",
@@ -60,10 +45,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Logging method detected",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_file_perm",
@@ -71,10 +53,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "No file encryption",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_weak_hash",
@@ -82,10 +61,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Weak Hash algorithm used",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_sha1_collision",
@@ -93,10 +69,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "SHA-1 Collision",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_aes_ecb",
@@ -104,20 +77,14 @@
         "severity": "CRITICAL",
         "type": "VULNERABILITY",
         "name": "Usage of ECB mode",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_biometric_bool",
         "description": "Biometric authentication should be based on Keychain, not based on bool.",
         "severity": "MAJOR",
         "name": "Weak biometric implementation",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        },
+        "debt": "60min",
         "type": "SECURITY_HOTSPOT"
     },
     {
@@ -126,10 +93,7 @@
         "severity": "INFO",
         "name": "No jailbreak detection",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_detect_jailbreak_check",
@@ -137,10 +101,7 @@
         "severity": "INFO",
         "name": "No SFAntiPiracy detection",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_piracy_check",
@@ -148,10 +109,7 @@
         "severity": "INFO",
         "name": "No SFAntiPiracy detection",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_mach_ports",
@@ -159,9 +117,6 @@
         "severity": "INFO",
         "name": "No anti-debugger protection",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     }
 ]

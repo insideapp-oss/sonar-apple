@@ -5,10 +5,7 @@
         "severity": "MAJOR",
         "description": "SHA1 is a weak hash known to have hash collisions.",
         "type": "VULNERABILITY",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_cert_pinning",
@@ -16,10 +13,7 @@
         "severity": "INFO",
         "description": "This app does not have Certificate Pinning implemented in code.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_hardcoded_secret",
@@ -27,10 +21,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Hardcoded Secret",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_load_html_string",
@@ -38,10 +29,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Unsafe WebView method",
-        "debt": {
-            "offset": "30min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "30min"
     },
     {
         "key": "ios_log",
@@ -49,10 +37,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Logging method detected",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_weak_hash",
@@ -60,10 +45,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Weak Hash algorithm used",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_biometric_bool",
@@ -71,10 +53,7 @@
         "severity": "MAJOR",
         "type": "SECURITY_HOTSPOT",
         "name": "Weak biometric implementation",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_file_no_special",
@@ -82,10 +61,7 @@
         "severity": "CRITICAL",
         "type": "VULNERABILITY",
         "name": "No file encryption",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_general_paste",
@@ -93,10 +69,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Usage of general pasteboard",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "ios_tls3_not_used",
@@ -104,10 +77,7 @@
         "severity": "CRITICAL",
         "type": "VULNERABILITY",
         "name": "Deprecated TLS version",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_tls12_used",
@@ -115,10 +85,7 @@
         "severity": "MAJOR",
         "name": "Deprecated TLS version",
         "type": "VULNERABILITY",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_dtls1_used",
@@ -126,10 +93,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Deprecated DTLS version",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_depr_tls_min",
@@ -137,10 +101,7 @@
         "severity": "MAJOR",
         "type": "VULNERABILITY",
         "name": "Deprecated TLS API",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_uiwebview",
@@ -148,10 +109,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Deprecated WebView",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_jailbreak_detect",
@@ -159,10 +117,7 @@
         "severity": "INFO",
         "name": "No jailbreak detection",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_custom_keyboard_disabled",
@@ -170,10 +125,7 @@
         "severity": "INFO",
         "name": "Custom keyboard enabled",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_keyboard_cache",
@@ -181,10 +133,7 @@
         "severity": "INFO",
         "type": "VULNERABILITY",
         "name": "Keyboard cache enabled",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_detect_reversing",
@@ -192,9 +141,6 @@
         "severity": "INFO",
         "name": "No reverse engineering detection",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     }
 ]

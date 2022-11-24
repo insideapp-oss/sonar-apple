@@ -17,6 +17,7 @@
  */
 import commons.ConsoleString
 import commons.RuleUpdater
+import commons.Rule
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7.1')
 import groovyx.net.http.HTTPBuilder
@@ -26,37 +27,39 @@ import groovy.transform.Field
 
 String.mixin(ConsoleString)
 
-@Field def SEVERITY = [
-        "ERROR": "CRITICAL",
-        "WARNING": "MAJOR",
-        "INFO": "INFO"
-]
+@Field def SEVERITY_MAP = [
+        "ERROR": Rule.Severity.CRITICAL,
+        "WARNING": Rule.Severity.MAJOR,
+        "INFO": Rule.Severity.INFO
+] as LinkedHashMap<String, Rule.Severity>
 
 @Field def VERSION = "0.1.0"
 @Field def URL = "https://raw.githubusercontent.com/MobSF/mobsfscan/${VERSION}/mobsfscan/rules/patterns/ios/"
 
-def parseCategory(url) {
+private ArrayList<Rule> parseCategory(url) {
 
-    def result = []
+    def rules = [] as ArrayList<Rule>
 
     def http = new HTTPBuilder(url)
     def htmlContent = http.get(contentType : 'text/html').text()
     def ys = new YamlSlurper()
     def rulesParsed = ys.parseText(htmlContent)
 
-    for(Map rule : rulesParsed) {
-        def entry = [:]
-        entry.key = rule.id
-        println "Processing rule ${entry.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
-        entry.description = rule.message
-        entry.severity = SEVERITY[rule.severity]
-        // type is hardcoded same as mobsfscan
+    for(Map ruleParsed : rulesParsed) {
+        println "Processing rule ${ruleParsed.id.style(ConsoleString.Color.DEFAULT_BOLD)}"
+        // type to VULNERABILITY is hardcoded same as mobsfscan
         // see https://github.com/MobSF/mobsfscan/blob/main/mobsfscan/formatters/sonarqube.py#L48
-        entry.type = "VULNERABILITY"
-        result.add entry
+        def rule = new Rule(
+                ruleParsed.id,
+                ruleParsed.message,
+                SEVERITY_MAP[ruleParsed.severity],
+                Rule.Type.VULNERABILITY,
+                null, // no name
+                null // no debt
+        )
+        rules.add rule
     }
-
-    return result
+    return rules
 }
 
 @Field def LANGUAGE_RULES = [
@@ -67,13 +70,10 @@ def parseCategory(url) {
 LANGUAGE_RULES.forEach( (key, value) -> {
 
     def updater = new RuleUpdater("${key}-lang/src/main/resources/${key}-mobsfscan-rules.json", {
-
-        def result = []
-
-        result.addAll parseCategory(URL + "${value.get(0)}/${value.get(1)}_rules.yaml")
-        result.addAll parseCategory(URL + "${value.get(0)}/best_practices.yaml")
-
-        return result
+        def rules = [] as ArrayList<Rule>
+        rules.addAll parseCategory(URL + "${value.get(0)}/${value.get(1)}_rules.yaml")
+        rules.addAll parseCategory(URL + "${value.get(0)}/best_practices.yaml")
+        return rules
     })
 
     updater.update()
