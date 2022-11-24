@@ -5,10 +5,7 @@
         "severity": "MAJOR",
         "description": "Checks for bitwise operations in conditionals. Although being written on purpose in some rare cases, bitwise operations are considered to be too \u201csmart\u201d. Smart code is not easy to understand.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "broken-nil-check",
@@ -16,10 +13,7 @@
         "severity": "CRITICAL",
         "description": "The broken nil check in Objective-C in some cases returns just the opposite result.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "broken-null-check",
@@ -27,10 +21,7 @@
         "severity": "CRITICAL",
         "description": "The broken null check itself will crash the program.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "broken-oddness-check",
@@ -38,10 +29,7 @@
         "severity": "CRITICAL",
         "description": "Checking oddness by x%2==1 won\u2019t work for negative numbers. Use x&1==1 or x%2!=0 instead.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "collapsible-if-statements",
@@ -49,10 +37,7 @@
         "severity": "MAJOR",
         "description": "This rule detects instances where the conditions of two consecutive if statements can be combined into one in order to increase code cleanness and readability.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "constant-conditional-operator",
@@ -60,10 +45,7 @@
         "severity": "CRITICAL",
         "description": "conditionaloperator whose conditionals are always true or always false are confusing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "constant-if-expression",
@@ -71,10 +53,7 @@
         "severity": "CRITICAL",
         "description": "if statements whose conditionals are always true or always false are confusing.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "dead-code",
@@ -82,10 +61,7 @@
         "severity": "CRITICAL",
         "description": "Code after return, break, continue, and throw statements is unreachable and will never be executed.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "double-negative",
@@ -93,10 +69,7 @@
         "severity": "MAJOR",
         "description": "There is no point in using a double negative, it is always positive.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "for-loop-should-be-while-loop",
@@ -104,10 +77,7 @@
         "severity": "MAJOR",
         "description": "Under certain circumstances, some for loops can be simplified to while loops to make code more concise.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "goto-statement",
@@ -115,10 +85,7 @@
         "severity": "CRITICAL",
         "description": "\u201cGo To Statement Considered Harmful\u201d",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "jumbled-incrementer",
@@ -126,10 +93,7 @@
         "severity": "BLOCKER",
         "description": "Jumbled incrementers are usually typos. If it\u2019s done on purpose, it\u2019s very confusing for code readers.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "misplaced-nil-check",
@@ -137,10 +101,7 @@
         "severity": "CRITICAL",
         "description": "The nil check is misplaced. In Objective-C, sending a message to a nil pointer simply does nothing. But code readers may be confused about the misplaced nil check.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "misplaced-null-check",
@@ -148,10 +109,7 @@
         "severity": "BLOCKER",
         "description": "The null check is misplaced. In C and C++, sending a message to a null pointer could crash the program. When null is misplaced, either the check is useless or it\u2019s incorrect.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "multiple-unary-operator",
@@ -159,10 +117,7 @@
         "severity": "MAJOR",
         "description": "Multiple unary operator can always be confusing and should be simplified.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "return-from-finally-block",
@@ -170,10 +125,7 @@
         "severity": "MAJOR",
         "description": "Returning from a finally block is not recommended.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "throw-exception-from-finally-block",
@@ -181,10 +133,7 @@
         "severity": "CRITICAL",
         "description": "Throwing exceptions within a finally block may mask other exceptions or code defects.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "calling-prohibited-method",
@@ -192,10 +141,7 @@
         "severity": "BLOCKER",
         "description": "When a method is declared with __attribute__((annotate(\"oclint:enforce[prohibitedmethod]\"))) annotation, all of its usages will be prohibited.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "calling-protected-method",
@@ -203,10 +149,7 @@
         "severity": "CRITICAL",
         "description": "Even though there is no protected in Objective-C language level, in a design\u2019s perspective, we sometimes hope to enforce a method only be used inside the class itself or by its subclass. This rule mimics the protected behavior, and alerts developers when a method is called outside its access scope.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "missing-abstract-method-implementation",
@@ -214,10 +157,7 @@
         "severity": "MAJOR",
         "description": "While Objective-C language allows abstract methods to be declared without implementations, this rule tries to verify if the subclass implements the correct abstract methods.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "missing-call-to-base-method",
@@ -225,10 +165,7 @@
         "severity": "CRITICAL",
         "description": "When a method is declared with __attribute__((annotate(\"oclint:enforce[basemethod]\"))) annotation, all of its implementations (including its own and its subclasses) must call the method implementation in super class.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "missing-hash-method",
@@ -236,10 +173,7 @@
         "severity": "CRITICAL",
         "description": "When isEqual method is overridden, hash method must be overridden, too.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "assign-ivar-outside-accessors",
@@ -247,10 +181,7 @@
         "severity": "MAJOR",
         "description": "This rule prevents assigning an ivar outside of getters, setters, and init method.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "avoid-branching-statement-as-last-in-loop",
@@ -258,10 +189,7 @@
         "severity": "BLOCKER",
         "description": "Having branching statement as the last statement inside a loop is likely a bug.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "destructor-of-virtual-class",
@@ -269,10 +197,7 @@
         "severity": "CRITICAL",
         "description": "This rule enforces the destructor of a virtual class must be virtual.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "inverted-logic",
@@ -280,10 +205,7 @@
         "severity": "CRITICAL",
         "description": "An inverted logic is hard to understand.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "misplaced-default-label",
@@ -291,10 +213,7 @@
         "severity": "BLOCKER",
         "description": "It is very confusing when default label is not the last label in a switch statement.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "missing-break-in-switch-statement",
@@ -302,10 +221,7 @@
         "severity": "BLOCKER",
         "description": "A switch case without a break statement is likely a bug.",
         "type": "BUG",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "missing-default-statement",
@@ -313,10 +229,7 @@
         "severity": "CRITICAL",
         "description": "Switch statements should have a default statement.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "non-case-label-in-switch-statement",
@@ -324,10 +237,7 @@
         "severity": "CRITICAL",
         "description": "It is very confusing when label becomes part of the switch statement.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "parameter-reassignment",
@@ -335,10 +245,7 @@
         "severity": "BLOCKER",
         "description": "Reassigning values to parameters is very problematic in most cases.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "prefer-early-exit",
@@ -346,10 +253,7 @@
         "severity": "MAJOR",
         "description": "Early exits can reduce the indentation of a block of code, so that reader do not have to remember all the previous decisions, therefore, makes it easier to understand the code.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "problematic-base-class-destructor",
@@ -357,10 +261,7 @@
         "severity": "MAJOR",
         "description": "Make base class destructor public and virtual, or protected and nonvirtual",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "too-few-branches-in-switch-statement",
@@ -368,10 +269,7 @@
         "severity": "MAJOR",
         "description": "To increase code readability, when a switch consists of only a few branches, it\u2019s much better to use an if statement instead.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "unnecessary-default-statement",
@@ -379,10 +277,7 @@
         "severity": "MAJOR",
         "description": "When a switch statement covers all possible cases, a default label is not needed and should be removed. If the switch is not fully covered, the SwitchStatementsShouldHaveDefault rule will report.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "branch-divergence",
@@ -390,10 +285,7 @@
         "severity": "CRITICAL",
         "description": "Branch divergence is quite expensive and needs to be avoided as much as possible.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "avoid-default-arguments-on-virtual-methods",
@@ -401,10 +293,7 @@
         "severity": "CRITICAL",
         "description": "Giving virtual functions default argument initializers tends to defeat polymorphism and introduce unnecessary complexity into a class hierarchy.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "avoid-private-static-members",
@@ -412,10 +301,7 @@
         "severity": "MAJOR",
         "description": "Having static members is easier to harm encapsulation.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-catch-statement",
@@ -423,10 +309,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where an exception is caught, but nothing is done about it.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-do-while-statement",
@@ -434,10 +317,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where do-while statement does nothing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-else-block",
@@ -445,10 +325,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where an else statement does nothing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-finally-statement",
@@ -456,10 +333,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where a finally statement does nothing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-for-statement",
@@ -467,10 +341,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where a for statement does nothing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-if-statement",
@@ -478,10 +349,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where a condition is checked, but nothing is done about it.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-switch-statement",
@@ -489,10 +357,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where a switch statement does nothing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-try-statement",
@@ -500,10 +365,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where a try statement is empty.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "empty-while-statement",
@@ -511,10 +373,7 @@
         "severity": "CRITICAL",
         "description": "This rule detects instances where a while statement does nothing.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "use-boxed-expression",
@@ -522,10 +381,7 @@
         "severity": "MAJOR",
         "description": "This rule locates the places that can be migrated to the Objective-C literals with boxed expressions.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "use-container-literal",
@@ -533,10 +389,7 @@
         "severity": "MAJOR",
         "description": "This rule locates the places that can be migrated to the Objective-C container literals.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "use-number-literal",
@@ -544,10 +397,7 @@
         "severity": "MAJOR",
         "description": "This rule locates the places that can be migrated to the Objective-C number literals.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "use-object-subscripting",
@@ -555,10 +405,7 @@
         "severity": "MAJOR",
         "description": "This rule locates the places that can be migrated to the Objective-C literals with object subscripting.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "long-variable-name",
@@ -566,10 +413,7 @@
         "severity": "MAJOR",
         "description": "Variables with long names harm readability.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "short-variable-name",
@@ -577,10 +421,7 @@
         "severity": "MAJOR",
         "description": "A variable with a short name is hard to understand what it stands for.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "redundant-conditional-operator",
@@ -588,10 +429,7 @@
         "severity": "MAJOR",
         "description": "This rule detects three types of redundant conditional operators:",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "redundant-if-statement",
@@ -599,10 +437,7 @@
         "severity": "MAJOR",
         "description": "This rule detects unnecessary if statements.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "redundant-local-variable",
@@ -610,10 +445,7 @@
         "severity": "MINOR",
         "description": "This rule detects cases where a variable declaration is immediately followed by a return of that variable.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "redundant-nil-check",
@@ -621,10 +453,7 @@
         "severity": "MINOR",
         "description": "C/C++-style null check in Objective-C like foo!=nil&&[foobar] is redundant, since sending a message to a nil object in this case simply returns a false-y value.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "unnecessary-else-statement",
@@ -632,10 +461,7 @@
         "severity": "MAJOR",
         "description": "When an if statement block ends with a return statement, or all branches in the if statement block end with return statements, then the else statement is unnecessary. The code in the else statement can be run without being in the block.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "unnecessary-null-check-for-dealloc",
@@ -643,10 +469,7 @@
         "severity": "MINOR",
         "description": "char*p=0;deletep; is valid. This rule locates unnecessary if(p) checks.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "useless-parentheses",
@@ -654,10 +477,7 @@
         "severity": "MINOR",
         "description": "This rule detects useless parentheses.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "deep-nested-block",
@@ -665,10 +485,7 @@
         "severity": "CRITICAL",
         "description": "This rule indicates nested blocks deeper than the threshold.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "high-cyclomatic-complexity",
@@ -676,10 +493,7 @@
         "severity": "CRITICAL",
         "description": "Cyclomatic complexity is determined by the number of linearly independent paths\nthrough a program\u2019s source code. In other words, cyclomatic complexity of a method\nis measured by the number of decision points, like if, while, and for\nstatements, plus one for the method entry.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "high-n-path-complexity",
@@ -687,10 +501,7 @@
         "severity": "CRITICAL",
         "description": "NPath complexity is determined by the number of execution paths through that method.\nCompared to cyclomatic complexity, NPath complexity has two outstanding characteristics:\nfirst, it distinguishes between different kinds of control flow structures;\nsecond, it takes the various type of acyclic paths in a flow graph into consideration.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "high-ncss-method",
@@ -698,10 +509,7 @@
         "severity": "CRITICAL",
         "description": "This rule counts the Non-Commenting Source Statements (NCSS) of a method. NCSS only takes actual statements into consideration. In other words, it ignores empty statements, empty blocks, closing brackets, semicolons after closing brackets, and others. Meanwhile, a statement that is broken into multiple lines is counted only once.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "long-class",
@@ -709,10 +517,7 @@
         "severity": "CRITICAL",
         "description": "Long class generally indicates that it does too many things. Each class should be cohesive: does one thing and that one thing well.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "15min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "15min"
     },
     {
         "key": "long-line",
@@ -720,10 +525,7 @@
         "severity": "MAJOR",
         "description": "Long lines are hard to read. Break them into multiple lines.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "long-method",
@@ -731,10 +533,7 @@
         "severity": "CRITICAL",
         "description": "Long method generally indicates that this method tries to do many things. Each method should do one thing and that one thing well.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "too-many-fields",
@@ -742,10 +541,7 @@
         "severity": "CRITICAL",
         "description": "A class with too many fields indicates it does too many things and lacks proper abstraction. It can be redesigned to have fewer fields.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "too-many-methods",
@@ -753,10 +549,7 @@
         "severity": "CRITICAL",
         "description": "A class with too many methods indicates it does too many things and is hard to read and understand. It usually contains complicated code, and should be refactored.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "too-many-parameters",
@@ -764,10 +557,7 @@
         "severity": "CRITICAL",
         "description": "Methods with too many parameters are hard to understand and maintain, and are thirsty for refactorings, like Replace Parameter With method, Introduce Parameter Object, or Preserve Whole Object.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "10min"
     },
     {
         "key": "unused-local-variable",
@@ -775,10 +565,7 @@
         "severity": "MAJOR",
         "description": "This rule detects local variables that are declared, but not used.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "unused-method-parameter",
@@ -786,9 +573,6 @@
         "severity": "MAJOR",
         "description": "This rule detects parameters that are not used in the method.",
         "type": "CODE_SMELL",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     }
 ]
