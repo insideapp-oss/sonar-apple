@@ -44,7 +44,7 @@ public class MobSFScanSensorTest {
 
             @Override
             public ReportParser reportParser() {
-                return new MobSFScanReportParser(new String[]{"swift"});
+                return new MobSFScanReportParserOld(new String[]{"swift"});
             }
         };
     }
@@ -61,7 +61,7 @@ public class MobSFScanSensorTest {
 
     @Test
     public void reportParser() {
-        assertThat(sensor.reportParser()).isInstanceOf(MobSFScanReportParser.class);
+        assertThat(sensor.reportParser()).isInstanceOf(MobSFScanReportParserOld.class);
     }
 
     @Test

@@ -21,7 +21,7 @@ import org.junit.Test;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanReportParserTest {
+public class MobSFScanReportParserOldTest {
 
     private static final String FILE_PATH = "SQApp/SQApp/SQAppApp.swift";
 
@@ -58,7 +58,7 @@ public class MobSFScanReportParserTest {
                 "  }\n" +
                 "}";
 
-        MobSFScanReportParser parser = new MobSFScanReportParser(new String[]{"swift"});
+        MobSFScanReportParserOld parser = new MobSFScanReportParserOld(new String[]{"swift"});
 
         List<ReportIssue> issues = parser.parse(input);
         assertThat(issues).hasSize(2);

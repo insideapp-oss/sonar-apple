@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.issues.mobsfscan;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParserOld;
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanSensor;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
@@ -41,6 +41,6 @@ public final class MobSFScanObjectiveCSensor extends MobSFScanSensor {
 
     @Override
     public ReportParser reportParser() {
-        return new MobSFScanReportParser(ObjectiveC.EXTENSIONS);
+        return new MobSFScanReportParserOld(ObjectiveC.EXTENSIONS);
     }
 }

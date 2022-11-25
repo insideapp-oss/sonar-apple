@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.issues.mobsfscan;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParserOld;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
@@ -50,7 +50,7 @@ public class MobSFScanObjectiveCSensorTest {
 
     @Test
     public void reportParser() {
-        assertThat(sensor.reportParser()).isInstanceOf(MobSFScanReportParser.class);
+        assertThat(sensor.reportParser()).isInstanceOf(MobSFScanReportParserOld.class);
     }
 
     @Test

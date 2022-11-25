@@ -25,12 +25,12 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.util.*;
 
-public final class MobSFScanReportParser implements ReportParser {
-    private static final Logger LOGGER = Loggers.get(MobSFScanReportParser.class);
+public final class MobSFScanReportParserOld implements ReportParser {
+    private static final Logger LOGGER = Loggers.get(MobSFScanReportParserOld.class);
 
     private String[] extensions = {};
 
-    public MobSFScanReportParser(String[] extensions) {
+    public MobSFScanReportParserOld(String[] extensions) {
         this.extensions = extensions;
     }
 
