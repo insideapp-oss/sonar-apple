@@ -17,26 +17,38 @@
  */
 package fr.insideapp.sonarqube.objc.issues.mobsfscan;
 
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanObjectiveCRulesDefinitionTest {
+public final class MobSFScanObjectiveCRulesDefinitionTest {
+
+    private MobSFScanRulesDefinition rulesDefinition;
+    private ObjectiveC language;
+    private RulesDefinition.Context context;
+
+    @Before
+    public void prepare() {
+        language = new ObjectiveC();
+        rulesDefinition = new MobSFScanObjectiveCRulesDefinition(language);
+        context = new RulesDefinition.Context();
+    }
 
     @Test
     public void define() {
-
-        MobSFScanObjectiveCRulesDefinition rulesDefinition = new MobSFScanObjectiveCRulesDefinition();
-        RulesDefinition.Context context = new RulesDefinition.Context();
+        // test
         rulesDefinition.define(context);
-
+        // assert
         RulesDefinition.Repository repository = context.repository("MobSFScanObjc");
         assertThat(repository).isNotNull();
+        assertThat(repository.key()).isEqualTo("MobSFScanObjc");
         assertThat(repository.name()).isEqualTo("MobSFScanObjc");
-        assertThat(repository.language()).isEqualTo("objc");
+        assertThat(repository.language()).isEqualTo(language.getKey());
         assertThat(repository.rules()).hasSize(15);
-
     }
 
 }

@@ -22,8 +22,10 @@ import fr.insideapp.sonarqube.objc.ObjectiveC;
 
 public final class MobSFScanObjectiveCRulesDefinition extends MobSFScanRulesDefinition {
 
-    public MobSFScanObjectiveCRulesDefinition() {
-        super(ObjectiveC.KEY);
+    public MobSFScanObjectiveCRulesDefinition(
+            ObjectiveC objectiveC
+    ) {
+        super(objectiveC);
     }
 
 }

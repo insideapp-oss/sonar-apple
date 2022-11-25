@@ -27,8 +27,10 @@ public class PeripheryRulesDefinition extends JSONRulesDefinition {
 
     public static final String RULES_PATH = "/periphery-rules.json";
 
-    public PeripheryRulesDefinition() {
-        super(REPOSITORY_KEY, REPOSITORY_NAME, Swift.KEY, RULES_PATH);
+    public PeripheryRulesDefinition(
+            Swift swift
+    ) {
+        super(REPOSITORY_KEY, REPOSITORY_NAME, swift, RULES_PATH);
     }
 
 }

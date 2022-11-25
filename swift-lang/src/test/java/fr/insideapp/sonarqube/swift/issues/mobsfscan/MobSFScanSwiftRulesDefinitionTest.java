@@ -17,25 +17,39 @@
  */
 package fr.insideapp.sonarqube.swift.issues.mobsfscan;
 
+import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.swift.Swift;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanSwiftRulesDefinitionTest {
+public final class MobSFScanSwiftRulesDefinitionTest {
+
+    private MobSFScanRulesDefinition rulesDefinition;
+    private Swift language;
+    private RulesDefinition.Context context;
+
+    @Before
+    public void prepare() {
+        language = new Swift();
+        rulesDefinition = new MobSFScanSwiftRulesDefinition(language);
+        context = new RulesDefinition.Context();
+    }
 
     @Test
     public void define() {
-
-        MobSFScanSwiftRulesDefinition rulesDefinition = new MobSFScanSwiftRulesDefinition();
-        RulesDefinition.Context context = new RulesDefinition.Context();
+        // test
         rulesDefinition.define(context);
-
+        // assert
         RulesDefinition.Repository repository = context.repository("MobSFScanSwift");
         assertThat(repository).isNotNull();
+        assertThat(repository.key()).isEqualTo("MobSFScanSwift");
         assertThat(repository.name()).isEqualTo("MobSFScanSwift");
-        assertThat(repository.language()).isEqualTo("swift");
+        assertThat(repository.language()).isEqualTo(language.getKey());
         assertThat(repository.rules()).hasSize(18);
+
 
     }
 

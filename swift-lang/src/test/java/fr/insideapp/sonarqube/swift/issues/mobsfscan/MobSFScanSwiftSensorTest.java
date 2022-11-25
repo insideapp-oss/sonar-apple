@@ -18,19 +18,20 @@
 package fr.insideapp.sonarqube.swift.issues.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
+import fr.insideapp.sonarqube.swift.Swift;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MobSFScanSwiftSensorTest {
+/*public class MobSFScanSwiftSensorTest {
 
     private MobSFScanSwiftSensor sensor;
 
     @Before
     public void prepare() {
-        sensor = new MobSFScanSwiftSensor();
+        sensor = new MobSFScanSwiftSensor(new MobSFScanSwiftRulesDefinition(new Swift()));
     }
 
     @Test
@@ -70,4 +71,4 @@ public class MobSFScanSwiftSensorTest {
         assertThat(descriptor.name()).isEqualTo("MobSFScan Sensor for Swift");
     }
 
-}
+}*/

@@ -17,6 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
@@ -24,17 +28,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SwiftLintRulesDefinitionTest {
 
+    private JSONRulesDefinition rulesDefinition;
+    private Swift language;
+    private RulesDefinition.Context context;
+
+    @Before
+    public void prepare() {
+        language = new Swift();
+        rulesDefinition = new SwiftLintRulesDefinition(language);
+        context = new RulesDefinition.Context();
+    }
+
     @Test
     public void define() {
-
-        SwiftLintRulesDefinition rulesDefinition = new SwiftLintRulesDefinition();
-        RulesDefinition.Context context = new RulesDefinition.Context();
+        // test
         rulesDefinition.define(context);
-
+        // assert
         RulesDefinition.Repository repository = context.repository("SwiftLint");
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("SwiftLint");
-        assertThat(repository.language()).isEqualTo("swift");
+        assertThat(repository.language()).isEqualTo(language.getKey());
         assertThat(repository.rules()).hasSize(214);
 
 

@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.objc.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
 import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
@@ -33,6 +32,15 @@ import java.util.List;
 public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(ObjectiveCProfile.class);
+
+    private final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition;
+
+    public ObjectiveCProfile(
+            final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition
+    ) {
+        this.mobSFScanObjectiveCRulesDefinition = mobSFScanObjectiveCRulesDefinition;
+    }
+
 
     @Override
     public void define(Context context) {
@@ -53,10 +61,9 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
         // MobSFScan rules (for Objective-C)
         try {
-            MobSFScanRulesDefinition rulesDefinition = new MobSFScanObjectiveCRulesDefinition();
-            List<RepositoryRule> rules = repositoryRuleParser.parse(rulesDefinition.rulesPath());
+            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanObjectiveCRulesDefinition.jsonResourcePath);
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.key);
+                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanObjectiveCRulesDefinition.repositoryName, r.key);
                 rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {

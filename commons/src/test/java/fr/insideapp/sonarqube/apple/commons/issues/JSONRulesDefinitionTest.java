@@ -17,27 +17,45 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JSONRulesDefinitionTest {
+public final class JSONRulesDefinitionTest {
+
+    private JSONRulesDefinition rulesDefinition;
+    private RulesDefinition.Context context;
+
+    @Before
+    public void prepare() {
+        rulesDefinition = new JSONRulesDefinition(
+                "rep_key",
+                "rep_name",
+                new AbstractLanguage("lang") {
+                    @Override
+                    public String[] getFileSuffixes() {
+                        return new String[]{};
+                    }
+                },
+                "/rules/rules.json"
+        ) {};
+        context = new RulesDefinition.Context();
+    }
 
     @Test
     public void define() {
-
-        JSONRulesDefinition rulesDefinition = new JSONRulesDefinition("rep_key", "rep_name", "lang", "/rules/rules.json") {};
-
-
-        RulesDefinition.Context context = new RulesDefinition.Context();
+        // test
         rulesDefinition.define(context);
-
+        // assert
         RulesDefinition.Repository repository = context.repository("rep_key");
         assertThat(repository).isNotNull();
+        assertThat(repository.key()).isEqualTo("rep_key");
         assertThat(repository.name()).isEqualTo("rep_name");
         assertThat(repository.language()).isEqualTo("lang");
-        assertThat(repository.rules()).isNotEmpty();
+        assertThat(repository.rules()).hasSize(2);
 
 
     }

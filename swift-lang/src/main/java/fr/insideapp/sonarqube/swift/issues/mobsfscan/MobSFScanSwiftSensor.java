@@ -26,9 +26,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class MobSFScanSwiftSensor extends MobSFScanSensor {
 
-    public MobSFScanSwiftSensor() {
-        super(new MobSFScanSwiftRulesDefinition());
+    public MobSFScanSwiftSensor(
+            final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition
+    ) {
+        super(mobSFScanSwiftRulesDefinition);
     }
+
     @Override
     public String language() {
         return Swift.KEY;

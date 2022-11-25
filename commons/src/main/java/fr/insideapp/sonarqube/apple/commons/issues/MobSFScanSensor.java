@@ -36,7 +36,7 @@ public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
 
     @Override
     public final String repository() {
-        return rulesDefinition.repository();
+        return rulesDefinition.repositoryName;
     }
 
     @Override

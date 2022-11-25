@@ -28,7 +28,7 @@ public class MobSFScanSensorTest {
     private final String SUFFIX = "SUFFIX";
     private final String LANG = "LANG";
 
-    @Before
+    /*@Before
     public void prepare() {
         rulesDefinition = new MobSFScanRulesDefinition(LANG) {};
         sensor = new MobSFScanSensor(rulesDefinition) {
@@ -72,6 +72,6 @@ public class MobSFScanSensorTest {
     @Test
     public void commandOptions() {
         assertThat(sensor.commandOptions("FOLDER")).isEqualTo(new String[]{"--json", "FOLDER"});
-    }
+    }*/
 
 }

@@ -18,34 +18,22 @@
 package fr.insideapp.sonarqube.apple.commons.issues;
 
 import org.apache.commons.lang3.StringUtils;
+import org.sonar.api.resources.Language;
 
 import java.io.File;
 
 public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
 
-    private static String repositoryKey = "MobSFScan";
+    private static String REPOSITORY_KEY = "MobSFScan";
 
-    private String language;
+    protected static String RULES_PATH = "/mobsfscan/rules.json";
 
-    protected MobSFScanRulesDefinition(String language) {
-        super(repository(language), repository(language), language, rulesPath(language));
-        this.language = language;
+    protected MobSFScanRulesDefinition(Language language) {
+        super(repository(language), repository(language), language, RULES_PATH);
     }
 
-    public final String repository() {
-        return MobSFScanRulesDefinition.repository(language);
-    }
-
-    public final String rulesPath() {
-        return MobSFScanRulesDefinition.rulesPath(language);
-    }
-
-    private static String repository(String language) {
-        return repositoryKey + StringUtils.capitalize(language);
-    }
-
-    private static String rulesPath(String language) {
-        return File.separator + language + "-mobsfscan-rules.json";
+    private static String repository(Language language) {
+        return REPOSITORY_KEY + StringUtils.capitalize(language.getKey());
     }
 
 }

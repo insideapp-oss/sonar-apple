@@ -18,31 +18,35 @@
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OCLintRulesDefinitionTest {
+public final class OCLintRulesDefinitionTest {
 
     private JSONRulesDefinition rulesDefinition;
+    private ObjectiveC language;
     private RulesDefinition.Context context;
 
     @Before
     public void prepare() {
-        rulesDefinition = new OCLintRulesDefinition();
+        language = new ObjectiveC();
+        rulesDefinition = new OCLintRulesDefinition(language);
         context = new RulesDefinition.Context();
     }
 
     @Test
     public void define() {
+        // test
         rulesDefinition.define(context);
-
+        // assert
         RulesDefinition.Repository repository = context.repository("OCLint");
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("OCLint");
-        assertThat(repository.language()).isEqualTo("objc");
+        assertThat(repository.language()).isEqualTo(language.getKey());
         assertThat(repository.rules()).hasSize(72);
     }
 }
