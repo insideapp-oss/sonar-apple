@@ -21,7 +21,7 @@ import commons.Rule
 
 String.mixin(ConsoleString)
 
-def updater = new RuleUpdater('swift-lang/src/main/resources/swiftlint-rules.json', {
+def updater = new RuleUpdater('swift-lang/src/main/resources/swiftlint/rules.json', {
 
     def rulesKey = [] as ArrayList<String>
 

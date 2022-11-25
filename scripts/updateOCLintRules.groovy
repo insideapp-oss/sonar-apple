@@ -74,7 +74,7 @@ private def ArrayList<Rule> parseCategory(url, name) {
     return rules
 }
 
-def updater = new RuleUpdater('objc-lang/src/main/resources/oclint-rules.json', {
+def updater = new RuleUpdater('objc-lang/src/main/resources/oclint/rules.json', {
 
     def rules = [] as ArrayList<Rule>
 
