@@ -25,6 +25,13 @@ import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanSensor;
+import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportIssueMapper;
+import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParsable;
+import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParser;
+import fr.insideapp.sonarqube.apple.mobsfscan.runner.MobSFScanRunnable;
+import fr.insideapp.sonarqube.apple.mobsfscan.runner.MobSFScanRunner;
+import fr.insideapp.sonarqube.apple.mobsfscan.splitter.MobSFScanReportIssueSplitter;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.issues.ObjectiveCProfile;
@@ -68,8 +75,14 @@ public class ApplePlugin implements Plugin {
         context.addExtension(ReportIssueRecorder.class);
 
         // MobSFScan (Swift & Objective-C)
-        context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
-        context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
+
+        context.addExtension(MobSFScanSwiftRulesDefinition.class);
+        context.addExtension(MobSFScanObjectiveCRulesDefinition.class);
+        context.addExtension(MobSFScanRunner.class);
+        context.addExtension(MobSFScanReportParser.class);
+        context.addExtension(MobSFScanReportIssueMapper.class);
+        context.addExtension(MobSFScanReportIssueSplitter.class);
+        context.addExtension(MobSFScanSensor.class);
 
         register(context,
                 ApplePluginExtensionProvider.class,
