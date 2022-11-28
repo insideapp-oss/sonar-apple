@@ -2352,5 +2352,60 @@
             "offset": "5min",
             "function": "CONSTANT_ISSUE"
         }
+    },
+    {
+        "key": "accessibility_trait_for_button",
+        "name": "Accessibility Trait for Button",
+        "description": "All views with tap gestures added should include the .isButton accessibility trait. If a tap opens an external link the .isLink trait should be used instead.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "no_magic_numbers",
+        "name": "No Magic Numbers",
+        "description": "Magic numbers should be replaced by named constants.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "ns_number_init_as_function_reference",
+        "name": "NSNumber Init as Function Reference",
+        "description": "Passing `NSNumber.init` or `NSDecimalNumber.init` as a function reference is dangerous as it can cause the wrong initializer to be used, causing crashes. Use `.init(value:)` instead.",
+        "severity": "MAJOR",
+        "type": "BUG",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "self_binding",
+        "name": "Self Binding",
+        "description": "Re-bind `self` to a consistent identifier name.",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
+    },
+    {
+        "key": "shorthand_optional_binding",
+        "name": "Shorthand Optional Binding",
+        "description": "Use shorthand syntax for optional binding",
+        "severity": "MINOR",
+        "type": "CODE_SMELL",
+        "debt": {
+            "offset": "5min",
+            "function": "CONSTANT_ISSUE"
+        }
     }
 ]
