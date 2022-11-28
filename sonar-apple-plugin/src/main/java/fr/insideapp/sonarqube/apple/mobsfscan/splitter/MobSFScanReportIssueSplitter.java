@@ -64,7 +64,8 @@ public class MobSFScanReportIssueSplitter implements MobSFScanReportIssueSplitta
                     if (issue.getFilePath() != null) {
                         // making sure the file extensions match the language of the repository
                         // if not, we do nothing (hence the nested if)
-                        if (Arrays.stream(entry.getKey().getLanguage().getFileSuffixes()).anyMatch(e -> e.equalsIgnoreCase(FilenameUtils.getExtension(issue.getFilePath())))) {
+                        final String[] extensions = entry.getKey().getLanguage().getFileSuffixes();
+                        if (FilenameUtils.isExtension(issue.getFilePath(), extensions)) {
                             // update corresponding map entry
                             addIssue(map, entry.getKey(), issue);
                             // skipping
