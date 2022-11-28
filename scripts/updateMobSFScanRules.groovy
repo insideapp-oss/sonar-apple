@@ -69,7 +69,7 @@ private ArrayList<Rule> parseCategory(url) {
 
 LANGUAGE_RULES.forEach( (key, value) -> {
 
-    def updater = new RuleUpdater("${key}-lang/src/main/resources/mobsfscan/rules.json", {
+    def updater = new RuleUpdater("${key}-lang/src/main/resources/mobsfscan/${key}-rules.json", {
         def rules = [] as ArrayList<Rule>
         rules.addAll parseCategory(URL + "${value.get(0)}/${value.get(1)}_rules.yaml")
         rules.addAll parseCategory(URL + "${value.get(0)}/best_practices.yaml")
