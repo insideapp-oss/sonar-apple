@@ -25,6 +25,7 @@ import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
 import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanSensor;
 import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportIssueMapper;
 import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParsable;
@@ -74,20 +75,11 @@ public class ApplePlugin implements Plugin {
         // Issues reporter
         context.addExtension(ReportIssueRecorder.class);
 
-        // MobSFScan (Swift & Objective-C)
-
-        context.addExtension(MobSFScanSwiftRulesDefinition.class);
-        context.addExtension(MobSFScanObjectiveCRulesDefinition.class);
-        context.addExtension(MobSFScanRunner.class);
-        context.addExtension(MobSFScanReportParser.class);
-        context.addExtension(MobSFScanReportIssueMapper.class);
-        context.addExtension(MobSFScanReportIssueSplitter.class);
-        context.addExtension(MobSFScanSensor.class);
-
         register(context,
                 ApplePluginExtensionProvider.class,
                 SwiftLintExtensionProvider.class, // SwiftLint
                 PeripheryExtensionProvider.class, // Periphery
+                MobSFScanExtensionProvider.class, // MobSFScan
                 OCLintExtensionProvider.class  // OCLint
         );
 
