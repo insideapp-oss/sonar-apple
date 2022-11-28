@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
-import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Configuration;
@@ -104,8 +103,7 @@ public final class PeripheryExtensionProviderTest {
         // test
         Optional<String> indexStorePath = provider.indexStorePath(configuration);
         // assert
-        assertThat(indexStorePath).isPresent();
-        assertThat(indexStorePath).contains("/path/to/indexStore");
+        assertThat(indexStorePath).isPresent().contains("/path/to/indexStore");
     }
 
 }

@@ -41,49 +41,48 @@ public class MobSFScanReportIssueSplitter implements MobSFScanReportIssueSplitta
 
     @Override
     public Map<MobSFScanRulesDefinition, List<ReportIssue>> split(List<ReportIssue> issues, ActiveRules rules) {
-        Map<MobSFScanRulesDefinition, List<ReportIssue>> map = new HashMap<>() {{
-            mobSFScanRulesDefinitions.forEach(def -> put(def, new ArrayList<>()));
-        }};
-        Map<MobSFScanRulesDefinition, List<String>> activeRules = new HashMap<>() {{
-            mobSFScanRulesDefinitions.forEach(def -> {
-                List<String> rulesForRepo = rules.findByRepository(def.getRepositoryKey()).stream()
-                        .map(ActiveRule::ruleKey)
-                        .map(RuleKey::rule)
-                        .collect(Collectors.toList());
-                put(def, rulesForRepo);
-            });
-        }};
-
+        Map<MobSFScanRulesDefinition, List<ReportIssue>> map = new HashMap<>();
+        mobSFScanRulesDefinitions.forEach(def -> map.put(def, new ArrayList<>()));
+        Map<MobSFScanRulesDefinition, List<String>> activeRules = new HashMap<>();
+        mobSFScanRulesDefinitions.forEach(def -> {
+            List<String> rulesForRepo = rules.findByRepository(def.getRepositoryKey()).stream()
+                    .map(ActiveRule::ruleKey)
+                    .map(RuleKey::rule)
+                    .collect(Collectors.toList());
+            activeRules.put(def, rulesForRepo);
+        });
         for (ReportIssue issue : issues) {
             String ruleId = issue.getRuleId();
-
             for (Map.Entry<MobSFScanRulesDefinition, List<String>> entry : activeRules.entrySet()) {
-                // the issue rule key is in the repository
-                if (entry.getValue().contains(ruleId)) {
-                    // the issue is on a file
-                    if (issue.getFilePath() != null) {
-                        // making sure the file extensions match the language of the repository
-                        // if not, we do nothing (hence the nested if)
-                        final String[] extensions = entry.getKey().getLanguage().getFileSuffixes();
-                        if (FilenameUtils.isExtension(issue.getFilePath(), extensions)) {
-                            // update corresponding map entry
-                            addIssue(map, entry.getKey(), issue);
-                            // skipping
-                            break;
-                        }
-                    // issue is not on a file
-                    } else {
-                        // update corresponding map entry
-                        addIssue(map, entry.getKey(), issue);
-                        // skipping
-                        break;
-                    }
-
+                MobSFScanRulesDefinition rulesDefinition = entry.getKey();
+                List<String> ruleIDs = entry.getValue();
+                if (shouldAddIssue(issue, rulesDefinition, ruleIDs)) {
+                    // update corresponding map entry
+                    addIssue(map, rulesDefinition, issue);
+                    // skipping
+                    break;
                 }
             }
         }
-
         return map;
+    }
+
+    private boolean shouldAddIssue(ReportIssue issue, MobSFScanRulesDefinition rulesDefinition, List<String> ruleIDs) {
+        boolean shouldAdd = false;
+        // the issue rule key is in the repository
+        if (ruleIDs.contains(issue.getRuleId())) {
+            // the issue is on a file
+            if (issue.getFilePath() != null) {
+                // making sure the file extensions match the language of the repository
+                // if not, we do nothing (hence the nested if)
+                final String[] extensions = rulesDefinition.getLanguage().getFileSuffixes();
+                shouldAdd = FilenameUtils.isExtension(issue.getFilePath(), extensions);
+                // issue is not on a file
+            } else {
+                shouldAdd = true;
+            }
+        }
+        return shouldAdd;
     }
 
     private static void addIssue(Map<MobSFScanRulesDefinition, List<ReportIssue>> map, MobSFScanRulesDefinition key, ReportIssue issue) {

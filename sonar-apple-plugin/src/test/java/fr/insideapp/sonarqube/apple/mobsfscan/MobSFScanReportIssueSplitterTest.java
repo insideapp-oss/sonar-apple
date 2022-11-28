@@ -78,8 +78,8 @@ public final class MobSFScanReportIssueSplitterTest {
         Map<MobSFScanRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(), activeRules);
         // assert
         assertThat(issuesSplit).hasSize(2);
-        assertThat(issuesSplit.get(swiftRulesDefinition)).hasSize(0);
-        assertThat(issuesSplit.get(objcRulesDefinition)).hasSize(0);
+        assertThat(issuesSplit.get(swiftRulesDefinition)).isEmpty();
+        assertThat(issuesSplit.get(objcRulesDefinition)).isEmpty();
     }
 
     @Test
@@ -91,7 +91,7 @@ public final class MobSFScanReportIssueSplitterTest {
         // assert
         assertThat(issuesSplit).hasSize(2);
         assertThat(issuesSplit.get(swiftRulesDefinition)).hasSize(1);
-        assertThat(issuesSplit.get(objcRulesDefinition)).hasSize(0);
+        assertThat(issuesSplit.get(objcRulesDefinition)).isEmpty();
     }
 
     @Test
@@ -102,8 +102,8 @@ public final class MobSFScanReportIssueSplitterTest {
         Map<MobSFScanRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(reportIssue), activeRules);
         // assert
         assertThat(issuesSplit).hasSize(2);
-        assertThat(issuesSplit.get(swiftRulesDefinition)).hasSize(0);
-        assertThat(issuesSplit.get(objcRulesDefinition)).hasSize(0);
+        assertThat(issuesSplit.get(swiftRulesDefinition)).isEmpty();
+        assertThat(issuesSplit.get(objcRulesDefinition)).isEmpty();
     }
 
     @Test
@@ -115,7 +115,7 @@ public final class MobSFScanReportIssueSplitterTest {
         // assert
         assertThat(issuesSplit).hasSize(2);
         assertThat(issuesSplit.get(swiftRulesDefinition)).hasSize(1);
-        assertThat(issuesSplit.get(objcRulesDefinition)).hasSize(0);
+        assertThat(issuesSplit.get(objcRulesDefinition)).isEmpty();
     }
 
     @Test
