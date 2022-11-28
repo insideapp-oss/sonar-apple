@@ -1710,5 +1710,45 @@
         "description": "Using ternary to call Void functions should be avoided.",
         "type": "CODE_SMELL",
         "debt": "5min"
+    },
+    {
+        "key": "accessibility_trait_for_button",
+        "name": "Accessibility Trait for Button",
+        "severity": "MINOR",
+        "description": "All views with tap gestures added should include the .isButton accessibility trait. If a tap opens an external link the .isLink trait should be used instead.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "no_magic_numbers",
+        "name": "No Magic Numbers",
+        "severity": "MINOR",
+        "description": "Magic numbers should be replaced by named constants.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "ns_number_init_as_function_reference",
+        "name": "NSNumber Init as Function Reference",
+        "severity": "MAJOR",
+        "description": "Passing `NSNumber.init` or `NSDecimalNumber.init` as a function reference is dangerous as it can cause the wrong initializer to be used, causing crashes. Use `.init(value:)` instead.",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "self_binding",
+        "name": "Self Binding",
+        "severity": "MINOR",
+        "description": "Re-bind `self` to a consistent identifier name.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "shorthand_optional_binding",
+        "name": "Shorthand Optional Binding",
+        "severity": "MINOR",
+        "description": "Use shorthand syntax for optional binding",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     }
 ]
