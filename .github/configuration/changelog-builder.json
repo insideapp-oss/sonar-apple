@@ -1,0 +1,24 @@
+{
+    "categories": [
+        {
+            "title": "## Breaking",
+            "labels": ["breaking"],
+            "empty_content": "- None."
+        },
+        {
+            "title": "## Enhancements",
+            "labels": ["enhancement"],
+            "empty_content": "- None."
+        },
+        {
+            "title": "## Bug Fixes",
+            "labels": ["fix"],
+            "empty_content": "- None."
+        }
+    ],
+    "sort": "ASC",
+    "template": "${{CHANGELOG}}## Other\n\n${{UNCATEGORIZED}}",
+    "pr_template": "- ${{TITLE}} #${{NUMBER}} by @${{AUTHOR}}",
+    "max_pull_requests": 1000,
+    "max_back_track_time_days": 1000
+}
