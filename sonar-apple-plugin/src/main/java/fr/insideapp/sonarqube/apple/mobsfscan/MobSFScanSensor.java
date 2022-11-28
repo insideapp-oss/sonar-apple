@@ -25,26 +25,18 @@ import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanIssue;
 import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParsable;
 import fr.insideapp.sonarqube.apple.mobsfscan.runner.MobSFScanRunnable;
 import fr.insideapp.sonarqube.apple.mobsfscan.splitter.MobSFScanReportIssueSplittable;
-import fr.insideapp.sonarqube.apple.mobsfscan.splitter.MobSFScanReportIssueSplitter;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MobSFScanSensor implements Sensor {
-
-    private static final Logger LOGGER = Loggers.get(MobSFScanSensor.class);
 
     private final MobSFScanRunnable runner;
     private final MobSFScanReportParsable parser;
