@@ -52,7 +52,6 @@ public class MobSFScanReportIssueSplitter implements MobSFScanReportIssueSplitta
             activeRules.put(def, rulesForRepo);
         });
         for (ReportIssue issue : issues) {
-            String ruleId = issue.getRuleId();
             for (Map.Entry<MobSFScanRulesDefinition, List<String>> entry : activeRules.entrySet()) {
                 MobSFScanRulesDefinition rulesDefinition = entry.getKey();
                 List<String> ruleIDs = entry.getValue();
