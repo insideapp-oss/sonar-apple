@@ -62,7 +62,7 @@ public class MobSFScanSensor implements Sensor {
         List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
         Map<MobSFScanRulesDefinition, List<ReportIssue>> splitReportIssues = splitter.split(reportIssues, sensorContext.activeRules());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
-        splitReportIssues.forEach((rulesDefinition, splitIssues) -> issueRecorder.recordIssues(splitIssues, rulesDefinition.repositoryKey, sensorContext));
+        splitReportIssues.forEach((rulesDefinition, splitIssues) -> issueRecorder.recordIssues(splitIssues, rulesDefinition.getRepositoryKey(), sensorContext));
     }
 
 }

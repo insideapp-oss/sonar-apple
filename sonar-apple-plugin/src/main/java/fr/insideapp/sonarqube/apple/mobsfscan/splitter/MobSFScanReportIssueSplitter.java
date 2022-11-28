@@ -24,14 +24,12 @@ public class MobSFScanReportIssueSplitter implements MobSFScanReportIssueSplitta
 
     @Override
     public Map<MobSFScanRulesDefinition, List<ReportIssue>> split(List<ReportIssue> issues, ActiveRules rules) {
-        Map<MobSFScanRulesDefinition, List<ReportIssue>> map = new HashMap() {{
-            mobSFScanRulesDefinitions.forEach(def -> {
-                put(def, new ArrayList<>());
-            });
+        Map<MobSFScanRulesDefinition, List<ReportIssue>> map = new HashMap<>() {{
+            mobSFScanRulesDefinitions.forEach(def -> put(def, new ArrayList<>()));
         }};
-        Map<MobSFScanRulesDefinition, List<String>> activeRules = new HashMap() {{
+        Map<MobSFScanRulesDefinition, List<String>> activeRules = new HashMap<>() {{
             mobSFScanRulesDefinitions.forEach(def -> {
-                List<String> rulesForRepo = rules.findByRepository(def.repositoryKey).stream()
+                List<String> rulesForRepo = rules.findByRepository(def.getRepositoryKey()).stream()
                         .map(ActiveRule::ruleKey)
                         .map(RuleKey::rule)
                         .collect(Collectors.toList());
@@ -49,13 +47,13 @@ public class MobSFScanReportIssueSplitter implements MobSFScanReportIssueSplitta
                     if (issue.getFilePath() != null) {
                         // making sure the file extensions match the language of the repository
                         // if not, we do nothing (hence the nested if)
-                        if (Arrays.stream(entry.getKey().language.getFileSuffixes()).anyMatch(e -> e.equalsIgnoreCase(FilenameUtils.getExtension(issue.getFilePath())))) {
+                        if (Arrays.stream(entry.getKey().getLanguage().getFileSuffixes()).anyMatch(e -> e.equalsIgnoreCase(FilenameUtils.getExtension(issue.getFilePath())))) {
                             // update corresponding map entry
                             addIssue(map, entry.getKey(), issue);
                             // skipping
                             break;
                         }
-                        // issue is not on a file
+                    // issue is not on a file
                     } else {
                         // update corresponding map entry
                         addIssue(map, entry.getKey(), issue);

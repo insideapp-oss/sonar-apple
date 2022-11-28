@@ -61,9 +61,9 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
         // MobSFScan rules (for Objective-C)
         try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanObjectiveCRulesDefinition.jsonResourcePath);
+            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanObjectiveCRulesDefinition.getJsonResourcePath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanObjectiveCRulesDefinition.repositoryName, r.key);
+                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanObjectiveCRulesDefinition.getRepositoryName(), r.key);
                 rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {

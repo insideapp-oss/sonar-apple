@@ -30,10 +30,10 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
 
     private static final Logger LOGGER = Loggers.get(JSONRulesDefinition.class);
 
-    public final String repositoryKey;
-    public final String repositoryName;
-    public final Language language;
-    public final String jsonResourcePath;
+    private final String repositoryKey;
+    private final String repositoryName;
+    private final Language language;
+    private final String jsonResourcePath;
 
     protected JSONRulesDefinition(
             final String repositoryKey,
@@ -66,5 +66,21 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
             LOGGER.error(String.format("Failed to load %s rules", this.repositoryName), e);
         }
         repository.done();
+    }
+
+    public String getRepositoryKey() {
+        return repositoryKey;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public String getRepositoryName() {
+        return repositoryName;
+    }
+
+    public String getJsonResourcePath() {
+        return jsonResourcePath;
     }
 }

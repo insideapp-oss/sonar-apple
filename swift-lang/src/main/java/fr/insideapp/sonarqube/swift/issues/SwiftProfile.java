@@ -60,9 +60,9 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
         // MobSFScan rules (for Swift)
         try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanSwiftRulesDefinition.jsonResourcePath);
+            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanSwiftRulesDefinition.getJsonResourcePath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanSwiftRulesDefinition.repositoryName, r.key);
+                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanSwiftRulesDefinition.getRepositoryName(), r.key);
                 rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
