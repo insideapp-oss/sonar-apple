@@ -33,10 +33,18 @@ public class SwiftSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(SwiftSensor.class);
 
+    private final Swift swift;
+
+    public SwiftSensor(
+            final Swift swift
+    ) {
+        this.swift = swift;
+    }
+
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
         sensorDescriptor
-                .onlyOnLanguage(Swift.KEY)
+                .onlyOnLanguage(swift.getKey())
                 .name("Swift Sensor")
                 .onlyOnFileType(InputFile.Type.MAIN);
     }
@@ -46,12 +54,12 @@ public class SwiftSensor implements Sensor {
         final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
 
         LOGGER.info("Analyzing source files");
-        new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.MAIN, antlrContext, sensorContext)
+        new ParseTreeAnalyzer(swift.getKey(), InputFile.Type.MAIN, antlrContext, sensorContext)
                 .analyze(new SwiftSourceLinesVisitor(), new SwiftHighlighterVisitor(), new SwiftCyclomaticComplexityVisitor());
 
         LOGGER.info("Analyzing test files");
         // highlighter only
-        new ParseTreeAnalyzer(Swift.KEY, InputFile.Type.TEST, antlrContext, sensorContext)
+        new ParseTreeAnalyzer(swift.getKey(), InputFile.Type.TEST, antlrContext, sensorContext)
                 .analyze(new SwiftHighlighterVisitor());
     }
 }

@@ -51,6 +51,7 @@ public final class MobSFScanSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private MobSFScanSensor sensor;
+    private Swift swift;
     private ObjectiveC objectiveC;
     private SensorContextTester context;
     private MobSFScanRunnable runner;
@@ -68,8 +69,10 @@ public final class MobSFScanSensorTest {
         mapper = mock(MobSFScanReportIssueMappable.class);
         splitter = mock(MobSFScanReportIssueSplittable.class);
         rulesDefinition = mock(MobSFScanRulesDefinition.class);
+        swift = new Swift();
         objectiveC = new ObjectiveC();
         sensor = new MobSFScanSensor(
+                swift,
                 objectiveC,
                 runner,
                 parser,
@@ -86,7 +89,7 @@ public final class MobSFScanSensorTest {
         sensor.describe(defaultSensorDescriptor);
         // assert
         assertThat(defaultSensorDescriptor.name()).isEqualTo("MobSFScan Sensor");
-        assertThat(defaultSensorDescriptor.languages()).hasSize(2).containsOnly(Swift.KEY, objectiveC.getKey());
+        assertThat(defaultSensorDescriptor.languages()).hasSize(2).containsOnly(swift.getKey(), objectiveC.getKey());
         assertThat(defaultSensorDescriptor.type()).isEqualTo(InputFile.Type.MAIN);
     }
 
@@ -108,7 +111,7 @@ public final class MobSFScanSensorTest {
         // prepare
         DefaultInputFile testFile = new TestInputFileBuilder("", "Greeting.swift")
                 .setModuleBaseDir(Paths.get(BASE_DIR))
-                .setLanguage(Swift.KEY)
+                .setLanguage(swift.getKey())
                 .setLines(10)
                 .setOriginalLineEndOffsets(new int[10])
                 .setOriginalLineStartOffsets(new int[10])

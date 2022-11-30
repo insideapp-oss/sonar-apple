@@ -55,6 +55,7 @@ public final class PeripherySensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private PeripherySensor sensor;
+    private Swift swift;
     private SensorContextTester context;
     private PeripheryRunnable runner;
     private PeripheryReportParsable parser;
@@ -66,7 +67,9 @@ public final class PeripherySensorTest {
         runner = mock(PeripheryRunnable.class);
         parser = mock(PeripheryReportParsable.class);
         mapper = mock(PeripheryReportIssueMappable.class);
+        swift = new Swift();
         sensor = new PeripherySensor(
+                swift,
                 runner,
                 parser,
                 mapper
@@ -81,8 +84,7 @@ public final class PeripherySensorTest {
         sensor.describe(defaultSensorDescriptor);
         // assert
         assertThat(defaultSensorDescriptor.name()).isEqualTo("Periphery Sensor");
-        assertThat(defaultSensorDescriptor.languages()).hasSize(1);
-        assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(Swift.KEY);
+        assertThat(defaultSensorDescriptor.languages()).containsOnly(swift.getKey());
         assertThat(defaultSensorDescriptor.type()).isEqualTo(InputFile.Type.MAIN);
     }
 
@@ -103,7 +105,7 @@ public final class PeripherySensorTest {
         // prepare
         DefaultInputFile testFile = new TestInputFileBuilder("", "Greeting.swift")
                 .setModuleBaseDir(Paths.get(BASE_DIR))
-                .setLanguage(Swift.KEY)
+                .setLanguage(swift.getKey())
                 .setLines(10)
                 .setOriginalLineEndOffsets(new int[10])
                 .setOriginalLineStartOffsets(new int[10])

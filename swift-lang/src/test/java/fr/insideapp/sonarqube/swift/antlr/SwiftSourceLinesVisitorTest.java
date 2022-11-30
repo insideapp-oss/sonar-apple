@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SwiftSourceLinesVisitorTest {
 
@@ -54,11 +54,13 @@ public class SwiftSourceLinesVisitorTest {
 
     private static final String BASE_DIR = "src/test/resources/swift/source_lines_visitor";
     private SensorContextTester sensorContext;
+    private Swift swift;
     private SwiftAntlrContext antlrContext;
     private SwiftSourceLinesVisitor visitor;
 
     @Before
     public void prepare() {
+        swift = new Swift();
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
         antlrContext = new SwiftAntlrContext();
         visitor = new SwiftSourceLinesVisitor();
@@ -106,7 +108,7 @@ public class SwiftSourceLinesVisitorTest {
 
     private void assertContainer(Container container) throws IOException {
 
-        final String completeFileName = container.fileName + "." + Swift.KEY;
+        final String completeFileName = container.fileName + "." + swift.getFileSuffixes()[0];
 
         // Real file
         File file = new File(BASE_DIR, completeFileName);
@@ -114,7 +116,7 @@ public class SwiftSourceLinesVisitorTest {
         // Mock file for test purpose
         // Setting it up with the real file properties
         InputFile inputFile = new TestInputFileBuilder("", completeFileName)
-                .setLanguage(Swift.KEY)
+                .setLanguage(swift.getKey())
                 .setModuleBaseDir(Paths.get(BASE_DIR))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
                 .setCharset(Charset.defaultCharset())
