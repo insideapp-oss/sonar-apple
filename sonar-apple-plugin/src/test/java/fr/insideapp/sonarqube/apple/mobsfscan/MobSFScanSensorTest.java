@@ -51,6 +51,7 @@ public final class MobSFScanSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private MobSFScanSensor sensor;
+    private ObjectiveC objectiveC;
     private SensorContextTester context;
     private MobSFScanRunnable runner;
     private MobSFScanReportParsable parser;
@@ -67,7 +68,9 @@ public final class MobSFScanSensorTest {
         mapper = mock(MobSFScanReportIssueMappable.class);
         splitter = mock(MobSFScanReportIssueSplittable.class);
         rulesDefinition = mock(MobSFScanRulesDefinition.class);
+        objectiveC = new ObjectiveC();
         sensor = new MobSFScanSensor(
+                objectiveC,
                 runner,
                 parser,
                 mapper,
@@ -83,9 +86,7 @@ public final class MobSFScanSensorTest {
         sensor.describe(defaultSensorDescriptor);
         // assert
         assertThat(defaultSensorDescriptor.name()).isEqualTo("MobSFScan Sensor");
-        assertThat(defaultSensorDescriptor.languages()).hasSize(2);
-        assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(Swift.KEY);
-        assertThat(defaultSensorDescriptor.languages()).element(1).isEqualTo(ObjectiveC.KEY);
+        assertThat(defaultSensorDescriptor.languages()).hasSize(2).containsOnly(Swift.KEY, objectiveC.getKey());
         assertThat(defaultSensorDescriptor.type()).isEqualTo(InputFile.Type.MAIN);
     }
 

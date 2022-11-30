@@ -19,18 +19,14 @@ package fr.insideapp.sonarqube.objc;
 
 import org.sonar.api.resources.AbstractLanguage;
 
-public class ObjectiveC extends AbstractLanguage {
-
-    public static final String KEY = "objc";
-
-    public static final String[] EXTENSIONS = {"h", "m","mm"};
+public final class ObjectiveC extends AbstractLanguage {
 
     public ObjectiveC() {
-        super(KEY, "Objective-C");
+        super("objc", "Objective-C");
     }
 
     @Override
     public String[] getFileSuffixes() {
-        return EXTENSIONS;
+        return new String[]{"h", "m", "mm"};
     }
 }

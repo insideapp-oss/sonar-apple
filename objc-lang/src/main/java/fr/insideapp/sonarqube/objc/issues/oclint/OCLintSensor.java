@@ -41,6 +41,8 @@ public final class OCLintSensor implements Sensor {
     private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
 
     private static final String COMPILE_COMMANDS_PATH = "build/compile_commands.json";
+
+    private final ObjectiveC objectiveC;
     private final OCLintExtensionProvider ocLintExtensionProvider;
     private final Configuration configuration;
     private final FileSystem fileSystem;
@@ -50,6 +52,7 @@ public final class OCLintSensor implements Sensor {
 
     private final OCLintReportParsable parser;
     OCLintSensor(
+            final ObjectiveC objectiveC,
             final OCLintExtensionProvider ocLintExtensionProvider,
             final Configuration configuration,
             final FileSystem fileSystem,
@@ -58,6 +61,7 @@ public final class OCLintSensor implements Sensor {
             final OCLintReportParsable parser,
             final ReportIssueRecorder issueRecorder
     ) {
+        this.objectiveC = objectiveC;
         this.ocLintExtensionProvider = ocLintExtensionProvider;
         this.configuration = configuration;
         this.fileSystem = fileSystem;
@@ -70,7 +74,7 @@ public final class OCLintSensor implements Sensor {
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
         sensorDescriptor
-                .onlyOnLanguage(ObjectiveC.KEY)
+                .onlyOnLanguage(objectiveC.getKey())
                 .name("OCLint Sensor")
                 .onlyOnFileType(InputFile.Type.MAIN);
     }

@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ObjectiveCCyclomaticComplexityVisitorTest {
 
@@ -49,16 +49,16 @@ public class ObjectiveCCyclomaticComplexityVisitorTest {
 
     private static final String BASE_DIR = "src/test/resources/objc/cyclomatic_complexity";
     private SensorContextTester sensorContext;
+    private ObjectiveC objectiveC;
     private ObjectiveCAntlrContext antlrContext;
-    private ObjectiveCCyclomaticComplexityVisitor visitor;
     private CustomTreeVisitor customTreeVisitor;
 
     @Before
     public void prepare() {
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
+        objectiveC = new ObjectiveC();
         antlrContext = new ObjectiveCAntlrContext();
-        visitor = new ObjectiveCCyclomaticComplexityVisitor();
-        customTreeVisitor = new CustomTreeVisitor(visitor);
+        customTreeVisitor = new CustomTreeVisitor(new ObjectiveCCyclomaticComplexityVisitor());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class ObjectiveCCyclomaticComplexityVisitorTest {
         // Mock file for test purpose
         // Setting it up with the real file properties
         InputFile inputFile = new TestInputFileBuilder("", completeFileName)
-                .setLanguage(ObjectiveC.KEY)
+                .setLanguage(objectiveC.getKey())
                 .setModuleBaseDir(Paths.get(BASE_DIR))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
                 .setCharset(Charset.defaultCharset())

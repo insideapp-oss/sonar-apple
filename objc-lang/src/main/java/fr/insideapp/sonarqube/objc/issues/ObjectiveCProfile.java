@@ -33,11 +33,14 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(ObjectiveCProfile.class);
 
+    private final ObjectiveC objectiveC;
     private final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition;
 
     public ObjectiveCProfile(
+            final ObjectiveC objectiveC,
             final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition
     ) {
+        this.objectiveC = objectiveC;
         this.mobSFScanObjectiveCRulesDefinition = mobSFScanObjectiveCRulesDefinition;
     }
 
@@ -45,7 +48,7 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
     @Override
     public void define(Context context) {
 
-        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Objective-C", ObjectiveC.KEY);
+        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Objective-C", objectiveC.getKey());
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
 
         // OCLint rules
@@ -67,7 +70,7 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
                 rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
-            LOGGER.error("Failed to load MobSFScan rules (for Swift)", e);
+            LOGGER.error("Failed to load MobSFScan rules (for Objective-c)", e);
         }
 
         profile.setDefault(true);

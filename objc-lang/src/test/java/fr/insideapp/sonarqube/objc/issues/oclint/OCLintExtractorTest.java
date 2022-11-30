@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintExtractor;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public final class OCLintExtractorTest {
         MapSettings settings = new MapSettings();
         settings.setProperty("sonar.sources", "folder");
         DefaultFileSystem fileSystem = new DefaultFileSystem(new File("/oclint/extractor"));
-        extractor = new OCLintExtractor(settings.asConfig(), fileSystem);
+        extractor = new OCLintExtractor(new ObjectiveC(), settings.asConfig(), fileSystem);
     }
 
     @Test

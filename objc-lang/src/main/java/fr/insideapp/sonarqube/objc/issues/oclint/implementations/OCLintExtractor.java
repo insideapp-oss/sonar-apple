@@ -41,12 +41,19 @@ public final class OCLintExtractor implements OCLintExtractable {
     private static final Logger LOGGER = Loggers.get(OCLintExtractor.class);
     private static final int COMMAND_TIMEOUT = 30 * 60 * 1000;
     private static final int COMMAND_EXIT_CODE = 0;
+
+    private final ObjectiveC objectiveC;
     private final Configuration configuration;
     private final FileSystem fileSystem;
 
     private final ObjectMapper objectMapper;
 
-    public OCLintExtractor(final Configuration configuration, final FileSystem fileSystem) {
+    public OCLintExtractor(
+            final ObjectiveC objectiveC,
+            final Configuration configuration,
+            final FileSystem fileSystem
+    ) {
+        this.objectiveC = objectiveC;
         this.configuration = configuration;
         this.fileSystem = fileSystem;
         this.objectMapper = new ObjectMapper()
@@ -74,7 +81,7 @@ public final class OCLintExtractor implements OCLintExtractable {
         // Retrieve all the sources specified
         final String sourcesInput = configuration.get("sonar.sources").orElse(".");
         // Retrieve all the file extensions for Objective-C
-        String fileExtensions = Arrays.stream(ObjectiveC.EXTENSIONS).collect(Collectors.joining("|"));
+        String fileExtensions = Arrays.stream(objectiveC.getFileSuffixes()).collect(Collectors.joining("|"));
         final String[] sources = sourcesInput.split(",");
         final String[] sourceArgs = new String[sources.length * 2];
         final File baseDirectory = fileSystem.baseDir();
