@@ -1,6 +1,7 @@
 package fr.insideapp.sonarqube.objc.issues.oclint.mapper;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.apple.commons.mapper.AbstractReportMapper;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import org.sonar.api.scanner.ScannerSide;
 
@@ -9,10 +10,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @ScannerSide
-public final class OCLintReportIssueMapper implements OCLintReportIssueMappable {
+public final class OCLintReportIssueMapper extends AbstractReportMapper<List<OCLintViolation>> implements OCLintReportIssueMappable {
 
     @Override
-    public Set<ReportIssue> map(List<OCLintViolation> input) {
+    protected Set<ReportIssue> perform(List<OCLintViolation> input) throws Exception {
         return input.stream()
                 .map(violation ->
                         new ReportIssue(
@@ -24,4 +25,5 @@ public final class OCLintReportIssueMapper implements OCLintReportIssueMappable 
                 )
                 .collect(Collectors.toSet());
     }
+
 }
