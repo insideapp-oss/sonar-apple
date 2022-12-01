@@ -21,6 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMappable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
 import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
@@ -38,6 +39,7 @@ import org.sonar.api.utils.log.Loggers;
 import javax.annotation.Nullable;
 import java.io.*;
 import java.util.List;
+import java.util.Set;
 
 public final class OCLintSensor implements Sensor {
 
@@ -49,6 +51,7 @@ public final class OCLintSensor implements Sensor {
     private final OCLintJSONCompilationDatabaseWritable writer;
     private final OCLintRunnable runner;
     private final OCLintReportParsable parser;
+    private final OCLintReportIssueMappable mapper;
     private final ReportIssueRecorder issueRecorder;
 
     OCLintSensor(
@@ -58,6 +61,7 @@ public final class OCLintSensor implements Sensor {
             final OCLintJSONCompilationDatabaseWritable writer,
             final OCLintRunnable runner,
             final OCLintReportParsable parser,
+            final OCLintReportIssueMappable mapper,
             final ReportIssueRecorder issueRecorder
     ) {
         this.objectiveC = objectiveC;
@@ -66,6 +70,7 @@ public final class OCLintSensor implements Sensor {
         this.writer = writer;
         this.runner = runner;
         this.parser = parser;
+        this.mapper = mapper;
         this.issueRecorder = issueRecorder;
     }
 
@@ -88,7 +93,9 @@ public final class OCLintSensor implements Sensor {
         if (!writer.write(jsonCompileCommands)) { return; }
         String output = runner.run();
         // Parse issues
-        List<OCLintViolation> issues = parser.parse(output);
+        List<OCLintViolation> ocLintViolations = parser.parse(output);
+        // Map issues
+        Set<ReportIssue> issues = mapper.map(ocLintViolations);
         // TODO
         /*
         - map

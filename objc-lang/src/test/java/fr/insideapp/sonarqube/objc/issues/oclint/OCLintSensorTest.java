@@ -20,6 +20,7 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMappable;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
 import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
@@ -48,6 +49,7 @@ public class OCLintSensorTest {
     private OCLintJSONCompilationDatabaseWritable writer;
     private OCLintRunnable extractor;
     private OCLintReportParsable parser;
+    private OCLintReportIssueMappable mapper;
 
     private OCLintSensor sensor;
 
@@ -58,6 +60,7 @@ public class OCLintSensorTest {
         writer = mock(OCLintJSONCompilationDatabaseWritable.class);
         extractor = mock(OCLintRunnable.class);
         parser = mock(OCLintReportParsable.class);
+        mapper = mock(OCLintReportIssueMappable.class);
         context = SensorContextTester.create(baseDir);
         objectiveC = new ObjectiveC();
         sensor = new OCLintSensor(
@@ -67,6 +70,7 @@ public class OCLintSensorTest {
                 writer,
                 extractor,
                 parser,
+                mapper,
                 new ReportIssueRecorder()
         );
     }

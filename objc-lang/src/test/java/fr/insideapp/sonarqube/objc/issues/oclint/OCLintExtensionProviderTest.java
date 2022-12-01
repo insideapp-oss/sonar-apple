@@ -44,7 +44,7 @@ public final class OCLintExtensionProviderTest {
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(8);
+        assertThat(provider.extensions()).hasSize(9);
     }
 
     @Test
