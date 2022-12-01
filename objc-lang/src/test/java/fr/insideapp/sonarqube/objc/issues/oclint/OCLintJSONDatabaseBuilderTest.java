@@ -59,6 +59,14 @@ public final class OCLintJSONDatabaseBuilderTest {
     }
 
     @Test
+    public void build_invalid_file() {
+        assertContainer(new Container(
+                "invalid",
+                0
+        ));
+    }
+
+    @Test
     public void build_noFile() {
         assertContainer(new Container(
                 "noFile",
