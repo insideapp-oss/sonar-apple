@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuilder;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunner;
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintReportParser;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParser;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetriever;
 import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWriter;
 import org.sonar.api.batch.fs.FileSystem;

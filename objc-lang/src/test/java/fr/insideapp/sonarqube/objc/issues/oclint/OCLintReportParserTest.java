@@ -17,11 +17,9 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintReportParser;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
-import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParser;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,10 +30,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class OCLintReportParserTest {
+public final class OCLintReportParserTest {
 
     private static class Container {
         final String reportFileName;
@@ -62,7 +59,6 @@ public class OCLintReportParserTest {
     private static final String BASE_DIR = "/oclint/parser";
 
     private OCLintReportParsable parser;
-    private ObjectMapper objectMapper;
 
     private File baseFolder;
 
@@ -70,11 +66,10 @@ public class OCLintReportParserTest {
     public void prepare() {
         parser = new OCLintReportParser();
         baseFolder = FileUtils.toFile(getClass().getResource(BASE_DIR));
-        objectMapper = new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
     @Test
-    public void collectNoViolation() throws IOException {
+    public void parser_noViolation() throws IOException {
         assertContainer(new Container(
                 "noViolation.json",
                 new ArrayList<>()
@@ -82,7 +77,7 @@ public class OCLintReportParserTest {
     }
 
     @Test
-    public void collectEmptyViolation() throws IOException {
+    public void parse_emptyViolation() throws IOException {
         assertContainer(new Container(
                 "emptyViolation.json",
                 new ArrayList<>()
@@ -90,7 +85,7 @@ public class OCLintReportParserTest {
     }
 
     @Test
-    public void collectOneViolation() throws IOException {
+    public void parser_oneViolation() throws IOException {
         List<Violation> violations = new ArrayList<>() {
             {
                 add(new Violation(
@@ -111,21 +106,20 @@ public class OCLintReportParserTest {
         // Data setup
         File jsonFile = new File(baseFolder, container.reportFileName);
         String jsonFileContent = FileUtils.readFileToString(jsonFile, Charset.defaultCharset());
-        OCLintReport report = objectMapper.readValue(jsonFileContent, OCLintReport.class);
 
         // Running our code
-        List<ReportIssue> issues = parser.collect(report);
+        List<OCLintViolation> issues = parser.parse(jsonFileContent);
 
         // Asserting
         assertThat(issues).hasSize(container.violations.size());
 
         for (int i = 0; i < issues.size(); i++) {
-            ReportIssue issue = issues.get(i);
+            OCLintViolation issue = issues.get(i);
             Violation violation = container.violations.get(i);
-            assertThat(issue.getFilePath()).isEqualTo(violation.path);
-            assertThat(issue.getRuleId()).isEqualTo(violation.rule);
-            assertThat(issue.getMessage()).isEqualTo(violation.message);
-            assertThat(issue.getLineNumber()).isEqualTo(violation.line);
+            assertThat(issue.rule).isEqualTo(violation.rule);
+            assertThat(issue.path).isEqualTo(violation.path);
+            assertThat(issue.message).isEqualTo(violation.message);
+            assertThat(issue.line).isEqualTo(violation.line);
         }
     }
 

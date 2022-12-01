@@ -15,17 +15,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint.interfaces;
+package fr.insideapp.sonarqube.objc.issues.oclint.parser;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import fr.insideapp.sonarqube.apple.commons.parser.AbstractReportParser;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import org.sonar.api.scanner.ScannerSide;
-
 import java.util.List;
 
-@ScannerSide
-public interface OCLintReportParsable {
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
-    List<ReportIssue> collect(OCLintReport report);
+@ScannerSide
+public final class OCLintReportParser extends AbstractReportParser<OCLintViolation> implements OCLintReportParsable {
+
+    private final ObjectMapper objectMapper;
+
+    public OCLintReportParser() {
+        this.objectMapper = new ObjectMapper()
+                .disable(FAIL_ON_UNKNOWN_PROPERTIES)
+                .enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
+    @Override
+    protected List<OCLintViolation> perform(String input) throws Exception {
+        return objectMapper.readValue(input, OCLintReport.class).violations;
+    }
 
 }

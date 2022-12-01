@@ -21,7 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
 import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWritable;
 import org.apache.commons.io.FileUtils;

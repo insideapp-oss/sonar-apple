@@ -21,8 +21,9 @@ import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrieverException;
@@ -47,8 +48,8 @@ public final class OCLintSensor implements Sensor {
     private final OCLintJSONCompilationDatabaseBuildable builder;
     private final OCLintJSONCompilationDatabaseWritable writer;
     private final OCLintRunnable runner;
-    private final ReportIssueRecorder issueRecorder;
     private final OCLintReportParsable parser;
+    private final ReportIssueRecorder issueRecorder;
 
     OCLintSensor(
             final ObjectiveC objectiveC,
@@ -86,12 +87,14 @@ public final class OCLintSensor implements Sensor {
         // Write the JSON Compilation Database to a file
         if (!writer.write(jsonCompileCommands)) { return; }
         String output = runner.run();
+        // Parse issues
+        List<OCLintViolation> issues = parser.parse(output);
         // TODO
         /*
-        OCLintReport oclintReport = objectMapper.readValue(output, OCLintReport.class);
-        LOGGER.info("OCLint found {} violation(s)", oclintReport.violations.length);
-        if (report == null) { return; }
-        parseReport(report, sensorContext);*/
+        - map
+        - report
+                issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY, context);
+         */
     }
 
     @Nullable
@@ -104,12 +107,6 @@ public final class OCLintSensor implements Sensor {
             LOGGER.debug("Exception: {}", e.getMessage());
         }
         return null;
-    }
-
-    private void parseReport(OCLintReport report, SensorContext context) {
-        // Parse issues
-        List<ReportIssue> issues = parser.collect(report);
-        issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY, context);
     }
 
 }

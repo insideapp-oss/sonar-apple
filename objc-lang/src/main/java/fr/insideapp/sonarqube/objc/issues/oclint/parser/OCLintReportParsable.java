@@ -15,18 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint.models;
+package fr.insideapp.sonarqube.objc.issues.oclint.parser;
 
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.Nulls;
+import fr.insideapp.sonarqube.apple.commons.interfaces.ReportParsable;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
+import org.sonar.api.scanner.ScannerSide;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class OCLintReport {
-
-    @JsonSetter(value = "violation", nulls = Nulls.SKIP)
-    public List<OCLintViolation> violations = new ArrayList<>();
-
-}
-
+@ScannerSide
+public interface OCLintReportParsable extends ReportParsable<List<OCLintViolation>> { }
