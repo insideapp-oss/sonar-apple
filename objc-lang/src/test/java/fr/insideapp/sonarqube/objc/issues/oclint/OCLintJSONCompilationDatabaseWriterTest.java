@@ -58,8 +58,8 @@ public final class OCLintJSONCompilationDatabaseWriterTest {
         boolean success = writer.write("test");
         // assert
         assertThat(success).isTrue();
-        assertThat(jsonCompilationDatabase.exists()).isTrue();
-        assertThat(baseFolder.toPath().relativize(jsonCompilationDatabase.toPath()).toString()).isEqualTo("json_compilation_test.json");
+        assertThat(jsonCompilationDatabase).exists();
+        assertThat(baseFolder.toPath().relativize(jsonCompilationDatabase.toPath())).hasToString("json_compilation_test.json");
         assertThat(FileUtils.readFileToString(jsonCompilationDatabase, StandardCharsets.UTF_8)).isEqualTo("test");
     }
 
@@ -72,7 +72,7 @@ public final class OCLintJSONCompilationDatabaseWriterTest {
         boolean success = writer.write("test");
         // assert
         assertThat(success).isFalse();
-        assertThat(jsonCompilationDatabase.exists()).isFalse();
+        assertThat(jsonCompilationDatabase).doesNotExist();
     }
 
 }
