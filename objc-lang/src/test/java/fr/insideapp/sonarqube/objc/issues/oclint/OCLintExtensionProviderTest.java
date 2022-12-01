@@ -19,8 +19,10 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 
+import java.io.File;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,10 +33,12 @@ public final class OCLintExtensionProviderTest {
 
     private Configuration configuration;
     private OCLintExtensionProvider provider;
+    private FileSystem fileSystem;
 
     @Before
     public void prepare() {
         configuration = mock(Configuration.class);
+        fileSystem = mock(FileSystem.class);
         provider = new OCLintExtensionProvider();
     }
 
@@ -44,23 +48,33 @@ public final class OCLintExtensionProviderTest {
     }
 
     @Test
-    public void jsonCompilationDatabasePath_default() {
+    public void jsonCompilationDatabaseFolderPath_default() {
         // prepare
         when(configuration.get("sonar.apple.jsonCompilationDatabasePath")).thenReturn(Optional.empty());
         // test
-        String jsonCompilationDatabasePath = provider.jsonCompilationDatabasePath(configuration);
+        String jsonCompilationDatabasePath = provider.jsonCompilationDatabaseFolderPath(configuration);
         // assert
         assertThat(jsonCompilationDatabasePath).isEqualTo("build/json_compilation_database");
     }
 
     @Test
-    public void jsonCompilationDatabasePath_specified() {
+    public void jsonCompilationDatabaseFolderPath_specified() {
         // prepare
         when(configuration.get("sonar.apple.jsonCompilationDatabasePath")).thenReturn(Optional.of("this/is/a/path"));
         // test
-        String jsonCompilationDatabasePath = provider.jsonCompilationDatabasePath(configuration);
+        String jsonCompilationDatabasePath = provider.jsonCompilationDatabaseFolderPath(configuration);
         // assert
         assertThat(jsonCompilationDatabasePath).contains("this/is/a/path");
+    }
+
+    @Test
+    public void jsonCompilationDatabasePath() {
+        // prepare
+        when(fileSystem.baseDir()).thenReturn(new File("/this/is/a/path"));
+        // test
+        File jsonCompilationDatabase = provider.jsonCompilationDatabasePath(fileSystem);
+        // assert
+        assertThat(jsonCompilationDatabase.getAbsolutePath()).contains("this/is/a/path/compile_commands.json");
     }
 
 }

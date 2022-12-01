@@ -53,7 +53,7 @@ public final class OCLintJSONCompilationDatabaseFolderRetriever implements OCLin
      * If path is not absolute, returns a File with module base directory as parent path.
      */
     private File jsonCompilationDatabase() {
-        final String jsonCompilationDatabasePath = ocLintExtensionProvider.jsonCompilationDatabasePath(configuration);
+        final String jsonCompilationDatabasePath = ocLintExtensionProvider.jsonCompilationDatabaseFolderPath(configuration);
         File jsonCompilationDatabaseFile = new File(jsonCompilationDatabasePath);
         if (!jsonCompilationDatabaseFile.isAbsolute()) {
             jsonCompilationDatabaseFile = new File(fileSystem.baseDir(), jsonCompilationDatabasePath);

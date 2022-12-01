@@ -38,7 +38,7 @@ public final class OCLintJSONCompilationDatabaseFolderRetrieverTest {
     @Test
     public void jsonCompilationDatabaseFolder_does_not_exist() {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("nonExistingPath");
+        when(provider.jsonCompilationDatabaseFolderPath(configuration)).thenReturn("nonExistingPath");
         // test & assert
         assertThatExceptionOfType(OCLintJSONCompilationDatabaseFolderRetrieverException.class)
                 .isThrownBy(() -> { retriever.retrieve(); })
@@ -48,7 +48,7 @@ public final class OCLintJSONCompilationDatabaseFolderRetrieverTest {
     @Test
     public void jsonCompilationDatabaseFolder_not_a_directory() {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("notAFolder");
+        when(provider.jsonCompilationDatabaseFolderPath(configuration)).thenReturn("notAFolder");
         // test & assert
         assertThatExceptionOfType(OCLintJSONCompilationDatabaseFolderRetrieverException.class)
                 .isThrownBy(() -> { retriever.retrieve();})
@@ -58,7 +58,7 @@ public final class OCLintJSONCompilationDatabaseFolderRetrieverTest {
     @Test
     public void jsonCompilationDatabaseFolder_absolute_path() {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("/absoluteNonExistingPath");
+        when(provider.jsonCompilationDatabaseFolderPath(configuration)).thenReturn("/absoluteNonExistingPath");
         // test & assert
         assertThatExceptionOfType(OCLintJSONCompilationDatabaseFolderRetrieverException.class)
                 .isThrownBy(() -> { retriever.retrieve(); });
@@ -67,7 +67,7 @@ public final class OCLintJSONCompilationDatabaseFolderRetrieverTest {
     @Test
     public void jsonCompilationDatabaseFolder_success() {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
+        when(provider.jsonCompilationDatabaseFolderPath(configuration)).thenReturn("");
         // test & assert
         assertThatCode(() -> { retriever.retrieve(); }).doesNotThrowAnyException();
     }

@@ -1,5 +1,6 @@
 package fr.insideapp.sonarqube.objc.issues.oclint.writer;
 
+import fr.insideapp.sonarqube.objc.issues.oclint.OCLintExtensionProvider;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
@@ -15,34 +16,31 @@ public final class OCLintJSONCompilationDatabaseWriter implements OCLintJSONComp
 
     private static final Logger LOGGER = Loggers.get(OCLintJSONCompilationDatabaseWriter.class);
 
-    private static final String COMPILE_COMMANDS_PATH = "build/compile_commands.json";
-
+    private final OCLintExtensionProvider ocLintExtensionProvider;
     private final FileSystem fileSystem;
 
     public OCLintJSONCompilationDatabaseWriter(
+            final OCLintExtensionProvider ocLintExtensionProvider,
             final FileSystem fileSystem
     ) {
+        this.ocLintExtensionProvider = ocLintExtensionProvider;
         this.fileSystem = fileSystem;
     }
 
     @Override
-    public File write(@Nonnull String jsonCompileCommands) {
+    public boolean write(@Nonnull String jsonCompileCommands) {
+        boolean success = false;
         // Retrieve the file where to write
-        File jsonCompilationCommandsFile = jsonCompilationCommands();
-        // Create the necessary but nonexistent parent directories
-        jsonCompilationCommandsFile.getParentFile().mkdirs();
+        File jsonCompilationCommandsFile = ocLintExtensionProvider.jsonCompilationDatabasePath(fileSystem);
         // Write to the final file
         try (FileWriter jsonCompilationCommandsFileWriter = new FileWriter(jsonCompilationCommandsFile)) {
             jsonCompilationCommandsFileWriter.write(jsonCompileCommands);
+            success = true;
         } catch (IOException e) {
             LOGGER.error("Failed to write the JSON Compilation Database to the file: {}", jsonCompilationCommandsFile.getAbsolutePath());
             LOGGER.debug("{}", e);
         }
-        return jsonCompilationCommandsFile;
-    }
-
-    private File jsonCompilationCommands() {
-        return new File(fileSystem.baseDir(), COMPILE_COMMANDS_PATH);
+        return success;
     }
 
 }

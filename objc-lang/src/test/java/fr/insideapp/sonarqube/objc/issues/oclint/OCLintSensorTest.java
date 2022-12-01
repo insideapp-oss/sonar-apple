@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
+import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
 import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWritable;
@@ -46,7 +46,7 @@ public class OCLintSensorTest {
     private OCLintJSONCompilationDatabaseFolderRetrievable retriever;
     private OCLintJSONCompilationDatabaseBuildable builder;
     private OCLintJSONCompilationDatabaseWritable writer;
-    private OCLintExtractable extractor;
+    private OCLintRunnable extractor;
     private OCLintReportParsable parser;
 
     private OCLintSensor sensor;
@@ -56,7 +56,7 @@ public class OCLintSensorTest {
         retriever = mock(OCLintJSONCompilationDatabaseFolderRetrievable.class);
         builder = mock(OCLintJSONCompilationDatabaseBuildable.class);
         writer = mock(OCLintJSONCompilationDatabaseWritable.class);
-        extractor = mock(OCLintExtractable.class);
+        extractor = mock(OCLintRunnable.class);
         parser = mock(OCLintReportParsable.class);
         context = SensorContextTester.create(baseDir);
         objectiveC = new ObjectiveC();

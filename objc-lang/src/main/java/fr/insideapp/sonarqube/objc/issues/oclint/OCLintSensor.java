@@ -21,7 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
+import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
@@ -46,7 +46,7 @@ public final class OCLintSensor implements Sensor {
     private final OCLintJSONCompilationDatabaseFolderRetrievable retriever;
     private final OCLintJSONCompilationDatabaseBuildable builder;
     private final OCLintJSONCompilationDatabaseWritable writer;
-    private final OCLintExtractable extractor;
+    private final OCLintRunnable runner;
     private final ReportIssueRecorder issueRecorder;
     private final OCLintReportParsable parser;
 
@@ -55,7 +55,7 @@ public final class OCLintSensor implements Sensor {
             final OCLintJSONCompilationDatabaseFolderRetrievable retriever,
             final OCLintJSONCompilationDatabaseBuildable builder,
             final OCLintJSONCompilationDatabaseWritable writer,
-            final OCLintExtractable extractor,
+            final OCLintRunnable runner,
             final OCLintReportParsable parser,
             final ReportIssueRecorder issueRecorder
     ) {
@@ -63,7 +63,7 @@ public final class OCLintSensor implements Sensor {
         this.retriever = retriever;
         this.builder = builder;
         this.writer = writer;
-        this.extractor = extractor;
+        this.runner = runner;
         this.parser = parser;
         this.issueRecorder = issueRecorder;
     }
@@ -84,9 +84,12 @@ public final class OCLintSensor implements Sensor {
         // Building the JSON Compilation Database
         String jsonCompileCommands = builder.build(jsonCompilationDatabase);
         // Write the JSON Compilation Database to a file
-        File compilationCommands = writer.write(jsonCompileCommands);
+        if (!writer.write(jsonCompileCommands)) { return; }
+        String output = runner.run();
         // TODO
-        /*OCLintReport report = extractReport(jsonCompileCommands);
+        /*
+        OCLintReport oclintReport = objectMapper.readValue(output, OCLintReport.class);
+        LOGGER.info("OCLint found {} violation(s)", oclintReport.violations.length);
         if (report == null) { return; }
         parseReport(report, sensorContext);*/
     }
@@ -101,17 +104,6 @@ public final class OCLintSensor implements Sensor {
             LOGGER.debug("Exception: {}", e.getMessage());
         }
         return null;
-    }
-
-    private OCLintReport extractReport(File jsonCompilationCommandsFile) {
-        // Extract
-        try {
-            return extractor.extract(jsonCompilationCommandsFile.getParentFile());
-        } catch (Exception e) {
-            LOGGER.error("Extracting the JSON Database (OCLint) failed.");
-            LOGGER.debug("{}", e);
-            return null;
-        }
     }
 
     private void parseReport(OCLintReport report, SensorContext context) {
