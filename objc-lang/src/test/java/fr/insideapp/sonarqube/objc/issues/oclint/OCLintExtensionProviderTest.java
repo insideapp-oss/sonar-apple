@@ -17,11 +17,9 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.config.internal.MapSettings;
 
 import java.util.Optional;
 
@@ -42,7 +40,7 @@ public final class OCLintExtensionProviderTest {
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
+        assertThat(provider.extensions()).hasSize(8);
     }
 
     @Test

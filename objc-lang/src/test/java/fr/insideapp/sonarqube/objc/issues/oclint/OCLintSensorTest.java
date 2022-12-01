@@ -23,6 +23,7 @@ import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDa
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
+import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWritable;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +45,7 @@ public class OCLintSensorTest {
     private ObjectiveC objectiveC;
     private OCLintJSONCompilationDatabaseFolderRetrievable retriever;
     private OCLintJSONCompilationDatabaseBuildable builder;
+    private OCLintJSONCompilationDatabaseWritable writer;
     private OCLintExtractable extractor;
     private OCLintReportParsable parser;
 
@@ -53,15 +55,16 @@ public class OCLintSensorTest {
     public void prepare() {
         retriever = mock(OCLintJSONCompilationDatabaseFolderRetrievable.class);
         builder = mock(OCLintJSONCompilationDatabaseBuildable.class);
+        writer = mock(OCLintJSONCompilationDatabaseWritable.class);
         extractor = mock(OCLintExtractable.class);
         parser = mock(OCLintReportParsable.class);
         context = SensorContextTester.create(baseDir);
         objectiveC = new ObjectiveC();
         sensor = new OCLintSensor(
                 objectiveC,
-                context.fileSystem(),
                 retriever,
                 builder,
+                writer,
                 extractor,
                 parser,
                 new ReportIssueRecorder()

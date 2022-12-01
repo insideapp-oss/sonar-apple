@@ -27,7 +27,7 @@ import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OCLintJSONDatabaseBuilderTest {
+public final class OCLintJSONDatabaseBuilderTest {
 
     private static class Container {
         final String jsonCompilationDatabaseFolderPath;

@@ -26,7 +26,7 @@ import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrieverException;
-import org.sonar.api.batch.fs.FileSystem;
+import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWritable;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -34,7 +34,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.*;
 import java.util.List;
@@ -43,29 +42,27 @@ public final class OCLintSensor implements Sensor {
 
     private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
 
-    private static final String COMPILE_COMMANDS_PATH = "build/compile_commands.json";
-
     private final ObjectiveC objectiveC;
     private final OCLintJSONCompilationDatabaseFolderRetrievable retriever;
-    private final FileSystem fileSystem;
     private final OCLintJSONCompilationDatabaseBuildable builder;
+    private final OCLintJSONCompilationDatabaseWritable writer;
     private final OCLintExtractable extractor;
     private final ReportIssueRecorder issueRecorder;
-
     private final OCLintReportParsable parser;
+
     OCLintSensor(
             final ObjectiveC objectiveC,
-            final FileSystem fileSystem,
             final OCLintJSONCompilationDatabaseFolderRetrievable retriever,
             final OCLintJSONCompilationDatabaseBuildable builder,
+            final OCLintJSONCompilationDatabaseWritable writer,
             final OCLintExtractable extractor,
             final OCLintReportParsable parser,
             final ReportIssueRecorder issueRecorder
     ) {
         this.objectiveC = objectiveC;
-        this.fileSystem = fileSystem;
         this.retriever = retriever;
         this.builder = builder;
+        this.writer = writer;
         this.extractor = extractor;
         this.parser = parser;
         this.issueRecorder = issueRecorder;
@@ -85,10 +82,11 @@ public final class OCLintSensor implements Sensor {
         File jsonCompilationDatabase = retrieveJsonCompilationDatabaseFolder();
         if (jsonCompilationDatabase == null) { return; }
         // Building the JSON Compilation Database
-        String compileCommands = builder.build(jsonCompilationDatabase);
+        String jsonCompileCommands = builder.build(jsonCompilationDatabase);
+        // Write the JSON Compilation Database to a file
+        File compilationCommands = writer.write(jsonCompileCommands);
         // TODO
-        /*File jsonCompilationCommands = writeCompileCommands(compileCommands);
-        OCLintReport report = extractReport(jsonCompilationCommandsFile);
+        /*OCLintReport report = extractReport(jsonCompileCommands);
         if (report == null) { return; }
         parseReport(report, sensorContext);*/
     }
@@ -103,20 +101,6 @@ public final class OCLintSensor implements Sensor {
             LOGGER.debug("Exception: {}", e.getMessage());
         }
         return null;
-    }
-
-    @Nonnull
-    private File writeCompileCommands(@Nonnull String compileCommands) {
-        // Write to the final file
-        File jsonCompilationCommandsFile = jsonCompilationCommands();
-        jsonCompilationCommandsFile.getParentFile().mkdirs();
-        try (FileWriter jsonCompilationCommandsFileWriter = new FileWriter(jsonCompilationCommandsFile)) {
-            jsonCompilationCommandsFileWriter.write(compileCommands);
-        } catch (IOException e) {
-            LOGGER.error("Failed to write the JSON Compilation Database to the file. Exception: {}", e);
-            LOGGER.debug("{}", e);
-        }
-        return jsonCompilationCommandsFile;
     }
 
     private OCLintReport extractReport(File jsonCompilationCommandsFile) {
@@ -134,10 +118,6 @@ public final class OCLintSensor implements Sensor {
         // Parse issues
         List<ReportIssue> issues = parser.collect(report);
         issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY, context);
-    }
-
-    private File jsonCompilationCommands() {
-        return new File(fileSystem.baseDir(), COMPILE_COMMANDS_PATH);
     }
 
 }
