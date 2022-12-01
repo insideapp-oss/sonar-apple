@@ -17,8 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintJSONDatabaseBuilder;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuilder;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.junit.Before;
@@ -31,28 +30,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OCLintJSONDatabaseBuilderTest {
 
     private static class Container {
-        final String jsonCompilationDatabasePath;
+        final String jsonCompilationDatabaseFolderPath;
         final int size;
 
-        public Container(String jsonCompilationDatabasePath, int size) {
-            this.jsonCompilationDatabasePath = jsonCompilationDatabasePath;
+        public Container(String jsonCompilationDatabaseFolderPath, int size) {
+            this.jsonCompilationDatabaseFolderPath = jsonCompilationDatabaseFolderPath;
             this.size = size;
         }
     }
 
-    private static final String BASE_DIR = "/oclint/compilation_database";
+    private static final String BASE_DIR = "/oclint/builder";
 
-    private OCLintJSONDatabaseBuildable builder;
+    private OCLintJSONCompilationDatabaseBuilder builder;
     private File baseFolder;
 
     @Before
     public void prepare() {
-        builder = new OCLintJSONDatabaseBuilder();
+        builder = new OCLintJSONCompilationDatabaseBuilder();
         baseFolder = FileUtils.toFile(getClass().getResource(BASE_DIR));
     }
 
     @Test
-    public void buildNoFile() {
+    public void build_invalid_noFile() {
+        assertContainer(new Container(
+                "invalidPath",
+                0
+        ));
+    }
+
+    @Test
+    public void build_noFile() {
         assertContainer(new Container(
                 "noFile",
                 0
@@ -60,7 +67,7 @@ public class OCLintJSONDatabaseBuilderTest {
     }
 
     @Test
-    public void buildTwoFiles() {
+    public void build_twoFiles() {
         assertContainer(new Container(
                 "twoFiles",
                 2
@@ -68,12 +75,11 @@ public class OCLintJSONDatabaseBuilderTest {
     }
 
     private void assertContainer(Container container) {
-        File folder = new File(baseFolder, container.jsonCompilationDatabasePath);
-
-        // Running our code
+        // prepare
+        File folder = new File(baseFolder, container.jsonCompilationDatabaseFolderPath);
+        // test
         String compileCommands = builder.build(folder);
-
-        // Asserting
+        // assert
         JSONArray jsonArray = new JSONArray(compileCommands);
         assertThat(jsonArray).hasSize(container.size);
     }

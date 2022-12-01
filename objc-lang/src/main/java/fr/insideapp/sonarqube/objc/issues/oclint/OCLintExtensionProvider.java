@@ -18,8 +18,8 @@
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
+import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuilder;
 import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintExtractor;
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintJSONDatabaseBuilder;
 import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintReportParser;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetriever;
 import org.sonar.api.config.Configuration;
@@ -50,7 +50,7 @@ public class OCLintExtensionProvider implements ExtensionProvider {
                 JSON_COMPILATION_DATABASE_PROPERTY,
                 OCLintRulesDefinition.class,
                 OCLintJSONCompilationDatabaseFolderRetriever.class,
-                OCLintJSONDatabaseBuilder.class,
+                OCLintJSONCompilationDatabaseBuilder.class,
                 OCLintExtractor.class,
                 OCLintReportParser.class,
                 OCLintSensor.class

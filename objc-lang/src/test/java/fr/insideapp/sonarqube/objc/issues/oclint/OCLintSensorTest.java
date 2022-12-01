@@ -17,33 +17,22 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
-import fr.insideapp.sonarqube.objc.helper.ExceptionHelper;
+import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
-import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.batch.sensor.issue.Issue;
-import org.sonar.api.config.Configuration;
 
 import java.io.File;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class OCLintSensorTest {
@@ -54,7 +43,7 @@ public class OCLintSensorTest {
     private SensorContextTester context;
     private ObjectiveC objectiveC;
     private OCLintJSONCompilationDatabaseFolderRetrievable retriever;
-    private OCLintJSONDatabaseBuildable builder;
+    private OCLintJSONCompilationDatabaseBuildable builder;
     private OCLintExtractable extractor;
     private OCLintReportParsable parser;
 
@@ -63,7 +52,7 @@ public class OCLintSensorTest {
     @Before
     public void prepare() {
         retriever = mock(OCLintJSONCompilationDatabaseFolderRetrievable.class);
-        builder = mock(OCLintJSONDatabaseBuildable.class);
+        builder = mock(OCLintJSONCompilationDatabaseBuildable.class);
         extractor = mock(OCLintExtractable.class);
         parser = mock(OCLintReportParsable.class);
         context = SensorContextTester.create(baseDir);

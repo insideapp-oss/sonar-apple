@@ -20,8 +20,8 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
 import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
@@ -31,10 +31,11 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.*;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public final class OCLintSensor implements Sensor {
     private final ObjectiveC objectiveC;
     private final OCLintJSONCompilationDatabaseFolderRetrievable retriever;
     private final FileSystem fileSystem;
-    private final OCLintJSONDatabaseBuildable builder;
+    private final OCLintJSONCompilationDatabaseBuildable builder;
     private final OCLintExtractable extractor;
     private final ReportIssueRecorder issueRecorder;
 
@@ -56,7 +57,7 @@ public final class OCLintSensor implements Sensor {
             final ObjectiveC objectiveC,
             final FileSystem fileSystem,
             final OCLintJSONCompilationDatabaseFolderRetrievable retriever,
-            final OCLintJSONDatabaseBuildable builder,
+            final OCLintJSONCompilationDatabaseBuildable builder,
             final OCLintExtractable extractor,
             final OCLintReportParsable parser,
             final ReportIssueRecorder issueRecorder
@@ -80,22 +81,32 @@ public final class OCLintSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
+        // Retrieve the JSON Compilation Database folder
+        File jsonCompilationDatabase = retrieveJsonCompilationDatabaseFolder();
+        if (jsonCompilationDatabase == null) { return; }
+        // Building the JSON Compilation Database
+        String compileCommands = builder.build(jsonCompilationDatabase);
+        // TODO
+        /*File jsonCompilationCommands = writeCompileCommands(compileCommands);
+        OCLintReport report = extractReport(jsonCompilationCommandsFile);
+        if (report == null) { return; }
+        parseReport(report, sensorContext);*/
+    }
+
+    @Nullable
+    private File retrieveJsonCompilationDatabaseFolder() {
+        File jsonCompilationDatabase = null;
         try {
-            File jsonCompilationDatabase = retriever.retrieve();
-            File jsonCompilationCommandsFile = buildCompileCommands(jsonCompilationDatabase);
-            OCLintReport report = extractReport(jsonCompilationCommandsFile);
-            if (report == null) { return; }
-            parseReport(report, sensorContext);
+            jsonCompilationDatabase = retriever.retrieve();
         } catch (OCLintJSONCompilationDatabaseFolderRetrieverException e) {
             LOGGER.error("Failed to retrieve the JSON Compilation Database folder");
             LOGGER.debug("Exception: {}", e.getMessage());
         }
-
+        return null;
     }
 
-    private File buildCompileCommands(File jsonCompilationDatabaseFolder) {
-        // Building the JSON Database
-        String compileCommands = builder.build(jsonCompilationDatabaseFolder);
+    @Nonnull
+    private File writeCompileCommands(@Nonnull String compileCommands) {
         // Write to the final file
         File jsonCompilationCommandsFile = jsonCompilationCommands();
         jsonCompilationCommandsFile.getParentFile().mkdirs();

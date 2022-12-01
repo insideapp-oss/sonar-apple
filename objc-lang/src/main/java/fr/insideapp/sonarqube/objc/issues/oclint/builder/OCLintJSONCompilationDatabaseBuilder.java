@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint.implementations;
+package fr.insideapp.sonarqube.objc.issues.oclint.builder;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionFileFilter;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.FileFilter;
 import java.nio.charset.StandardCharsets;
@@ -33,18 +33,25 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 @ScannerSide
-public final class OCLintJSONDatabaseBuilder implements OCLintJSONDatabaseBuildable {
+public final class OCLintJSONCompilationDatabaseBuilder implements OCLintJSONCompilationDatabaseBuildable {
 
     private static final Pattern CLEAN_PATTERN = Pattern.compile("(\"-index-store-path.*DataStore\", |\"-index-unit-output-path.*\\.o\", )");
 
-    private static final Logger LOGGER = Loggers.get(OCLintJSONDatabaseBuilder.class);
+    private static final Logger LOGGER = Loggers.get(OCLintJSONCompilationDatabaseBuilder.class);
 
-    public String build(File jsonCompilationDatabaseFolder) {
+    private final FileFilter jsonFileFilter;
+
+    public OCLintJSONCompilationDatabaseBuilder() {
+        jsonFileFilter = new ExtensionFileFilter("json");
+    }
+
+    public String build(@Nonnull File jsonCompilationDatabaseFolder) {
         // Retrieve the JSON Database fragments
-        FileFilter jsonFileFilter = new ExtensionFileFilter("json");
         File[] jsonFiles = jsonCompilationDatabaseFolder.listFiles(jsonFileFilter);
-        Iterator<File> jsonFilesIterator = Arrays.asList(jsonFiles).iterator();
+        // Making sure we got something
+        if (jsonFiles == null) { jsonFiles = new File[]{}; }
 
+        Iterator<File> jsonFilesIterator = Arrays.asList(jsonFiles).iterator();
         final StringBuilder compileCommandsBuilder = new StringBuilder();
 
         // Beginning the JSON Database
@@ -67,8 +74,9 @@ public final class OCLintJSONDatabaseBuilder implements OCLintJSONDatabaseBuilda
                     json = RegExUtils.removeFirst(json, ",$");
                 }
                 compileCommandsBuilder.append(json);
-            } catch (Exception e) {
-                LOGGER.error(e.getMessage(), e);
+            } catch (Exception exception) {
+                LOGGER.error("An exception occurred when reading {}. Run in debug for more information", jsonFile.getAbsolutePath());
+                LOGGER.debug("Exception: {}", exception);
             }
         }
 

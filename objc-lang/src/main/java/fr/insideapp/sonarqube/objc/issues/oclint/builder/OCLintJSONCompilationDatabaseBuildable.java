@@ -15,14 +15,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint.interfaces;
+package fr.insideapp.sonarqube.objc.issues.oclint.builder;
 
 import org.sonar.api.scanner.ScannerSide;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 
 @ScannerSide
 public
-interface OCLintJSONDatabaseBuildable {
-    String build(File jsonCompilationDatabaseFolder);
+interface OCLintJSONCompilationDatabaseBuildable {
+    String build(@Nonnull File jsonCompilationDatabaseFolder);
 }

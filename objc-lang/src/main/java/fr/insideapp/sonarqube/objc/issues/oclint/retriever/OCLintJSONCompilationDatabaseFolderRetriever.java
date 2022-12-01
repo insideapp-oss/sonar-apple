@@ -7,6 +7,7 @@ import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 
 @ScannerSide
@@ -30,6 +31,7 @@ public final class OCLintJSONCompilationDatabaseFolderRetriever implements OCLin
     }
 
     @Override
+    @Nonnull
     public File retrieve() throws OCLintJSONCompilationDatabaseFolderRetrieverException {
         File jsonCompilationDatabaseFolder = jsonCompilationDatabase();
         LOGGER.debug("JSON Compilation Database folder path according to the configuration is {}", jsonCompilationDatabaseFolder.getAbsolutePath());
