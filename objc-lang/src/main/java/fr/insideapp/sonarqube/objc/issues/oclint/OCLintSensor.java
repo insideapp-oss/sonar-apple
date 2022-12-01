@@ -25,7 +25,6 @@ import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMappabl
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
 import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
-import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
 import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrieverException;
 import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWritable;
@@ -38,8 +37,8 @@ import org.sonar.api.utils.log.Loggers;
 
 import javax.annotation.Nullable;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public final class OCLintSensor implements Sensor {
 
@@ -52,6 +51,8 @@ public final class OCLintSensor implements Sensor {
     private final OCLintRunnable runner;
     private final OCLintReportParsable parser;
     private final OCLintReportIssueMappable mapper;
+
+    private final OCLintRulesDefinition rulesDefinition;
     private final ReportIssueRecorder issueRecorder;
 
     OCLintSensor(
@@ -62,6 +63,7 @@ public final class OCLintSensor implements Sensor {
             final OCLintRunnable runner,
             final OCLintReportParsable parser,
             final OCLintReportIssueMappable mapper,
+            final OCLintRulesDefinition rulesDefinition,
             final ReportIssueRecorder issueRecorder
     ) {
         this.objectiveC = objectiveC;
@@ -71,6 +73,7 @@ public final class OCLintSensor implements Sensor {
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
+        this.rulesDefinition = rulesDefinition;
         this.issueRecorder = issueRecorder;
     }
 
@@ -91,17 +94,13 @@ public final class OCLintSensor implements Sensor {
         String jsonCompileCommands = builder.build(jsonCompilationDatabase);
         // Write the JSON Compilation Database to a file
         if (!writer.write(jsonCompileCommands)) { return; }
+        // Run the tool
         String output = runner.run();
         // Parse issues
         List<OCLintViolation> ocLintViolations = parser.parse(output);
         // Map issues
-        Set<ReportIssue> issues = mapper.map(ocLintViolations);
-        // TODO
-        /*
-        - map
-        - report
-                issueRecorder.recordIssues(issues, OCLintRulesDefinition.REPOSITORY_KEY, context);
-         */
+        List<ReportIssue> issues = new ArrayList<>(mapper.map(ocLintViolations));
+        issueRecorder.recordIssues(issues, rulesDefinition.getRepositoryKey(), sensorContext);
     }
 
     @Nullable
@@ -113,7 +112,7 @@ public final class OCLintSensor implements Sensor {
             LOGGER.error("Failed to retrieve the JSON Compilation Database folder");
             LOGGER.debug("Exception: {}", e.getMessage());
         }
-        return null;
+        return jsonCompilationDatabase;
     }
 
 }
