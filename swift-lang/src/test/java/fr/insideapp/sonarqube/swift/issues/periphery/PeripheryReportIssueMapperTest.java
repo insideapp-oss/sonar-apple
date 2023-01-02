@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMapper;
+import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportMapper;
 import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssue;
 import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssueLocation;
 import org.junit.Before;
@@ -34,11 +34,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public final class PeripheryReportIssueMapperTest {
 
-    private PeripheryReportIssueMapper mapper;
+    private PeripheryReportMapper mapper;
 
     @Before
     public void prepare() {
-        mapper = new PeripheryReportIssueMapper();
+        mapper = new PeripheryReportMapper();
     }
 
     @Test

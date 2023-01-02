@@ -21,33 +21,25 @@ import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
-import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
-import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
-import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
 import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
+import fr.insideapp.sonarqube.apple.xcode.tests.XcodeTestsExtensionProvider;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.issues.ObjectiveCProfile;
 import fr.insideapp.sonarqube.objc.issues.oclint.*;
-import fr.insideapp.sonarqube.objc.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.SwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.SwiftProfile;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
-import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
 import org.sonar.api.Plugin;
-import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 public class ApplePlugin implements Plugin {
 
     private static final Logger LOGGER = Loggers.get(ApplePlugin.class);
-
-    public static final String APPLE_CATEGORY = "Apple";
 
     @Override
     public void define(Context context) {
@@ -66,28 +58,16 @@ public class ApplePlugin implements Plugin {
 
         register(context,
                 ApplePluginExtensionProvider.class,
+                XcodeResultExtensionProvider.class, // Xcode
+                XcodeTestsExtensionProvider.class, // Tests
                 SwiftLintExtensionProvider.class, // SwiftLint
                 PeripheryExtensionProvider.class, // Periphery
                 MobSFScanExtensionProvider.class, // MobSFScan
                 OCLintExtensionProvider.class  // OCLint
         );
 
-        // Xcode result bundle
-        context.addExtension(
-                PropertyDefinition.builder(AppleResultSensor.RESULT_BUNDLE_PATH_KEY)
-                        .name("Xcode result bundle")
-                        .description("Path to Xcode result bundle file. The path is relative to the project base directory.")
-                        .onQualifiers(Qualifiers.PROJECT)
-                        .category(APPLE_CATEGORY)
-                        .build());
-
         // Coverage
         context.addExtension(AppleCoverageSensor.class);
-
-        // Tests
-        TestFileFinders.getInstance().addFinder(new SwiftTestFileFinder());
-        TestFileFinders.getInstance().addFinder(new ObjectiveCTestFileFinder());
-        context.addExtension(AppleTestsSensor.class);
 
     }
 
@@ -100,6 +80,8 @@ public class ApplePlugin implements Plugin {
                 // registering extensions
                 ExtensionProvider provider = providerClazz.getDeclaredConstructor().newInstance();
                 context.addExtensions(provider.extensions());
+                // perform setup, if any
+                provider.setup();
             } catch (Exception e) {
                 LOGGER.info("An error occurred when trying to register '{}'", providerClazz.getCanonicalName());
                 LOGGER.debug("Exception: {}", e);

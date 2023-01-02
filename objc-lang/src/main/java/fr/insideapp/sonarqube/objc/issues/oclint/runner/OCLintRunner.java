@@ -18,7 +18,6 @@
 package fr.insideapp.sonarqube.objc.issues.oclint.runner;
 
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
-import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolRunner;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.OCLintExtensionProvider;
 import org.sonar.api.batch.fs.FileSystem;
@@ -32,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @ScannerSide
-public final class OCLintRunner extends SingleCommandLineToolRunner implements OCLintRunnable {
+public final class OCLintRunner extends OCLintRunnable {
 
     private static final Logger LOGGER = Loggers.get(OCLintRunner.class);
 
@@ -55,7 +54,7 @@ public final class OCLintRunner extends SingleCommandLineToolRunner implements O
     }
 
     @Override
-    protected String[] options() {
+    protected String[] arguments() {
         List<String> options = new ArrayList<>();
         options.addAll(sources());
         options.addAll(jsonCompilationDatabase());

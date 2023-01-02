@@ -25,4 +25,6 @@ public interface ExtensionProvider {
 
     List<Object> extensions();
 
+    default void setup() {};
+
 }

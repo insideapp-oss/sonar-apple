@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
 import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverage;
 import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverageMetadata;
-import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import org.apache.commons.io.FileUtils;
 import org.buildobjects.process.ProcBuilder;
@@ -66,22 +65,6 @@ public class AppleResultExtractor {
         Record xcResultRecord = objectMapper.readValue(xcresultData, Record.class);
         LOGGER.debug("Record actions : {}", xcResultRecord.actions.size());
         return xcResultRecord;
-    }
-
-    public ActionTestPlanRunSummaries getTestPlanRunSummaries(File resultBundle, Reference testsReference) throws JsonProcessingException {
-        // get the test plan data of the build result as JSON
-        String xcresultData = xcrun()
-                .withArgs("xcresulttool", "get", "--format", "json")
-                .withArgs("--path", resultBundle.getAbsolutePath())
-                .withArgs("--id", testsReference.id)
-                .withTimeoutMillis(COMMAND_TIMEOUT)
-                .withExpectedExitStatuses(COMMAND_EXIT_CODE)
-                .run()
-                .getOutputString();
-
-        ActionTestPlanRunSummaries actionTestPlanRunSummaries = objectMapper.readValue(xcresultData, ActionTestPlanRunSummaries.class);
-        LOGGER.debug("Test plan summaries : {}", actionTestPlanRunSummaries.summaries.size());
-        return actionTestPlanRunSummaries;
     }
 
     public List<ActionCodeCoverage> getCoverage(File resultBundle, List<Reference> archiveReferences) throws IOException {

@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.interfaces;
 
+// TODO: remove this when no used anymore
 public interface CommandLineToolRunnable<T> {
     T run();
 }

@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.swift.issues.swiftlint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportMappable;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParsable;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunnable;
@@ -40,13 +40,13 @@ public class SwiftLintSensor implements Sensor {
     private final SwiftLintRunnable runner;
     private final SwiftLintReportParsable parser;
 
-    private final SwiftLintReportIssueMappable mapper;
+    private final SwiftLintReportMappable mapper;
 
     public SwiftLintSensor(
             final Swift swift,
             final SwiftLintRunnable runner,
             final SwiftLintReportParsable parser,
-            final SwiftLintReportIssueMappable mapper
+            final SwiftLintReportMappable mapper
     ) {
         this.swift = swift;
         this.runner = runner;

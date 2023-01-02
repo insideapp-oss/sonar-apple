@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.apple.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
-import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportIssueMapper;
+import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportMapper;
 import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParser;
 import fr.insideapp.sonarqube.apple.mobsfscan.runner.MobSFScanRunner;
 import fr.insideapp.sonarqube.apple.mobsfscan.splitter.MobSFScanReportIssueSplitter;
@@ -38,7 +38,7 @@ public final class MobSFScanExtensionProvider implements ExtensionProvider {
                 MobSFScanObjectiveCRulesDefinition.class,
                 MobSFScanRunner.class,
                 MobSFScanReportParser.class,
-                MobSFScanReportIssueMapper.class,
+                MobSFScanReportMapper.class,
                 MobSFScanReportIssueSplitter.class,
                 MobSFScanSensor.class
         );

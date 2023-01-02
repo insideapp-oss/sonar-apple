@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMapper;
+import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportMapper;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,11 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public final class OCLintReportIssueMapperTest {
 
-    private OCLintReportIssueMapper mapper;
+    private OCLintReportMapper mapper;
 
     @Before
     public void prepare() {
-        mapper = new OCLintReportIssueMapper();
+        mapper = new OCLintReportMapper();
     }
 
     @Test

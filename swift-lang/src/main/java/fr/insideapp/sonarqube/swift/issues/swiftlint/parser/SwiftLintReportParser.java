@@ -40,6 +40,11 @@ public final class SwiftLintReportParser extends AbstractReportParser<SwiftLintI
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    @Override
+    protected String objectName() {
+        return "SwiftLint issue(s)";
+    }
+
     protected List<SwiftLintIssue> perform(String input) throws Exception {
         return Arrays.asList(objectMapper.readValue(input, SwiftLintIssue[].class));
     }

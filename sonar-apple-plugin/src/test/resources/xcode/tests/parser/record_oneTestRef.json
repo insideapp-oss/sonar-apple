@@ -1,0 +1,163 @@
+{
+    "actions" : {
+        "_values" : [
+            {
+                "actionResult" : {
+                    "_type" : {
+                        "_name" : "ActionResult"
+                    },
+                    "coverage" : {
+                        "_type" : {
+                            "_name" : "CodeCoverageInfo"
+                        }
+                    },
+                    "issues" : {
+                        "_type" : {
+                            "_name" : "ResultIssueSummaries"
+                        }
+                    },
+                    "metrics" : {
+                        "_type" : {
+                            "_name" : "ResultMetrics"
+                        }
+                    },
+                    "resultName" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "action"
+                    },
+                    "status" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "notRequested"
+                    }
+                }
+            },
+            {
+                "actionResult" : {
+                    "_type" : {
+                        "_name" : "ActionResult"
+                    },
+                    "coverage" : {
+                        "_type" : {
+                            "_name" : "CodeCoverageInfo"
+                        },
+                        "archiveRef" : {
+                            "_type" : {
+                                "_name" : "Reference"
+                            },
+                            "id" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "0~Is1V62Hb-W3eZoBrgkmzQKLBtFqLfjx-24vpUyzw4Tns1scLWlhs8L0mWGAF-mxl9DXdttYGmfIJNqgL2RJ_1g=="
+                            }
+                        },
+                        "hasCoverageData" : {
+                            "_type" : {
+                                "_name" : "Bool"
+                            },
+                            "_value" : "true"
+                        },
+                        "reportRef" : {
+                            "_type" : {
+                                "_name" : "Reference"
+                            },
+                            "id" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "0~ibeCvXKiRlDS5MdiiUoDQqIZLNneNztdUPpS6Hf_OUd_qn4xg9VtCPKeQiVDVMBkrhdk8xxG4M8475B3har3ZA=="
+                            }
+                        }
+                    },
+                    "diagnosticsRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~dsbC7DaYum1c49UI9y_Z8NFkM6zxYWmWZ9Q4kRXQpjtk0r_XvaslpQTwAouQ2sKsFoKo0nQl8bky_IX1WsnX_A=="
+                        }
+                    },
+                    "issues" : {
+                        "_type" : {
+                            "_name" : "ResultIssueSummaries"
+                        }
+                    },
+                    "logRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~NjMVe1bNjKuJe4sk_fEhDnqn1_Oapo6NT-hs5rVGeQ5qZwzwKjijO7-0CP8SpDkD8S-zPayQLn_d6OmUkuCn5w=="
+                        },
+                        "targetType" : {
+                            "_type" : {
+                                "_name" : "TypeDefinition"
+                            },
+                            "name" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "ActivityLogSection"
+                            }
+                        }
+                    },
+                    "metrics" : {
+                        "_type" : {
+                            "_name" : "ResultMetrics"
+                        },
+                        "testsCount" : {
+                            "_type" : {
+                                "_name" : "Int"
+                            },
+                            "_value" : "5"
+                        }
+                    },
+                    "resultName" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "action"
+                    },
+                    "status" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "succeeded"
+                    },
+                    "testsRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~K1i4sYDEi5bYCfHEZjghADT2KA1UdMo-9K1zx2wQDk7nehDbbTToxCAUakTFI2Iqjox7nk7NwH7CYkpDlBbewA=="
+                        },
+                        "targetType" : {
+                            "_type" : {
+                                "_name" : "TypeDefinition"
+                            },
+                            "name" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "ActionTestPlanRunSummaries"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

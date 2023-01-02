@@ -19,7 +19,7 @@ package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportMappable;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParsable;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunnable;
 import org.apache.commons.io.FileUtils;
@@ -54,14 +54,14 @@ public class SwiftLintSensorTest {
     private SensorContextTester context;
     private SwiftLintRunnable runner;
     private SwiftLintReportParsable parser;
-    private SwiftLintReportIssueMappable mapper;
+    private SwiftLintReportMappable mapper;
 
     @Before
     public void prepare() {
         context = SensorContextTester.create(baseDir);
         runner = mock(SwiftLintRunnable.class);
         parser = mock(SwiftLintReportParsable.class);
-        mapper = mock(SwiftLintReportIssueMappable.class);
+        mapper = mock(SwiftLintReportMappable.class);
         swift = new Swift();
         sensor = new SwiftLintSensor(
                 swift,

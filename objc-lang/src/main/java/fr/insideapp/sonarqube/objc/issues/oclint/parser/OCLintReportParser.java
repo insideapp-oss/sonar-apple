@@ -39,6 +39,11 @@ public final class OCLintReportParser extends AbstractReportParser<OCLintViolati
     }
 
     @Override
+    protected String objectName() {
+        return "OCLint violation(s)";
+    }
+
+    @Override
     protected List<OCLintViolation> perform(String input) throws Exception {
         return objectMapper.readValue(input, OCLintReport.class).violations;
     }

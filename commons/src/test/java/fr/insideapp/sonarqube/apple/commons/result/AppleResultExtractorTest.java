@@ -20,7 +20,6 @@ package fr.insideapp.sonarqube.apple.commons.result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
 import fr.insideapp.sonarqube.apple.commons.result.models.coverage.ActionCodeCoverage;
-import fr.insideapp.sonarqube.apple.commons.result.models.tests.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.commons.result.models.Record;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -38,11 +37,9 @@ public class AppleResultExtractorTest {
     private static final String XCRESULT = "build_result.xcresult";
 
     private static final String RECORD = "record.json";
-    private static final String TEST_PLAN_RUN_SUMMARIES = "testPlanRunSummaries.json";
     private AppleResultExtractor extractor;
     private File xcResultFile;
     private File recordFile;
-    private File testPlanRunSummariesFile;
     private ObjectMapper objectMapper;
 
     @Before
@@ -50,7 +47,6 @@ public class AppleResultExtractorTest {
         extractor = new AppleResultExtractor();
         xcResultFile = new File(BASE_DIR, XCRESULT);
         recordFile = new File(BASE_DIR, RECORD);
-        testPlanRunSummariesFile = new File(BASE_DIR, TEST_PLAN_RUN_SUMMARIES);
         objectMapper = new ObjectMapper();
     }
 
@@ -63,18 +59,6 @@ public class AppleResultExtractorTest {
         String recordJSON = objectMapper.writeValueAsString(record);
         String expectedRecordJSON = FileUtils.readFileToString(recordFile, Charset.defaultCharset());
         assertThat(recordJSON).isEqualTo(expectedRecordJSON);
-    }
-
-    @Test
-    public void getTestPlanRunSummaries() throws Exception {
-        // testing
-        Reference testsReference = new Reference("0~-gMOd6ejNZCXRlKlSSCSAZYeGmORF_XtvTemdOLMVfIpPZGUAp8QFk_Xrvl62uQeSBfm6vleIrOiKun_Tn3DnQ==");
-        ActionTestPlanRunSummaries testPlanRunSummaries = extractor.getTestPlanRunSummaries(xcResultFile, testsReference);
-        // asserting
-        assertThat(testPlanRunSummaries.summaries).hasSize(1);
-        String testPlanRunSummariesJSON = objectMapper.writeValueAsString(testPlanRunSummaries);
-        String expectedTestPlanRunSummaries = FileUtils.readFileToString(testPlanRunSummariesFile, Charset.defaultCharset());
-        assertThat(testPlanRunSummariesJSON).isEqualTo(expectedTestPlanRunSummaries);
     }
 
     @Test

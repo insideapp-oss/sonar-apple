@@ -40,6 +40,11 @@ public final class MobSFScanReportParser extends AbstractReportParser<MobSFScanI
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    @Override
+    protected String objectName() {
+        return "MobSF issue(s)";
+    }
+
     protected List<MobSFScanIssue> perform(String input) throws Exception {
         return objectMapper.readValue(input, MobSFScanReport.class)
                 .results

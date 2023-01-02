@@ -39,6 +39,11 @@ public final class PeripheryReportParser extends AbstractReportParser<PeripheryI
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    @Override
+    protected String objectName() {
+        return "Periphery issue(s)";
+    }
+
     protected List<PeripheryIssue> perform(String input) throws Exception {
         return Arrays.asList(objectMapper.readValue(input, PeripheryIssue[].class));
     }

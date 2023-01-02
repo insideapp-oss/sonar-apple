@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMapper;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportMapper;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.models.SwiftLintIssue;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,11 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public final class SwiftLintReportIssueMapperTest {
 
-    private SwiftLintReportIssueMapper mapper;
+    private SwiftLintReportMapper mapper;
 
     @Before
     public void prepare() {
-        mapper = new SwiftLintReportIssueMapper();
+        mapper = new SwiftLintReportMapper();
     }
 
     @Test

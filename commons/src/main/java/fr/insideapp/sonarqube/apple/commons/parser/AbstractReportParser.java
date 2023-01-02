@@ -28,18 +28,20 @@ public abstract class AbstractReportParser<T> implements ReportParsable<List<T>>
 
     private static final Logger LOGGER = Loggers.get(AbstractReportParser.class);
 
+    protected abstract String objectName();
+
     protected abstract List<T> perform(String input) throws Exception;
 
     public List<T> parse(String input) {
-        List<T> issues = new ArrayList<>();
+        List<T> objects = new ArrayList<>();
         try {
-            issues.addAll(perform(input));
+            objects.addAll(perform(input));
         } catch (Exception e) {
             LOGGER.error("Parsing failed. Run in verbose to get more information.");
             LOGGER.debug("{}", e);
         }
-        LOGGER.info("Parsed {} issue(s)", issues.size());
-        return issues;
+        LOGGER.info("Parsed {} {}", objects.size(), objectName());
+        return objects;
     }
 
 }

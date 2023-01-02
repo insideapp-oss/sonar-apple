@@ -17,8 +17,12 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint.runner;
 
-import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
+import fr.insideapp.sonarqube.apple.commons.cli.StaticSingleCommandLineToolRunner;
 import org.sonar.api.scanner.ScannerSide;
 
 @ScannerSide
-public interface OCLintRunnable extends CommandLineToolRunnable<String> {}
+public abstract class OCLintRunnable extends StaticSingleCommandLineToolRunner {
+    protected OCLintRunnable(String command) {
+        super(command);
+    }
+}

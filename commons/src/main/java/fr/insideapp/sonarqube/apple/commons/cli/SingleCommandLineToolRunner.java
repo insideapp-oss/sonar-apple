@@ -17,11 +17,10 @@
  */
 package fr.insideapp.sonarqube.apple.commons.cli;
 
-import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-public abstract class SingleCommandLineToolRunner extends CommandLineToolRunner implements CommandLineToolRunnable<String> {
+public abstract class SingleCommandLineToolRunner extends CommandLineToolRunner {
 
     private static final Logger LOGGER = Loggers.get(SingleCommandLineToolRunner.class);
 
@@ -29,12 +28,9 @@ public abstract class SingleCommandLineToolRunner extends CommandLineToolRunner 
         super(command);
     }
 
-    protected abstract String[] options();
-
-    @Override
-    public String run() {
+    protected String run(String[] arguments) {
         try {
-            return execute(options());
+            return execute(arguments);
         } catch (Exception e) {
             LOGGER.error("Running failed. Run in verbose to get more information.");
             LOGGER.debug("{}", e);
