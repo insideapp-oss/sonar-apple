@@ -55,7 +55,7 @@ public final class OCLintSensor implements Sensor {
     private final OCLintRulesDefinition rulesDefinition;
     private final ReportIssueRecorder issueRecorder;
 
-    OCLintSensor(
+    public OCLintSensor(
             final ObjectiveC objectiveC,
             final OCLintJSONCompilationDatabaseFolderRetrievable retriever,
             final OCLintJSONCompilationDatabaseBuildable builder,
