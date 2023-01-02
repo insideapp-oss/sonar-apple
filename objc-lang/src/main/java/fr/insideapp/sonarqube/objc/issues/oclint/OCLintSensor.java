@@ -49,7 +49,7 @@ public final class OCLintSensor implements Sensor {
     private final ReportIssueRecorder issueRecorder;
 
     private final OCLintReportParsable parser;
-    OCLintSensor(
+    public OCLintSensor(
             final OCLintExtensionProvider ocLintExtensionProvider,
             final Configuration configuration,
             final FileSystem fileSystem,
