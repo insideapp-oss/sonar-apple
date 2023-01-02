@@ -45,7 +45,7 @@ public final class AbstractReportParserTest {
         // prepare
         when(parser.perform(anyString())).thenThrow(ExceptionHelper.build());
         // test
-        List<String> outputs = parser.parse(anyString());
+        List<?> outputs = parser.parse(anyString());
         // assert
         assertThat(outputs).isEmpty();
     }
@@ -55,7 +55,7 @@ public final class AbstractReportParserTest {
         // prepare
         when(parser.perform(anyString())).thenReturn(Arrays.asList("string_parsed"));
         // test
-        List<String> outputs = parser.parse(anyString());
+        List<?> outputs = parser.parse(anyString());
         // assert
         assertThat(outputs).hasSize(1);
         assertThat(outputs.get(0)).isEqualTo("string_parsed");
