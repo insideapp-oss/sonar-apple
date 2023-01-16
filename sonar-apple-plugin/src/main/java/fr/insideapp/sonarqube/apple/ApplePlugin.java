@@ -17,7 +17,9 @@
  */
 package fr.insideapp.sonarqube.apple;
 
+import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
+import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
@@ -35,8 +37,7 @@ import fr.insideapp.sonarqube.swift.SwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.SwiftProfile;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftSensor;
-import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
-import fr.insideapp.sonarqube.swift.issues.periphery.PeripherySensor;
+import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
 import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
 import org.sonar.api.Plugin;
@@ -51,10 +52,11 @@ public class ApplePlugin implements Plugin {
 
     public static final String APPLE_CATEGORY = "Apple";
 
-    public static final String PERIPHERY_SUBCATEGORY = "Periphery";
-
     @Override
     public void define(Context context) {
+
+        // Project
+        context.addExtension(SonarProjectConfiguration.class);
 
         // Swift language support
         context.addExtensions(Swift.class, SwiftSensor.class , SwiftProfile.class);
@@ -69,19 +71,10 @@ public class ApplePlugin implements Plugin {
         context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
         context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
 
-        // Periphery
-        context.addExtension(
-                PropertyDefinition.builder(PeripherySensor.LOG_PATH_KEY)
-                        .name("periphery log")
-                        .description("Path to periphery log file. The path may be either absolute or relative to the project base directory.")
-                        .onQualifiers(Qualifiers.PROJECT)
-                        .category(APPLE_CATEGORY)
-                        .subCategory(PERIPHERY_SUBCATEGORY)
-                        .build());
-        context.addExtensions(PeripherySensor.class, PeripheryRulesDefinition.class);
-
         register(context,
+                ApplePluginExtensionProvider.class,
                 SwiftLintExtensionProvider.class, // SwiftLint
+                PeripheryExtensionProvider.class, // Periphery
                 OCLintExtensionProvider.class  // OCLint
         );
 

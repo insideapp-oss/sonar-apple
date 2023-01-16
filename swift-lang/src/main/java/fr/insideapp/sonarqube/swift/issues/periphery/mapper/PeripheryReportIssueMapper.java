@@ -15,37 +15,30 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.issues.swiftlint.runner;
+package fr.insideapp.sonarqube.swift.issues.periphery.mapper;
 
-import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
-import fr.insideapp.sonarqube.apple.commons.cli.MultiCommandLineToolRunner;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
+import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssue;
 import org.sonar.api.scanner.ScannerSide;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @ScannerSide
-public final class SwiftLintRunner extends MultiCommandLineToolRunner implements SwiftLintRunnable {
-
-    private final SonarProjectConfiguration configuration;
-
-    public SwiftLintRunner(final SonarProjectConfiguration configuration) {
-        super("swiftlint");
-        this.configuration = configuration;
-    }
+public class PeripheryReportIssueMapper implements PeripheryReportIssueMappable {
 
     @Override
-    protected List<String[]> multiOptions() {
-        List<String[]> options = new ArrayList<>();
-        for (String source: configuration.sources()) {
-            options.add(new String[]{"lint", "--quiet", "--reporter", "json", source});
-        }
-        return options;
+    public Set<ReportIssue> map(List<PeripheryIssue> input) {
+        return input.stream()
+                .map(issue ->
+                        new ReportIssue(
+                                issue.ruleIdentifier,
+                                null,
+                                issue.location.path,
+                                issue.location.line
+                        )
+                )
+                .collect(Collectors.toSet());
     }
-
-    @Override
-    protected Integer[] exitCodes() {
-        return new Integer[]{0, 2};
-    }
-
 }

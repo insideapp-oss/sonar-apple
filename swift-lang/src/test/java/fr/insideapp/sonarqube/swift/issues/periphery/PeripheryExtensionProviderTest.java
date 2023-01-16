@@ -17,19 +17,25 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
-import fr.insideapp.sonarqube.swift.issues.RegexReportParser;
+import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.util.regex.Matcher;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class PeripheryReportParser extends RegexReportParser {
+public final class PeripheryExtensionProviderTest {
 
-    public PeripheryReportParser() {
-        super("(.*.swift):(\\w+):(\\w+): (warning): (.*)");
+    private ExtensionProvider provider;
+
+    @Before
+    public void prepare() {
+        provider = new PeripheryExtensionProvider();
     }
 
-    @Override
-    public String ruleId(Matcher matcher) {
-        // periphery doesn't provide the ruleId at the moment
-        return "unused";
+    @Test
+    public void extensions() {
+        assertThat(provider.extensions()).hasSize(8);
     }
+
 }
+

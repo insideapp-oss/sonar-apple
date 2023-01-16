@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
+import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,32 +25,38 @@ import org.sonar.api.config.Configuration;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class SwiftLintRunnerTest {
 
     private SwiftLintRunner runner;
+    private SonarProjectConfiguration configuration;
     private Class clazz;
 
     @Before
     public void prepare() {
-        runner = new SwiftLintRunner(mock(Configuration.class));
+        configuration = mock(SonarProjectConfiguration.class);
+        runner = new SwiftLintRunner(configuration);
         clazz = runner.getClass();
     }
 
     @Test
     public void options() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Class clazz = runner.getClass();
-        Method options = clazz.getDeclaredMethod("options", String.class);
+        Method options = clazz.getDeclaredMethod("multiOptions");
         options.setAccessible(true);
-        assertThat(options.invoke(runner, "source")).isEqualTo(new String[]{"lint", "--quiet", "--reporter", "json", "source"});
+        when(configuration.sources()).thenReturn(Arrays.asList("source"));
+        List<String[]> optionsBuilt = (List<String[]>) options.invoke(runner);
+        assertThat(optionsBuilt).hasSize(1);
+        assertThat(optionsBuilt.get(0)).isEqualTo(new String[]{"lint", "--quiet", "--reporter", "json", "source"});
     }
 
     @Test
     public void exitCodes() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Class clazz = runner.getClass();
         Method options = clazz.getDeclaredMethod("exitCodes");
         options.setAccessible(true);
         assertThat(options.invoke(runner)).isEqualTo(new Integer[]{0, 2});

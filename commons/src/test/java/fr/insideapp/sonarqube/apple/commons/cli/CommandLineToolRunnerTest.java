@@ -17,19 +17,19 @@
  */
 package fr.insideapp.sonarqube.apple.commons.cli;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.config.Configuration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public final class SingleCommandLineToolBuilderTest {
+import org.buildobjects.process.StartupException;
 
-    private SingleCommandLineToolBuilder builder;
+public final class CommandLineToolRunnerTest {
 
     private Configuration configuration;
 
@@ -39,44 +39,63 @@ public final class SingleCommandLineToolBuilderTest {
     }
 
     @Test
-    public void run_no_option() {
+    public void exitCodes_default() {
         // prepare
-        builder = makeMock("echo");
-        when(builder.options(any())).thenReturn(new String[]{});
+        CommandLineToolRunner runner = makeMock("echo");
         // test
-        String output = builder.run();
+        Integer[] exitCodes = runner.exitCodes();
+        // assert
+        assertThat(exitCodes).hasSize(1).isEqualTo(new Integer[]{0});
+    }
+
+    @Test
+    public void exitCodes_override() {
+        // prepare
+        CommandLineToolRunner runner = makeMock("echo");
+        // prepare
+        when(runner.exitCodes()).thenReturn(new Integer[]{1,2});
+        // test
+        Integer[] exitCodes = runner.exitCodes();
+        // assert
+        assertThat(exitCodes).hasSize(2).isEqualTo(new Integer[]{1,2});
+    }
+
+    @Test
+    public void execute_no_option() throws Exception {
+        // prepare
+        CommandLineToolRunner runner = makeMock("echo");
+        // test
+        String output = runner.execute(new String[]{});
         // assert
         assertThat(output).isEqualTo("\n");
     }
 
     @Test
-    public void run_with_option() {
+    public void execute_with_option() throws Exception {
         // prepare
-        builder = makeMock("echo");
-        when(builder.options(any())).thenReturn(new String[]{"test"});
+        CommandLineToolRunner runner = makeMock("echo");
         // test
-        String output = builder.run();
+        String output = runner.execute(new String[]{"test"});
         // assert
         assertThat(output).isEqualTo("test\n");
     }
 
     @Test
-    public void run_failed() {
+    public void execute_should_throw() {
         // prepare
-        builder = makeMock("dummy");
-        when(builder.options(any())).thenReturn(new String[]{});
-        // test
-        String output = builder.run();
+        CommandLineToolRunner runner = makeMock("dummy");
         // assert
-        assertThat(output).isEmpty();
+        assertThatExceptionOfType(StartupException.class).isThrownBy(() -> {
+            runner.execute(new String[]{});
+        });
     }
 
-    private SingleCommandLineToolBuilder makeMock(String command) {
+    private CommandLineToolRunner makeMock(String command) {
         return mock(
-                SingleCommandLineToolBuilder.class,
+                CommandLineToolRunner.class,
                 Mockito.withSettings()
                         .defaultAnswer(Mockito.CALLS_REAL_METHODS)
-                        .useConstructor(configuration, command)
+                        .useConstructor(command)
         );
     }
 

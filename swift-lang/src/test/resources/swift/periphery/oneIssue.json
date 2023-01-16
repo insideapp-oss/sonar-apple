@@ -1,0 +1,8 @@
+[
+    {
+        "hints" : [
+            "unused"
+        ],
+        "location" : "path/to/file.swift:12:40"
+    }
+]
