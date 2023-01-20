@@ -1,0 +1,40 @@
+{
+    "errors": [],
+    "mobsfscan_version": "0.1.2",
+    "results": {
+        "ios_log": {
+            "files": [
+                {
+                    "file_path": "path/to/file.swift",
+                    "match_lines": [
+                        15
+                    ],
+                    "match_position": [
+                        9832,
+                        9847
+                    ],
+                    "match_string": "os_log(message)"
+                },
+                {
+                    "file_path": "path/to/another/file.swift",
+                    "match_lines": [
+                        16
+                    ],
+                    "match_position": [
+                        9777,
+                        9802
+                    ],
+                    "match_string": "os_log(message, argument)"
+                }
+            ],
+            "metadata": {
+                "cwe": "CWE-532: Insertion of Sensitive Information into Log File",
+                "description": "The App logs information. Sensitive information should never be logged.",
+                "masvs": "MSTG-STORAGE-3",
+                "owasp-mobile": "M1: Improper Platform Usage",
+                "reference": "https://github.com/MobSF/owasp-mstg/blob/master/Document/0x06i-Testing-Code-Quality-and-Build-Settings.md#finding-debugging-code-and-verbose-error-logging-mstg-code-4",
+                "severity": "INFO"
+            }
+        }
+    }
+}

@@ -25,18 +25,15 @@ import fr.insideapp.sonarqube.apple.commons.tests.TestFileFinders;
 import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.apple.commons.result.AppleResultSensor;
 import fr.insideapp.sonarqube.apple.commons.tests.AppleTestsSensor;
+import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.issues.ObjectiveCProfile;
-import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
-import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCSensor;
 import fr.insideapp.sonarqube.objc.issues.oclint.*;
 import fr.insideapp.sonarqube.objc.tests.ObjectiveCTestFileFinder;
 import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.SwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.SwiftProfile;
-import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
-import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftSensor;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
 import fr.insideapp.sonarqube.swift.tests.SwiftTestFileFinder;
@@ -67,14 +64,11 @@ public class ApplePlugin implements Plugin {
         // Issues reporter
         context.addExtension(ReportIssueRecorder.class);
 
-        // MobSFScan (Swift & Objective-C)
-        context.addExtensions(MobSFScanSwiftSensor.class, MobSFScanSwiftRulesDefinition.class);
-        context.addExtensions(MobSFScanObjectiveCSensor.class, MobSFScanObjectiveCRulesDefinition.class);
-
         register(context,
                 ApplePluginExtensionProvider.class,
                 SwiftLintExtensionProvider.class, // SwiftLint
                 PeripheryExtensionProvider.class, // Periphery
+                MobSFScanExtensionProvider.class, // MobSFScan
                 OCLintExtensionProvider.class  // OCLint
         );
 

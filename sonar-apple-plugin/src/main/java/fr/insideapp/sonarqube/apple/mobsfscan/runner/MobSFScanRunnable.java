@@ -15,38 +15,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.mobsfscan.runner;
 
-import fr.insideapp.sonarqube.apple.commons.RunningSourcesCLISensor;
+import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
+import org.sonar.api.scanner.ScannerSide;
 
-
-public abstract class MobSFScanSensor extends RunningSourcesCLISensor {
-
-    private MobSFScanRulesDefinition rulesDefinition;
-
-    protected MobSFScanSensor (MobSFScanRulesDefinition rulesDefinition) {
-        this.rulesDefinition = rulesDefinition;
-    }
-
-    public String name() {
-        return String.join(" ", "MobSFScan Sensor", nameSuffix());
-    }
-
-    public abstract String nameSuffix();
-
-    @Override
-    public final String repository() {
-        return rulesDefinition.repository();
-    }
-
-    @Override
-    public String command() {
-        return "mobsfscan";
-    }
-
-    @Override
-    public String[] commandOptions(String source) {
-        return new String[]{"--json", source};
-    }
-
-}
+@ScannerSide
+public interface MobSFScanRunnable extends CommandLineToolRunnable<String> {}

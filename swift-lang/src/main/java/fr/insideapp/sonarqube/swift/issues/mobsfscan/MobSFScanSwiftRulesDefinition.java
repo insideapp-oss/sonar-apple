@@ -19,10 +19,14 @@ package fr.insideapp.sonarqube.swift.issues.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
+import org.sonar.api.scanner.ScannerSide;
 
+@ScannerSide
 public class MobSFScanSwiftRulesDefinition extends MobSFScanRulesDefinition {
-    public MobSFScanSwiftRulesDefinition() {
-        super(Swift.KEY);
+    public MobSFScanSwiftRulesDefinition(
+            Swift swift
+    ) {
+        super(swift);
     }
 
 }

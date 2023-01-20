@@ -21,7 +21,6 @@ import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMapper;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParser;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunner;
-import org.sonar.api.Plugin;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;

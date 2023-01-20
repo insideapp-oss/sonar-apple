@@ -60,8 +60,7 @@ public final class ApplePluginExtensionProviderTest {
         // test
         Optional<String> workspace = provider.workspace(configuration);
         // assert
-        assertThat(workspace).isPresent();
-        assertThat(workspace).contains("MyProject.xcworkspace");
+        assertThat(workspace).isPresent().contains("MyProject.xcworkspace");
     }
 
     @Test
@@ -81,8 +80,7 @@ public final class ApplePluginExtensionProviderTest {
         // test
         Optional<String> project = provider.project(configuration);
         // assert
-        assertThat(project).isPresent();
-        assertThat(project).contains("MyProject.xcodeproj");
+        assertThat(project).isPresent().contains("MyProject.xcodeproj");
     }
 
 }

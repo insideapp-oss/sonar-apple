@@ -19,11 +19,15 @@ package fr.insideapp.sonarqube.objc.issues.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import org.sonar.api.scanner.ScannerSide;
 
+@ScannerSide
 public final class MobSFScanObjectiveCRulesDefinition extends MobSFScanRulesDefinition {
 
-    public MobSFScanObjectiveCRulesDefinition() {
-        super(ObjectiveC.KEY);
+    public MobSFScanObjectiveCRulesDefinition(
+            ObjectiveC objectiveC
+    ) {
+        super(objectiveC);
     }
 
 }

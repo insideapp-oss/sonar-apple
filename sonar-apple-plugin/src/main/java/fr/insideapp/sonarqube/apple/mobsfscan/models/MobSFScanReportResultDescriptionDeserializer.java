@@ -15,32 +15,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.issues.mobsfscan;
+package fr.insideapp.sonarqube.apple.mobsfscan.models;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanReportParser;
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanSensor;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportParser;
-import fr.insideapp.sonarqube.swift.Swift;
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 
+import java.io.IOException;
 
-public final class MobSFScanSwiftSensor extends MobSFScanSensor {
+public final class MobSFScanReportResultDescriptionDeserializer extends JsonDeserializer<String> {
 
-    public MobSFScanSwiftSensor() {
-        super(new MobSFScanSwiftRulesDefinition());
-    }
-    @Override
-    public String language() {
-        return Swift.KEY;
+    public MobSFScanReportResultDescriptionDeserializer() {
+        super();
     }
 
     @Override
-    public String nameSuffix() {
-        return String.format("for %s", StringUtils.capitalize(Swift.KEY));
+    public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        ObjectCodec codec = jsonParser.getCodec();
+        JsonNode tree = codec.readTree(jsonParser);
+        return tree.get("description").asText();
     }
 
-    @Override
-    public ReportParser reportParser() {
-        return new MobSFScanReportParser(Swift.EXTENSIONS);
-    }
 }

@@ -17,6 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import org.sonar.api.resources.Language;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.log.Logger;
@@ -31,11 +32,15 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
 
     private final String repositoryKey;
     private final String repositoryName;
-    private final String language;
-
+    private final Language language;
     private final String jsonResourcePath;
 
-    protected JSONRulesDefinition(String repositoryKey, String repositoryName, String language, String jsonResourcePath) {
+    protected JSONRulesDefinition(
+            final String repositoryKey,
+            final String repositoryName,
+            final Language language,
+            final String jsonResourcePath
+    ) {
         this.repositoryKey = repositoryKey;
         this.repositoryName = repositoryName;
         this.language = language;
@@ -44,7 +49,7 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
 
     @Override
     public void define(RulesDefinition.Context context) {
-        RulesDefinition.NewRepository repository = context.createRepository(this.repositoryKey, this.language).setName(this.repositoryName);
+        RulesDefinition.NewRepository repository = context.createRepository(this.repositoryKey, this.language.getKey()).setName(this.repositoryName);
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
         try {
             List<RepositoryRule> rules = repositoryRuleParser.parse(jsonResourcePath);
@@ -61,5 +66,21 @@ public abstract class JSONRulesDefinition implements RulesDefinition {
             LOGGER.error(String.format("Failed to load %s rules", this.repositoryName), e);
         }
         repository.done();
+    }
+
+    public String getRepositoryKey() {
+        return repositoryKey;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public String getRepositoryName() {
+        return repositoryName;
+    }
+
+    public String getJsonResourcePath() {
+        return jsonResourcePath;
     }
 }

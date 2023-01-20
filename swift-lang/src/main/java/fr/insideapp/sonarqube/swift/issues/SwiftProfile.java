@@ -33,6 +33,14 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(SwiftProfile.class);
 
+    private final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition;
+
+    public SwiftProfile(
+            final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition
+    ) {
+        this.mobSFScanSwiftRulesDefinition = mobSFScanSwiftRulesDefinition;
+    }
+
     @Override
     public void define(Context context) {
 
@@ -52,10 +60,9 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
         // MobSFScan rules (for Swift)
         try {
-            MobSFScanRulesDefinition rulesDefinition = new MobSFScanSwiftRulesDefinition();
-            List<RepositoryRule> rules = repositoryRuleParser.parse(rulesDefinition.rulesPath());
+            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanSwiftRulesDefinition.getJsonResourcePath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.key);
+                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanSwiftRulesDefinition.getRepositoryName(), r.key);
                 rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {

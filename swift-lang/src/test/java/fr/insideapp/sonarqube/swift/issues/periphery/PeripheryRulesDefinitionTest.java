@@ -17,6 +17,9 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
+import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.swift.Swift;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
@@ -24,19 +27,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PeripheryRulesDefinitionTest {
 
+    private JSONRulesDefinition rulesDefinition;
+    private Swift language;
+    private RulesDefinition.Context context;
+
+    @Before
+    public void prepare() {
+        language = new Swift();
+        rulesDefinition = new PeripheryRulesDefinition(language);
+        context = new RulesDefinition.Context();
+    }
+
     @Test
     public void define() {
-
-        PeripheryRulesDefinition rulesDefinition = new PeripheryRulesDefinition();
-        RulesDefinition.Context context = new RulesDefinition.Context();
+        // test
         rulesDefinition.define(context);
-
+        // assert
         RulesDefinition.Repository repository = context.repository("Periphery");
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("Periphery");
-        assertThat(repository.language()).isEqualTo("swift");
+        assertThat(repository.language()).isEqualTo(language.getKey());
         assertThat(repository.rules()).hasSize(4);
-
-
     }
 }

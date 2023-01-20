@@ -1,0 +1,16 @@
+{
+    "errors": [],
+    "mobsfscan_version": "0.1.2",
+    "results": {
+        "ios_detect_jailbreak_check": {
+            "metadata": {
+                "cwe": "CWE-919: Weaknesses in Mobile Applications",
+                "description": "This app does not perform SFAntiPiracy Jailbreak checks.",
+                "masvs": "MSTG-RESILIENCE-1",
+                "owasp-mobile": "M8: Code Tampering",
+                "reference": "https://github.com/MobSF/owasp-mstg/blob/master/Document/0x06j-Testing-Resiliency-Against-Reverse-Engineering.md#jailbreak-detection-mstg-resilience-1",
+                "severity": "INFO"
+            }
+        }
+    }
+}
