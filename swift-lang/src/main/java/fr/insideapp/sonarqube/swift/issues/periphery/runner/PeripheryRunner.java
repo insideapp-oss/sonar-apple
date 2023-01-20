@@ -32,11 +32,18 @@ import java.util.Optional;
 public final class PeripheryRunner extends SingleCommandLineToolRunner implements PeripheryRunnable {
 
     private final Configuration configuration;
+    private final ApplePluginExtensionProvider applePluginExtensionProvider;
+    private final PeripheryExtensionProvider peripheryExtensionProvider;
+
     public PeripheryRunner(
-            final Configuration configuration
+            final Configuration configuration,
+            final ApplePluginExtensionProvider applePluginExtensionProvider,
+            final PeripheryExtensionProvider peripheryExtensionProvider
     ) {
         super("periphery");
         this.configuration = configuration;
+        this.applePluginExtensionProvider = applePluginExtensionProvider;
+        this.peripheryExtensionProvider = peripheryExtensionProvider;
     }
 
     @Override
@@ -55,8 +62,8 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
 
     private List<String> xcode() {
         List<String> options = new ArrayList<>();
-        Optional<String> workspace = ApplePluginExtensionProvider.workspace(configuration);
-        Optional<String> project = ApplePluginExtensionProvider.project(configuration);
+        Optional<String> workspace = applePluginExtensionProvider.workspace(configuration);
+        Optional<String> project = applePluginExtensionProvider.project(configuration);
         if (workspace.isPresent()) {
             options.addAll(Arrays.asList("--workspace", workspace.get()));
         } else project.ifPresent(s -> options.addAll(Arrays.asList("--project", s)));
@@ -65,7 +72,7 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
 
     private List<String> schemes() {
         List<String> options = new ArrayList<>();
-        List<String> schemes = PeripheryExtensionProvider.schemes(configuration);
+        List<String> schemes = peripheryExtensionProvider.schemes(configuration);
         if (!schemes.isEmpty()) {
             options.add("--schemes");
             options.addAll(schemes);
@@ -75,7 +82,7 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
 
     private List<String> targets() {
         List<String> options = new ArrayList<>();
-        List<String> targets = PeripheryExtensionProvider.targets(configuration);
+        List<String> targets = peripheryExtensionProvider.targets(configuration);
         if (!targets.isEmpty()) {
             options.add("--targets");
             options.addAll(targets);
@@ -85,7 +92,7 @@ public final class PeripheryRunner extends SingleCommandLineToolRunner implement
 
     private List<String> indexStorePath() {
         List<String> options = new ArrayList<>();
-        Optional<String> indexStorePath = PeripheryExtensionProvider.indexStorePath(configuration);
+        Optional<String> indexStorePath = peripheryExtensionProvider.indexStorePath(configuration);
         indexStorePath.ifPresent(s -> options.addAll(Arrays.asList("--index-store-path", s)));
         return options;
     }

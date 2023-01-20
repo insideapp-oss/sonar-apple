@@ -20,12 +20,14 @@ package fr.insideapp.sonarqube.swift.issues.swiftlint;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class SwiftLintExtensionProviderTest {
 
-    private ExtensionProvider provider;
+    private SwiftLintExtensionProvider provider;
 
     @Before
     public void prepare() {

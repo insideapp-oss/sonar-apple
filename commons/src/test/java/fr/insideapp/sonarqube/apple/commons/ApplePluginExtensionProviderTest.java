@@ -19,21 +19,23 @@ package fr.insideapp.sonarqube.apple.commons;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.config.Configuration;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class ApplePluginExtensionProviderTest {
 
-    private MapSettings settings;
-    private ExtensionProvider provider;
+    private Configuration configuration;
+    private ApplePluginExtensionProvider provider;
 
     @Before
     public void prepare() {
+        configuration = mock(Configuration.class);
         provider = new ApplePluginExtensionProvider();
-        settings = new MapSettings();
     }
 
     @Test
@@ -43,32 +45,44 @@ public final class ApplePluginExtensionProviderTest {
 
     @Test
     public void workspace_default() {
-        Optional<String> workspace = ApplePluginExtensionProvider.workspace(settings.asConfig());
+        // prepare
+        when(configuration.get("sonar.apple.workspace")).thenReturn(Optional.empty());
+        // test
+        Optional<String> workspace = provider.workspace(configuration);
+        // assert
         assertThat(workspace).isNotPresent();
     }
 
     @Test
     public void workspace_specified() {
-        String expectedCustomWorkspace = "MyProject.xcworkspace";
-        settings.setProperty("sonar.apple.workspace", expectedCustomWorkspace);
-        Optional<String> workspace = ApplePluginExtensionProvider.workspace(settings.asConfig());
+        // prepare
+        when(configuration.get("sonar.apple.workspace")).thenReturn(Optional.of("MyProject.xcworkspace"));
+        // test
+        Optional<String> workspace = provider.workspace(configuration);
+        // assert
         assertThat(workspace).isPresent();
-        assertThat(workspace).contains(expectedCustomWorkspace);
+        assertThat(workspace).contains("MyProject.xcworkspace");
     }
 
     @Test
     public void project_default() {
-        Optional<String> project = ApplePluginExtensionProvider.project(settings.asConfig());
+        // prepare
+        when(configuration.get("sonar.apple.project")).thenReturn(Optional.empty());
+        // test
+        Optional<String> project = provider.project(configuration);
+        // assert
         assertThat(project).isNotPresent();
     }
 
     @Test
     public void project_specified() {
-        String expectedCustomProject = "MyProject.xcodeproj";
-        settings.setProperty("sonar.apple.project", expectedCustomProject);
-        Optional<String> project = ApplePluginExtensionProvider.project(settings.asConfig());
+        // prepare
+        when(configuration.get("sonar.apple.project")).thenReturn(Optional.of("MyProject.xcodeproj"));
+        // test
+        Optional<String> project = provider.project(configuration);
+        // assert
         assertThat(project).isPresent();
-        assertThat(project).contains(expectedCustomProject);
+        assertThat(project).contains("MyProject.xcodeproj");
     }
 
 }

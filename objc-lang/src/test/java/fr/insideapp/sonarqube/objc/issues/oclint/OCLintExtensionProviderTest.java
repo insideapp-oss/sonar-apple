@@ -20,19 +20,24 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class OCLintExtensionProviderTest {
 
-    private MapSettings settings;
-    private ExtensionProvider provider;
+    private Configuration configuration;
+    private OCLintExtensionProvider provider;
 
     @Before
     public void prepare() {
+        configuration = mock(Configuration.class);
         provider = new OCLintExtensionProvider();
-        settings = new MapSettings();
     }
 
     @Test
@@ -42,16 +47,22 @@ public final class OCLintExtensionProviderTest {
 
     @Test
     public void jsonCompilationDatabasePath_default() {
-        String jsonCompilationDatabasePath = OCLintExtensionProvider.jsonCompilationDatabasePath(settings.asConfig());
+        // prepare
+        when(configuration.get("sonar.apple.jsonCompilationDatabasePath")).thenReturn(Optional.empty());
+        // test
+        String jsonCompilationDatabasePath = provider.jsonCompilationDatabasePath(configuration);
+        // assert
         assertThat(jsonCompilationDatabasePath).isEqualTo("build/json_compilation_database");
     }
 
     @Test
     public void jsonCompilationDatabasePath_specified() {
-        String expectedCustomPath = "this/is/a/path";
-        settings.setProperty("sonar.apple.jsonCompilationDatabasePath", expectedCustomPath);
-        String jsonCompilationDatabasePath = OCLintExtensionProvider.jsonCompilationDatabasePath(settings.asConfig());
-        assertThat(jsonCompilationDatabasePath).isEqualTo(expectedCustomPath);
+        // prepare
+        when(configuration.get("sonar.apple.jsonCompilationDatabasePath")).thenReturn(Optional.of("this/is/a/path"));
+        // test
+        String jsonCompilationDatabasePath = provider.jsonCompilationDatabasePath(configuration);
+        // assert
+        assertThat(jsonCompilationDatabasePath).contains("this/is/a/path");
     }
 
 }

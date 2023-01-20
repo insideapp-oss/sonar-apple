@@ -41,6 +41,7 @@ public final class OCLintSensor implements Sensor {
     private static final Logger LOGGER = Loggers.get(OCLintSensor.class);
 
     private static final String COMPILE_COMMANDS_PATH = "build/compile_commands.json";
+    private final OCLintExtensionProvider ocLintExtensionProvider;
     private final Configuration configuration;
     private final FileSystem fileSystem;
     private final OCLintJSONDatabaseBuildable builder;
@@ -49,6 +50,7 @@ public final class OCLintSensor implements Sensor {
 
     private final OCLintReportParsable parser;
     public OCLintSensor(
+            final OCLintExtensionProvider ocLintExtensionProvider,
             final Configuration configuration,
             final FileSystem fileSystem,
             final OCLintJSONDatabaseBuildable builder,
@@ -56,6 +58,7 @@ public final class OCLintSensor implements Sensor {
             final OCLintReportParsable parser,
             final ReportIssueRecorder issueRecorder
     ) {
+        this.ocLintExtensionProvider = ocLintExtensionProvider;
         this.configuration = configuration;
         this.fileSystem = fileSystem;
         this.builder = builder;
@@ -134,7 +137,7 @@ public final class OCLintSensor implements Sensor {
     }
 
     private File jsonCompilationDatabase() {
-        return new File(fileSystem.baseDir(), OCLintExtensionProvider.jsonCompilationDatabasePath(configuration));
+        return new File(fileSystem.baseDir(), ocLintExtensionProvider.jsonCompilationDatabasePath(configuration));
     }
 
     private File jsonCompilationCommands() {

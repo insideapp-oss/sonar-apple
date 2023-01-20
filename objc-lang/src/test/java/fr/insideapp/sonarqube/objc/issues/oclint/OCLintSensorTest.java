@@ -51,6 +51,7 @@ public class OCLintSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private SensorContextTester context;
+    private OCLintExtensionProvider provider;
     private Configuration configuration;
     private OCLintJSONDatabaseBuildable builder;
     private OCLintExtractable extractor;
@@ -60,12 +61,14 @@ public class OCLintSensorTest {
 
     @Before
     public void prepare() {
+        provider = mock(OCLintExtensionProvider.class);
         configuration = mock(Configuration.class);
         builder = mock(OCLintJSONDatabaseBuildable.class);
         extractor = mock(OCLintExtractable.class);
         parser = mock(OCLintReportParsable.class);
         context = SensorContextTester.create(baseDir);
         sensor = new OCLintSensor(
+                provider,
                 configuration,
                 context.fileSystem(),
                 builder,
@@ -90,7 +93,7 @@ public class OCLintSensorTest {
     @Test
     public void jsonCompilationDatabaseFolder_does_not_exist() throws Exception {
         // prepare
-        when(configuration.get(anyString())).thenReturn(Optional.of("nonExistingPath"));
+        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("nonExistingPath");
         // test
         sensor.execute(context);
         // assert
@@ -103,7 +106,7 @@ public class OCLintSensorTest {
     @Test
     public void jsonCompilationDatabaseFolder_not_a_directory() throws Exception {
         // prepare
-        when(configuration.get(anyString())).thenReturn(Optional.of("notAFolder"));
+        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("notAFolder");
         // test
         sensor.execute(context);
         // assert
@@ -116,7 +119,7 @@ public class OCLintSensorTest {
     @Test
     public void extractReport_throw() throws Exception {
         // prepare
-        when(configuration.get(anyString())).thenReturn(Optional.of(""));
+        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
         when(builder.build(any())).thenReturn("");
         when(extractor.extract(any())).thenThrow(ExceptionHelper.build());
         // test
@@ -129,7 +132,7 @@ public class OCLintSensorTest {
     @Test
     public void parseReport_noIssue() throws Exception {
         // prepare
-        when(configuration.get(anyString())).thenReturn(Optional.of(""));
+        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
         when(builder.build(any())).thenReturn("");
         when(extractor.extract(any())).thenReturn(new OCLintReport());
         when(parser.collect(any())).thenReturn(new ArrayList<>());
@@ -156,7 +159,7 @@ public class OCLintSensorTest {
                 5
         );
         context.fileSystem().add(testFile);
-        when(configuration.get(anyString())).thenReturn(Optional.of(""));
+        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
         when(builder.build(any())).thenReturn("");
         when(extractor.extract(any())).thenReturn(new OCLintReport());
         when(parser.collect(any())).thenReturn(Arrays.asList(issue));
