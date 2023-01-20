@@ -51,6 +51,7 @@ public class OCLintSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private SensorContextTester context;
+    private ObjectiveC objectiveC;
     private OCLintExtensionProvider provider;
     private Configuration configuration;
     private OCLintJSONDatabaseBuildable builder;
@@ -67,7 +68,9 @@ public class OCLintSensorTest {
         extractor = mock(OCLintExtractable.class);
         parser = mock(OCLintReportParsable.class);
         context = SensorContextTester.create(baseDir);
+        objectiveC = new ObjectiveC();
         sensor = new OCLintSensor(
+                objectiveC,
                 provider,
                 configuration,
                 context.fileSystem(),
@@ -86,8 +89,7 @@ public class OCLintSensorTest {
         sensor.describe(defaultSensorDescriptor);
         // assert
         assertThat(defaultSensorDescriptor.name()).isEqualTo("OCLint Sensor");
-        assertThat(defaultSensorDescriptor.languages()).hasSize(1);
-        assertThat(defaultSensorDescriptor.languages()).element(0).isEqualTo(ObjectiveC.KEY);
+        assertThat(defaultSensorDescriptor.languages()).hasSize(1).containsOnly(objectiveC.getKey());
     }
 
     @Test
@@ -147,7 +149,7 @@ public class OCLintSensorTest {
         // prepare
         DefaultInputFile testFile = new TestInputFileBuilder("", "Greeting.m")
                 .setModuleBaseDir(Paths.get(BASE_DIR))
-                .setLanguage(ObjectiveC.KEY)
+                .setLanguage(objectiveC.getKey())
                 .setLines(10)
                 .setOriginalLineEndOffsets(new int[10])
                 .setOriginalLineStartOffsets(new int[10])

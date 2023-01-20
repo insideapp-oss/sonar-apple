@@ -29,10 +29,18 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 
 public class ObjectiveCSensor implements Sensor {
 
+    private final ObjectiveC objectiveC;
+
+    public ObjectiveCSensor(
+            final ObjectiveC objectiveC
+    ) {
+        this.objectiveC = objectiveC;
+    }
+
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
         sensorDescriptor
-                .onlyOnLanguage(ObjectiveC.KEY)
+                .onlyOnLanguage(objectiveC.getKey())
                 .name("Objective-C Sensor")
                 .onlyOnFileType(InputFile.Type.MAIN);
     }
@@ -41,10 +49,10 @@ public class ObjectiveCSensor implements Sensor {
     public void execute(SensorContext sensorContext) {
         final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
         // Analyse source files
-        new ParseTreeAnalyzer(ObjectiveC.KEY, InputFile.Type.MAIN, antlrContext, sensorContext)
+        new ParseTreeAnalyzer(objectiveC.getKey(), InputFile.Type.MAIN, antlrContext, sensorContext)
                 .analyze(new ObjectiveCSourceLinesVisitor(), new ObjectiveCHighlighterVisitor(), new ObjectiveCCyclomaticComplexityVisitor());
         // Analyse test files (highlighter only)
-        new ParseTreeAnalyzer(ObjectiveC.KEY, InputFile.Type.TEST, antlrContext, sensorContext)
+        new ParseTreeAnalyzer(objectiveC.getKey(), InputFile.Type.TEST, antlrContext, sensorContext)
                 .analyze(new ObjectiveCHighlighterVisitor());
     }
 }

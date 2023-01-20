@@ -38,17 +38,21 @@ import java.util.stream.Collectors;
 
 public class MobSFScanSensor implements Sensor {
 
+    public final ObjectiveC objectiveC;
+
     private final MobSFScanRunnable runner;
     private final MobSFScanReportParsable parser;
     private final MobSFScanReportIssueMappable mapper;
     private final MobSFScanReportIssueSplittable splitter;
 
     public MobSFScanSensor(
+            final ObjectiveC objectiveC,
             final MobSFScanRunnable runner,
             final MobSFScanReportParsable parser,
             final MobSFScanReportIssueMappable mapper,
             final MobSFScanReportIssueSplittable splitter
     ) {
+        this.objectiveC = objectiveC;
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
@@ -57,9 +61,8 @@ public class MobSFScanSensor implements Sensor {
 
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
-
         sensorDescriptor
-                .onlyOnLanguages(Swift.KEY, ObjectiveC.KEY)
+                .onlyOnLanguages(Swift.KEY, objectiveC.getKey())
                 .name("MobSFScan Sensor")
                 .onlyOnFileType(InputFile.Type.MAIN);
     }

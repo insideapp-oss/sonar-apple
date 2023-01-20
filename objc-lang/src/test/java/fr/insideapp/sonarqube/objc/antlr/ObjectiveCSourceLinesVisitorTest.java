@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ObjectiveCSourceLinesVisitorTest {
 
@@ -51,12 +51,14 @@ public class ObjectiveCSourceLinesVisitorTest {
 
     private static final String BASE_DIR = "src/test/resources/objc/source_lines_visitor";
     private SensorContextTester sensorContext;
+    private ObjectiveC objectiveC;
     private ObjectiveCAntlrContext antlrContext;
     private ObjectiveCSourceLinesVisitor visitor;
 
     @Before
     public void prepare() {
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
+        objectiveC = new ObjectiveC();
         antlrContext = new ObjectiveCAntlrContext();
         visitor = new ObjectiveCSourceLinesVisitor();
     }
@@ -96,7 +98,7 @@ public class ObjectiveCSourceLinesVisitorTest {
         // Mock file for test purpose
         // Setting it up with the real file properties
         InputFile inputFile = new TestInputFileBuilder("", completeFileName)
-                .setLanguage(ObjectiveC.KEY)
+                .setLanguage(objectiveC.getKey())
                 .setModuleBaseDir(Paths.get(BASE_DIR))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
                 .setCharset(Charset.defaultCharset())

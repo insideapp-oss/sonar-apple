@@ -17,16 +17,26 @@
  */
 package fr.insideapp.sonarqube.objc;
 
-import org.sonar.api.resources.AbstractLanguage;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.resources.Language;
 
-public final class ObjectiveC extends AbstractLanguage {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    public ObjectiveC() {
-        super("objc", "Objective-C");
+public final class ObjectiveCTest {
+
+    private Language language;
+
+    @Before
+    public void prepare() {
+        language = new ObjectiveC();
     }
 
-    @Override
-    public String[] getFileSuffixes() {
-        return new String[]{"h", "m", "mm"};
+    @Test
+    public void definition() {
+        assertThat(language.getKey()).isEqualTo("objc");
+        assertThat(language.getName()).isEqualTo("Objective-C");
+        assertThat(language.getFileSuffixes()).containsOnly("h", "m", "mm");
     }
+
 }

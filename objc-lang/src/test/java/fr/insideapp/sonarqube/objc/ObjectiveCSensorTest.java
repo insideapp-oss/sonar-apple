@@ -15,10 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.tests;
+package fr.insideapp.sonarqube.objc;
 
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
+import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
@@ -27,19 +30,34 @@ import java.io.File;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class ObjectiveCSensorTest {
+public final class ObjectiveCSensorTest {
+
+    private ObjectiveCSensor sensor;
+    private ObjectiveC objectiveC;
+
+    @Before
+    public void prepare() {
+        objectiveC = new ObjectiveC();
+        sensor = new ObjectiveCSensor(objectiveC);
+    }
+
     @Test
     public void describe() {
-        ObjectiveCSensor sensor = new ObjectiveCSensor();
+        // prepare
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        // test
         sensor.describe(descriptor);
+        // assert
         assertThat(descriptor.name()).isEqualTo("Objective-C Sensor");
+        assertThat(descriptor.languages()).hasSize(1).containsOnly(objectiveC.getKey());
+        assertThat(descriptor.type()).isNotNull().isEqualTo(InputFile.Type.MAIN);
     }
 
     @Test
     public void execute() {
+        // prepare
         SensorContextTester context = SensorContextTester.create(new File("."));
-        ObjectiveCSensor sensor = new ObjectiveCSensor();
+        // test
         assertThatCode(() -> {
             sensor.execute(context);
         }).doesNotThrowAnyException();
