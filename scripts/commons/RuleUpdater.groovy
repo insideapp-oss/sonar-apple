@@ -17,9 +17,6 @@
  */
 package commons
 
-import groovy.json.JsonSlurper
-import groovy.json.JsonBuilder
-
 /**
  * Rule updater: performs new rules retrieval, checks and update.
  */
@@ -42,21 +39,27 @@ class RuleUpdater {
      * Read rules from file.
      * @return List of rules
      */
-    private def readRules() {
-        def jsonSlurper = new JsonSlurper()
-        return jsonSlurper.parseText(file.getText('UTF-8'))
+    def private Set<Rule> readRules() {
+        def jsonSlurper = new groovy.json.JsonSlurper()
+        return jsonSlurper.parseText(file.getText('UTF-8')) as Set<Rule>
     }
 
     /**
      * Write rules to the rule file.
      * @param rules List of rules
      */
-    private def writeRules(rules) {
-
-        def builder = new JsonBuilder()
-        builder(rules)
-        file.text = builder.toPrettyString()
-
+    def private writeRules(ArrayList<Rule> rules) {
+        def generator = new groovy.json.JsonGenerator.Options().excludeNulls().build()
+        def json = new groovy.json.JsonBuilder(generator)
+        json(rules) { rule ->
+            key rule.key
+            name rule.name
+            severity rule.severity
+            description rule.description
+            type rule.type
+            debt rule.debt
+        }
+        file.text = groovy.json.JsonOutput.prettyPrint(json.toString())
     }
 
     /**
@@ -65,14 +68,12 @@ class RuleUpdater {
      * @param newRules List of new rules
      * @return List of merged rules
      */
-    private def mergeRules(existingRules, newRules) {
+    def private ArrayList<Rule> mergeRules(ArrayList<Rule> existingRules, ArrayList<Rule> newRules) {
 
-        def result = []
+        def allRules = [] as ArrayList<Rule>
 
         // Add existing rules
-        existingRules.each { r ->
-            result.add(r)
-        }
+        allRules.addAll(existingRules)
 
         // Add new rules, if they don't exist yet
         use(ConsoleString) {
@@ -80,12 +81,12 @@ class RuleUpdater {
                 def exists = existingRules.find { er -> er.key == r.key }
                 if (!exists) {
                     println "Adding new rule ${r.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
-                    result.add(r)
+                    allRules.add(r)
                 }
             }
         }
 
-        return result
+        return allRules
     }
 
     /**
@@ -93,9 +94,9 @@ class RuleUpdater {
      * @param rules List of rules to check
      * @return List of rules (with all data completed)
      */
-    def private requestManualInfo(rules) {
+    def private requestManualInfo(ArrayList<Rule> rules) {
 
-        def result = []
+        def rulesCompleted = [] as ArrayList<Rule>
 
         use(ConsoleString) {
             rules.each { r ->
@@ -106,30 +107,34 @@ class RuleUpdater {
                     println "${r.description}".style(ConsoleString.Color.DEFAULT)
                     println ""
                     if (r.name == null) {
-                        r.name = new Prompt("Name ?").promptText()
+                        r.name = new Prompt("Name?", null).promptText()
                         println r.name.style(ConsoleString.Color.DEFAULT_BOLD)
                     }
                     if (r.severity == null) {
-                        r.severity = new Prompt("Severity ?", "BLOCKER", "CRITICAL", "MAJOR", "MINOR", "INFO").promptChoice()
-                        println r.severity.style(ConsoleString.Color.DEFAULT_BOLD)
+                        List<String> severities = Arrays.asList(Rule.Severity.values().each{ s -> s.name() });
+                        def choice = new Prompt("Severity?", severities).promptChoice() as String
+                        r.severity = Enum.valueOf(Rule.Severity.class, choice);
+                        println r.severity.name().style(ConsoleString.Color.DEFAULT_BOLD)
                     }
                     if (r.type == null) {
-                        r.type = new Prompt("Type ?", "CODE_SMELL", "BUG", "VULNERABILITY", "SECURITY_HOTSPOT").promptChoice()
-                        println r.type.style(ConsoleString.Color.DEFAULT_BOLD)
+                        List<String> types = Arrays.asList(Rule.Type.values().each{ s -> s.name() });
+                        def choice = new Prompt("Type?", types).promptChoice() as String
+                        r.type = Enum.valueOf(Rule.Type.class, choice);
+                        println r.Type.name().style(ConsoleString.Color.DEFAULT_BOLD)
                     }
                     if (r.debt == null) {
-                        def offset = new Prompt("Remediation time ?").promptDuration()
+                        def offset = new Prompt("Remediation time?", null).promptDuration()
                         println offset.style(ConsoleString.Color.DEFAULT_BOLD)
-                        r.debt = [offset: offset, function: "CONSTANT_ISSUE"]
+                        r.debt = offset
                     }
 
                 }
 
-                result.add(r)
+                rulesCompleted.add(r)
             }
         }
 
-        return result
+        return rulesCompleted
     }
 
     /**
@@ -137,12 +142,19 @@ class RuleUpdater {
      */
     def update() {
 
-        def existingRules = readRules()
-        def newRules = fetchClosure.call()
-        def mergedRules = mergeRules(existingRules, newRules)
+        def existingRules = readRules() as ArrayList<Rule>
+        println "Read ${existingRules.size()} existing rule(s) from file"
+
+        println "Processing rules from tool"
+        def rules = fetchClosure.call() as ArrayList<Rule>
+        println "Read ${rules.size()} rule(s) from tool"
+
+        def allRules = mergeRules(existingRules, rules) as ArrayList<Rule>
+        println "${allRules.size()} rule(s) merged"
 
         // Fill missing info
-        def completedRules = requestManualInfo(mergedRules)
+        def completedRules = requestManualInfo(allRules) as ArrayList<Rule>
+        println "${completedRules.size()} rule(s) about to be saved"
 
         writeRules(completedRules)
     }

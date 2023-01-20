@@ -43,8 +43,8 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
         try {
             List<RepositoryRule> rules = repositoryRuleParser.parse(SwiftLintRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule1 = profile.activateRule("SwiftLint",r.getKey());
-                rule1.overrideSeverity(r.getSeverity());
+                NewBuiltInActiveRule rule1 = profile.activateRule("SwiftLint", r.key);
+                rule1.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load SwiftLint rules", e);
@@ -55,8 +55,8 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
             MobSFScanRulesDefinition rulesDefinition = new MobSFScanSwiftRulesDefinition();
             List<RepositoryRule> rules = repositoryRuleParser.parse(rulesDefinition.rulesPath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.getKey());
-                rule.overrideSeverity(r.getSeverity());
+                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.key);
+                rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load MobSFScan rules (for Swift)", e);
@@ -66,8 +66,8 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
         try {
             List<RepositoryRule> rules = repositoryRuleParser.parse(PeripheryRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule("Periphery", r.getKey());
-                rule.overrideSeverity(r.getSeverity());
+                NewBuiltInActiveRule rule = profile.activateRule("Periphery", r.key);
+                rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load Periphery rules", e);

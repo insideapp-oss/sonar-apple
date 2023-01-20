@@ -17,45 +17,41 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public final class RepositoryRule {
 
-    private final String key;
-    private final String name;
-    private final String severity;
-    private final String description;
-    private final String type;
-    private final RepositoryRuleDebt debt;
-
-    public RepositoryRule(final String key, final String name, final String severity, final String description, final String type, final RepositoryRuleDebt debt) {
-        this.key = key;
-        this.name = name;
-        this.severity = severity;
-        this.description = description;
-        this.type = type;
-        this.debt = debt;
+    public enum Severity {
+        BLOCKER,
+        CRITICAL,
+        MAJOR,
+        MINOR,
+        INFO
     }
 
-    public String getKey() {
-        return key;
+    public enum Type {
+        CODE_SMELL,
+        BUG,
+        VULNERABILITY,
+        SECURITY_HOTSPOT
     }
 
-    public String getName() {
-        return name;
-    }
+    @JsonProperty("key")
+    public String key;
 
-    public String getSeverity() {
-        return severity;
-    }
+    @JsonProperty("name")
+    public String name;
 
-    public String getDescription() {
-        return description;
-    }
+    @JsonProperty("severity")
+    public Severity severity;
 
-    public String getType() {
-        return type;
-    }
+    @JsonProperty("description")
+    public String description;
 
-    public RepositoryRuleDebt getDebt() {
-        return debt;
-    }
+    @JsonProperty("type")
+    public Type type;
+
+    @JsonProperty("debt")
+    public String debt;
+
 }

@@ -44,8 +44,8 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
         try {
             List<RepositoryRule> rules = repositoryRuleParser.parse(OCLintRulesDefinition.RULES_PATH);
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule1 = profile.activateRule("OCLint",r.getKey());
-                rule1.overrideSeverity(r.getSeverity());
+                NewBuiltInActiveRule rule1 = profile.activateRule("OCLint", r.key);
+                rule1.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load OCLint rules", e);
@@ -56,8 +56,8 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
             MobSFScanRulesDefinition rulesDefinition = new MobSFScanObjectiveCRulesDefinition();
             List<RepositoryRule> rules = repositoryRuleParser.parse(rulesDefinition.rulesPath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.getKey());
-                rule.overrideSeverity(r.getSeverity());
+                NewBuiltInActiveRule rule = profile.activateRule(rulesDefinition.repository(), r.key);
+                rule.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {
             LOGGER.error("Failed to load MobSFScan rules (for Swift)", e);

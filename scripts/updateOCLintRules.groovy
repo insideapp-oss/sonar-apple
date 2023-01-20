@@ -17,6 +17,7 @@
  */
 import commons.ConsoleString
 import commons.RuleUpdater
+import commons.Rule
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 import groovyx.net.http.HTTPBuilder
@@ -36,54 +37,60 @@ def splitCamelCase(value) {
 }
 
 
-def parseCategory(url, name) {
+private def ArrayList<Rule> parseCategory(url, name) {
 
-    def result = []
+    def rules = [] as ArrayList<Rule>
 
     def http = new HTTPBuilder(url)
     def html = http.get([:])
 
     def root = html."**".find { it.@id.toString().contains(name) }
-    root."**".findAll { it.@class.toString() == 'section' }.each { rule ->
-
-        def entry = [:]
+    root."**".findAll { it.@class.toString() == 'section' }.each { rawRule ->
 
         // Name
-        entry.name = splitCamelCase(rule.H2.text() - '¶').capitalize()
+        def ruleName = splitCamelCase(rawRule.H2.text() - '¶').capitalize()
 
-        if (entry.name != '') {
+        if (ruleName != '') {
             // Key
-            entry.key = entry.name.replaceAll(' ', '-').toLowerCase()
+            def ruleKey = ruleName.replaceAll(' ', '-').toLowerCase()
 
-            println "Processing rule ${entry.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
+            println "Processing rule ${ruleKey.style(ConsoleString.Color.DEFAULT_BOLD)}"
 
             // Summary
-            entry.description = rule.P[2].text()
+            def ruleDescription = rawRule.P[2].text()
 
-            result.add entry
+            def rule = new Rule(
+                    ruleKey,
+                    ruleDescription,
+                    null, // no severity
+                    null, // not type
+                    ruleName,
+                    null // no debt
+            )
+            rules.add rule
         }
     }
 
-    return result
+    return rules
 }
 
 def updater = new RuleUpdater('objc-lang/src/main/resources/oclint-rules.json', {
 
-    def result = []
+    def rules = [] as ArrayList<Rule>
 
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/basic.html", "basic")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/cocoa.html", "cocoa")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/convention.html", "convention")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/cuda.html", "cuda")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/design.html", "design")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/empty.html", "empty")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/migration.html", "migration")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/naming.html", "naming")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/redundant.html", "redundant")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/size.html", "size")
-    result.addAll parseCategory("http://docs.oclint.org/en/stable/rules/unused.html", "unused")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/basic.html", "basic")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/cocoa.html", "cocoa")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/convention.html", "convention")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/cuda.html", "cuda")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/design.html", "design")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/empty.html", "empty")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/migration.html", "migration")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/naming.html", "naming")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/redundant.html", "redundant")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/size.html", "size")
+    rules.addAll parseCategory("http://docs.oclint.org/en/stable/rules/unused.html", "unused")
 
-    return result
+    return rules
 })
 
 updater.update()

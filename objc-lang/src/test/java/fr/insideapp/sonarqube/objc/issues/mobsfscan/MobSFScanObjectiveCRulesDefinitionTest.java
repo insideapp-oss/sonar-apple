@@ -35,7 +35,7 @@ public class MobSFScanObjectiveCRulesDefinitionTest {
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("MobSFScanObjc");
         assertThat(repository.language()).isEqualTo("objc");
-        assertThat(repository.rules()).isNotEmpty();
+        assertThat(repository.rules()).hasSize(15);
 
     }
 

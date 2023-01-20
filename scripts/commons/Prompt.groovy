@@ -22,10 +22,10 @@ package commons
  */
 class Prompt {
 
-    private question
-    private choices
+    private String question
+    private List<String> choices
 
-    Prompt(question, String... choices) {
+    Prompt(String question, List<String> choices) {
         this.question = question
         this.choices = choices
     }
@@ -39,7 +39,7 @@ class Prompt {
             def display = "${question} ("
             this.choices.eachWithIndex { c, i ->
                 display += "${i + 1} = ${c}"
-                if (i < choices.length - 1) {
+                if (i < choices.size() - 1) {
                     display += ", "
                 }
             }
@@ -50,7 +50,7 @@ class Prompt {
             def error = false
             try {
                 def intAnswer = Integer.parseInt(answer)
-                if (intAnswer < 1 || intAnswer > choices.length) {
+                if (intAnswer < 1 || intAnswer > choices.size()) {
                     error = true
                 } else {
                     return choices[intAnswer - 1]

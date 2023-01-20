@@ -1,167 +1,122 @@
 [
     {
         "key": "ios_hardcoded_secret",
-        "description": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Hardcoded Secret",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_load_html_string",
-        "description": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Unsafe WebView method",
-        "debt": {
-            "offset": "30min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
+        "type": "VULNERABILITY",
+        "debt": "30min"
     },
     {
         "key": "ios_banned_api",
-        "description": "The App may contain banned API(s). These API(s) are insecure and must not be used.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Banned API",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "The App may contain banned API(s). These API(s) are insecure and must not be used.",
+        "type": "VULNERABILITY",
+        "debt": "10min"
     },
     {
         "key": "ios_self_signed_ssl",
-        "description": "App allows self signed or invalid SSL certificates. App is vulnerable to MITM attacks.",
-        "severity": "CRITICAL",
         "name": "Self Signed SSL",
+        "severity": "CRITICAL",
+        "description": "App allows self signed or invalid SSL certificates. App is vulnerable to MITM attacks.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_webview_ignore_ssl",
-        "description": "UIWebView in App ignore SSL errors and accept any SSL Certificate. App is vulnerable to MITM attacks.",
-        "severity": "CRITICAL",
         "name": "WebView ignore SSL",
+        "severity": "CRITICAL",
+        "description": "UIWebView in App ignore SSL errors and accept any SSL Certificate. App is vulnerable to MITM attacks.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_app_logging",
-        "description": "The App logs information. Sensitive information should never be logged.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Logging method detected",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "The App logs information. Sensitive information should never be logged.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_file_perm",
-        "description": "The file has no special protections associated with it.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "No file encryption",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "The file has no special protections associated with it.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_weak_hash",
-        "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Weak Hash algorithm used",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
+        "type": "VULNERABILITY",
+        "debt": "60min"
     },
     {
         "key": "ios_sha1_collision",
-        "description": "SHA1 is a weak hash known to have hash collisions.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "SHA-1 Collision",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "SHA1 is a weak hash known to have hash collisions.",
+        "type": "VULNERABILITY",
+        "debt": "60min"
     },
     {
         "key": "ios_aes_ecb",
-        "description": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
-        "severity": "CRITICAL",
-        "type": "VULNERABILITY",
         "name": "Usage of ECB mode",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "CRITICAL",
+        "description": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
+        "type": "VULNERABILITY",
+        "debt": "60min"
     },
     {
         "key": "ios_biometric_bool",
-        "description": "Biometric authentication should be based on Keychain, not based on bool.",
-        "severity": "MAJOR",
         "name": "Weak biometric implementation",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        },
-        "type": "SECURITY_HOTSPOT"
+        "severity": "MAJOR",
+        "description": "Biometric authentication should be based on Keychain, not based on bool.",
+        "type": "SECURITY_HOTSPOT",
+        "debt": "60min"
     },
     {
         "key": "ios_jailbreak_detect",
-        "description": "This app does not have Jailbreak detection capabilities.",
-        "severity": "INFO",
         "name": "No jailbreak detection",
+        "severity": "INFO",
+        "description": "This app does not have Jailbreak detection capabilities.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_detect_jailbreak_check",
-        "description": "This app does not perform SFAntiPiracy Jailbreak checks.",
-        "severity": "INFO",
         "name": "No SFAntiPiracy detection",
+        "severity": "INFO",
+        "description": "This app does not perform SFAntiPiracy Jailbreak checks.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_piracy_check",
-        "description": "This app does not perform SFAntiPiracy Piracy checks.",
-        "severity": "INFO",
         "name": "No SFAntiPiracy detection",
+        "severity": "INFO",
+        "description": "This app does not perform SFAntiPiracy Piracy checks.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_mach_ports",
-        "description": "This app does not have anti-debugger code using Mach Exception Ports.",
-        "severity": "INFO",
         "name": "No anti-debugger protection",
+        "severity": "INFO",
+        "description": "This app does not have anti-debugger code using Mach Exception Ports.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     }
 ]

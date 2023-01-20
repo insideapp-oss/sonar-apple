@@ -5,10 +5,7 @@
         "severity": "MAJOR",
         "description": "SHA1 is a weak hash known to have hash collisions.",
         "type": "VULNERABILITY",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "60min"
     },
     {
         "key": "ios_cert_pinning",
@@ -16,185 +13,134 @@
         "severity": "INFO",
         "description": "This app does not have Certificate Pinning implemented in code.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_hardcoded_secret",
-        "description": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Hardcoded Secret",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_load_html_string",
-        "description": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Unsafe WebView method",
-        "debt": {
-            "offset": "30min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
+        "type": "VULNERABILITY",
+        "debt": "30min"
     },
     {
         "key": "ios_log",
-        "description": "The App logs information. Sensitive information should never be logged.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Logging method detected",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "The App logs information. Sensitive information should never be logged.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_weak_hash",
-        "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Weak Hash algorithm used",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "Weak Hash algorithm used. The hash algorithm is known to have hash collisions.",
+        "type": "VULNERABILITY",
+        "debt": "60min"
     },
     {
         "key": "ios_biometric_bool",
-        "description": "Biometric authentication should be based on Keychain, not based on bool.",
-        "severity": "MAJOR",
-        "type": "SECURITY_HOTSPOT",
         "name": "Weak biometric implementation",
-        "debt": {
-            "offset": "60min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "Biometric authentication should be based on Keychain, not based on bool.",
+        "type": "SECURITY_HOTSPOT",
+        "debt": "60min"
     },
     {
         "key": "ios_file_no_special",
-        "description": "The file has no special protections associated with it.",
-        "severity": "CRITICAL",
-        "type": "VULNERABILITY",
         "name": "No file encryption",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "CRITICAL",
+        "description": "The file has no special protections associated with it.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_general_paste",
-        "description": "Usage of generalPasteboard should be avoided. A malicious app can monitor the pasteboard in the background in iOS versions below 9.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Usage of general pasteboard",
-        "debt": {
-            "offset": "10min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "Usage of generalPasteboard should be avoided. A malicious app can monitor the pasteboard in the background in iOS versions below 9.",
+        "type": "VULNERABILITY",
+        "debt": "10min"
     },
     {
         "key": "ios_tls3_not_used",
-        "description": "The app uses TLS 1.0 or TLS 1.1. TLS 1.3 should be used instead.",
-        "severity": "CRITICAL",
-        "type": "VULNERABILITY",
         "name": "Deprecated TLS version",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "CRITICAL",
+        "description": "The app uses TLS 1.0 or TLS 1.1. TLS 1.3 should be used instead.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_tls12_used",
-        "description": "This app uses TLS 1.2. TLS 1.3 should be used instead.",
-        "severity": "MAJOR",
         "name": "Deprecated TLS version",
+        "severity": "MAJOR",
+        "description": "This app uses TLS 1.2. TLS 1.3 should be used instead.",
         "type": "VULNERABILITY",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_dtls1_used",
-        "description": "DTLS 1.2 should be used. Detected old version - DTLS 1.0.",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Deprecated DTLS version",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "DTLS 1.2 should be used. Detected old version - DTLS 1.0.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_depr_tls_min",
-        "description": "Use of deprecated property tlsMinimumSupportedProtocol. To avoid potential security risks, use tlsMinimumSupportedProtocolVersion",
-        "severity": "MAJOR",
-        "type": "VULNERABILITY",
         "name": "Deprecated TLS API",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "MAJOR",
+        "description": "Use of deprecated property tlsMinimumSupportedProtocol. To avoid potential security risks, use tlsMinimumSupportedProtocolVersion",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_uiwebview",
-        "description": "This app uses UIWebView. For security reasons, It is recommended to use WKWebView instead.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Deprecated WebView",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "This app uses UIWebView. For security reasons, It is recommended to use WKWebView instead.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_jailbreak_detect",
-        "description": "This app does not have Jailbreak detection capabilities.",
-        "severity": "INFO",
         "name": "No jailbreak detection",
+        "severity": "INFO",
+        "description": "This app does not have Jailbreak detection capabilities.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     },
     {
         "key": "ios_custom_keyboard_disabled",
-        "description": "This app does not have custom keyboards disabled.",
-        "severity": "INFO",
         "name": "Custom keyboard enabled",
+        "severity": "INFO",
+        "description": "This app does not have custom keyboards disabled.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "5min"
     },
     {
         "key": "ios_keyboard_cache",
-        "description": "This app does not disable Keyboard cache. It must be disabled for all sensitive data inputs.",
-        "severity": "INFO",
-        "type": "VULNERABILITY",
         "name": "Keyboard cache enabled",
-        "debt": {
-            "offset": "5min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "severity": "INFO",
+        "description": "This app does not disable Keyboard cache. It must be disabled for all sensitive data inputs.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     },
     {
         "key": "ios_detect_reversing",
-        "description": "This app does not have Reverse engineering detection capabilities.",
-        "severity": "INFO",
         "name": "No reverse engineering detection",
+        "severity": "INFO",
+        "description": "This app does not have Reverse engineering detection capabilities.",
         "type": "SECURITY_HOTSPOT",
-        "debt": {
-            "offset": "0min",
-            "function": "CONSTANT_ISSUE"
-        }
+        "debt": "0min"
     }
 ]

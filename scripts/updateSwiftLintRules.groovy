@@ -17,47 +17,57 @@
  */
 import commons.RuleUpdater
 import commons.ConsoleString
+import commons.Rule
 
 String.mixin(ConsoleString)
 
 def updater = new RuleUpdater('swift-lang/src/main/resources/swiftlint-rules.json', {
 
-    def result = []
+    def rulesKey = [] as ArrayList<String>
 
     def processRules = "swiftlint rules".execute()
     // Extract rule identifiers
     processRules.text.eachLine { line ->
 
-        def rule = [:]
-
-
         if (!line.startsWith('+')) {
 
             def matcher = line =~ /\| (\w+)/
 
-            rule.key = matcher[0][1]
+            def key = matcher[0][1]
 
-            if (rule.key != 'identifier') {
-                result.add rule
+            if (key != 'identifier') {
+                rulesKey.add key
             }
         }
 
     }
 
+    def rules = [] as ArrayList<Rule>
+
     // Get details of each rule
-    result.each { rule ->
-        def processRuleDetails = "swiftlint rules ${rule.key}".execute()
+    rulesKey.each { ruleKey ->
+        def processRuleDetails = "swiftlint rules ${ruleKey}".execute()
         def details = processRuleDetails.text.readLines().first()
 
-        println "Processing rule ${rule.key.style(ConsoleString.Color.DEFAULT_BOLD)}"
+        println "Processing rule ${ruleKey.style(ConsoleString.Color.DEFAULT_BOLD)}"
 
         def matcher = details =~ /(.*) \((\w+)\): (.*)/
-        rule.name = matcher[0][1] - ' Rule'
-        rule.description = matcher[0][3]
+        def name = matcher[0][1] - ' Rule'
+        def description = matcher[0][3]
+
+        def rule = new Rule(
+                ruleKey,
+                description,
+                null, // no severity
+                null, // no type
+                name,
+                null // no debt
+        )
+        rules.add rule
 
     }
 
-    return result
+    return rules
 })
 
 updater.update()
