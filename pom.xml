@@ -234,6 +234,10 @@
                     <licenseSets>
                         <licenseSet>
                             <header>com/mycila/maven/plugin/license/templates/LGPL-3.txt</header>
+                            <includes>
+                                <include>**/*.java</include>
+                                <include>**/*.groovy</include>
+                            </includes>
                         </licenseSet>
                     </licenseSets>
                     <properties>
