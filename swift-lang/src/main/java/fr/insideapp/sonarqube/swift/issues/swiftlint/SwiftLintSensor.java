@@ -35,16 +35,20 @@ import java.util.stream.Collectors;
 
 public class SwiftLintSensor implements Sensor {
 
+    private final Swift swift;
+
     private final SwiftLintRunnable runner;
     private final SwiftLintReportParsable parser;
 
     private final SwiftLintReportIssueMappable mapper;
 
     public SwiftLintSensor(
-            SwiftLintRunnable runner,
-            SwiftLintReportParsable parser,
-            SwiftLintReportIssueMappable mapper
+            final Swift swift,
+            final SwiftLintRunnable runner,
+            final SwiftLintReportParsable parser,
+            final SwiftLintReportIssueMappable mapper
     ) {
+        this.swift = swift;
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
@@ -53,7 +57,7 @@ public class SwiftLintSensor implements Sensor {
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
         sensorDescriptor
-                .onlyOnLanguage(Swift.KEY)
+                .onlyOnLanguage(swift.getKey())
                 .name("SwiftLint Sensor")
                 .onlyOnFileType(InputFile.Type.MAIN);
     }

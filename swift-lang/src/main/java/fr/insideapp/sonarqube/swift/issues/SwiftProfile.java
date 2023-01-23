@@ -33,18 +33,22 @@ public class SwiftProfile implements BuiltInQualityProfilesDefinition {
 
     private static final Logger LOGGER = Loggers.get(SwiftProfile.class);
 
+    private final Swift swift;
+
     private final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition;
 
     public SwiftProfile(
+            final Swift swift,
             final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition
     ) {
+        this.swift = swift;
         this.mobSFScanSwiftRulesDefinition = mobSFScanSwiftRulesDefinition;
     }
 
     @Override
     public void define(Context context) {
 
-        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Swift", Swift.KEY);
+        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Swift", swift.getKey());
         RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
 
         // SwiftLint rules

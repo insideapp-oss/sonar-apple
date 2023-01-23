@@ -17,8 +17,11 @@
  */
 package fr.insideapp.sonarqube.swift.tests;
 
+import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.SwiftSensor;
+import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
@@ -27,19 +30,32 @@ import java.io.File;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class SwiftSensorTest {
+public final class SwiftSensorTest {
+
+    private SwiftSensor sensor;
+    private Swift swift;
+
+    @Before
+    public void prepare() {
+        swift = new Swift();
+        sensor = new SwiftSensor(swift);
+    }
+
     @Test
     public void describe() {
-        SwiftSensor sensor = new SwiftSensor();
+        // prepare
         DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+        // test
         sensor.describe(descriptor);
+        // assert
         assertThat(descriptor.name()).isEqualTo("Swift Sensor");
+        assertThat(descriptor.languages()).containsOnly(swift.getKey());
+        assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
     }
 
     @Test
     public void execute() {
         SensorContextTester context = SensorContextTester.create(new File("."));
-        SwiftSensor sensor = new SwiftSensor();
         assertThatCode(() -> {
             sensor.execute(context);
         }).doesNotThrowAnyException();

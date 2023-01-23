@@ -19,18 +19,14 @@ package fr.insideapp.sonarqube.swift;
 
 import org.sonar.api.resources.AbstractLanguage;
 
-public class Swift extends AbstractLanguage {
-
-    public static final String KEY = "swift";
-
-    public static final String[] EXTENSIONS = {"swift"};
+public final class Swift extends AbstractLanguage {
 
     public Swift() {
-        super(KEY, "Swift");
+        super("swift", "Swift");
     }
 
     @Override
     public String[] getFileSuffixes() {
-        return EXTENSIONS;
+        return new String[]{"swift"};
     }
 }

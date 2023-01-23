@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 
 public class PeripherySensor implements Sensor {
 
+    private final Swift swift;
     private final PeripheryRunnable runner;
 
     private final PeripheryReportParsable parser;
@@ -44,10 +45,12 @@ public class PeripherySensor implements Sensor {
     private final PeripheryReportIssueMappable mapper;
 
     public PeripherySensor(
+            final Swift swift,
             final PeripheryRunnable runner,
             final PeripheryReportParsable parser,
             final PeripheryReportIssueMappable mapper
     ) {
+        this.swift = swift;
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
@@ -56,7 +59,7 @@ public class PeripherySensor implements Sensor {
     @Override
     public void describe(SensorDescriptor sensorDescriptor) {
         sensorDescriptor
-                .onlyOnLanguage(Swift.KEY)
+                .onlyOnLanguage(swift.getKey())
                 .name("Periphery Sensor")
                 .onlyOnFileType(InputFile.Type.MAIN);
     }
