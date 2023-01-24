@@ -36,7 +36,7 @@ public final class SwiftLintRunnerTest {
 
     private SwiftLintRunner runner;
     private SonarProjectConfiguration configuration;
-    private Class clazz;
+    private Class<?> clazz;
 
     @Before
     public void prepare() {
@@ -50,7 +50,7 @@ public final class SwiftLintRunnerTest {
         Method options = clazz.getDeclaredMethod("multiOptions");
         options.setAccessible(true);
         when(configuration.sources()).thenReturn(Arrays.asList("source"));
-        List<String[]> optionsBuilt = (List<String[]>) options.invoke(runner);
+        List<?> optionsBuilt = (List<?>)options.invoke(runner);
         assertThat(optionsBuilt).hasSize(1);
         assertThat(optionsBuilt.get(0)).isEqualTo(new String[]{"lint", "--quiet", "--reporter", "json", "source"});
     }

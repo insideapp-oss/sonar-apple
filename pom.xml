@@ -197,6 +197,9 @@
                 <configuration>
                     <source>${jdk.min.version}</source>
                     <target>${jdk.min.version}</target>
+                    <compilerArgs>
+                        <arg>-Xlint</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 

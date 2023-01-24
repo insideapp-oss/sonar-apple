@@ -25,7 +25,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 import java.io.File;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ObjectiveCTestFileFinderTest {
 
