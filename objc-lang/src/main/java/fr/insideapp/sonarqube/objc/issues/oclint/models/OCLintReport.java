@@ -17,12 +17,16 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OCLintReport {
 
-    @JsonProperty("violation")
-    public OCLintViolation[] violations;
+    @JsonSetter(value = "violation", nulls = Nulls.SKIP)
+    public List<OCLintViolation> violations = new ArrayList<>();
 
 }
 

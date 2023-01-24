@@ -18,14 +18,19 @@
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintExtractor;
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintJSONDatabaseBuilder;
-import fr.insideapp.sonarqube.objc.issues.oclint.implementations.OCLintReportParser;
+import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuilder;
+import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMapper;
+import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunner;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParser;
+import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetriever;
+import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWriter;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.scanner.ScannerSide;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,21 +49,30 @@ public class OCLintExtensionProvider implements ExtensionProvider {
             .subCategory("OCLint")
             .build();
 
+    private static final String COMPILE_COMMANDS_PATH = "compile_commands.json";
+
     public List<Object> extensions() {
         return Arrays.asList(
                 JSON_COMPILATION_DATABASE_PROPERTY,
                 OCLintRulesDefinition.class,
-                OCLintJSONDatabaseBuilder.class,
-                OCLintExtractor.class,
+                OCLintJSONCompilationDatabaseFolderRetriever.class,
+                OCLintJSONCompilationDatabaseBuilder.class,
+                OCLintJSONCompilationDatabaseWriter.class,
+                OCLintRunner.class,
                 OCLintReportParser.class,
+                OCLintReportIssueMapper.class,
                 OCLintSensor.class
         );
     }
 
-    public String jsonCompilationDatabasePath(Configuration configuration) {
+    public String jsonCompilationDatabaseFolderPath(Configuration configuration) {
         return configuration
                 .get(JSON_COMPILATION_DATABASE_KEY)
                 .orElse(DEFAULT_JSON_COMPILATION_DATABASE_PATH);
+    }
+
+    public File jsonCompilationDatabasePath(FileSystem fileSystem) {
+        return new File(fileSystem.baseDir(), COMPILE_COMMANDS_PATH);
     }
 
 }

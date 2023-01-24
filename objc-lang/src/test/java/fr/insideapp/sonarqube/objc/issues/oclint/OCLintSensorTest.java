@@ -20,63 +20,64 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
-import fr.insideapp.sonarqube.objc.helper.ExceptionHelper;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintExtractable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintJSONDatabaseBuildable;
-import fr.insideapp.sonarqube.objc.issues.oclint.interfaces.OCLintReportParsable;
-import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
+import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
+import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMappable;
+import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrieverException;
+import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
+import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
+import fr.insideapp.sonarqube.objc.issues.oclint.retriever.OCLintJSONCompilationDatabaseFolderRetrievable;
+import fr.insideapp.sonarqube.objc.issues.oclint.writer.OCLintJSONCompilationDatabaseWritable;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
-import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class OCLintSensorTest {
 
-    private static final String BASE_DIR = "/oclint/sensor";
+    private static final String BASE_DIR = "/oclint";
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private SensorContextTester context;
     private ObjectiveC objectiveC;
-    private OCLintExtensionProvider provider;
-    private Configuration configuration;
-    private OCLintJSONDatabaseBuildable builder;
-    private OCLintExtractable extractor;
+    private OCLintJSONCompilationDatabaseFolderRetrievable retriever;
+    private OCLintJSONCompilationDatabaseBuildable builder;
+    private OCLintJSONCompilationDatabaseWritable writer;
+    private OCLintRunnable runner;
     private OCLintReportParsable parser;
-
+    private OCLintReportIssueMappable mapper;
+    private OCLintRulesDefinition rulesDefinition;
     private OCLintSensor sensor;
 
     @Before
     public void prepare() {
-        provider = mock(OCLintExtensionProvider.class);
-        configuration = mock(Configuration.class);
-        builder = mock(OCLintJSONDatabaseBuildable.class);
-        extractor = mock(OCLintExtractable.class);
+        retriever = mock(OCLintJSONCompilationDatabaseFolderRetrievable.class);
+        builder = mock(OCLintJSONCompilationDatabaseBuildable.class);
+        writer = mock(OCLintJSONCompilationDatabaseWritable.class);
+        runner = mock(OCLintRunnable.class);
         parser = mock(OCLintReportParsable.class);
+        mapper = mock(OCLintReportIssueMappable.class);
+        rulesDefinition = mock(OCLintRulesDefinition.class);
         context = SensorContextTester.create(baseDir);
         objectiveC = new ObjectiveC();
-        sensor = new OCLintSensor(
-                objectiveC,
-                provider,
-                configuration,
-                context.fileSystem(),
-                builder,
-                extractor,
-                parser,
+        sensor = new OCLintSensor(objectiveC,
+                retriever, builder, writer,
+                runner, parser, mapper,
+                rulesDefinition,
                 new ReportIssueRecorder()
         );
     }
@@ -90,54 +91,53 @@ public class OCLintSensorTest {
         // assert
         assertThat(defaultSensorDescriptor.name()).isEqualTo("OCLint Sensor");
         assertThat(defaultSensorDescriptor.languages()).hasSize(1).containsOnly(objectiveC.getKey());
+        assertThat(defaultSensorDescriptor.type()).isEqualTo(InputFile.Type.MAIN);
     }
 
     @Test
-    public void jsonCompilationDatabaseFolder_does_not_exist() throws Exception {
+    public void execute_noJsonCompilationDatabaseFolder() throws OCLintJSONCompilationDatabaseFolderRetrieverException {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("nonExistingPath");
+        when(retriever.retrieve()).thenThrow(new OCLintJSONCompilationDatabaseFolderRetrieverException("This is a message"));
         // test
         sensor.execute(context);
         // assert
         verify(builder, never()).build(any());
-        verify(extractor, never()).extract(any());
-        verify(parser, never()).collect(any());
+        verify(writer, never()).write(any());
+        verify(runner, never()).run();
+        verify(parser, never()).parse(any());
+        verify(mapper, never()).map(any());
+        verify(rulesDefinition, never()).getRepositoryKey();
         assertThat(context.allIssues()).isEmpty();
     }
 
     @Test
-    public void jsonCompilationDatabaseFolder_not_a_directory() throws Exception {
+    public void execute_writeFailed() throws OCLintJSONCompilationDatabaseFolderRetrieverException {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("notAFolder");
+        File jsonCompilationDatabaseFolder = new File("");
+        when(retriever.retrieve()).thenReturn(jsonCompilationDatabaseFolder);
+        when(builder.build(jsonCompilationDatabaseFolder)).thenReturn("test");
+        when(writer.write("test")).thenReturn(false);
         // test
         sensor.execute(context);
         // assert
-        verify(builder, never()).build(any());
-        verify(extractor, never()).extract(any());
-        verify(parser, never()).collect(any());
+        verify(runner, never()).run();
+        verify(parser, never()).parse(any());
+        verify(mapper, never()).map(any());
+        verify(rulesDefinition, never()).getRepositoryKey();
         assertThat(context.allIssues()).isEmpty();
     }
 
     @Test
-    public void extractReport_throw() throws Exception {
+    public void execute_noIssue() throws OCLintJSONCompilationDatabaseFolderRetrieverException {
         // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
-        when(builder.build(any())).thenReturn("");
-        when(extractor.extract(any())).thenThrow(ExceptionHelper.build());
-        // test
-        sensor.execute(context);
-        // assert
-        verify(parser, never()).collect(any());
-        assertThat(context.allIssues()).isEmpty();
-    }
-
-    @Test
-    public void parseReport_noIssue() throws Exception {
-        // prepare
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
-        when(builder.build(any())).thenReturn("");
-        when(extractor.extract(any())).thenReturn(new OCLintReport());
-        when(parser.collect(any())).thenReturn(new ArrayList<>());
+        File jsonCompilationDatabaseFolder = new File("");
+        when(retriever.retrieve()).thenReturn(jsonCompilationDatabaseFolder);
+        when(builder.build(jsonCompilationDatabaseFolder)).thenReturn("test");
+        when(writer.write("test")).thenReturn(true);
+        when(runner.run()).thenReturn("output");
+        when(parser.parse("output")).thenReturn(List.of());
+        when(mapper.map(List.of())).thenReturn(Set.of());
+        when(rulesDefinition.getRepositoryKey()).thenReturn("key");
         // test
         sensor.execute(context);
         // assert
@@ -145,7 +145,7 @@ public class OCLintSensorTest {
     }
 
     @Test
-    public void parseReport_oneIssue() throws Exception {
+    public void execute_oneIssue() throws OCLintJSONCompilationDatabaseFolderRetrieverException {
         // prepare
         DefaultInputFile testFile = new TestInputFileBuilder("", "Greeting.m")
                 .setModuleBaseDir(Paths.get(BASE_DIR))
@@ -161,10 +161,14 @@ public class OCLintSensorTest {
                 5
         );
         context.fileSystem().add(testFile);
-        when(provider.jsonCompilationDatabasePath(configuration)).thenReturn("");
-        when(builder.build(any())).thenReturn("");
-        when(extractor.extract(any())).thenReturn(new OCLintReport());
-        when(parser.collect(any())).thenReturn(Arrays.asList(issue));
+        File jsonCompilationDatabaseFolder = new File("");
+        when(retriever.retrieve()).thenReturn(jsonCompilationDatabaseFolder);
+        when(builder.build(jsonCompilationDatabaseFolder)).thenReturn("test");
+        when(writer.write("test")).thenReturn(true);
+        when(runner.run()).thenReturn("output");
+        when(parser.parse("output")).thenReturn(List.of());
+        when(mapper.map(List.of())).thenReturn(Set.of(issue));
+        when(rulesDefinition.getRepositoryKey()).thenReturn("key");
         // test
         sensor.execute(context);
         // assert

@@ -34,13 +34,16 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
     private static final Logger LOGGER = Loggers.get(ObjectiveCProfile.class);
 
     private final ObjectiveC objectiveC;
+    private final OCLintRulesDefinition ocLintRulesDefinition;
     private final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition;
 
     public ObjectiveCProfile(
             final ObjectiveC objectiveC,
+            final OCLintRulesDefinition ocLintRulesDefinition,
             final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition
     ) {
         this.objectiveC = objectiveC;
+        this.ocLintRulesDefinition = ocLintRulesDefinition;
         this.mobSFScanObjectiveCRulesDefinition = mobSFScanObjectiveCRulesDefinition;
     }
 
@@ -53,9 +56,9 @@ public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
 
         // OCLint rules
         try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(OCLintRulesDefinition.RULES_PATH);
+            List<RepositoryRule> rules = repositoryRuleParser.parse(ocLintRulesDefinition.getJsonResourcePath());
             for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule1 = profile.activateRule("OCLint", r.key);
+                NewBuiltInActiveRule rule1 = profile.activateRule(ocLintRulesDefinition.getRepositoryName(), r.key);
                 rule1.overrideSeverity(r.severity.name());
             }
         } catch (IOException e) {

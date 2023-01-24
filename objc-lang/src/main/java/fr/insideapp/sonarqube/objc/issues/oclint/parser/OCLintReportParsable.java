@@ -15,17 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.issues.oclint;
+package fr.insideapp.sonarqube.objc.issues.oclint.parser;
 
-import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
-import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.apple.commons.interfaces.ReportParsable;
+import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import org.sonar.api.scanner.ScannerSide;
 
+import java.util.List;
+
 @ScannerSide
-public class OCLintRulesDefinition extends JSONRulesDefinition {
-    public OCLintRulesDefinition(
-            ObjectiveC objectiveC
-    ) {
-        super("OCLint", "OCLint", objectiveC, "/oclint/rules.json");
-    }
-}
+public interface OCLintReportParsable extends ReportParsable<List<OCLintViolation>> { }
