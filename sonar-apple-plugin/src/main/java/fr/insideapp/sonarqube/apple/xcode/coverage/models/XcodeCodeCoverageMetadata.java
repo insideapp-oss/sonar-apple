@@ -15,25 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage.models;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class XcodeCodeCoverageMetadata {
 
-public final class XcodeTestsExtensionProviderTest {
+    @JsonProperty("isExecutable")
+    public boolean isExecutable;
 
-    private XcodeTestsExtensionProvider provider;
+    @JsonProperty("line")
+    public int lineNumber;
 
-    @Before
-    public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
-    }
-
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
-    }
+    @JsonProperty("executionCount")
+    public Long hitsCount;
 
 }
+

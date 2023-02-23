@@ -15,25 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage.runner;
 
-import org.junit.Before;
-import org.junit.Test;
+import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolRunner;
+import org.sonar.api.scanner.ScannerSide;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.io.File;
 
-public final class XcodeTestsExtensionProviderTest {
-
-    private XcodeTestsExtensionProvider provider;
-
-    @Before
-    public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
+@ScannerSide
+public abstract class XcodeCoverageReadRunnable extends SingleCommandLineToolRunner {
+    protected XcodeCoverageReadRunnable(String command) {
+        super(command);
     }
 
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
-    }
+    public abstract String run(File resultBundle);
 
 }

@@ -15,25 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage.models;
 
-import org.junit.Before;
-import org.junit.Test;
+import java.util.List;
+import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class XcodeCodeCoverage {
 
-public final class XcodeTestsExtensionProviderTest {
+    public String filePath;
 
-    private XcodeTestsExtensionProvider provider;
+    public List<XcodeCodeCoverageMetadata> coverageMetadata;
 
-    @Before
-    public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
-    }
-
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
+    public XcodeCodeCoverage(Map.Entry<String, List<XcodeCodeCoverageMetadata>> entry) {
+        this.filePath = entry.getKey();
+        this.coverageMetadata = entry.getValue();
     }
 
 }

@@ -15,25 +15,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage.mapper;
 
-import org.junit.Before;
-import org.junit.Test;
+import fr.insideapp.sonarqube.apple.commons.interfaces.ReportMappable;
+import fr.insideapp.sonarqube.apple.xcode.coverage.models.XcodeCodeCoverage;
+import fr.insideapp.sonarqube.apple.xcode.coverage.models.XcodeCodeCoverageMetadata;
+import org.sonar.api.scanner.ScannerSide;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+import java.util.Map;
 
-public final class XcodeTestsExtensionProviderTest {
-
-    private XcodeTestsExtensionProvider provider;
-
-    @Before
-    public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
-    }
-
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
-    }
-
+@ScannerSide
+public interface XcodeCoverageMappable extends ReportMappable<Map<String, List<XcodeCodeCoverageMetadata>>, XcodeCodeCoverage> {
 }
+

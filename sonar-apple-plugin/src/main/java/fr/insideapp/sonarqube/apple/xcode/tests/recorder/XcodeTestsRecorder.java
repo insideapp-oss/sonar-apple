@@ -44,6 +44,7 @@ public final class XcodeTestsRecorder implements XcodeTestsRecordable {
 
     private static final Logger LOGGER = Loggers.get(XcodeTestsRecorder.class);
 
+    @Override
     public void record(List<XcodeTestSummary> testSummaries, SensorContext context) {
         LOGGER.info("{} test report(s) to handle", testSummaries.size());
         testSummaries.forEach(testSummary -> {

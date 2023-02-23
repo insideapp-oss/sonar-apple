@@ -1,0 +1,232 @@
+{
+    "_type" : {
+        "_name" : "ActionsInvocationRecord"
+    },
+    "actions" : {
+        "_type" : {
+            "_name" : "Array"
+        },
+        "_values" : [
+            {
+                "_type" : {
+                    "_name" : "ActionRecord"
+                },
+                "actionResult" : {
+                    "_type" : {
+                        "_name" : "ActionResult"
+                    },
+                    "coverage" : {
+                        "_type" : {
+                            "_name" : "CodeCoverageInfo"
+                        }
+                    },
+                    "diagnosticsRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~pEXGI83V9ubWHN1qHcYeIrDQcbB4iORh1B3wIzpzLjmOhm72g4MRSfrAEwlq4Zls80x-gC2nXCpRMIxMhK4hUg=="
+                        }
+                    },
+                    "issues" : {
+                        "_type" : {
+                            "_name" : "ResultIssueSummaries"
+                        }
+                    },
+                    "logRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~pVL3SccE43J0D6NB_ELLip5YuXmxKX950EGtLXoeOqenQ2CKtPYiM1oRvjF90xaTA931J2EDzA6Vnp4OflEQ2Q=="
+                        },
+                        "targetType" : {
+                            "_type" : {
+                                "_name" : "TypeDefinition"
+                            },
+                            "name" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "ActivityLogSection"
+                            }
+                        }
+                    },
+                    "metrics" : {
+                        "_type" : {
+                            "_name" : "ResultMetrics"
+                        },
+                        "testsCount" : {
+                            "_type" : {
+                                "_name" : "Int"
+                            },
+                            "_value" : "1"
+                        }
+                    },
+                    "resultName" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "action"
+                    },
+                    "status" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "succeeded"
+                    },
+                    "testsRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~fCRDvoPm2JFfGUugXTJXAzF1ZvGPSWG0YxxwVi5U7dwM6Z1DVLXMsSHKSnieQqoe8G_SoDCndYysdzudJ0eCnA=="
+                        },
+                        "targetType" : {
+                            "_type" : {
+                                "_name" : "TypeDefinition"
+                            },
+                            "name" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "ActionTestPlanRunSummaries"
+                            }
+                        }
+                    }
+                },
+                "buildResult" : {
+                    "_type" : {
+                        "_name" : "ActionResult"
+                    },
+                    "coverage" : {
+                        "_type" : {
+                            "_name" : "CodeCoverageInfo"
+                        }
+                    },
+                    "issues" : {
+                        "_type" : {
+                            "_name" : "ResultIssueSummaries"
+                        }
+                    },
+                    "logRef" : {
+                        "_type" : {
+                            "_name" : "Reference"
+                        },
+                        "id" : {
+                            "_type" : {
+                                "_name" : "String"
+                            },
+                            "_value" : "0~4YDO_ghwEgnThhaYRRXOKadbFSLKGuF7Skp7nMsDuHtV3M5jkAwqBIK0gb2IWwpLQQZxq03ot2eaFnbJRjvu-A=="
+                        },
+                        "targetType" : {
+                            "_type" : {
+                                "_name" : "TypeDefinition"
+                            },
+                            "name" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "ActivityLogSection"
+                            }
+                        }
+                    },
+                    "metrics" : {
+                        "_type" : {
+                            "_name" : "ResultMetrics"
+                        }
+                    },
+                    "resultName" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "build"
+                    },
+                    "status" : {
+                        "_type" : {
+                            "_name" : "String"
+                        },
+                        "_value" : "succeeded"
+                    }
+                },
+                "endedTime" : {
+                    "_type" : {
+                        "_name" : "Date"
+                    },
+                    "_value" : "2022-10-17T11:48:46.559+0200"
+                },
+                "schemeCommandName" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "Test"
+                },
+                "schemeTaskName" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "BuildAndAction"
+                },
+                "startedTime" : {
+                    "_type" : {
+                        "_name" : "Date"
+                    },
+                    "_value" : "2022-10-17T11:48:36.957+0200"
+                },
+                "title" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "Testing project TestProject with scheme TestProject"
+                }
+            }
+        ]
+    },
+    "issues" : {
+        "_type" : {
+            "_name" : "ResultIssueSummaries"
+        }
+    },
+    "metadataRef" : {
+        "_type" : {
+            "_name" : "Reference"
+        },
+        "id" : {
+            "_type" : {
+                "_name" : "String"
+            },
+            "_value" : "0~2dPTlNgfriDFYwNY0cMm-T1e548EPDvd-FDInic6ClWIMRE8PNhF30wdeGC-rSdEEgcYmbLig2DlQphpklOenA=="
+        },
+        "targetType" : {
+            "_type" : {
+                "_name" : "TypeDefinition"
+            },
+            "name" : {
+                "_type" : {
+                    "_name" : "String"
+                },
+                "_value" : "ActionsInvocationMetadata"
+            }
+        }
+    },
+    "metrics" : {
+        "_type" : {
+            "_name" : "ResultMetrics"
+        },
+        "testsCount" : {
+            "_type" : {
+                "_name" : "Int"
+            },
+            "_value" : "1"
+        }
+    }
+}

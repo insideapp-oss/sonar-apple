@@ -21,8 +21,8 @@ import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
-import fr.insideapp.sonarqube.apple.commons.coverage.AppleCoverageSensor;
 import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
+import fr.insideapp.sonarqube.apple.xcode.coverage.XcodeCoverageExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.tests.XcodeTestsExtensionProvider;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
@@ -60,14 +60,12 @@ public class ApplePlugin implements Plugin {
                 ApplePluginExtensionProvider.class,
                 XcodeResultExtensionProvider.class, // Xcode
                 XcodeTestsExtensionProvider.class, // Tests
+                XcodeCoverageExtensionProvider.class, // Coverage
                 SwiftLintExtensionProvider.class, // SwiftLint
                 PeripheryExtensionProvider.class, // Periphery
                 MobSFScanExtensionProvider.class, // MobSFScan
                 OCLintExtensionProvider.class  // OCLint
         );
-
-        // Coverage
-        context.addExtension(AppleCoverageSensor.class);
 
     }
 

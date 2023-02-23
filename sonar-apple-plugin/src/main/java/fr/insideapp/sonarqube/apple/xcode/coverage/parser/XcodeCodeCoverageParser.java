@@ -15,26 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.mobsfscan.parser;
+package fr.insideapp.sonarqube.apple.xcode.coverage.parser;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.insideapp.sonarqube.apple.commons.parser.ReportListParser;
-import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanReport;
-import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanIssue;
+import fr.insideapp.sonarqube.apple.commons.parser.ReportMapParser;
+import fr.insideapp.sonarqube.apple.xcode.coverage.models.XcodeCodeCoverageMetadata;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 @ScannerSide
-public final class MobSFScanReportParser extends ReportListParser<MobSFScanIssue> implements MobSFScanReportParsable {
+public final class XcodeCodeCoverageParser extends ReportMapParser<String, List<XcodeCodeCoverageMetadata>> implements XcodeCodeCoverageParsable {
 
     private final ObjectMapper objectMapper;
 
-    public MobSFScanReportParser() {
+    public XcodeCodeCoverageParser() {
         this.objectMapper = new ObjectMapper()
                 .disable(FAIL_ON_UNKNOWN_PROPERTIES)
                 .enable(SerializationFeature.INDENT_OUTPUT);
@@ -42,16 +42,12 @@ public final class MobSFScanReportParser extends ReportListParser<MobSFScanIssue
 
     @Override
     protected String objectName() {
-        return "MobSF issue(s)";
+        return "file(s) with coverage data";
     }
 
-    protected List<MobSFScanIssue> perform(String input) throws Exception {
-        return objectMapper.readValue(input, MobSFScanReport.class)
-                .results
-                .entrySet()
-                .stream()
-                .map(MobSFScanIssue::new)
-                .collect(Collectors.toList());
+    @Override
+    protected Map<String, List<XcodeCodeCoverageMetadata>> perform(String input) throws Exception {
+        return objectMapper.readValue(input, new TypeReference<>() {});
     }
 
 }

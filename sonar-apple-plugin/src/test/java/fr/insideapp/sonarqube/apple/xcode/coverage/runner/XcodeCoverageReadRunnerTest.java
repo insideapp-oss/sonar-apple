@@ -15,25 +15,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage.runner;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class XcodeTestsExtensionProviderTest {
+public final class XcodeCoverageReadRunnerTest {
 
-    private XcodeTestsExtensionProvider provider;
+    private static final String BASE_DIR = "/xcode";
+
+    private XcodeCoverageReadRunner runner;
 
     @Before
     public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
+        runner = new XcodeCoverageReadRunner();
     }
 
     @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
+    public void arguments() {
+        String[] options = runner.arguments(new File(BASE_DIR));
+        assertThat(options).isEqualTo(new String[]{
+                "xccov",
+                "view",
+                "--archive", "--json",
+                "/xcode",
+                "1>&2", "2>/dev/null"
+        });
     }
 
 }

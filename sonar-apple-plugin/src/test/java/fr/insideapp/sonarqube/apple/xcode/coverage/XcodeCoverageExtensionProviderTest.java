@@ -15,25 +15,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class XcodeTestsExtensionProviderTest {
+public final class XcodeCoverageExtensionProviderTest {
 
-    private XcodeTestsExtensionProvider provider;
+    private XcodeCoverageExtensionProvider provider;
 
     @Before
     public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
+        provider = new XcodeCoverageExtensionProvider();
     }
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
+        assertThat(provider.extensions()).hasSize(5);
     }
 
 }

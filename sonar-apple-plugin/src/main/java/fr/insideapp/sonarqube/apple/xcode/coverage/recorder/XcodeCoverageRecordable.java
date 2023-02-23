@@ -15,25 +15,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.tests;
+package fr.insideapp.sonarqube.apple.xcode.coverage.recorder;
 
-import org.junit.Before;
-import org.junit.Test;
+import fr.insideapp.sonarqube.apple.xcode.coverage.models.XcodeCodeCoverage;
+import org.sonar.api.scanner.ScannerSide;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
 
-public final class XcodeTestsExtensionProviderTest {
+@ScannerSide
+public interface XcodeCoverageRecordable {
 
-    private XcodeTestsExtensionProvider provider;
-
-    @Before
-    public void prepare() {
-        provider = new XcodeTestsExtensionProvider();
-    }
-
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
-    }
+    void record(List<XcodeCodeCoverage> codeCoverages);
 
 }

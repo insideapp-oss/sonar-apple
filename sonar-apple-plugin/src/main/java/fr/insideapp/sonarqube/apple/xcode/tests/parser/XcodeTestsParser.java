@@ -19,7 +19,7 @@ package fr.insideapp.sonarqube.apple.xcode.tests.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.insideapp.sonarqube.apple.commons.parser.AbstractReportParser;
+import fr.insideapp.sonarqube.apple.commons.parser.ReportListParser;
 import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestPlanRunSummaries;
 import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestableSummary;
 import org.sonar.api.scanner.ScannerSide;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 @ScannerSide
-public final class XcodeTestsParser extends AbstractReportParser<ActionTestableSummary> implements XcodeTestsParsable {
+public final class XcodeTestsParser extends ReportListParser<ActionTestableSummary> implements XcodeTestsParsable {
 
     private final ObjectMapper objectMapper;
 
