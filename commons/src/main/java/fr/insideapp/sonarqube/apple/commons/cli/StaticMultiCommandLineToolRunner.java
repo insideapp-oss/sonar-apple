@@ -18,10 +18,7 @@
 package fr.insideapp.sonarqube.apple.commons.cli;
 
 import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class StaticMultiCommandLineToolRunner extends MultiCommandLineToolRunner implements CommandLineToolRunnable<List<String>> {

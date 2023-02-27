@@ -51,8 +51,7 @@ public final class XcodeCodeCoverageParserTest {
         // test
         final Map<String, List<XcodeCodeCoverageMetadata>> coverageDataMap = parser.parse(codeCoverageSummariesJSON);
         // assert
-        assertThat(coverageDataMap).hasSize(1);
-        assertThat(coverageDataMap).containsKey("file.swift");
+        assertThat(coverageDataMap).hasSize(1).containsKey("file.swift");
         List<XcodeCodeCoverageMetadata> metadata = coverageDataMap.get("file.swift");
         assertThat(metadata).hasSize(4);
     }

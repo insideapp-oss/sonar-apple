@@ -30,7 +30,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class XcodeTestsActionRecordParser {
+public class XcodeActionRecordParserTest {
 
     private static final String BASE_DIR = "/xcode/tests/parser";
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));

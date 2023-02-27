@@ -22,11 +22,11 @@ import java.util.Map;
 
 public class XcodeCodeCoverage {
 
-    public String filePath;
+    public final String filePath;
 
-    public List<XcodeCodeCoverageMetadata> coverageMetadata;
+    public final List<XcodeCodeCoverageMetadata> coverageMetadata;
 
-    public XcodeCodeCoverage(Map.Entry<String, List<XcodeCodeCoverageMetadata>> entry) {
+    public XcodeCodeCoverage(final Map.Entry<String, List<XcodeCodeCoverageMetadata>> entry) {
         this.filePath = entry.getKey();
         this.coverageMetadata = entry.getValue();
     }

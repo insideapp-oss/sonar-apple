@@ -78,8 +78,6 @@ public class ApplePlugin implements Plugin {
                 // registering extensions
                 ExtensionProvider provider = providerClazz.getDeclaredConstructor().newInstance();
                 context.addExtensions(provider.extensions());
-                // perform setup, if any
-                provider.setup();
             } catch (Exception e) {
                 LOGGER.info("An error occurred when trying to register '{}'", providerClazz.getCanonicalName());
                 LOGGER.debug("Exception: {}", e);

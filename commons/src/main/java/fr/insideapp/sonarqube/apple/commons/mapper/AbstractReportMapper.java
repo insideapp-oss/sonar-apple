@@ -18,21 +18,20 @@
 package fr.insideapp.sonarqube.apple.commons.mapper;
 
 import fr.insideapp.sonarqube.apple.commons.interfaces.ReportMappable;
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class AbstractReportMapper<IN, OUT> implements ReportMappable<IN, OUT> {
+public abstract class AbstractReportMapper<I, O> implements ReportMappable<I, O> {
 
     private static final Logger LOGGER = Loggers.get(AbstractReportMapper.class);
 
-    protected abstract Set<OUT> perform(IN input) throws Exception;
+    protected abstract Set<O> perform(I input) throws Exception;
 
-    public Set<OUT> map(IN input) {
-        Set<OUT> values = new HashSet<>();
+    public Set<O> map(I input) {
+        Set<O> values = new HashSet<>();
         try {
             values.addAll(perform(input));
         } catch (Exception e) {

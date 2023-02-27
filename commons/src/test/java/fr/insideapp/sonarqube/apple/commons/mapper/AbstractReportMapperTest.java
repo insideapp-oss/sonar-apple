@@ -55,8 +55,7 @@ public final class AbstractReportMapperTest {
         // test
         Set<?> outputs = mapper.map(anyString());
         // assert
-        assertThat(outputs).hasSize(1);
-        assertThat(outputs).isEqualTo(Set.of("value_mapped"));
+        assertThat(outputs).hasSize(1).isEqualTo(Set.of("value_mapped"));
     }
 
 }

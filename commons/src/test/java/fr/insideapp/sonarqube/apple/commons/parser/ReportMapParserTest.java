@@ -55,8 +55,7 @@ public final class ReportMapParserTest {
         // test
         Map<?, ?> outputs = parser.parse(anyString());
         // assert
-        assertThat(outputs).hasSize(1);
-        assertThat(outputs).isEqualTo(Map.of("key_parsed", "value_parsed"));
+        assertThat(outputs).hasSize(1).isEqualTo(Map.of("key_parsed", "value_parsed"));
     }
 
 }

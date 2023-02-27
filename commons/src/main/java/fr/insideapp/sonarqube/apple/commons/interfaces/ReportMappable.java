@@ -19,8 +19,8 @@ package fr.insideapp.sonarqube.apple.commons.interfaces;
 
 import java.util.Set;
 
-public interface ReportMappable<IN, OUT> {
+public interface ReportMappable<I, O> {
 
-    Set<OUT> map(IN input);
+    Set<O> map(I input);
 
 }

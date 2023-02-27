@@ -22,7 +22,6 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public abstract class MultiCommandLineToolRunner extends CommandLineToolRunner {
 
