@@ -17,15 +17,18 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
+import org.sonar.api.scanner.ScannerSide;
 
+
+@ScannerSide
 public class SwiftLintRulesDefinition extends JSONRulesDefinition {
 
-    public static final String REPOSITORY_KEY = "SwiftLint";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
+    private static final String REPOSITORY_KEY = "SwiftLint";
+    private static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    public static final String RULES_PATH = "/swiftlint/rules.json";
+    private static final String RULES_PATH = "/swiftlint/rules.json";
 
     public SwiftLintRulesDefinition(
             Swift swift

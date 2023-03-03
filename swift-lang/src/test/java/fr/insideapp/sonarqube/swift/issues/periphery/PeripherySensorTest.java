@@ -55,6 +55,7 @@ public final class PeripherySensorTest {
     private PeripheryRunnable runner;
     private PeripheryReportParsable parser;
     private PeripheryReportMappable mapper;
+    private PeripheryRulesDefinition rulesDefinition;
 
     @Before
     public void prepare() {
@@ -62,9 +63,11 @@ public final class PeripherySensorTest {
         runner = mock(PeripheryRunnable.class);
         parser = mock(PeripheryReportParsable.class);
         mapper = mock(PeripheryReportMappable.class);
+        rulesDefinition = mock(PeripheryRulesDefinition.class);
         swift = new Swift();
         sensor = new PeripherySensor(
                 swift,
+                rulesDefinition,
                 runner,
                 parser,
                 mapper
@@ -89,6 +92,7 @@ public final class PeripherySensorTest {
         when(runner.run()).thenReturn("[]");
         when(parser.parse(anyString())).thenReturn(List.of());
         when(mapper.map(any())).thenReturn(Set.of());
+        when(rulesDefinition.getRepositoryKey()).thenReturn("key");
         // test
         sensor.execute(context);
         // assert
@@ -115,6 +119,7 @@ public final class PeripherySensorTest {
         when(runner.run()).thenReturn("[]");
         when(parser.parse(anyString())).thenReturn(List.of());
         when(mapper.map(any())).thenReturn(Set.of(issue));
+        when(rulesDefinition.getRepositoryKey()).thenReturn("key");
         // test
         sensor.execute(context);
         // assert

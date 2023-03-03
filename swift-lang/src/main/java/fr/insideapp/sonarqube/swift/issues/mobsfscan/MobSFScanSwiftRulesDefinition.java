@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.issues.mobsfscan;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.sonar.api.scanner.ScannerSide;
 

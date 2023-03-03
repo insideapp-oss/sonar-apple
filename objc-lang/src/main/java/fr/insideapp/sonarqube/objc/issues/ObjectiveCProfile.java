@@ -17,66 +17,22 @@
  */
 package fr.insideapp.sonarqube.objc.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRule;
-import fr.insideapp.sonarqube.apple.commons.issues.RepositoryRuleParser;
+import fr.insideapp.sonarqube.apple.commons.rules.*;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
 import fr.insideapp.sonarqube.objc.issues.oclint.OCLintRulesDefinition;
-import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.io.IOException;
 import java.util.List;
 
-public class ObjectiveCProfile implements BuiltInQualityProfilesDefinition {
-
-    private static final Logger LOGGER = Loggers.get(ObjectiveCProfile.class);
-
-    private final ObjectiveC objectiveC;
-    private final OCLintRulesDefinition ocLintRulesDefinition;
-    private final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition;
+public class ObjectiveCProfile extends ProfilesDefinition {
 
     public ObjectiveCProfile(
             final ObjectiveC objectiveC,
+            final RepositoryRuleParsable parser,
             final OCLintRulesDefinition ocLintRulesDefinition,
             final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition
     ) {
-        this.objectiveC = objectiveC;
-        this.ocLintRulesDefinition = ocLintRulesDefinition;
-        this.mobSFScanObjectiveCRulesDefinition = mobSFScanObjectiveCRulesDefinition;
+        super(objectiveC, parser, List.of(ocLintRulesDefinition, mobSFScanObjectiveCRulesDefinition));
     }
 
-
-    @Override
-    public void define(Context context) {
-
-        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Objective-C", objectiveC.getKey());
-        RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
-
-        // OCLint rules
-        try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(ocLintRulesDefinition.getJsonResourcePath());
-            for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule1 = profile.activateRule(ocLintRulesDefinition.getRepositoryName(), r.key);
-                rule1.overrideSeverity(r.severity.name());
-            }
-        } catch (IOException e) {
-            LOGGER.error("Failed to load OCLint rules", e);
-        }
-
-        // MobSFScan rules (for Objective-C)
-        try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanObjectiveCRulesDefinition.getJsonResourcePath());
-            for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanObjectiveCRulesDefinition.getRepositoryName(), r.key);
-                rule.overrideSeverity(r.severity.name());
-            }
-        } catch (IOException e) {
-            LOGGER.error("Failed to load MobSFScan rules (for Objective-c)", e);
-        }
-
-        profile.setDefault(true);
-        profile.done();
-    }
 }

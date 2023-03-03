@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.commons.rules;
 
+import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.resources.AbstractLanguage;
@@ -24,24 +25,19 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class JSONRulesDefinitionTest {
+public final class MobSFScanRulesDefinitionTest {
 
-    private JSONRulesDefinition rulesDefinition;
+    private MobSFScanRulesDefinition rulesDefinition;
     private RulesDefinition.Context context;
 
     @Before
     public void prepare() {
-        rulesDefinition = new JSONRulesDefinition(
-                "rep_key",
-                "rep_name",
-                new AbstractLanguage("lang") {
-                    @Override
-                    public String[] getFileSuffixes() {
-                        return new String[]{};
-                    }
-                },
-                "/rules/rules.json"
-        ) {};
+        rulesDefinition = new MobSFScanRulesDefinition(new AbstractLanguage("lang") {
+            @Override
+            public String[] getFileSuffixes() {
+                return new String[]{};
+            }
+        }) {};
         context = new RulesDefinition.Context();
     }
 
@@ -50,13 +46,11 @@ public final class JSONRulesDefinitionTest {
         // test
         rulesDefinition.define(context);
         // assert
-        RulesDefinition.Repository repository = context.repository("rep_key");
+        RulesDefinition.Repository repository = context.repository("MobSFScanLang");
         assertThat(repository).isNotNull();
-        assertThat(repository.key()).isEqualTo("rep_key");
-        assertThat(repository.name()).isEqualTo("rep_name");
+        assertThat(repository.key()).isEqualTo("MobSFScanLang");
+        assertThat(repository.name()).isEqualTo("MobSFScanLang");
         assertThat(repository.language()).isEqualTo("lang");
         assertThat(repository.rules()).hasSize(2);
-
-
     }
 }

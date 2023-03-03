@@ -38,19 +38,21 @@ import java.util.stream.Collectors;
 public class PeripherySensor implements Sensor {
 
     private final Swift swift;
+    private final PeripheryRulesDefinition rulesDefinition;
     private final PeripheryRunnable runner;
-
     private final PeripheryReportParsable parser;
 
     private final PeripheryReportMappable mapper;
 
     public PeripherySensor(
             final Swift swift,
+            final PeripheryRulesDefinition rulesDefinition,
             final PeripheryRunnable runner,
             final PeripheryReportParsable parser,
             final PeripheryReportMappable mapper
     ) {
         this.swift = swift;
+        this.rulesDefinition = rulesDefinition;
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
@@ -74,7 +76,7 @@ public class PeripherySensor implements Sensor {
                 .collect(Collectors.toList());
         List<ReportIssue> reportIssues = new ArrayList<>(mapper.map(issues));
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
-        issueRecorder.recordIssues(reportIssues, PeripheryRulesDefinition.REPOSITORY_KEY, sensorContext);
+        issueRecorder.recordIssues(reportIssues, rulesDefinition.getRepositoryKey(), sensorContext);
     }
 
 }

@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 public class SwiftLintSensor implements Sensor {
 
     private final Swift swift;
-
+    private final SwiftLintRulesDefinition rulesDefinition;
     private final SwiftLintRunnable runner;
     private final SwiftLintReportParsable parser;
 
@@ -44,11 +44,13 @@ public class SwiftLintSensor implements Sensor {
 
     public SwiftLintSensor(
             final Swift swift,
+            final SwiftLintRulesDefinition rulesDefinition,
             final SwiftLintRunnable runner,
             final SwiftLintReportParsable parser,
             final SwiftLintReportMappable mapper
     ) {
         this.swift = swift;
+        this.rulesDefinition = rulesDefinition;
         this.runner = runner;
         this.parser = parser;
         this.mapper = mapper;
@@ -71,7 +73,7 @@ public class SwiftLintSensor implements Sensor {
                 .collect(Collectors.toList());
         List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
-        issueRecorder.recordIssues(reportIssues, SwiftLintRulesDefinition.REPOSITORY_KEY, sensorContext);
+        issueRecorder.recordIssues(reportIssues, rulesDefinition.getRepositoryKey(), sensorContext);
     }
 
 }

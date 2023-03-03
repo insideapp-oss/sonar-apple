@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.mobsfscan.splitter;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.scanner.ScannerSide;

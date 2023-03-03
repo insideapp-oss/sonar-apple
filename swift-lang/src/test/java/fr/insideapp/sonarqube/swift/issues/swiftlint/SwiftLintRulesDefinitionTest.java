@@ -17,9 +17,8 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
-import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition;

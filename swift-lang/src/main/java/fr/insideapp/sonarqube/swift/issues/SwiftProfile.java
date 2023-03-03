@@ -17,74 +17,25 @@
  */
 package fr.insideapp.sonarqube.swift.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.*;
+import fr.insideapp.sonarqube.apple.commons.rules.ProfilesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.RepositoryRuleParsable;
 import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
-import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import java.io.IOException;
 import java.util.List;
 
-public class SwiftProfile implements BuiltInQualityProfilesDefinition {
-
-    private static final Logger LOGGER = Loggers.get(SwiftProfile.class);
-
-    private final Swift swift;
-
-    private final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition;
+public class SwiftProfile extends ProfilesDefinition {
 
     public SwiftProfile(
             final Swift swift,
-            final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition
+            final RepositoryRuleParsable parser,
+            final SwiftLintRulesDefinition swiftLintRulesDefinition,
+            final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition,
+            final PeripheryRulesDefinition peripheryRulesDefinition
     ) {
-        this.swift = swift;
-        this.mobSFScanSwiftRulesDefinition = mobSFScanSwiftRulesDefinition;
+        super(swift, parser, List.of(swiftLintRulesDefinition, mobSFScanSwiftRulesDefinition, peripheryRulesDefinition));
     }
 
-    @Override
-    public void define(Context context) {
-
-        NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile("Swift", swift.getKey());
-        RepositoryRuleParser repositoryRuleParser = new RepositoryRuleParser();
-
-        // SwiftLint rules
-        try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(SwiftLintRulesDefinition.RULES_PATH);
-            for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule1 = profile.activateRule("SwiftLint", r.key);
-                rule1.overrideSeverity(r.severity.name());
-            }
-        } catch (IOException e) {
-            LOGGER.error("Failed to load SwiftLint rules", e);
-        }
-
-        // MobSFScan rules (for Swift)
-        try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(mobSFScanSwiftRulesDefinition.getJsonResourcePath());
-            for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule(mobSFScanSwiftRulesDefinition.getRepositoryName(), r.key);
-                rule.overrideSeverity(r.severity.name());
-            }
-        } catch (IOException e) {
-            LOGGER.error("Failed to load MobSFScan rules (for Swift)", e);
-        }
-
-        // Periphery rules
-        try {
-            List<RepositoryRule> rules = repositoryRuleParser.parse(PeripheryRulesDefinition.RULES_PATH);
-            for (RepositoryRule r: rules) {
-                NewBuiltInActiveRule rule = profile.activateRule("Periphery", r.key);
-                rule.overrideSeverity(r.severity.name());
-            }
-        } catch (IOException e) {
-            LOGGER.error("Failed to load Periphery rules", e);
-        }
-
-        profile.setDefault(true);
-        profile.done();
-    }
 }
