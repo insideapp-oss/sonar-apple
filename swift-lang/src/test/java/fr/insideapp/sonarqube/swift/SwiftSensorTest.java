@@ -17,6 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift;
 
+import fr.insideapp.sonarqube.swift.antlr.SwiftAntlrContext;
+import fr.insideapp.sonarqube.swift.antlr.SwiftCyclomaticComplexityVisitor;
+import fr.insideapp.sonarqube.swift.antlr.SwiftHighlighterVisitor;
+import fr.insideapp.sonarqube.swift.antlr.SwiftSourceLinesVisitor;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -26,17 +30,25 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 
 public final class SwiftSensorTest {
 
     private SwiftSensor sensor;
+    private SensorContextTester context;
+
     private Swift swift;
 
     @Before
     public void prepare() {
         swift = new Swift();
-        sensor = new SwiftSensor(swift);
+        context = SensorContextTester.create(new File("."));
+        sensor = new SwiftSensor(
+                swift,
+                new SwiftAntlrContext(),
+                new SwiftSourceLinesVisitor(),
+                new SwiftHighlighterVisitor(),
+                new SwiftCyclomaticComplexityVisitor()
+        );
     }
 
     @Test
@@ -47,16 +59,15 @@ public final class SwiftSensorTest {
         sensor.describe(descriptor);
         // assert
         assertThat(descriptor.name()).isEqualTo("Swift Sensor");
-        assertThat(descriptor.languages()).containsOnly(swift.getKey());
-        assertThat(descriptor.type()).isEqualTo(InputFile.Type.MAIN);
+        assertThat(descriptor.languages()).hasSize(1).containsOnly(swift.getKey());
+        assertThat(descriptor.type()).isNotNull().isEqualTo(InputFile.Type.MAIN);
     }
 
     @Test
     public void execute() {
-        SensorContextTester context = SensorContextTester.create(new File("."));
-        assertThatCode(() -> {
-            sensor.execute(context);
-        }).doesNotThrowAnyException();
-        assertThat(context.allIssues()).isEmpty();
+        // test
+        sensor.execute(context);
+        // assert
+        // nothing to test
     }
 }

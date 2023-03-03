@@ -23,9 +23,11 @@ import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.objc.antlr.generated.ObjectiveCParser;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.scanner.ScannerSide;
 
 import java.util.Set;
 
+@ScannerSide
 public class ObjectiveCHighlighterVisitor implements ParseTreeItemVisitor {
 
     private static final Set<Integer> ObjectiveCCommentTypes = Set.of(

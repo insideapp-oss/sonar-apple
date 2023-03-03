@@ -23,9 +23,11 @@ import fr.insideapp.sonarqube.apple.commons.antlr.ParseTreeItemVisitor;
 import fr.insideapp.sonarqube.swift.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.scanner.ScannerSide;
 
 import java.util.Set;
 
+@ScannerSide
 public class SwiftHighlighterVisitor implements ParseTreeItemVisitor {
 
     private static final Set<Integer> Swift5CommentTypes = Set.of(
