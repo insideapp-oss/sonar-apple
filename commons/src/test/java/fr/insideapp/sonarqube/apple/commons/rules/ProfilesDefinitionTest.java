@@ -64,7 +64,7 @@ public final class ProfilesDefinitionTest {
         assertThat(builtProfile).isNotNull();
         assertThat(builtProfile.language()).isEqualTo(LANGUAGE);
         assertThat(builtProfile.name()).isEqualTo(LANGUAGE);
-        assertThat(builtProfile.rules()).hasSize(0);
+        assertThat(builtProfile.rules()).isEmpty();
     }
 
     @Test
@@ -82,7 +82,7 @@ public final class ProfilesDefinitionTest {
         assertThat(builtProfile).isNotNull();
         assertThat(builtProfile.language()).isEqualTo(LANGUAGE);
         assertThat(builtProfile.name()).isEqualTo(LANGUAGE);
-        assertThat(builtProfile.rules()).hasSize(0);
+        assertThat(builtProfile.rules()).isEmpty();
     }
 
     @Test
