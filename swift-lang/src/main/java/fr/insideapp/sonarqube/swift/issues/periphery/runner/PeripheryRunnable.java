@@ -17,8 +17,12 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery.runner;
 
-import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
+import fr.insideapp.sonarqube.apple.commons.cli.StaticSingleCommandLineToolRunner;
 import org.sonar.api.scanner.ScannerSide;
 
 @ScannerSide
-public interface PeripheryRunnable extends CommandLineToolRunnable<String> {}
+public abstract class PeripheryRunnable extends StaticSingleCommandLineToolRunner {
+    protected PeripheryRunnable(String command) {
+        super(command);
+    }
+}

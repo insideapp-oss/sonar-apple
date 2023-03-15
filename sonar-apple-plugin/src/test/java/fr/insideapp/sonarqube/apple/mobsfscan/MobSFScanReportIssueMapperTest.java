@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.apple.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportIssueMapper;
+import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportMapper;
 import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanIssue;
 import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanReportResultLocation;
 import org.junit.Before;
@@ -33,11 +33,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public final class MobSFScanReportIssueMapperTest {
 
-    private MobSFScanReportIssueMapper mapper;
+    private MobSFScanReportMapper mapper;
 
     @Before
     public void prepare() {
-        mapper = new MobSFScanReportIssueMapper();
+        mapper = new MobSFScanReportMapper();
     }
 
     @Test

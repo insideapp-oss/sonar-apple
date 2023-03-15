@@ -47,7 +47,7 @@ public final class SwiftLintRunnerTest {
 
     @Test
     public void options() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("multiOptions");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         when(configuration.sources()).thenReturn(Arrays.asList("source"));
         List<?> optionsBuilt = (List<?>)options.invoke(runner);

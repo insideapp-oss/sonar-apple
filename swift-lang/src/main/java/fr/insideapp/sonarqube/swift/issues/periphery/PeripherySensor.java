@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.swift.issues.periphery;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportMappable;
 import fr.insideapp.sonarqube.swift.issues.periphery.models.PeripheryIssue;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParsable;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunnable;
@@ -42,13 +42,13 @@ public class PeripherySensor implements Sensor {
 
     private final PeripheryReportParsable parser;
 
-    private final PeripheryReportIssueMappable mapper;
+    private final PeripheryReportMappable mapper;
 
     public PeripherySensor(
             final Swift swift,
             final PeripheryRunnable runner,
             final PeripheryReportParsable parser,
-            final PeripheryReportIssueMappable mapper
+            final PeripheryReportMappable mapper
     ) {
         this.swift = swift;
         this.runner = runner;

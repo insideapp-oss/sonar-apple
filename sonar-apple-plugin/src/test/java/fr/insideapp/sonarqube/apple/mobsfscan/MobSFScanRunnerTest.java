@@ -46,7 +46,7 @@ public final class MobSFScanRunnerTest {
 
     @Test
     public void one_source() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockSources(List.of("source1"));
         String[] optionsBuilt = (String[]) options.invoke(runner);
@@ -58,7 +58,7 @@ public final class MobSFScanRunnerTest {
 
     @Test
     public void many_sources() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockSources(List.of("source1", "source2"));
         String[] optionsBuilt = (String[]) options.invoke(runner);

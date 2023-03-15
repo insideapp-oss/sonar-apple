@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.swift.issues.swiftlint;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMapper;
+import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportMapper;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParser;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunner;
 import org.sonar.api.scanner.ScannerSide;
@@ -34,7 +34,7 @@ public final class SwiftLintExtensionProvider implements ExtensionProvider {
                 SwiftLintRulesDefinition.class,
                 SwiftLintRunner.class,
                 SwiftLintReportParser.class,
-                SwiftLintReportIssueMapper.class,
+                SwiftLintReportMapper.class,
                 SwiftLintSensor.class
         );
     }

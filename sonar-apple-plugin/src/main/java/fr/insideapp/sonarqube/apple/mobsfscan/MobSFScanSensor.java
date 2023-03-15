@@ -20,7 +20,7 @@ package fr.insideapp.sonarqube.apple.mobsfscan;
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
-import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportIssueMappable;
+import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportMappable;
 import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanIssue;
 import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParsable;
 import fr.insideapp.sonarqube.apple.mobsfscan.runner.MobSFScanRunnable;
@@ -43,7 +43,7 @@ public class MobSFScanSensor implements Sensor {
 
     private final MobSFScanRunnable runner;
     private final MobSFScanReportParsable parser;
-    private final MobSFScanReportIssueMappable mapper;
+    private final MobSFScanReportMappable mapper;
     private final MobSFScanReportIssueSplittable splitter;
 
     public MobSFScanSensor(
@@ -51,7 +51,7 @@ public class MobSFScanSensor implements Sensor {
             final ObjectiveC objectiveC,
             final MobSFScanRunnable runner,
             final MobSFScanReportParsable parser,
-            final MobSFScanReportIssueMappable mapper,
+            final MobSFScanReportMappable mapper,
             final MobSFScanReportIssueSplittable splitter
     ) {
         this.swift = swift;

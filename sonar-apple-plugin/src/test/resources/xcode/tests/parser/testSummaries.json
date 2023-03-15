@@ -1,0 +1,557 @@
+{
+    "_type" : {
+        "_name" : "ActionTestPlanRunSummaries"
+    },
+    "summaries" : {
+        "_type" : {
+            "_name" : "Array"
+        },
+        "_values" : [
+            {
+                "_type" : {
+                    "_name" : "ActionTestPlanRunSummary",
+                    "_supertype" : {
+                        "_name" : "ActionAbstractTestSummary"
+                    }
+                },
+                "name" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "Test Scheme Action"
+                },
+                "testableSummaries" : {
+                    "_type" : {
+                        "_name" : "Array"
+                    },
+                    "_values" : [
+                        {
+                            "_type" : {
+                                "_name" : "ActionTestableSummary",
+                                "_supertype" : {
+                                    "_name" : "ActionAbstractTestSummary"
+                                }
+                            },
+                            "diagnosticsDirectoryName" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "TestProjectTests-FC7D240B-B238-4442-9937-B1DFEF42DF36-Configuration-Test Scheme Action-Iteration-1"
+                            },
+                            "identifierURL" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests"
+                            },
+                            "name" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "TestProjectTests"
+                            },
+                            "projectRelativePath" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "TestProject.xcodeproj"
+                            },
+                            "targetName" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "TestProjectTests"
+                            },
+                            "testKind" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : "app hosted"
+                            },
+                            "testLanguage" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : ""
+                            },
+                            "testRegion" : {
+                                "_type" : {
+                                    "_name" : "String"
+                                },
+                                "_value" : ""
+                            },
+                            "tests" : {
+                                "_type" : {
+                                    "_name" : "Array"
+                                },
+                                "_values" : [
+                                    {
+                                        "_type" : {
+                                            "_name" : "ActionTestSummaryGroup",
+                                            "_supertype" : {
+                                                "_name" : "ActionTestSummaryIdentifiableObject",
+                                                "_supertype" : {
+                                                    "_name" : "ActionAbstractTestSummary"
+                                                }
+                                            }
+                                        },
+                                        "duration" : {
+                                            "_type" : {
+                                                "_name" : "Double"
+                                            },
+                                            "_value" : "0.6080629825592041"
+                                        },
+                                        "identifier" : {
+                                            "_type" : {
+                                                "_name" : "String"
+                                            },
+                                            "_value" : "All tests"
+                                        },
+                                        "identifierURL" : {
+                                            "_type" : {
+                                                "_name" : "String"
+                                            },
+                                            "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/All%20tests"
+                                        },
+                                        "name" : {
+                                            "_type" : {
+                                                "_name" : "String"
+                                            },
+                                            "_value" : "All tests"
+                                        },
+                                        "subtests" : {
+                                            "_type" : {
+                                                "_name" : "Array"
+                                            },
+                                            "_values" : [
+                                                {
+                                                    "_type" : {
+                                                        "_name" : "ActionTestSummaryGroup",
+                                                        "_supertype" : {
+                                                            "_name" : "ActionTestSummaryIdentifiableObject",
+                                                            "_supertype" : {
+                                                                "_name" : "ActionAbstractTestSummary"
+                                                            }
+                                                        }
+                                                    },
+                                                    "duration" : {
+                                                        "_type" : {
+                                                            "_name" : "Double"
+                                                        },
+                                                        "_value" : "0.6061300039291382"
+                                                    },
+                                                    "identifier" : {
+                                                        "_type" : {
+                                                            "_name" : "String"
+                                                        },
+                                                        "_value" : "TestProjectTests.xctest"
+                                                    },
+                                                    "identifierURL" : {
+                                                        "_type" : {
+                                                            "_name" : "String"
+                                                        },
+                                                        "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestProjectTests.xctest"
+                                                    },
+                                                    "name" : {
+                                                        "_type" : {
+                                                            "_name" : "String"
+                                                        },
+                                                        "_value" : "TestProjectTests.xctest"
+                                                    },
+                                                    "subtests" : {
+                                                        "_type" : {
+                                                            "_name" : "Array"
+                                                        },
+                                                        "_values" : [
+                                                            {
+                                                                "_type" : {
+                                                                    "_name" : "ActionTestSummaryGroup",
+                                                                    "_supertype" : {
+                                                                        "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                        "_supertype" : {
+                                                                            "_name" : "ActionAbstractTestSummary"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "duration" : {
+                                                                    "_type" : {
+                                                                        "_name" : "Double"
+                                                                    },
+                                                                    "_value" : "0.34553396701812744"
+                                                                },
+                                                                "identifier" : {
+                                                                    "_type" : {
+                                                                        "_name" : "String"
+                                                                    },
+                                                                    "_value" : "TestObjectiveCTests"
+                                                                },
+                                                                "identifierURL" : {
+                                                                    "_type" : {
+                                                                        "_name" : "String"
+                                                                    },
+                                                                    "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestObjectiveCTests"
+                                                                },
+                                                                "name" : {
+                                                                    "_type" : {
+                                                                        "_name" : "String"
+                                                                    },
+                                                                    "_value" : "TestObjectiveCTests"
+                                                                },
+                                                                "subtests" : {
+                                                                    "_type" : {
+                                                                        "_name" : "Array"
+                                                                    },
+                                                                    "_values" : [
+                                                                        {
+                                                                            "_type" : {
+                                                                                "_name" : "ActionTestMetadata",
+                                                                                "_supertype" : {
+                                                                                    "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                                    "_supertype" : {
+                                                                                        "_name" : "ActionAbstractTestSummary"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "duration" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Double"
+                                                                                },
+                                                                                "_value" : "0.0023430585861206055"
+                                                                            },
+                                                                            "identifier" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "TestObjectiveCTests\/testExample"
+                                                                            },
+                                                                            "identifierURL" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestObjectiveCTests\/testExample"
+                                                                            },
+                                                                            "name" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "testExample"
+                                                                            },
+                                                                            "testStatus" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "Success"
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "_type" : {
+                                                                                "_name" : "ActionTestMetadata",
+                                                                                "_supertype" : {
+                                                                                    "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                                    "_supertype" : {
+                                                                                        "_name" : "ActionAbstractTestSummary"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "duration" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Double"
+                                                                                },
+                                                                                "_value" : "0.34193694591522217"
+                                                                            },
+                                                                            "identifier" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "TestObjectiveCTests\/testPerformanceExample"
+                                                                            },
+                                                                            "identifierURL" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestObjectiveCTests\/testPerformanceExample"
+                                                                            },
+                                                                            "name" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "testPerformanceExample"
+                                                                            },
+                                                                            "summaryRef" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Reference"
+                                                                                },
+                                                                                "id" : {
+                                                                                    "_type" : {
+                                                                                        "_name" : "String"
+                                                                                    },
+                                                                                    "_value" : "0~IeXEAxU5YtiyvpuNehnx_601V7ePyqXoBx4L6IoNTwElb4ELUoSTG2-_eQ7AXWR5FC18w93bDiY3wh8ofYMgFw=="
+                                                                                },
+                                                                                "targetType" : {
+                                                                                    "_type" : {
+                                                                                        "_name" : "TypeDefinition"
+                                                                                    },
+                                                                                    "name" : {
+                                                                                        "_type" : {
+                                                                                            "_name" : "String"
+                                                                                        },
+                                                                                        "_value" : "ActionTestSummary"
+                                                                                    },
+                                                                                    "supertype" : {
+                                                                                        "_type" : {
+                                                                                            "_name" : "TypeDefinition"
+                                                                                        },
+                                                                                        "name" : {
+                                                                                            "_type" : {
+                                                                                                "_name" : "String"
+                                                                                            },
+                                                                                            "_value" : "ActionTestSummaryIdentifiableObject"
+                                                                                        },
+                                                                                        "supertype" : {
+                                                                                            "_type" : {
+                                                                                                "_name" : "TypeDefinition"
+                                                                                            },
+                                                                                            "name" : {
+                                                                                                "_type" : {
+                                                                                                    "_name" : "String"
+                                                                                                },
+                                                                                                "_value" : "ActionAbstractTestSummary"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "testStatus" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "Success"
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            {
+                                                                "_type" : {
+                                                                    "_name" : "ActionTestSummaryGroup",
+                                                                    "_supertype" : {
+                                                                        "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                        "_supertype" : {
+                                                                            "_name" : "ActionAbstractTestSummary"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "duration" : {
+                                                                    "_type" : {
+                                                                        "_name" : "Double"
+                                                                    },
+                                                                    "_value" : "0.2592979669570923"
+                                                                },
+                                                                "identifier" : {
+                                                                    "_type" : {
+                                                                        "_name" : "String"
+                                                                    },
+                                                                    "_value" : "TestProjectTests"
+                                                                },
+                                                                "identifierURL" : {
+                                                                    "_type" : {
+                                                                        "_name" : "String"
+                                                                    },
+                                                                    "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestProjectTests"
+                                                                },
+                                                                "name" : {
+                                                                    "_type" : {
+                                                                        "_name" : "String"
+                                                                    },
+                                                                    "_value" : "TestProjectTests"
+                                                                },
+                                                                "subtests" : {
+                                                                    "_type" : {
+                                                                        "_name" : "Array"
+                                                                    },
+                                                                    "_values" : [
+                                                                        {
+                                                                            "_type" : {
+                                                                                "_name" : "ActionTestMetadata",
+                                                                                "_supertype" : {
+                                                                                    "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                                    "_supertype" : {
+                                                                                        "_name" : "ActionAbstractTestSummary"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "duration" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Double"
+                                                                                },
+                                                                                "_value" : "0.0015360116958618164"
+                                                                            },
+                                                                            "identifier" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "TestProjectTests\/testExample()"
+                                                                            },
+                                                                            "identifierURL" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestProjectTests\/testExample"
+                                                                            },
+                                                                            "name" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "testExample()"
+                                                                            },
+                                                                            "testStatus" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "Success"
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "_type" : {
+                                                                                "_name" : "ActionTestMetadata",
+                                                                                "_supertype" : {
+                                                                                    "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                                    "_supertype" : {
+                                                                                        "_name" : "ActionAbstractTestSummary"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "duration" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Double"
+                                                                                },
+                                                                                "_value" : "0.0008369684219360352"
+                                                                            },
+                                                                            "identifier" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "TestProjectTests\/testInExtension()"
+                                                                            },
+                                                                            "identifierURL" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestProjectTests\/testInExtension"
+                                                                            },
+                                                                            "name" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "testInExtension()"
+                                                                            },
+                                                                            "testStatus" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "Success"
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "_type" : {
+                                                                                "_name" : "ActionTestMetadata",
+                                                                                "_supertype" : {
+                                                                                    "_name" : "ActionTestSummaryIdentifiableObject",
+                                                                                    "_supertype" : {
+                                                                                        "_name" : "ActionAbstractTestSummary"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "duration" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Double"
+                                                                                },
+                                                                                "_value" : "0.25580406188964844"
+                                                                            },
+                                                                            "identifier" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "TestProjectTests\/testPerformanceExample()"
+                                                                            },
+                                                                            "identifierURL" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/TestProjectTests\/testPerformanceExample"
+                                                                            },
+                                                                            "name" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "testPerformanceExample()"
+                                                                            },
+                                                                            "summaryRef" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "Reference"
+                                                                                },
+                                                                                "id" : {
+                                                                                    "_type" : {
+                                                                                        "_name" : "String"
+                                                                                    },
+                                                                                    "_value" : "0~V-CFcuswhgwH_h5Hn_y-UbjguKlVwhbaK4ZU3sqFls2ctGp8oE3KoOdsrMhsynu3JvmML2VD5h_kZ0ANtiptqg=="
+                                                                                },
+                                                                                "targetType" : {
+                                                                                    "_type" : {
+                                                                                        "_name" : "TypeDefinition"
+                                                                                    },
+                                                                                    "name" : {
+                                                                                        "_type" : {
+                                                                                            "_name" : "String"
+                                                                                        },
+                                                                                        "_value" : "ActionTestSummary"
+                                                                                    },
+                                                                                    "supertype" : {
+                                                                                        "_type" : {
+                                                                                            "_name" : "TypeDefinition"
+                                                                                        },
+                                                                                        "name" : {
+                                                                                            "_type" : {
+                                                                                                "_name" : "String"
+                                                                                            },
+                                                                                            "_value" : "ActionTestSummaryIdentifiableObject"
+                                                                                        },
+                                                                                        "supertype" : {
+                                                                                            "_type" : {
+                                                                                                "_name" : "TypeDefinition"
+                                                                                            },
+                                                                                            "name" : {
+                                                                                                "_type" : {
+                                                                                                    "_name" : "String"
+                                                                                                },
+                                                                                                "_value" : "ActionAbstractTestSummary"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "testStatus" : {
+                                                                                "_type" : {
+                                                                                    "_name" : "String"
+                                                                                },
+                                                                                "_value" : "Success"
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

@@ -23,7 +23,4 @@ public class ActionResult {
     @JsonProperty("testsRef")
     public Reference testsRef;
 
-    @JsonProperty("coverage")
-    public Coverage coverage;
-
 }

@@ -56,7 +56,7 @@ public final class OCLintRunnerTest {
 
     @Test
     public void option_no_sources() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockSources(List.of());
         mockJSONCompilationDatabase(new File("/a/path/to","database.json"));
@@ -70,7 +70,7 @@ public final class OCLintRunnerTest {
 
     @Test
     public void option_one_source() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockSources(List.of("source"));
         mockJSONCompilationDatabase(new File("/a/path/to","database.json"));
@@ -85,7 +85,7 @@ public final class OCLintRunnerTest {
 
     @Test
     public void option_two_sources() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockSources(List.of("source1", "source2"));
         mockJSONCompilationDatabase(new File("/a/path/to","database.json"));

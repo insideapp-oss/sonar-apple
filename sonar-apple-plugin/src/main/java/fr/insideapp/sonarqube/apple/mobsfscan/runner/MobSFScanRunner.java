@@ -18,14 +18,13 @@
 package fr.insideapp.sonarqube.apple.mobsfscan.runner;
 
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
-import fr.insideapp.sonarqube.apple.commons.cli.SingleCommandLineToolRunner;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @ScannerSide
-public final class MobSFScanRunner extends SingleCommandLineToolRunner implements MobSFScanRunnable {
+public final class MobSFScanRunner extends MobSFScanRunnable {
 
     private final SonarProjectConfiguration sonarProjectConfiguration;
 
@@ -37,7 +36,7 @@ public final class MobSFScanRunner extends SingleCommandLineToolRunner implement
     }
 
     @Override
-    protected String[] options() {
+    protected String[] arguments() {
         List<String> options = new ArrayList<>();
         options.add("--json");
         options.addAll(sonarProjectConfiguration.sources());

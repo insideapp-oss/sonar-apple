@@ -21,7 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuildable;
-import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportIssueMappable;
+import fr.insideapp.sonarqube.objc.issues.oclint.mapper.OCLintReportMappable;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunnable;
 import fr.insideapp.sonarqube.objc.issues.oclint.parser.OCLintReportParsable;
@@ -50,7 +50,7 @@ public final class OCLintSensor implements Sensor {
     private final OCLintJSONCompilationDatabaseWritable writer;
     private final OCLintRunnable runner;
     private final OCLintReportParsable parser;
-    private final OCLintReportIssueMappable mapper;
+    private final OCLintReportMappable mapper;
 
     private final OCLintRulesDefinition rulesDefinition;
     private final ReportIssueRecorder issueRecorder;
@@ -62,7 +62,7 @@ public final class OCLintSensor implements Sensor {
             final OCLintJSONCompilationDatabaseWritable writer,
             final OCLintRunnable runner,
             final OCLintReportParsable parser,
-            final OCLintReportIssueMappable mapper,
+            final OCLintReportMappable mapper,
             final OCLintRulesDefinition rulesDefinition,
             final ReportIssueRecorder issueRecorder
     ) {

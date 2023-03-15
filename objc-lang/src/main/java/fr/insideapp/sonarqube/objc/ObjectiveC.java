@@ -17,9 +17,10 @@
  */
 package fr.insideapp.sonarqube.objc;
 
+import fr.insideapp.sonarqube.apple.commons.tests.LanguageTestFile;
 import org.sonar.api.resources.AbstractLanguage;
 
-public final class ObjectiveC extends AbstractLanguage {
+public final class ObjectiveC extends AbstractLanguage implements LanguageTestFile {
 
     public ObjectiveC() {
         super("objc", "Objective-C");
@@ -28,5 +29,10 @@ public final class ObjectiveC extends AbstractLanguage {
     @Override
     public String[] getFileSuffixes() {
         return new String[]{"h", "m", "mm"};
+    }
+
+    @Override
+    public String testFileExtension() {
+        return "m";
     }
 }

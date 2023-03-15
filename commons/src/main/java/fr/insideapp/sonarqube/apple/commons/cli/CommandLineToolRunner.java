@@ -38,17 +38,17 @@ public abstract class CommandLineToolRunner {
         return new Integer[]{DEFAULT_COMMAND_EXIT_CODE};
     }
 
-    private ProcBuilder build(String[] options) {
+    private ProcBuilder build(String[] arguments) {
         ProcBuilder builtCommand = new ProcBuilder(command)
-                .withArgs(options)
+                .withArgs(arguments)
                 .withTimeoutMillis(COMMAND_TIMEOUT)
                 .withExpectedExitStatuses(Set.of(exitCodes()));
         LOGGER.debug("Command that will be executed: {}", builtCommand.getCommandLine());
         return builtCommand;
     }
 
-    public final String execute(String[] options) throws Exception {
-        return build(options).run().getOutputString();
+    public final String execute(String[] arguments) throws Exception {
+        return build(arguments).run().getOutputString();
     }
 
 }

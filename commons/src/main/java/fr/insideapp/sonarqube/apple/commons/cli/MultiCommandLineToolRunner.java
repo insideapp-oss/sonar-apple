@@ -17,14 +17,13 @@
  */
 package fr.insideapp.sonarqube.apple.commons.cli;
 
-import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MultiCommandLineToolRunner extends CommandLineToolRunner implements CommandLineToolRunnable<List<String>> {
+public abstract class MultiCommandLineToolRunner extends CommandLineToolRunner {
 
     private static final Logger LOGGER = Loggers.get(MultiCommandLineToolRunner.class);
 
@@ -32,14 +31,11 @@ public abstract class MultiCommandLineToolRunner extends CommandLineToolRunner i
         super(command);
     }
 
-    protected abstract List<String[]> multiOptions();
-
-    @Override
-    public List<String> run() {
+    public List<String> run(List<String[]> arguments) {
         List<String> outputs = new ArrayList<>();
-        for (String[] multiOption : multiOptions()) {
+        for (String[] argument : arguments) {
             try {
-                outputs.add(execute(multiOption));
+                outputs.add(execute(argument));
             } catch (Exception e) {
                 LOGGER.error("Running failed. Run in verbose to get more information.");
                 LOGGER.debug("{}", e);

@@ -19,7 +19,7 @@ package fr.insideapp.sonarqube.objc.issues.oclint.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import fr.insideapp.sonarqube.apple.commons.parser.AbstractReportParser;
+import fr.insideapp.sonarqube.apple.commons.parser.ReportListParser;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintReport;
 import fr.insideapp.sonarqube.objc.issues.oclint.models.OCLintViolation;
 import org.sonar.api.scanner.ScannerSide;
@@ -28,7 +28,7 @@ import java.util.List;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 @ScannerSide
-public final class OCLintReportParser extends AbstractReportParser<OCLintViolation> implements OCLintReportParsable {
+public final class OCLintReportParser extends ReportListParser<OCLintViolation> implements OCLintReportParsable {
 
     private final ObjectMapper objectMapper;
 
@@ -36,6 +36,11 @@ public final class OCLintReportParser extends AbstractReportParser<OCLintViolati
         this.objectMapper = new ObjectMapper()
                 .disable(FAIL_ON_UNKNOWN_PROPERTIES)
                 .enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
+    @Override
+    protected String objectName() {
+        return "OCLint violation(s)";
     }
 
     @Override

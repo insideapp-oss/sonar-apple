@@ -53,7 +53,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void no_option() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
@@ -70,7 +70,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void options_with_workspace() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.of("MyProject.xcworkspace"));
         mockSchemes(List.of());
@@ -87,7 +87,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void options_with_project() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.of("MyProject.xcodeproj"));
@@ -105,7 +105,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void options_with_workspace_and_project() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.of("MyProject.xcworkspace"));
         mockProject(Optional.of("MyProject.xcodeproj"));
@@ -123,7 +123,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void options_schemes() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
@@ -141,7 +141,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void options_targets() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
@@ -159,7 +159,7 @@ public final class PeripheryRunnerTest {
 
     @Test
     public void options_index_store_path() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method options = clazz.getDeclaredMethod("options");
+        Method options = clazz.getDeclaredMethod("arguments");
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());

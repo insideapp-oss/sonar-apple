@@ -17,9 +17,10 @@
  */
 package fr.insideapp.sonarqube.swift;
 
+import fr.insideapp.sonarqube.apple.commons.tests.LanguageTestFile;
 import org.sonar.api.resources.AbstractLanguage;
 
-public final class Swift extends AbstractLanguage {
+public final class Swift extends AbstractLanguage implements LanguageTestFile {
 
     public Swift() {
         super("swift", "Swift");
@@ -28,5 +29,10 @@ public final class Swift extends AbstractLanguage {
     @Override
     public String[] getFileSuffixes() {
         return new String[]{"swift"};
+    }
+
+    @Override
+    public String testFileExtension() {
+        return "swift";
     }
 }

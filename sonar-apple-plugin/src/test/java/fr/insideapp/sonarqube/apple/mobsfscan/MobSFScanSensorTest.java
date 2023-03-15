@@ -19,7 +19,7 @@ package fr.insideapp.sonarqube.apple.mobsfscan;
 
 import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
-import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportIssueMappable;
+import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportMappable;
 import fr.insideapp.sonarqube.apple.mobsfscan.parser.MobSFScanReportParsable;
 import fr.insideapp.sonarqube.apple.mobsfscan.runner.MobSFScanRunnable;
 import fr.insideapp.sonarqube.apple.mobsfscan.splitter.MobSFScanReportIssueSplittable;
@@ -56,7 +56,7 @@ public final class MobSFScanSensorTest {
     private SensorContextTester context;
     private MobSFScanRunnable runner;
     private MobSFScanReportParsable parser;
-    private MobSFScanReportIssueMappable mapper;
+    private MobSFScanReportMappable mapper;
     private MobSFScanReportIssueSplittable splitter;
 
     private MobSFScanRulesDefinition rulesDefinition;
@@ -66,7 +66,7 @@ public final class MobSFScanSensorTest {
         context = SensorContextTester.create(baseDir);
         runner = mock(MobSFScanRunnable.class);
         parser = mock(MobSFScanReportParsable.class);
-        mapper = mock(MobSFScanReportIssueMappable.class);
+        mapper = mock(MobSFScanReportMappable.class);
         splitter = mock(MobSFScanReportIssueSplittable.class);
         rulesDefinition = mock(MobSFScanRulesDefinition.class);
         swift = new Swift();

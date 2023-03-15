@@ -19,13 +19,9 @@ package fr.insideapp.sonarqube.swift.issues.periphery;
 
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMappable;
+import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportMappable;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParsable;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunnable;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintSensor;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.mapper.SwiftLintReportIssueMappable;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.parser.SwiftLintReportParsable;
-import fr.insideapp.sonarqube.swift.issues.swiftlint.runner.SwiftLintRunnable;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +31,6 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
-import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -59,14 +54,14 @@ public final class PeripherySensorTest {
     private SensorContextTester context;
     private PeripheryRunnable runner;
     private PeripheryReportParsable parser;
-    private PeripheryReportIssueMappable mapper;
+    private PeripheryReportMappable mapper;
 
     @Before
     public void prepare() {
         context = SensorContextTester.create(baseDir);
         runner = mock(PeripheryRunnable.class);
         parser = mock(PeripheryReportParsable.class);
-        mapper = mock(PeripheryReportIssueMappable.class);
+        mapper = mock(PeripheryReportMappable.class);
         swift = new Swift();
         sensor = new PeripherySensor(
                 swift,

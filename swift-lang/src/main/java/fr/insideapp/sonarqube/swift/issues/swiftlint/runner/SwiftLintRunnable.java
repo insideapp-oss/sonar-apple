@@ -17,10 +17,12 @@
  */
 package fr.insideapp.sonarqube.swift.issues.swiftlint.runner;
 
-import fr.insideapp.sonarqube.apple.commons.interfaces.CommandLineToolRunnable;
+import fr.insideapp.sonarqube.apple.commons.cli.StaticMultiCommandLineToolRunner;
 import org.sonar.api.scanner.ScannerSide;
 
-import java.util.List;
-
 @ScannerSide
-public interface SwiftLintRunnable extends CommandLineToolRunnable<List<String>> {}
+public abstract class SwiftLintRunnable extends StaticMultiCommandLineToolRunner {
+    protected SwiftLintRunnable(String command) {
+        super(command);
+    }
+}

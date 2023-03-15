@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
-import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportIssueMapper;
+import fr.insideapp.sonarqube.swift.issues.periphery.mapper.PeripheryReportMapper;
 import fr.insideapp.sonarqube.swift.issues.periphery.parser.PeripheryReportParser;
 import fr.insideapp.sonarqube.swift.issues.periphery.runner.PeripheryRunner;
 import org.sonar.api.config.Configuration;
@@ -75,7 +75,7 @@ public class PeripheryExtensionProvider implements ExtensionProvider {
                 PeripheryRulesDefinition.class,
                 PeripheryRunner.class,
                 PeripheryReportParser.class,
-                PeripheryReportIssueMapper.class,
+                PeripheryReportMapper.class,
                 PeripherySensor.class
         );
     }
