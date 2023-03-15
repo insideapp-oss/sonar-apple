@@ -24,11 +24,13 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import static java.lang.String.format;
 
+@ScannerSide
 public class SwiftCyclomaticComplexityVisitor implements ParseTreeItemVisitor {
 
     private static final Logger LOGGER = Loggers.get(SwiftCyclomaticComplexityVisitor.class);

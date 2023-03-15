@@ -23,7 +23,9 @@ import fr.insideapp.sonarqube.apple.commons.antlr.SourceLinesVisitor;
 import fr.insideapp.sonarqube.swift.antlr.generated.Swift5Parser;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.scanner.ScannerSide;
 
+@ScannerSide
 public class SwiftSourceLinesVisitor implements ParseTreeItemVisitor {
 
     private final SourceLinesVisitor sourceLinesVisitor;

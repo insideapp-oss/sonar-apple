@@ -25,13 +25,9 @@ import fr.insideapp.sonarqube.apple.commons.rules.RepositoryRuleParser;
 import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.coverage.XcodeCoverageExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.tests.XcodeTestsExtensionProvider;
-import fr.insideapp.sonarqube.objc.ObjectiveC;
-import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
-import fr.insideapp.sonarqube.objc.issues.ObjectiveCProfile;
 import fr.insideapp.sonarqube.objc.issues.oclint.*;
-import fr.insideapp.sonarqube.swift.Swift;
-import fr.insideapp.sonarqube.swift.SwiftSensor;
-import fr.insideapp.sonarqube.swift.issues.SwiftProfile;
+import fr.insideapp.sonarqube.objc.ObjectiveCExtensionProvider;
+import fr.insideapp.sonarqube.swift.SwiftExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintExtensionProvider;
 import org.sonar.api.Plugin;
@@ -51,16 +47,12 @@ public class ApplePlugin implements Plugin {
         // Rules
         context.addExtension(RepositoryRuleParser.class);
 
-        // Swift language support
-        context.addExtensions(Swift.class, SwiftSensor.class, SwiftProfile.class);
-
-        // Objective-C language support
-        context.addExtensions(ObjectiveC.class, ObjectiveCSensor.class, ObjectiveCProfile.class);
-
         // Issues reporter
         context.addExtension(ReportIssueRecorder.class);
 
         register(context,
+                SwiftExtensionProvider.class, // Swift language
+                ObjectiveCExtensionProvider.class, // Objective-C language
                 ApplePluginExtensionProvider.class,
                 XcodeResultExtensionProvider.class, // Xcode
                 XcodeTestsExtensionProvider.class, // Tests

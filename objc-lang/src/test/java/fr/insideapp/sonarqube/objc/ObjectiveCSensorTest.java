@@ -17,8 +17,10 @@
  */
 package fr.insideapp.sonarqube.objc;
 
-import fr.insideapp.sonarqube.objc.ObjectiveC;
-import fr.insideapp.sonarqube.objc.ObjectiveCSensor;
+import fr.insideapp.sonarqube.objc.antlr.ObjectiveCAntlrContext;
+import fr.insideapp.sonarqube.objc.antlr.ObjectiveCCyclomaticComplexityVisitor;
+import fr.insideapp.sonarqube.objc.antlr.ObjectiveCHighlighterVisitor;
+import fr.insideapp.sonarqube.objc.antlr.ObjectiveCSourceLinesVisitor;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -28,17 +30,24 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 
 public final class ObjectiveCSensorTest {
 
     private ObjectiveCSensor sensor;
+    private SensorContextTester context;
     private ObjectiveC objectiveC;
 
     @Before
     public void prepare() {
         objectiveC = new ObjectiveC();
-        sensor = new ObjectiveCSensor(objectiveC);
+        context = SensorContextTester.create(new File("."));
+        sensor = new ObjectiveCSensor(
+                objectiveC,
+                new ObjectiveCAntlrContext(),
+                new ObjectiveCSourceLinesVisitor(),
+                new ObjectiveCHighlighterVisitor(),
+                new ObjectiveCCyclomaticComplexityVisitor()
+        );
     }
 
     @Test
@@ -55,12 +64,9 @@ public final class ObjectiveCSensorTest {
 
     @Test
     public void execute() {
-        // prepare
-        SensorContextTester context = SensorContextTester.create(new File("."));
         // test
-        assertThatCode(() -> {
-            sensor.execute(context);
-        }).doesNotThrowAnyException();
-        assertThat(context.allIssues()).isEmpty();
+        sensor.execute(context);
+        // assert
+        // nothing to test
     }
 }

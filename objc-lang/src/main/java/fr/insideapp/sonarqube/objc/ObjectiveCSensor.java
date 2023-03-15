@@ -30,11 +30,23 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 public class ObjectiveCSensor implements Sensor {
 
     private final ObjectiveC objectiveC;
+    private final ObjectiveCAntlrContext antlrContext;
+    private final ObjectiveCSourceLinesVisitor sourceLinesVisitor;
+    private final ObjectiveCHighlighterVisitor highlighterVisitor;
+    private final ObjectiveCCyclomaticComplexityVisitor cyclomaticComplexityVisitor;
 
     public ObjectiveCSensor(
-            final ObjectiveC objectiveC
+            final ObjectiveC objectiveC,
+            final ObjectiveCAntlrContext antlrContext,
+            final ObjectiveCSourceLinesVisitor sourceLinesVisitor,
+            final ObjectiveCHighlighterVisitor highlighterVisitor,
+            final ObjectiveCCyclomaticComplexityVisitor cyclomaticComplexityVisitor
     ) {
         this.objectiveC = objectiveC;
+        this.antlrContext = antlrContext;
+        this.sourceLinesVisitor = sourceLinesVisitor;
+        this.highlighterVisitor = highlighterVisitor;
+        this.cyclomaticComplexityVisitor = cyclomaticComplexityVisitor;
     }
 
     @Override
@@ -47,12 +59,11 @@ public class ObjectiveCSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        final ObjectiveCAntlrContext antlrContext = new ObjectiveCAntlrContext();
         // Analyse source files
         new ParseTreeAnalyzer(objectiveC.getKey(), InputFile.Type.MAIN, antlrContext, sensorContext)
-                .analyze(new ObjectiveCSourceLinesVisitor(), new ObjectiveCHighlighterVisitor(), new ObjectiveCCyclomaticComplexityVisitor());
+                .analyze(sourceLinesVisitor, highlighterVisitor, cyclomaticComplexityVisitor);
         // Analyse test files (highlighter only)
         new ParseTreeAnalyzer(objectiveC.getKey(), InputFile.Type.TEST, antlrContext, sensorContext)
-                .analyze(new ObjectiveCHighlighterVisitor());
+                .analyze(highlighterVisitor);
     }
 }

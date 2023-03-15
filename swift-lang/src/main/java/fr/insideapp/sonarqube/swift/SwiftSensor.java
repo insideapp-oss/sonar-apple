@@ -26,19 +26,28 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 public class SwiftSensor implements Sensor {
 
-    private static final Logger LOGGER = Loggers.get(SwiftSensor.class);
-
     private final Swift swift;
 
+    private final SwiftAntlrContext antlrContext;
+    private final SwiftSourceLinesVisitor sourceLinesVisitor;
+    private final SwiftHighlighterVisitor highlighterVisitor;
+    private final SwiftCyclomaticComplexityVisitor cyclomaticComplexityVisitor;
+
     public SwiftSensor(
-            final Swift swift
+            final Swift swift,
+            final SwiftAntlrContext antlrContext,
+            final SwiftSourceLinesVisitor sourceLinesVisitor,
+            final SwiftHighlighterVisitor highlighterVisitor,
+            final SwiftCyclomaticComplexityVisitor cyclomaticComplexityVisitor
     ) {
         this.swift = swift;
+        this.antlrContext = antlrContext;
+        this.sourceLinesVisitor = sourceLinesVisitor;
+        this.highlighterVisitor = highlighterVisitor;
+        this.cyclomaticComplexityVisitor = cyclomaticComplexityVisitor;
     }
 
     @Override
@@ -51,15 +60,11 @@ public class SwiftSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
-        final SwiftAntlrContext antlrContext = new SwiftAntlrContext();
-
-        LOGGER.info("Analyzing source files");
+        // Analyse source files
         new ParseTreeAnalyzer(swift.getKey(), InputFile.Type.MAIN, antlrContext, sensorContext)
-                .analyze(new SwiftSourceLinesVisitor(), new SwiftHighlighterVisitor(), new SwiftCyclomaticComplexityVisitor());
-
-        LOGGER.info("Analyzing test files");
-        // highlighter only
+                .analyze(sourceLinesVisitor, highlighterVisitor, cyclomaticComplexityVisitor);
+        // Analyse test files (highlighter only)
         new ParseTreeAnalyzer(swift.getKey(), InputFile.Type.TEST, antlrContext, sensorContext)
-                .analyze(new SwiftHighlighterVisitor());
+                .analyze(highlighterVisitor);
     }
 }
