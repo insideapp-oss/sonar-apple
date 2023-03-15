@@ -42,8 +42,7 @@ public class ApplePluginTest {
         plugin.define(context);
 
         List<?> extensions = context.getExtensions();
-        assertThat(extensions).hasSize(63);
-
+        assertThat(extensions).hasSize(64);
 
     }
 }

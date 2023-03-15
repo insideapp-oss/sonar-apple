@@ -15,23 +15,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.commons.rules;
 
-import org.apache.commons.lang3.StringUtils;
-import org.sonar.api.resources.Language;
+import org.sonar.api.server.ServerSide;
 
-public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
+import java.io.IOException;
+import java.util.List;
 
-    protected MobSFScanRulesDefinition(Language language) {
-        super(repository(language), repository(language), language, rulePath(language));
-    }
+@ServerSide
+public interface RepositoryRuleParsable {
 
-    private static String repository(Language language) {
-        return "MobSFScan" + StringUtils.capitalize(language.getKey());
-    }
-
-    private static String rulePath(Language language) {
-        return String.format("/mobsfscan/%s-rules.json", language.getKey());
-    }
+    List<RepositoryRule> parse(String resourceName) throws IOException;
 
 }

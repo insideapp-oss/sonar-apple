@@ -17,6 +17,8 @@
  */
 package fr.insideapp.sonarqube.apple.commons;
 
+import java.io.IOException;
+
 public final class ExceptionHelper {
 
     private ExceptionHelper() {}
@@ -25,11 +27,21 @@ public final class ExceptionHelper {
         return  new DummyException("My message");
     }
 
+    public static IOException buildIO() {
+        return  new DummyIOException("My message");
+    }
+
 
 }
 
 class DummyException extends Exception {
     DummyException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class DummyIOException extends IOException {
+    DummyIOException(String errorMessage) {
         super(errorMessage);
     }
 }

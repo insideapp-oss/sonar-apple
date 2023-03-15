@@ -55,6 +55,7 @@ public class SwiftLintSensorTest {
     private SwiftLintRunnable runner;
     private SwiftLintReportParsable parser;
     private SwiftLintReportMappable mapper;
+    private SwiftLintRulesDefinition rulesDefinition;
 
     @Before
     public void prepare() {
@@ -62,9 +63,11 @@ public class SwiftLintSensorTest {
         runner = mock(SwiftLintRunnable.class);
         parser = mock(SwiftLintReportParsable.class);
         mapper = mock(SwiftLintReportMappable.class);
+        rulesDefinition = mock(SwiftLintRulesDefinition.class);
         swift = new Swift();
         sensor = new SwiftLintSensor(
                 swift,
+                rulesDefinition,
                 runner,
                 parser,
                 mapper
@@ -89,6 +92,7 @@ public class SwiftLintSensorTest {
         when(runner.run()).thenReturn(List.of());
         when(parser.parse(anyString())).thenReturn(List.of());
         when(mapper.map(any())).thenReturn(Set.of());
+        when(rulesDefinition.getRepositoryKey()).thenReturn("key");
         // test
         sensor.execute(context);
         // assert
@@ -115,6 +119,7 @@ public class SwiftLintSensorTest {
         when(runner.run()).thenReturn(List.of());
         when(parser.parse(anyString())).thenReturn(List.of());
         when(mapper.map(any())).thenReturn(Set.of(issue));
+        when(rulesDefinition.getRepositoryKey()).thenReturn("key");
         // test
         sensor.execute(context);
         // assert

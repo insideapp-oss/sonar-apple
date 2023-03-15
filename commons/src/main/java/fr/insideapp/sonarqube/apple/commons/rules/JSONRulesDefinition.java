@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.commons.rules;
 
 import org.sonar.api.resources.Language;
 import org.sonar.api.rules.RuleType;

@@ -15,43 +15,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.commons.rules;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
+import org.sonar.api.resources.Language;
 
-public final class RepositoryRule {
+public abstract class MobSFScanRulesDefinition extends JSONRulesDefinition {
 
-    public enum Severity {
-        BLOCKER,
-        CRITICAL,
-        MAJOR,
-        MINOR,
-        INFO
+    protected MobSFScanRulesDefinition(Language language) {
+        super(repository(language), repository(language), language, rulePath(language));
     }
 
-    public enum Type {
-        CODE_SMELL,
-        BUG,
-        VULNERABILITY,
-        SECURITY_HOTSPOT
+    private static String repository(Language language) {
+        return "MobSFScan" + StringUtils.capitalize(language.getKey());
     }
 
-    @JsonProperty("key")
-    public String key;
-
-    @JsonProperty("name")
-    public String name;
-
-    @JsonProperty("severity")
-    public Severity severity;
-
-    @JsonProperty("description")
-    public String description;
-
-    @JsonProperty("type")
-    public Type type;
-
-    @JsonProperty("debt")
-    public String debt;
+    private static String rulePath(Language language) {
+        return String.format("/mobsfscan/%s-rules.json", language.getKey());
+    }
 
 }

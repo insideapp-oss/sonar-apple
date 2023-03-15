@@ -17,15 +17,17 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery;
 
-import fr.insideapp.sonarqube.apple.commons.issues.JSONRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
+import org.sonar.api.scanner.ScannerSide;
 
+@ScannerSide
 public class PeripheryRulesDefinition extends JSONRulesDefinition {
 
-    public static final String REPOSITORY_KEY = "Periphery";
-    public static final String REPOSITORY_NAME = REPOSITORY_KEY;
+    private static final String REPOSITORY_KEY = "Periphery";
+    private static final String REPOSITORY_NAME = REPOSITORY_KEY;
 
-    public static final String RULES_PATH = "/periphery/rules.json";
+    private static final String RULES_PATH = "/periphery/rules.json";
 
     public PeripheryRulesDefinition(
             Swift swift

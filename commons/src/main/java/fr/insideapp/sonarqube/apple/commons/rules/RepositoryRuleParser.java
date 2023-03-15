@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.issues;
+package fr.insideapp.sonarqube.apple.commons.rules;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -27,16 +27,17 @@ import java.util.List;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
-public class RepositoryRuleParser {
+public final class RepositoryRuleParser implements RepositoryRuleParsable {
 
     private final ObjectMapper objectMapper;
 
     public RepositoryRuleParser() {
-        objectMapper = new ObjectMapper()
+        this.objectMapper = new ObjectMapper()
                 .disable(FAIL_ON_UNKNOWN_PROPERTIES)
                 .enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    @Override
     public List<RepositoryRule> parse(String resourceName) throws IOException {
         InputStream is =  getClass().getResourceAsStream(resourceName);
         if (is == null) {
@@ -45,5 +46,4 @@ public class RepositoryRuleParser {
         Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
         return Arrays.asList(objectMapper.readValue(reader, RepositoryRule[].class));
     }
-
 }

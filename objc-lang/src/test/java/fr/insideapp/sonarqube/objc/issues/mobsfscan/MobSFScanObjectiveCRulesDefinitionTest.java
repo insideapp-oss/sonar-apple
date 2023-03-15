@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.objc.issues.mobsfscan;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import org.junit.Before;
 import org.junit.Test;

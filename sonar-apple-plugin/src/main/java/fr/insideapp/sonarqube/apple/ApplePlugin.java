@@ -21,6 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
+import fr.insideapp.sonarqube.apple.commons.rules.RepositoryRuleParser;
 import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.coverage.XcodeCoverageExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.tests.XcodeTestsExtensionProvider;
@@ -46,6 +47,9 @@ public class ApplePlugin implements Plugin {
 
         // Project
         context.addExtension(SonarProjectConfiguration.class);
+
+        // Rules
+        context.addExtension(RepositoryRuleParser.class);
 
         // Swift language support
         context.addExtensions(Swift.class, SwiftSensor.class, SwiftProfile.class);

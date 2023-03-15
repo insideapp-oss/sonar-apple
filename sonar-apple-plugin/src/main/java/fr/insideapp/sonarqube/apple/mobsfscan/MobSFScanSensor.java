@@ -17,7 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.mobsfscan;
 
-import fr.insideapp.sonarqube.apple.commons.issues.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
 import fr.insideapp.sonarqube.apple.mobsfscan.mapper.MobSFScanReportMappable;
