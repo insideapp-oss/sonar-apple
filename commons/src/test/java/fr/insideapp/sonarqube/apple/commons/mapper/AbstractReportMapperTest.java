@@ -31,9 +31,10 @@ import static org.mockito.Mockito.when;
 
 public final class AbstractReportMapperTest {
 
-    private AbstractReportMapper mapper;
+    private AbstractReportMapper<String, String> mapper;
 
     @Before
+    @SuppressWarnings("unchecked")
     public void prepare() {
         mapper = mock(AbstractReportMapper.class, Mockito.CALLS_REAL_METHODS);
     }
