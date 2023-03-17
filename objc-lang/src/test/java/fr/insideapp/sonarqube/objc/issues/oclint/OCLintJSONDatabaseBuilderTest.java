@@ -17,14 +17,18 @@
  */
 package fr.insideapp.sonarqube.objc.issues.oclint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.insideapp.sonarqube.objc.issues.oclint.builder.OCLintJSONCompilationDatabaseBuilder;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public final class OCLintJSONDatabaseBuilderTest {
@@ -51,7 +55,7 @@ public final class OCLintJSONDatabaseBuilderTest {
     }
 
     @Test
-    public void build_invalid_noFile() {
+    public void build_invalid_noFile() throws JsonProcessingException {
         assertContainer(new Container(
                 "invalidPath",
                 0
@@ -59,7 +63,7 @@ public final class OCLintJSONDatabaseBuilderTest {
     }
 
     @Test
-    public void build_invalid_file() {
+    public void build_invalid_file() throws JsonProcessingException {
         assertContainer(new Container(
                 "invalid",
                 0
@@ -67,7 +71,7 @@ public final class OCLintJSONDatabaseBuilderTest {
     }
 
     @Test
-    public void build_noFile() {
+    public void build_noFile() throws JsonProcessingException {
         assertContainer(new Container(
                 "noFile",
                 0
@@ -75,20 +79,23 @@ public final class OCLintJSONDatabaseBuilderTest {
     }
 
     @Test
-    public void build_twoFiles() {
+    public void build_twoFiles() throws JsonProcessingException {
         assertContainer(new Container(
                 "twoFiles",
                 2
         ));
     }
 
-    private void assertContainer(Container container) {
+    private void assertContainer(Container container) throws JsonProcessingException {
         // prepare
         File folder = new File(baseFolder, container.jsonCompilationDatabaseFolderPath);
         // test
         String compileCommands = builder.build(folder);
         // assert
-        JSONArray jsonArray = new JSONArray(compileCommands);
+        ObjectMapper objectMapper = new ObjectMapper()
+                .disable(FAIL_ON_UNKNOWN_PROPERTIES)
+                .enable(SerializationFeature.INDENT_OUTPUT);
+        final ArrayList<?> jsonArray = objectMapper.readValue(compileCommands, ArrayList.class);
         assertThat(jsonArray).hasSize(container.size);
     }
 
