@@ -17,8 +17,7 @@
  */
 package fr.insideapp.sonarqube.apple.xcode.warnings.parser;
 
-import fr.insideapp.sonarqube.apple.commons.result.models.WarningSummary;
-import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParser;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;

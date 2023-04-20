@@ -15,16 +15,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.result.models;
+package fr.insideapp.sonarqube.apple.xcode.warnings.parser.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValueDeserializer;
 
+import java.net.URI;
+
 public class DocumentLocation {
 
     @JsonProperty("url")
     @JsonDeserialize(using = ValueDeserializer.class)
-    public String url;
+    public URI uri;
 
 }

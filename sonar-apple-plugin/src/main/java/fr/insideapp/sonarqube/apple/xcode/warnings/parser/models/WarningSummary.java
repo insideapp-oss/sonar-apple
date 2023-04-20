@@ -15,18 +15,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.commons.result.models;
+package fr.insideapp.sonarqube.apple.xcode.warnings.parser.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValuesDeserializer;
+import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValueDeserializer;
 
-import java.util.List;
+public class WarningSummary {
 
-public class Issue {
+    @JsonProperty("issueType")
+    @JsonDeserialize(using = ValueDeserializer.class)
+    public String type;
 
-    @JsonProperty("warningSummaries")
-    @JsonDeserialize(using = ValuesDeserializer.class)
-    public List<WarningSummary> warnings;
+    @JsonProperty("documentLocationInCreatingWorkspace")
+    public DocumentLocation location;
+
+    @JsonProperty("message")
+    @JsonDeserialize(using = ValueDeserializer.class)
+    public String message;
 
 }

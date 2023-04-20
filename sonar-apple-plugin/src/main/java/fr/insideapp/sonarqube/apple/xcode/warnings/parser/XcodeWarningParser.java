@@ -21,8 +21,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.insideapp.sonarqube.apple.commons.parser.ReportListParser;
-import fr.insideapp.sonarqube.apple.commons.result.models.Issue;
-import fr.insideapp.sonarqube.apple.commons.result.models.WarningSummary;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.Issue;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.util.List;

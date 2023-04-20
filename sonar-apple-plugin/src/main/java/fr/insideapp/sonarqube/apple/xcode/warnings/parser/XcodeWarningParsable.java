@@ -18,7 +18,7 @@
 package fr.insideapp.sonarqube.apple.xcode.warnings.parser;
 
 import fr.insideapp.sonarqube.apple.commons.interfaces.ReportParsable;
-import fr.insideapp.sonarqube.apple.commons.result.models.WarningSummary;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.util.List;
