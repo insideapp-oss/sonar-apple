@@ -1,0 +1,10 @@
+[
+    {
+        "key": "note",
+        "name": "Notes",
+        "severity": "MINOR",
+        "description": "Notes.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    }
+]

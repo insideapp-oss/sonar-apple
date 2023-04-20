@@ -1,0 +1,18 @@
+[
+    {
+        "key": "swift-compiler-warning",
+        "name": "Swift Compiler Warning",
+        "severity": "MINOR",
+        "description": "A warning thrown by the Swift compiler.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "note",
+        "name": "Notes",
+        "severity": "MINOR",
+        "description": "Notes.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    }
+]

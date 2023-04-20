@@ -15,41 +15,38 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.warnings;
+package fr.insideapp.sonarqube.objc.issues.warnings;
 
-import fr.insideapp.sonarqube.apple.commons.result.models.WarningSummary;
-import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParser;
-import org.apache.commons.io.FileUtils;
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.List;
+import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class XcodeWarningParserTest {
+public class XcodeWarningObjectiveCRulesDefinitionTest {
 
-    private static final String BASE_DIR = "/xcode/warnings/parser";
-    private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
-
-    private XcodeWarningParser parser;
+    private JSONRulesDefinition rulesDefinition;
+    private ObjectiveC language;
+    private RulesDefinition.Context context;
 
     @Before
     public void prepare() {
-        parser = new XcodeWarningParser();
+        language = new ObjectiveC();
+        rulesDefinition = new XcodeWarningObjectiveCRulesDefinition(language);
+        context = new RulesDefinition.Context();
     }
 
     @Test
-    public void parse_oneTestRef() throws IOException {
-        // prepare
-        File recordFile = new File(baseDir, "record_oneWarning.json");
-        String recordJSON = FileUtils.readFileToString(recordFile, Charset.defaultCharset());
+    public void define() {
         // test
-        final List<WarningSummary> warningSummaries = parser.parse(recordJSON);
+        rulesDefinition.define(context);
         // assert
-        assertThat(warningSummaries).hasSize(1);
+        RulesDefinition.Repository repository = context.repository("XcodeWarningObjc");
+        assertThat(repository).isNotNull();
+        assertThat(repository.name()).isEqualTo("XcodeWarningObjc");
+        assertThat(repository.language()).isEqualTo(language.getKey());
+        assertThat(repository.rules()).hasSize(1);
     }
 }
