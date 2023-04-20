@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.warnings.mapper;
+package fr.insideapp.sonarqube.apple.xcode.warnings.converter;
 
 import fr.insideapp.sonarqube.apple.commons.mapper.AbstractReportMapper;
 import fr.insideapp.sonarqube.apple.commons.utils.QueryParameterUtils;
@@ -33,14 +33,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @ScannerSide
-public final class XcodeWarningsMapper extends AbstractReportMapper<List<WarningSummary>, XcodeWarning> implements XcodeWarningMappable {
+public final class XcodeWarningsConverter extends AbstractReportMapper<List<WarningSummary>, XcodeWarning> implements XcodeWarningConvertible {
 
-    private static final Logger LOGGER = Loggers.get(XcodeWarningsMapper.class);
+    private static final Logger LOGGER = Loggers.get(XcodeWarningsConverter.class);
 
     @Override
     protected Set<XcodeWarning> perform(List<WarningSummary> input) throws Exception {
         return input.stream()
-            .map(XcodeWarningsMapper::mapping)
+            .map(XcodeWarningsConverter::mapping)
             .collect(Collectors.toSet());
     }
 

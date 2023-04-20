@@ -18,6 +18,7 @@
 package fr.insideapp.sonarqube.apple.xcode.warnings.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.insideapp.sonarqube.apple.xcode.warnings.converter.XcodeWarningsConverter;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarning;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarningLocation;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarningType;
@@ -35,29 +36,29 @@ import java.util.List;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class XcodeWarningsMapperTest {
+public final class XcodeWarningsConverterTest {
 
-    private static final String BASE_DIR = "/xcode/warnings/mapper";
+    private static final String BASE_DIR = "/xcode/warnings/converter";
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
-    private XcodeWarningsMapper mapper;
+    private XcodeWarningsConverter converter;
     private ObjectMapper objectMapper;
 
 
     @Before
     public void prepare() {
-        mapper = new XcodeWarningsMapper();
+        converter = new XcodeWarningsConverter();
         objectMapper = new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
     @Test
-    public void map_oneWarning_noLocation() throws IOException {
+    public void convert_oneWarning_noLocation() throws IOException {
         // prepare
         File warningSummaryFile = new File(baseDir, "warningSummary_noLocation.json");
         String warningSummaryJSON = FileUtils.readFileToString(warningSummaryFile, Charset.defaultCharset());
         WarningSummary warningSummary = objectMapper.readValue(warningSummaryJSON, WarningSummary.class);
         // test
-        final List<XcodeWarning> warnings = new ArrayList<>(mapper.map(List.of(warningSummary)));
+        final List<XcodeWarning> warnings = new ArrayList<>(converter.map(List.of(warningSummary)));
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);
@@ -67,13 +68,13 @@ public final class XcodeWarningsMapperTest {
     }
 
     @Test
-    public void map_oneWarning_withLocation() throws IOException {
+    public void convert_oneWarning_withLocation() throws IOException {
         // prepare
         File warningSummaryFile = new File(baseDir, "warningSummary_withLocation.json");
         String warningSummaryJSON = FileUtils.readFileToString(warningSummaryFile, Charset.defaultCharset());
         WarningSummary warningSummary = objectMapper.readValue(warningSummaryJSON, WarningSummary.class);
         // test
-        final List<XcodeWarning> warnings = new ArrayList<>(mapper.map(List.of(warningSummary)));
+        final List<XcodeWarning> warnings = new ArrayList<>(converter.map(List.of(warningSummary)));
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);
@@ -86,13 +87,13 @@ public final class XcodeWarningsMapperTest {
     }
 
     @Test
-    public void map_oneWarning_missingLineNumber() throws IOException {
+    public void convert_oneWarning_missingLineNumber() throws IOException {
         // prepare
         File warningSummaryFile = new File(baseDir, "warningSummary_missingLineNumber.json");
         String warningSummaryJSON = FileUtils.readFileToString(warningSummaryFile, Charset.defaultCharset());
         WarningSummary warningSummary = objectMapper.readValue(warningSummaryJSON, WarningSummary.class);
         // test
-        final List<XcodeWarning> warnings = new ArrayList<>(mapper.map(List.of(warningSummary)));
+        final List<XcodeWarning> warnings = new ArrayList<>(converter.map(List.of(warningSummary)));
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);
@@ -102,13 +103,13 @@ public final class XcodeWarningsMapperTest {
     }
 
     @Test
-    public void map_oneWarning_missingFilePath() throws IOException {
+    public void convert_oneWarning_missingFilePath() throws IOException {
         // prepare
         File warningSummaryFile = new File(baseDir, "warningSummary_missingFilePath.json");
         String warningSummaryJSON = FileUtils.readFileToString(warningSummaryFile, Charset.defaultCharset());
         WarningSummary warningSummary = objectMapper.readValue(warningSummaryJSON, WarningSummary.class);
         // test
-        final List<XcodeWarning> warnings = new ArrayList<>(mapper.map(List.of(warningSummary)));
+        final List<XcodeWarning> warnings = new ArrayList<>(converter.map(List.of(warningSummary)));
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);

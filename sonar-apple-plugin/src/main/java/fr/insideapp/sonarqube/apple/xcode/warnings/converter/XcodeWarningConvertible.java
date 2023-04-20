@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.warnings.mapper;
+package fr.insideapp.sonarqube.apple.xcode.warnings.converter;
 
 import fr.insideapp.sonarqube.apple.commons.interfaces.ReportMappable;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarning;
@@ -25,5 +25,5 @@ import org.sonar.api.scanner.ScannerSide;
 import java.util.List;
 
 @ScannerSide
-public interface XcodeWarningMappable extends ReportMappable<List<WarningSummary>, XcodeWarning> {
+public interface XcodeWarningConvertible extends ReportMappable<List<WarningSummary>, XcodeWarning> {
 }

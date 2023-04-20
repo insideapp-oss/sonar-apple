@@ -19,7 +19,7 @@ package fr.insideapp.sonarqube.apple.xcode.warnings;
 ;
 import fr.insideapp.sonarqube.apple.XcodeResultExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.runner.XcodeResultReadRunnable;
-import fr.insideapp.sonarqube.apple.xcode.warnings.mapper.XcodeWarningMappable;
+import fr.insideapp.sonarqube.apple.xcode.warnings.converter.XcodeWarningConvertible;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarning;
 import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParsable;
 import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
@@ -40,7 +40,7 @@ public class XcodeWarningsSensor implements Sensor {
     private final XcodeResultExtensionProvider extensionProvider;
     private final XcodeResultReadRunnable runner;
     private final XcodeWarningParsable parser;
-    private final XcodeWarningMappable mapper;
+    private final XcodeWarningConvertible mapper;
 
     public XcodeWarningsSensor(
         final Swift swift,
@@ -48,7 +48,7 @@ public class XcodeWarningsSensor implements Sensor {
         final XcodeResultExtensionProvider extensionProvider,
         final XcodeResultReadRunnable runner,
         final XcodeWarningParsable parser,
-        final XcodeWarningMappable mapper
+        final XcodeWarningConvertible mapper
     ) {
         this.swift = swift;
         this.objectiveC = objectiveC;
