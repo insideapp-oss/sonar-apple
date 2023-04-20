@@ -17,6 +17,10 @@
  */
 package fr.insideapp.sonarqube.apple.xcode.warnings;
 
+import fr.insideapp.sonarqube.apple.XcodeResultExtensionProvider;
+import fr.insideapp.sonarqube.apple.xcode.runner.XcodeResultReadRunnable;
+import fr.insideapp.sonarqube.apple.xcode.warnings.mapper.XcodeWarningMappable;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParsable;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.apache.commons.io.FileUtils;
@@ -28,6 +32,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class XcodeWarningsSensorTest {
 
@@ -46,7 +51,11 @@ public final class XcodeWarningsSensorTest {
         objectiveC = new ObjectiveC();
         sensor = new XcodeWarningsSensor(
             swift,
-            objectiveC
+            objectiveC,
+            new XcodeResultExtensionProvider(),
+            mock(XcodeResultReadRunnable.class),
+            mock(XcodeWarningParsable.class),
+            mock(XcodeWarningMappable.class)
         );
     }
 

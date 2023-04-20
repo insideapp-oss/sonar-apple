@@ -17,23 +17,45 @@
  */
 package fr.insideapp.sonarqube.apple.xcode.warnings;
 ;
+import fr.insideapp.sonarqube.apple.XcodeResultExtensionProvider;
+import fr.insideapp.sonarqube.apple.xcode.runner.XcodeResultReadRunnable;
+import fr.insideapp.sonarqube.apple.xcode.warnings.mapper.XcodeWarningMappable;
+import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarning;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParsable;
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class XcodeWarningsSensor implements Sensor {
 
     private final Swift swift;
     private final ObjectiveC objectiveC;
+    private final XcodeResultExtensionProvider extensionProvider;
+    private final XcodeResultReadRunnable runner;
+    private final XcodeWarningParsable parser;
+    private final XcodeWarningMappable mapper;
 
     public XcodeWarningsSensor(
         final Swift swift,
-        final ObjectiveC objectiveC
+        final ObjectiveC objectiveC,
+        final XcodeResultExtensionProvider extensionProvider,
+        final XcodeResultReadRunnable runner,
+        final XcodeWarningParsable parser,
+        final XcodeWarningMappable mapper
     ) {
         this.swift = swift;
         this.objectiveC = objectiveC;
+        this.extensionProvider = extensionProvider;
+        this.runner = runner;
+        this.parser = parser;
+        this.mapper = mapper;
     }
 
     @Override
@@ -45,6 +67,10 @@ public class XcodeWarningsSensor implements Sensor {
 
     @Override
     public void execute(SensorContext sensorContext) {
+        final File resultBundle = extensionProvider.resultBundle(sensorContext.fileSystem(), sensorContext.config());
+        final String xcodeResultReadOutput = runner.run(resultBundle);
+        final List<WarningSummary> warningSummaries = parser.parse(xcodeResultReadOutput);
+        List<XcodeWarning> xcodeWarnings = mapper.map(warningSummaries).stream().collect(Collectors.toList());
         // TODO
     }
 }
