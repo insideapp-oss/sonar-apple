@@ -20,9 +20,15 @@ package fr.insideapp.sonarqube.apple.xcode.warnings.models;
 public enum XcodeWarningType {
 
     // Notes
-    NOTE,
+    NOTE("note"),
     // A warning thrown by the Swift compiler.
-    SWIFT_WARNING;
+    SWIFT_WARNING("swift-compiler-warning");
+
+    public final String identifier;
+
+    private XcodeWarningType(final String identifier) {
+        this.identifier = identifier;
+    }
 
     public static XcodeWarningType builder(String type) {
         switch (type) {
