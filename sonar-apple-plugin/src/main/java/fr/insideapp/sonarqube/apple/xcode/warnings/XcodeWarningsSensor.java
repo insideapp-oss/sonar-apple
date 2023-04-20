@@ -16,25 +16,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.insideapp.sonarqube.apple.xcode.warnings;
+;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.swift.Swift;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
-import org.junit.Before;
-import org.junit.Test;
+public class XcodeWarningsSensor implements Sensor {
 
-import static org.assertj.core.api.Assertions.assertThat;
+    private final Swift swift;
+    private final ObjectiveC objectiveC;
 
-public final class XcodeWarningExtensionProviderTest {
-
-    private XcodeWarningExtensionProvider provider;
-
-    @Before
-    public void prepare() {
-        provider = new XcodeWarningExtensionProvider();
+    public XcodeWarningsSensor(
+        final Swift swift,
+        final ObjectiveC objectiveC
+    ) {
+        this.swift = swift;
+        this.objectiveC = objectiveC;
     }
 
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(3);
+    @Override
+    public void describe(SensorDescriptor sensorDescriptor) {
+        sensorDescriptor
+            .name("Xcode Warnings")
+            .onlyOnLanguages(swift.getKey(), objectiveC.getKey());
     }
 
+    @Override
+    public void execute(SensorContext sensorContext) {
+        // TODO
+    }
 }
-
