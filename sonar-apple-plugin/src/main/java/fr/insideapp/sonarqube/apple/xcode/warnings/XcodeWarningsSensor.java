@@ -20,12 +20,14 @@ package fr.insideapp.sonarqube.apple.xcode.warnings;
 import fr.insideapp.sonarqube.apple.XcodeResultExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
+import fr.insideapp.sonarqube.apple.commons.warnings.XcodeWarningRulesDefinition;
 import fr.insideapp.sonarqube.apple.xcode.runner.XcodeResultReadRunnable;
 import fr.insideapp.sonarqube.apple.xcode.warnings.converter.XcodeWarningConvertible;
 import fr.insideapp.sonarqube.apple.xcode.warnings.mapper.XcodeWarningsMappable;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarning;
 import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParsable;
 import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
+import fr.insideapp.sonarqube.apple.xcode.warnings.splitter.XcodeWarningsReportIssueSplittable;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.sonar.api.batch.sensor.Sensor;
@@ -34,6 +36,7 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class XcodeWarningsSensor implements Sensor {
@@ -45,6 +48,7 @@ public class XcodeWarningsSensor implements Sensor {
     private final XcodeWarningParsable parser;
     private final XcodeWarningConvertible converter;
     private final XcodeWarningsMappable mapper;
+    private final XcodeWarningsReportIssueSplittable splitter;
 
     public XcodeWarningsSensor(
         final Swift swift,
@@ -53,7 +57,8 @@ public class XcodeWarningsSensor implements Sensor {
         final XcodeResultReadRunnable runner,
         final XcodeWarningParsable parser,
         final XcodeWarningConvertible converter,
-        final XcodeWarningsMappable mapper
+        final XcodeWarningsMappable mapper,
+        final XcodeWarningsReportIssueSplittable splitter
     ) {
         this.swift = swift;
         this.objectiveC = objectiveC;
@@ -62,6 +67,7 @@ public class XcodeWarningsSensor implements Sensor {
         this.parser = parser;
         this.converter = converter;
         this.mapper = mapper;
+        this.splitter = splitter;
     }
 
     @Override
@@ -78,8 +84,8 @@ public class XcodeWarningsSensor implements Sensor {
         final List<WarningSummary> warningSummaries = parser.parse(xcodeResultReadOutput);
         List<XcodeWarning> xcodeWarnings = converter.map(warningSummaries).stream().collect(Collectors.toList());
         List<ReportIssue> reportIssues = mapper.map(xcodeWarnings).stream().collect(Collectors.toList());
-        // TODO: split
+        Map<XcodeWarningRulesDefinition, List<ReportIssue>> splitReportIssues = splitter.split(reportIssues, sensorContext.activeRules());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
-        // TODO
+        splitReportIssues.forEach((rulesDefinition, splitIssues) -> issueRecorder.recordIssues(splitIssues, rulesDefinition.getRepositoryKey(), sensorContext));
     }
 }

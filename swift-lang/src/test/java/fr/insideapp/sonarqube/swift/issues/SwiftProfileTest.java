@@ -22,6 +22,7 @@ import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
+import fr.insideapp.sonarqube.swift.issues.warnings.XcodeWarningSwiftRulesDefinition;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
@@ -45,7 +46,8 @@ public final class SwiftProfileTest {
                 new RepositoryRuleParser(),
                 new SwiftLintRulesDefinition(swift),
                 new MobSFScanSwiftRulesDefinition(swift),
-                new PeripheryRulesDefinition(swift)
+                new PeripheryRulesDefinition(swift),
+                new XcodeWarningSwiftRulesDefinition(swift)
         );
     }
 
@@ -59,7 +61,7 @@ public final class SwiftProfileTest {
         assertThat(builtProfile).isNotNull();
         assertThat(builtProfile.language()).isEqualTo(swift.getKey());
         assertThat(builtProfile.name()).isEqualTo(swift.getName());
-        assertThat(builtProfile.rules()).hasSize(241);
+        assertThat(builtProfile.rules()).hasSize(243);
     }
 
 }

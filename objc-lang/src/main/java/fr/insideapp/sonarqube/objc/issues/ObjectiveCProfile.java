@@ -21,18 +21,24 @@ import fr.insideapp.sonarqube.apple.commons.rules.*;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
 import fr.insideapp.sonarqube.objc.issues.oclint.OCLintRulesDefinition;
+import fr.insideapp.sonarqube.objc.issues.warnings.XcodeWarningObjectiveCRulesDefinition;
 
 import java.util.List;
 
 public class ObjectiveCProfile extends ProfilesDefinition {
 
     public ObjectiveCProfile(
-            final ObjectiveC objectiveC,
-            final RepositoryRuleParsable parser,
-            final OCLintRulesDefinition ocLintRulesDefinition,
-            final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition
-    ) {
-        super(objectiveC, parser, List.of(ocLintRulesDefinition, mobSFScanObjectiveCRulesDefinition));
+        final ObjectiveC objectiveC,
+        final RepositoryRuleParsable parser,
+        final OCLintRulesDefinition ocLintRulesDefinition,
+        final MobSFScanObjectiveCRulesDefinition mobSFScanObjectiveCRulesDefinition,
+        final XcodeWarningObjectiveCRulesDefinition xcodeWarningObjectiveCRulesDefinition
+        ) {
+        super(objectiveC, parser, List.of(
+            ocLintRulesDefinition,
+            mobSFScanObjectiveCRulesDefinition,
+            xcodeWarningObjectiveCRulesDefinition
+        ));
     }
 
 }
