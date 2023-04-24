@@ -15,21 +15,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.mobsfscan.splitter;
+package fr.insideapp.sonarqube.apple.commons.issues;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueSplitter;
-import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.scanner.ScannerSide;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @ScannerSide
-public class MobSFScanReportIssueSplitter extends ReportIssueSplitter<MobSFScanRulesDefinition> implements MobSFScanReportIssueSplittable {
+public interface ReportIssueSplittable<T extends JSONRulesDefinition> {
 
-    public MobSFScanReportIssueSplitter(
-            final List<MobSFScanRulesDefinition> mobSFScanRulesDefinitions
-    ) {
-        super(mobSFScanRulesDefinitions);
-    }
+    Map<T, List<ReportIssue>> split(List<ReportIssue> issues, ActiveRules rules);
 
 }
