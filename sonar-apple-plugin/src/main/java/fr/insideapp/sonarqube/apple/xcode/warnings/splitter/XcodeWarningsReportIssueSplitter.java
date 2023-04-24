@@ -15,26 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.warnings;
+package fr.insideapp.sonarqube.apple.xcode.warnings.splitter;
 
-import org.junit.Before;
-import org.junit.Test;
+import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueSplitter;
+import fr.insideapp.sonarqube.apple.commons.warnings.XcodeWarningRulesDefinition;
+import org.sonar.api.scanner.ScannerSide;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+@ScannerSide
+public class XcodeWarningsReportIssueSplitter extends ReportIssueSplitter<XcodeWarningRulesDefinition> implements XcodeWarningsReportIssueSplittable {
 
-public final class XcodeWarningExtensionProviderTest {
-
-    private XcodeWarningExtensionProvider provider;
-
-    @Before
-    public void prepare() {
-        provider = new XcodeWarningExtensionProvider();
-    }
-
-    @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
+    public XcodeWarningsReportIssueSplitter(
+        final List<XcodeWarningRulesDefinition> rulesDefinitions
+    ) {
+        super(rulesDefinitions);
     }
 
 }
-

@@ -44,7 +44,6 @@ public class XcodeWarningsSensor implements Sensor {
     private final XcodeResultReadRunnable runner;
     private final XcodeWarningParsable parser;
     private final XcodeWarningConvertible converter;
-
     private final XcodeWarningsMappable mapper;
 
     public XcodeWarningsSensor(
