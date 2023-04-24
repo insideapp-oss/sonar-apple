@@ -15,10 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.xcode.warnings.mapper;
+package fr.insideapp.sonarqube.apple.xcode.warnings.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.insideapp.sonarqube.apple.xcode.warnings.converter.XcodeWarningsConverter;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarning;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarningLocation;
 import fr.insideapp.sonarqube.apple.xcode.warnings.models.XcodeWarningType;

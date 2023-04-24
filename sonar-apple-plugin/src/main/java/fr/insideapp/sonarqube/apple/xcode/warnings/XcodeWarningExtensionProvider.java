@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.apple.xcode.warnings;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.warnings.converter.XcodeWarningsConverter;
+import fr.insideapp.sonarqube.apple.xcode.warnings.mapper.XcodeWarningsMapper;
 import fr.insideapp.sonarqube.apple.xcode.warnings.parser.XcodeWarningParser;
 import fr.insideapp.sonarqube.objc.issues.warnings.XcodeWarningObjectiveCRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.warnings.XcodeWarningSwiftRulesDefinition;
@@ -36,6 +37,7 @@ public final class XcodeWarningExtensionProvider implements ExtensionProvider {
             XcodeWarningSwiftRulesDefinition.class,
             XcodeWarningParser.class,
             XcodeWarningsConverter.class,
+            XcodeWarningsMapper.class,
             XcodeWarningsSensor.class
         );
     }
