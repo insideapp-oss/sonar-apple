@@ -82,7 +82,7 @@ public final class XcodeWarningsConverterTest {
         assertThat(warning.location).isNotNull();
         XcodeWarningLocation location = warning.location;
         assertThat(location.filePath).isEqualTo("/path/to/file/TestObjectiveC.m");
-        assertThat(location.lineNumber).isEqualTo(14);
+        assertThat(location.lineNumber).isEqualTo(15);
     }
 
     @Test
