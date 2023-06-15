@@ -59,7 +59,7 @@ public final class ObjectiveCProfileTest {
         assertThat(builtProfile).isNotNull();
         assertThat(builtProfile.language()).isEqualTo(objectiveC.getKey());
         assertThat(builtProfile.name()).isEqualTo(objectiveC.getName());
-        assertThat(builtProfile.rules()).hasSize(88);
+        assertThat(builtProfile.rules()).hasSize(91);
     }
 
 }

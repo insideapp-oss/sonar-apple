@@ -1,9 +1,17 @@
 [
     {
-        "key": "swift-compiler-warning",
-        "name": "Swift Compiler Warning",
+        "key": "swift-compiler",
+        "name": "Swift Compiler",
         "severity": "MINOR",
-        "description": "A warning thrown by the Swift compiler.",
+        "description": "Thrown by the Swift compiler.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "deprecation",
+        "name": "Deprecation",
+        "severity": "MINOR",
+        "description": "The usage of a deprecated API.",
         "type": "CODE_SMELL",
         "debt": "5min"
     },

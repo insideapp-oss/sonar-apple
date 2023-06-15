@@ -36,8 +36,7 @@ public final class QueryParameterUtils {
         final String[] components = Stream.of(rawQuery.split("&"))
             .filter(StringUtils::isNotEmpty) // remove empty values
             .toArray(String[]::new);
-        for (int i = 0; i < components.length; i++) {
-            String component = components[i];
+        for(String component: components) {
             // splitting the parameter using the separator "="
             final String[] parameter = Stream.of(component.split("="))
                 .filter(StringUtils::isNotEmpty) // remove empty values

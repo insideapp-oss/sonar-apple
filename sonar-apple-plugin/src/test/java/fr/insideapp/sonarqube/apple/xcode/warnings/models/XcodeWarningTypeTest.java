@@ -40,7 +40,7 @@ public final class XcodeWarningTypeTest {
     @Before
     public void prepare() {
         data = Map.ofEntries(
-            entry("Swift Compiler Warning", SWIFT_WARNING),
+            entry("Swift Compiler Warning", SWIFT_COMPILER),
             entry("dummy random data", NOTE)
         );
     }

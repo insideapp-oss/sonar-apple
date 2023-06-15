@@ -47,6 +47,6 @@ public class XcodeWarningObjectiveCRulesDefinitionTest {
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("XcodeWarningObjc");
         assertThat(repository.language()).isEqualTo(language.getKey());
-        assertThat(repository.rules()).hasSize(1);
+        assertThat(repository.rules()).hasSize(4);
     }
 }

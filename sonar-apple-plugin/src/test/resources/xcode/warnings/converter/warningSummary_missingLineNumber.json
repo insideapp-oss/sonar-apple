@@ -16,7 +16,7 @@
             "_type" : {
                 "_name" : "String"
             },
-            "_value": "file:///path/to/file/TestObjectiveC.m#CharacterRangeLen=0&EndingColumnNumber=32&EndingLineNumber=14&StartingColumnNumber=32"
+            "_value": "file:///path/to/file/TestObjectiveC.m"
         }
     }
 }

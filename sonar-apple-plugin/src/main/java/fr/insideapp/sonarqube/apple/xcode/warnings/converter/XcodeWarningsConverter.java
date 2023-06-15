@@ -56,10 +56,14 @@ public final class XcodeWarningsConverter extends AbstractReportMapper<List<Warn
         try {
             String filePath = uri.getPath();
             String rawQueryParameters = uri.getFragment();
-            Map<String, String> warningLocationData = QueryParameterUtils.parse(rawQueryParameters);
-            String rawLineNumber = warningLocationData.get("StartingLineNumber");
-            Integer lineNumber = Integer.valueOf(rawLineNumber);
-            return new XcodeWarningLocation(filePath, lineNumber + 1); // I don't know why, there is an offset of one
+            if (rawQueryParameters == null) {
+                return new XcodeWarningLocation(filePath, null);
+            } else {
+                Map<String, String> warningLocationData = QueryParameterUtils.parse(rawQueryParameters);
+                String rawLineNumber = warningLocationData.get("StartingLineNumber");
+                Integer lineNumber = Integer.valueOf(rawLineNumber);
+                return new XcodeWarningLocation(filePath, lineNumber + 1); // I don't know why, there is an offset of one
+            }
         } catch (Exception e) {
             LOGGER.info("An exception occurred while mapping Xcode warning data. Please run in debug mode for more information.");
             LOGGER.debug("{}", e);

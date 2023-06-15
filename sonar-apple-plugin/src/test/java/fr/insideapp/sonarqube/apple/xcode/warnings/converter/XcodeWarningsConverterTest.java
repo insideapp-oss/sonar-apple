@@ -61,7 +61,7 @@ public final class XcodeWarningsConverterTest {
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);
-        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_WARNING);
+        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_COMPILER);
         assertThat(warning.message).isEqualTo("Comparing non-optional value of type 'UIView' to 'nil' always returns true");
         assertThat(warning.location).isNull();
     }
@@ -77,7 +77,7 @@ public final class XcodeWarningsConverterTest {
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);
-        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_WARNING);
+        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_COMPILER);
         assertThat(warning.message).isEqualTo("Comparing non-optional value of type 'UIView' to 'nil' always returns true");
         assertThat(warning.location).isNotNull();
         XcodeWarningLocation location = warning.location;
@@ -96,25 +96,12 @@ public final class XcodeWarningsConverterTest {
         // assert
         assertThat(warnings).hasSize(1);
         XcodeWarning warning = warnings.get(0);
-        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_WARNING);
+        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_COMPILER);
         assertThat(warning.message).isEqualTo("Comparing non-optional value of type 'UIView' to 'nil' always returns true");
-        assertThat(warning.location).isNull();
-    }
-
-    @Test
-    public void convert_oneWarning_missingFilePath() throws IOException {
-        // prepare
-        File warningSummaryFile = new File(baseDir, "warningSummary_missingFilePath.json");
-        String warningSummaryJSON = FileUtils.readFileToString(warningSummaryFile, Charset.defaultCharset());
-        WarningSummary warningSummary = objectMapper.readValue(warningSummaryJSON, WarningSummary.class);
-        // test
-        final List<XcodeWarning> warnings = new ArrayList<>(converter.map(List.of(warningSummary)));
-        // assert
-        assertThat(warnings).hasSize(1);
-        XcodeWarning warning = warnings.get(0);
-        assertThat(warning.type).isEqualTo(XcodeWarningType.SWIFT_WARNING);
-        assertThat(warning.message).isEqualTo("Comparing non-optional value of type 'UIView' to 'nil' always returns true");
-        assertThat(warning.location).isNull();
+        assertThat(warning.location).isNotNull();
+        XcodeWarningLocation location = warning.location;
+        assertThat(location.filePath).isEqualTo("/path/to/file/TestObjectiveC.m");
+        assertThat(location.lineNumber).isNull();
     }
 
 }

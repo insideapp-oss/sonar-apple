@@ -1,5 +1,29 @@
 [
     {
+        "key": "c-compiler",
+        "name": "C Compiler",
+        "severity": "MINOR",
+        "description": "Thrown by the C compiler.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "value-conversion",
+        "name": "Value Conversion",
+        "severity": "MINOR",
+        "description": "Implicit conversion loses integer precision.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "deprecation",
+        "name": "Deprecation",
+        "severity": "MINOR",
+        "description": "The usage of a deprecated API.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
         "key": "note",
         "name": "Notes",
         "severity": "MINOR",
