@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.insideapp.sonarqube.apple.xcode.warnings;
-;
+
 import fr.insideapp.sonarqube.apple.XcodeResultExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
@@ -35,9 +35,9 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class XcodeWarningsSensor implements Sensor {
 
@@ -82,8 +82,8 @@ public class XcodeWarningsSensor implements Sensor {
         final File resultBundle = extensionProvider.resultBundle(sensorContext.fileSystem(), sensorContext.config());
         final String xcodeResultReadOutput = runner.run(resultBundle);
         final List<WarningSummary> warningSummaries = parser.parse(xcodeResultReadOutput);
-        List<XcodeWarning> xcodeWarnings = converter.map(warningSummaries).stream().collect(Collectors.toList());
-        List<ReportIssue> reportIssues = mapper.map(xcodeWarnings).stream().collect(Collectors.toList());
+        List<XcodeWarning> xcodeWarnings = new ArrayList<>(converter.map(warningSummaries));
+        List<ReportIssue> reportIssues = new ArrayList<>(mapper.map(xcodeWarnings));
         Map<XcodeWarningRulesDefinition, List<ReportIssue>> splitReportIssues = splitter.split(reportIssues, sensorContext.activeRules());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         splitReportIssues.forEach((rulesDefinition, splitIssues) -> issueRecorder.recordIssues(splitIssues, rulesDefinition.getRepositoryKey(), sensorContext));
