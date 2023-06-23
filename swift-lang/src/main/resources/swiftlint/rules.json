@@ -1750,5 +1750,93 @@
         "description": "Use shorthand syntax for optional binding",
         "type": "CODE_SMELL",
         "debt": "5min"
+    },
+    {
+        "key": "blanket_disable_command",
+        "name": "Blanket Disable Command",
+        "severity": "MAJOR",
+        "description": "swiftlint:disable commands should be re-enabled before the end of the file",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "direct_return",
+        "name": "Direct Return",
+        "severity": "MINOR",
+        "description": "Directly return the expression instead of assigning it to a variable first",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "duplicate_conditions",
+        "name": "Duplicate Conditions",
+        "severity": "MAJOR",
+        "description": "Duplicate sets of conditions in the same branch instruction should be avoided",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "invalid_swiftlint_command",
+        "name": "Invalid SwiftLint Command",
+        "severity": "MINOR",
+        "description": "swiftlint command does not have a valid action or modifier",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "local_doc_comment",
+        "name": "Local Doc Comment",
+        "severity": "MINOR",
+        "description": "Prefer regular comments over doc comments in local scopes",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "period_spacing",
+        "name": "Period Spacing",
+        "severity": "MINOR",
+        "description": "Periods should not be followed by more than one space",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "redundant_self_in_closure",
+        "name": "Redundant Self in Closure",
+        "severity": "MAJOR",
+        "description": "Explicit use of 'self' is not required",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "sorted_enum_cases",
+        "name": "Sorted Enum Cases",
+        "severity": "MINOR",
+        "description": "Enum cases should be sorted",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "superfluous_else",
+        "name": "Superfluous Else",
+        "severity": "MAJOR",
+        "description": "Else branches should be avoided when the previous if-block exits the current scope",
+        "type": "BUG",
+        "debt": "5min"
+    },
+    {
+        "key": "unhandled_throwing_task",
+        "name": "Unhandled Throwing Task",
+        "severity": "CRITICAL",
+        "description": "Errors thrown inside this task are not handled, which may be unexpected. Handle errors inside the task, or use `try await` to access the Tasks value and handle errors. See this forum thread for more details: https://forums.swift.org/t/task-initializer-with-throwing-closure-swallows-error/56066",
+        "type": "BUG",
+        "debt": "15min"
+    },
+    {
+        "key": "unneeded_synthesized_initializer",
+        "name": "Unneeded Synthesized Initializer",
+        "severity": "MINOR",
+        "description": "Default or memberwise initializers that will be automatically synthesized do not need to be manually defined.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     }
 ]
