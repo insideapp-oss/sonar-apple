@@ -44,7 +44,14 @@ public class XcodeWarningsMapper extends AbstractReportMapper<List<XcodeWarning>
                     )
                 );
             } else {
-                // no-op
+                issues.add(
+                    new ReportIssue(
+                        warning.type.identifier,
+                        warning.message,
+                        null,
+                        null
+                    )
+                );
             }
         }
         return issues;

@@ -48,9 +48,14 @@ public final class XcodeWarningsMapperTest {
             null
         );
         // test
-        final Set<ReportIssue> issues = mapper.map(List.of(warning));
+        final List<ReportIssue> issues = new ArrayList<>(mapper.map(List.of(warning)));
         // assert
-        assertThat(issues).hasSize(0);
+        assertThat(issues).hasSize(1);
+        ReportIssue issue = issues.get(0);
+        assertThat(issue.getRuleId()).isEqualTo(warning.type.identifier);
+        assertThat(issue.getMessage()).isEqualTo(warning.message);
+        assertThat(issue.getFilePath()).isNull();
+        assertThat(issue.getLineNumber()).isNull();
     }
 
     @Test
