@@ -41,6 +41,16 @@ public final class XcodeWarningTypeTest {
     public void prepare() {
         data = Map.ofEntries(
             entry("Swift Compiler Warning", SWIFT_COMPILER),
+            entry("Format String Issue", CLANG_COMPILER),
+            entry("Semantic Issue", CLANG_COMPILER),
+            entry("Value Conversion Issue", CLANG_COMPILER),
+            entry("Lexical or Preprocessor Issue", CLANG_COMPILER),
+            entry("Nullability Issue", CLANG_COMPILER),
+            entry("Deprecations", DEPRECATION),
+            entry("Deprecation", DEPRECATION),
+            entry("No-usage", UNUSED),
+            entry("Warning", PROJECT),
+            entry("Target Integrity", PROJECT),
             entry("dummy random data", NOTE)
         );
     }
@@ -54,6 +64,13 @@ public final class XcodeWarningTypeTest {
             // assert
             assertThat(type).isEqualTo(expected);
         });
+    }
+    @Test
+    public void count() {
+        // test
+        final XcodeWarningType[] types = XcodeWarningType.values();
+        // assert
+        assertThat(types.length).isEqualTo(6);
     }
 
 }

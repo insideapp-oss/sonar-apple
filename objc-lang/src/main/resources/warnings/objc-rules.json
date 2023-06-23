@@ -1,17 +1,9 @@
 [
     {
-        "key": "c-compiler",
-        "name": "C Compiler",
-        "severity": "MINOR",
-        "description": "Thrown by the C compiler.",
-        "type": "CODE_SMELL",
-        "debt": "5min"
-    },
-    {
-        "key": "value-conversion",
-        "name": "Value Conversion",
-        "severity": "MINOR",
-        "description": "Implicit conversion loses integer precision.",
+        "key": "clang-compiler",
+        "name": "Clang Compiler",
+        "severity": "MAJOR",
+        "description": "Thrown by the Clang compiler.",
         "type": "CODE_SMELL",
         "debt": "5min"
     },
@@ -20,6 +12,22 @@
         "name": "Deprecation",
         "severity": "MINOR",
         "description": "The usage of a deprecated API.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "no-usage",
+        "name": "Unused",
+        "severity": "MINOR",
+        "description": "This code is unused.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "project",
+        "name": "Xcode",
+        "severity": "MAJOR",
+        "description": "Thrown by the Xcode build system.",
         "type": "CODE_SMELL",
         "debt": "5min"
     },

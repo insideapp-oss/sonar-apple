@@ -2,7 +2,7 @@
     {
         "key": "swift-compiler",
         "name": "Swift Compiler",
-        "severity": "MINOR",
+        "severity": "MAJOR",
         "description": "Thrown by the Swift compiler.",
         "type": "CODE_SMELL",
         "debt": "5min"
@@ -12,6 +12,14 @@
         "name": "Deprecation",
         "severity": "MINOR",
         "description": "The usage of a deprecated API.",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "project",
+        "name": "Xcode",
+        "severity": "MAJOR",
+        "description": "Thrown by the Xcode build system.",
         "type": "CODE_SMELL",
         "debt": "5min"
     },

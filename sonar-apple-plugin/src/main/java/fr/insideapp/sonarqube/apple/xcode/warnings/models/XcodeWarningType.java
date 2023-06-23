@@ -19,13 +19,12 @@ package fr.insideapp.sonarqube.apple.xcode.warnings.models;
 
 public enum XcodeWarningType {
 
-    // TODO: split this enum into Swift and Objective-C enums?
-
-    NOTE("note"),
     SWIFT_COMPILER("swift-compiler"),
+    CLANG_COMPILER("clang-compiler"),
     DEPRECATION("deprecation"),
-    C_COMPILER("c-compiler"),
-    VALUE_CONVERSION("value-conversion");
+    UNUSED("no-usage"),
+    PROJECT("project"),
+    NOTE("note");
 
     public final String identifier;
 
@@ -37,13 +36,20 @@ public enum XcodeWarningType {
         switch (type) {
             case "Swift Compiler Warning":
                 return SWIFT_COMPILER;
-            case "Deprecations":
-                case "Deprecation":
-                return DEPRECATION;
+            case "Format String Issue":
             case "Semantic Issue":
-                return C_COMPILER;
             case "Value Conversion Issue":
-                return VALUE_CONVERSION;
+            case "Lexical or Preprocessor Issue":
+            case "Nullability Issue":
+                return CLANG_COMPILER;
+            case "Deprecations":
+            case "Deprecation":
+                return DEPRECATION;
+            case "No-usage":
+                return UNUSED;
+            case "Warning":
+            case "Target Integrity":
+                return PROJECT;
             default:
                 return NOTE;
         }

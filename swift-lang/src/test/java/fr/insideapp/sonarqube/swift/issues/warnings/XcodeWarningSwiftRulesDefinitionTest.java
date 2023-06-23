@@ -47,6 +47,6 @@ public class XcodeWarningSwiftRulesDefinitionTest {
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("XcodeWarningSwift");
         assertThat(repository.language()).isEqualTo(language.getKey());
-        assertThat(repository.rules()).hasSize(3);
+        assertThat(repository.rules()).hasSize(4);
     }
 }
