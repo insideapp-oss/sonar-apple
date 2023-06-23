@@ -27,32 +27,27 @@ public final class QueryParameterUtilsTest {
 
     @Test
     public void parse_empty_failure() {
-        // test
-        final Map<String, String> parameters = QueryParameterUtils.parse("");
-        // assert
-        assertThat(parameters).isEmpty();
+        parse_failure("");
     }
 
     @Test
     public void parse_only_ampersand_failure() {
-        // test
-        final Map<String, String> parameters = QueryParameterUtils.parse("&");
-        // assert
-        assertThat(parameters).isEmpty();
+        parse_failure("&");
     }
 
     @Test
     public void parse_only_missing_key_failure() {
-        // test
-        final Map<String, String> parameters = QueryParameterUtils.parse("=value");
-        // assert
-        assertThat(parameters).isEmpty();
+        parse_failure("=value");
     }
 
     @Test
     public void parse_only_missing_value_failure() {
+        parse_failure("key=");
+    }
+
+    public void parse_failure(String rawQuery) {
         // test
-        final Map<String, String> parameters = QueryParameterUtils.parse("key=");
+        final Map<String, String> parameters = QueryParameterUtils.parse(rawQuery);
         // assert
         assertThat(parameters).isEmpty();
     }
@@ -63,7 +58,7 @@ public final class QueryParameterUtilsTest {
         final Map<String, String> parameters = QueryParameterUtils.parse("key=value");
         // assert
         assertThat(parameters).hasSize(1);
-        assertThat(parameters.get("key")).isEqualTo("value");
+        assertThat(parameters).containsEntry("key", "value");
     }
 
     @Test
@@ -72,8 +67,8 @@ public final class QueryParameterUtilsTest {
         final Map<String, String> parameters = QueryParameterUtils.parse("key1=value1&key2=value2");
         // assert
         assertThat(parameters).hasSize(2);
-        assertThat(parameters.get("key1")).isEqualTo("value1");
-        assertThat(parameters.get("key2")).isEqualTo("value2");
+        assertThat(parameters).containsEntry("key1", "value1");
+        assertThat(parameters).containsEntry("key2", "value2");
     }
 
 }

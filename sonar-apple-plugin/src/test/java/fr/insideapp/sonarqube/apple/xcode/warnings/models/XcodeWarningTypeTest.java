@@ -70,7 +70,7 @@ public final class XcodeWarningTypeTest {
         // test
         final XcodeWarningType[] types = XcodeWarningType.values();
         // assert
-        assertThat(types.length).isEqualTo(6);
+        assertThat(types).hasSize(6);
     }
 
 }

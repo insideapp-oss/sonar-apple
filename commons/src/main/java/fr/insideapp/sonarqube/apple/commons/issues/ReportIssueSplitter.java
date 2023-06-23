@@ -33,7 +33,7 @@ public abstract class ReportIssueSplitter<T extends JSONRulesDefinition> impleme
 
     private final List<T> rulesDefinitions;
 
-    public ReportIssueSplitter(
+    protected ReportIssueSplitter(
         final List<T> rulesDefinitions
     ) {
         this.rulesDefinitions = rulesDefinitions;
