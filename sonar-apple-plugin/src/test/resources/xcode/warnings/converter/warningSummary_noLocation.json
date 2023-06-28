@@ -1,0 +1,14 @@
+{
+    "issueType" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "Swift Compiler Warning"
+    },
+    "message" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "Comparing non-optional value of type 'UIView' to 'nil' always returns true"
+    }
+}

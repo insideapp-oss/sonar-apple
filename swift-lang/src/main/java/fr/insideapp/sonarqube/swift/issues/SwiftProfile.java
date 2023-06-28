@@ -23,19 +23,26 @@ import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.issues.mobsfscan.MobSFScanSwiftRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
+import fr.insideapp.sonarqube.swift.issues.warnings.XcodeWarningSwiftRulesDefinition;
 
 import java.util.List;
 
 public class SwiftProfile extends ProfilesDefinition {
 
     public SwiftProfile(
-            final Swift swift,
-            final RepositoryRuleParsable parser,
-            final SwiftLintRulesDefinition swiftLintRulesDefinition,
-            final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition,
-            final PeripheryRulesDefinition peripheryRulesDefinition
-    ) {
-        super(swift, parser, List.of(swiftLintRulesDefinition, mobSFScanSwiftRulesDefinition, peripheryRulesDefinition));
+        final Swift swift,
+        final RepositoryRuleParsable parser,
+        final SwiftLintRulesDefinition swiftLintRulesDefinition,
+        final MobSFScanSwiftRulesDefinition mobSFScanSwiftRulesDefinition,
+        final PeripheryRulesDefinition peripheryRulesDefinition,
+        final XcodeWarningSwiftRulesDefinition xcodeWarningSwiftRulesDefinition
+        ) {
+        super(swift, parser, List.of(
+            swiftLintRulesDefinition,
+            mobSFScanSwiftRulesDefinition,
+            peripheryRulesDefinition,
+            xcodeWarningSwiftRulesDefinition
+        ));
     }
 
 }

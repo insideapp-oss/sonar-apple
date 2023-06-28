@@ -15,26 +15,38 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.issues.swiftlint;
+package fr.insideapp.sonarqube.objc.issues.warnings;
 
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class SwiftLintExtensionProviderTest {
+public class XcodeWarningObjectiveCRulesDefinitionTest {
 
-    private SwiftLintExtensionProvider provider;
+    private JSONRulesDefinition rulesDefinition;
+    private ObjectiveC language;
+    private RulesDefinition.Context context;
 
     @Before
     public void prepare() {
-        provider = new SwiftLintExtensionProvider();
+        language = new ObjectiveC();
+        rulesDefinition = new XcodeWarningObjectiveCRulesDefinition(language);
+        context = new RulesDefinition.Context();
     }
 
     @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(5);
+    public void define() {
+        // test
+        rulesDefinition.define(context);
+        // assert
+        RulesDefinition.Repository repository = context.repository("XcodeWarningObjc");
+        assertThat(repository).isNotNull();
+        assertThat(repository.name()).isEqualTo("XcodeWarningObjc");
+        assertThat(repository.language()).isEqualTo(language.getKey());
+        assertThat(repository.rules()).hasSize(5);
     }
-
 }
-

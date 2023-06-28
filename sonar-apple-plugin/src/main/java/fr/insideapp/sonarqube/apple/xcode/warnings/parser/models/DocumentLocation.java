@@ -15,21 +15,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.mobsfscan.splitter;
+package fr.insideapp.sonarqube.apple.xcode.warnings.parser.models;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueSplitter;
-import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
-import org.sonar.api.scanner.ScannerSide;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fr.insideapp.sonarqube.apple.commons.result.deserializer.ValueDeserializer;
 
-import java.util.*;
+import java.net.URI;
 
-@ScannerSide
-public class MobSFScanReportIssueSplitter extends ReportIssueSplitter<MobSFScanRulesDefinition> implements MobSFScanReportIssueSplittable {
+public class DocumentLocation {
 
-    public MobSFScanReportIssueSplitter(
-            final List<MobSFScanRulesDefinition> mobSFScanRulesDefinitions
-    ) {
-        super(mobSFScanRulesDefinitions);
-    }
+    @JsonProperty("url")
+    @JsonDeserialize(using = ValueDeserializer.class)
+    public URI uri;
 
 }

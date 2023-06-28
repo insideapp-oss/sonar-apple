@@ -15,26 +15,40 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.issues.swiftlint;
+package fr.insideapp.sonarqube.apple.xcode.warnings.parser;
 
+import fr.insideapp.sonarqube.apple.xcode.warnings.parser.models.WarningSummary;
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class SwiftLintExtensionProviderTest {
+public final class XcodeWarningParserTest {
 
-    private SwiftLintExtensionProvider provider;
+    private static final String BASE_DIR = "/xcode/warnings/parser";
+    private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
+
+    private XcodeWarningParser parser;
 
     @Before
     public void prepare() {
-        provider = new SwiftLintExtensionProvider();
+        parser = new XcodeWarningParser();
     }
 
     @Test
-    public void extensions() {
-        assertThat(provider.extensions()).hasSize(5);
+    public void parse_oneTestRef() throws IOException {
+        // prepare
+        File recordFile = new File(baseDir, "record_oneWarning.json");
+        String recordJSON = FileUtils.readFileToString(recordFile, Charset.defaultCharset());
+        // test
+        final List<WarningSummary> warningSummaries = parser.parse(recordJSON);
+        // assert
+        assertThat(warningSummaries).hasSize(1);
     }
-
 }
-

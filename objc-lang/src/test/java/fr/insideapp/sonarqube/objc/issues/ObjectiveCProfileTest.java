@@ -21,6 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.rules.RepositoryRuleParser;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
 import fr.insideapp.sonarqube.objc.issues.mobsfscan.MobSFScanObjectiveCRulesDefinition;
 import fr.insideapp.sonarqube.objc.issues.oclint.OCLintRulesDefinition;
+import fr.insideapp.sonarqube.objc.issues.warnings.XcodeWarningObjectiveCRulesDefinition;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
@@ -43,7 +44,8 @@ public final class ObjectiveCProfileTest {
                 objectiveC,
                 new RepositoryRuleParser(),
                 new OCLintRulesDefinition(objectiveC),
-                new MobSFScanObjectiveCRulesDefinition(objectiveC)
+                new MobSFScanObjectiveCRulesDefinition(objectiveC),
+                new XcodeWarningObjectiveCRulesDefinition(objectiveC)
         );
     }
 
@@ -57,7 +59,7 @@ public final class ObjectiveCProfileTest {
         assertThat(builtProfile).isNotNull();
         assertThat(builtProfile.language()).isEqualTo(objectiveC.getKey());
         assertThat(builtProfile.name()).isEqualTo(objectiveC.getName());
-        assertThat(builtProfile.rules()).hasSize(87);
+        assertThat(builtProfile.rules()).hasSize(92);
     }
 
 }

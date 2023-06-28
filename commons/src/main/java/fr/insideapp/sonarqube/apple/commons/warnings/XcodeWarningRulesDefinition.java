@@ -15,21 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.mobsfscan.splitter;
+package fr.insideapp.sonarqube.apple.commons.warnings;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueSplitter;
-import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
+import org.apache.commons.lang3.StringUtils;
+import org.sonar.api.resources.Language;
 import org.sonar.api.scanner.ScannerSide;
 
-import java.util.*;
-
 @ScannerSide
-public class MobSFScanReportIssueSplitter extends ReportIssueSplitter<MobSFScanRulesDefinition> implements MobSFScanReportIssueSplittable {
+public abstract class XcodeWarningRulesDefinition extends JSONRulesDefinition {
 
-    public MobSFScanReportIssueSplitter(
-            final List<MobSFScanRulesDefinition> mobSFScanRulesDefinitions
-    ) {
-        super(mobSFScanRulesDefinitions);
+    protected XcodeWarningRulesDefinition(Language language) {
+        super(repository(language), repository(language), language, rulePath(language));
+    }
+
+    private static String repository(Language language) {
+        return "XcodeWarning" + StringUtils.capitalize(language.getKey());
+    }
+
+    private static String rulePath(Language language) {
+        return String.format("/warnings/%s-rules.json", language.getKey());
     }
 
 }

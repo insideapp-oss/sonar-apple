@@ -15,21 +15,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.mobsfscan.splitter;
+package fr.insideapp.sonarqube.apple.xcode.warnings;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueSplitter;
-import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
-import org.sonar.api.scanner.ScannerSide;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.util.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@ScannerSide
-public class MobSFScanReportIssueSplitter extends ReportIssueSplitter<MobSFScanRulesDefinition> implements MobSFScanReportIssueSplittable {
+public final class XcodeWarningExtensionProviderTest {
 
-    public MobSFScanReportIssueSplitter(
-            final List<MobSFScanRulesDefinition> mobSFScanRulesDefinitions
-    ) {
-        super(mobSFScanRulesDefinitions);
+    private XcodeWarningExtensionProvider provider;
+
+    @Before
+    public void prepare() {
+        provider = new XcodeWarningExtensionProvider();
+    }
+
+    @Test
+    public void extensions() {
+        assertThat(provider.extensions()).hasSize(7);
     }
 
 }
+

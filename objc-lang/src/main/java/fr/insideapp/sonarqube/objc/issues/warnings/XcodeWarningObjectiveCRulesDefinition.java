@@ -15,21 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple.mobsfscan.splitter;
+package fr.insideapp.sonarqube.objc.issues.warnings;
 
-import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueSplitter;
-import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
+import fr.insideapp.sonarqube.apple.commons.warnings.XcodeWarningRulesDefinition;
+import fr.insideapp.sonarqube.objc.ObjectiveC;
 import org.sonar.api.scanner.ScannerSide;
 
-import java.util.*;
-
 @ScannerSide
-public class MobSFScanReportIssueSplitter extends ReportIssueSplitter<MobSFScanRulesDefinition> implements MobSFScanReportIssueSplittable {
+public class XcodeWarningObjectiveCRulesDefinition extends XcodeWarningRulesDefinition {
 
-    public MobSFScanReportIssueSplitter(
-            final List<MobSFScanRulesDefinition> mobSFScanRulesDefinitions
+    public XcodeWarningObjectiveCRulesDefinition(
+        ObjectiveC objectiveC
     ) {
-        super(mobSFScanRulesDefinitions);
+        super(objectiveC);
     }
 
 }

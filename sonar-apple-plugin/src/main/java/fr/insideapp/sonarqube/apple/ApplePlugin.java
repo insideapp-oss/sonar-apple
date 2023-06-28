@@ -25,6 +25,7 @@ import fr.insideapp.sonarqube.apple.commons.rules.RepositoryRuleParser;
 import fr.insideapp.sonarqube.apple.mobsfscan.MobSFScanExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.coverage.XcodeCoverageExtensionProvider;
 import fr.insideapp.sonarqube.apple.xcode.tests.XcodeTestsExtensionProvider;
+import fr.insideapp.sonarqube.apple.xcode.warnings.XcodeWarningExtensionProvider;
 import fr.insideapp.sonarqube.objc.issues.oclint.*;
 import fr.insideapp.sonarqube.objc.ObjectiveCExtensionProvider;
 import fr.insideapp.sonarqube.swift.SwiftExtensionProvider;
@@ -57,6 +58,7 @@ public class ApplePlugin implements Plugin {
                 XcodeResultExtensionProvider.class, // Xcode
                 XcodeTestsExtensionProvider.class, // Tests
                 XcodeCoverageExtensionProvider.class, // Coverage
+                XcodeWarningExtensionProvider.class, // Warnings
                 SwiftLintExtensionProvider.class, // SwiftLint
                 PeripheryExtensionProvider.class, // Periphery
                 MobSFScanExtensionProvider.class, // MobSFScan
