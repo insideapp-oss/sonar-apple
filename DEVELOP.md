@@ -46,7 +46,7 @@ When a new version of the linter (with new rules) is released, the matching repo
 
 This update is mostly automatic with the execution of a Groovy script.
 
-### SwitLint update
+### SwiftLint update
 
 Use the following command to update the SwiftLint rules file:
 
@@ -72,7 +72,7 @@ $ mvn groovy:execute -Dsource=scripts/updateMobSFScanRules.groovy
 
 ### Filling rules information
 
-Eventhough updating rule repository file is mostly automatic, some data related to rules cannot be automatically computed.
+Even though updating rule repository file is mostly automatic, some data related to rules cannot be automatically computed.
 
 This is the case for :
 - severity (blocker, critical, major, minor, info)
@@ -117,11 +117,11 @@ A sensor requires different pieces in order to work
 
 Have a look at the ``SwiftLintSensor`` implementation:
 - The rule update script is ``scripts/updateSwiftLintRules.groovy``
-- The RulesDefinition is ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/lang/issues/swiftlint/SwiftLintRulesDefinition.java``
-- The ReportParser is ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/lang/issues/swiftlint/SwiftLintReportParser.java``
-- The Sensor is ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/lang/issues/swiftlint/SwiftLintSensor.java``
+- The RulesDefinition is ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/issues/swiftlint/SwiftLintRulesDefinition.java``
+- The ReportParser is ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/issues/swiftlint/parser/SwiftLintReportParser.java``
+- The Sensor is ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/issues/swiftlint/SwiftLintSensor.java``
 
-Also, when adding a new sensor for a language, don't forget to declare its rules into a profile. See ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/lang/issues/SwiftProfile.java`` as an example.
+Also, when adding a new sensor for a language, don't forget to declare its rules into a profile. See ``swift-lang/src/main/java/fr/insideapp/sonarqube/swift/issues/SwiftProfile.java`` as an example.
 
 ## Releasing
 
