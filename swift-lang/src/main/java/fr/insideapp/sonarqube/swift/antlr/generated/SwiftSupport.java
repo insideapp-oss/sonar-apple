@@ -207,7 +207,6 @@ public class SwiftSupport {
 
         //System.out.println("getLastOpTokenIndex: "+currentToken.getText());
 
-
         tokens.getText(); // Ensures that tokens can be read
         // operator → dot-operator-head­ dot-operator-characters
         if (currentToken.getType() == Swift5Parser.DOT && tokens.get(currentTokenIndex + 1).getType() == Swift5Parser.DOT) {
@@ -318,7 +317,7 @@ public class SwiftSupport {
         //String text = tokens.getText(Interval.of(start, stop));
         // System.out.println("isPostfixOp: '"+prevToken+"','"+text+"','"+nextToken+"' is "+result);
         return !prevIsWS && nextIsWS ||
-                !prevIsWS && nextToken.getType() == Swift5Parser.DOT;
+            !prevIsWS && nextToken.getType() == Swift5Parser.DOT;
     }
 
     public static boolean isOperator(TokenStream tokens, String op) {

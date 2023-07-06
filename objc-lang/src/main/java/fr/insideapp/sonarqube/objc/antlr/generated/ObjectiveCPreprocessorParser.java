@@ -15,16 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.antlr.generated;// Generated from ObjectiveCPreprocessorParser.g4 by ANTLR 4.10.1
+package fr.insideapp.sonarqube.objc.antlr.generated;
+// Generated from ObjectiveCPreprocessorParser.g4 by ANTLR 4.13.0
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class ObjectiveCPreprocessorParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -207,6 +211,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DirectiveContext extends ParserRuleContext {
 		public DirectiveContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -218,6 +223,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorDefContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public TerminalNode DIRECTIVE_IFDEF() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_IFDEF, 0); }
@@ -234,6 +240,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorDef(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorErrorContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public TerminalNode DIRECTIVE_ERROR() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_ERROR, 0); }
@@ -250,6 +257,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorError(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorConditionalContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public TerminalNode DIRECTIVE_IF() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_IF, 0); }
@@ -269,6 +277,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorConditional(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorImportContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public DirectiveTextContext directiveText() {
@@ -286,6 +295,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorImport(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorPragmaContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public TerminalNode DIRECTIVE_PRAGMA() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_PRAGMA, 0); }
@@ -302,6 +312,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorPragma(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorDefineContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public TerminalNode DIRECTIVE_DEFINE() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_DEFINE, 0); }
@@ -319,6 +330,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorDefine(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorWarningContext extends DirectiveContext {
 		public TerminalNode SHARP() { return getToken(ObjectiveCPreprocessorParser.SHARP, 0); }
 		public TerminalNode DIRECTIVE_WARNING() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_WARNING, 0); }
@@ -515,6 +527,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DirectiveTextContext extends ParserRuleContext {
 		public List<TerminalNode> DIRECTIVE_TEXT() { return getTokens(ObjectiveCPreprocessorParser.DIRECTIVE_TEXT); }
 		public TerminalNode DIRECTIVE_TEXT(int i) {
@@ -580,6 +593,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorExpressionContext extends ParserRuleContext {
 		public PreprocessorExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -591,6 +605,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorParenthesisContext extends PreprocessorExpressionContext {
 		public TerminalNode DIRECTIVE_LP() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_LP, 0); }
 		public PreprocessorExpressionContext preprocessorExpression() {
@@ -607,6 +622,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorParenthesis(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorNotContext extends PreprocessorExpressionContext {
 		public TerminalNode DIRECTIVE_BANG() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_BANG, 0); }
 		public PreprocessorExpressionContext preprocessorExpression() {
@@ -622,6 +638,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorNot(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorBinaryContext extends PreprocessorExpressionContext {
 		public Token op;
 		public List<PreprocessorExpressionContext> preprocessorExpression() {
@@ -648,6 +665,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorBinary(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorConstantContext extends PreprocessorExpressionContext {
 		public TerminalNode DIRECTIVE_TRUE() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_TRUE, 0); }
 		public TerminalNode DIRECTIVE_FALSE() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_FALSE, 0); }
@@ -663,6 +681,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorConstant(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorConditionalSymbolContext extends PreprocessorExpressionContext {
 		public TerminalNode DIRECTIVE_ID() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_ID, 0); }
 		public TerminalNode DIRECTIVE_LP() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_LP, 0); }
@@ -680,6 +699,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 			if ( listener instanceof ObjectiveCPreprocessorParserListener ) ((ObjectiveCPreprocessorParserListener)listener).exitPreprocessorConditionalSymbol(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class PreprocessorDefinedContext extends PreprocessorExpressionContext {
 		public TerminalNode DIRECTIVE_DEFINED() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_DEFINED, 0); }
 		public TerminalNode DIRECTIVE_ID() { return getToken(ObjectiveCPreprocessorParser.DIRECTIVE_ID, 0); }
@@ -899,7 +919,7 @@ public class ObjectiveCPreprocessorParser extends Parser {
 						setState(87);
 						((PreprocessorBinaryContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(((((_la - 209)) & ~0x3f) == 0 && ((1L << (_la - 209)) & ((1L << (DIRECTIVE_LT - 209)) | (1L << (DIRECTIVE_GT - 209)) | (1L << (DIRECTIVE_LE - 209)) | (1L << (DIRECTIVE_GE - 209)))) != 0)) ) {
+						if ( !(((((_la - 209)) & ~0x3f) == 0 && ((1L << (_la - 209)) & 15L) != 0)) ) {
 							((PreprocessorBinaryContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {

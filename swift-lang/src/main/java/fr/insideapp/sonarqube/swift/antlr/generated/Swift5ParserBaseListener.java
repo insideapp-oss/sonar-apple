@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-// Generated from Swift5Parser.g4 by ANTLR 4.10
+// Generated from Swift5Parser.g4 by ANTLR 4.13.0
 package fr.insideapp.sonarqube.swift.antlr.generated;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -27,6 +27,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
+@SuppressWarnings("CheckReturnValue")
 public class Swift5ParserBaseListener implements Swift5ParserListener {
 	/**
 	 * {@inheritDoc}

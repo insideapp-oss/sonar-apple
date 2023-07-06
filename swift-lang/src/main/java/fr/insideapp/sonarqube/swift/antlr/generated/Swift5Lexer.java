@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-// Generated from Swift5Lexer.g4 by ANTLR 4.10
+// Generated from Swift5Lexer.g4 by ANTLR 4.13.0
 package fr.insideapp.sonarqube.swift.antlr.generated;
 
 	import java.util.Stack;
@@ -29,9 +29,9 @@ import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class Swift5Lexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.10", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =

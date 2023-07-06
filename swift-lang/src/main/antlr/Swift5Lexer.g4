@@ -235,11 +235,11 @@ LPAREN:
 LBRACK: '[';
 RCURLY: '}';
 RPAREN:
-	')' { if(!parenthesis.isEmpty())
+	')' { if(!parenthesis.isEmpty()) 
 		{
-			parenthesis.push(parenthesis.pop()-1);
-			if(parenthesis.peek() == 0)
-			{
+			parenthesis.push(parenthesis.pop()-1); 
+			if(parenthesis.peek() == 0) 
+			{ 
 				parenthesis.pop();
 				popMode();
 			}

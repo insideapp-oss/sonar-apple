@@ -15,7 +15,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc.antlr.generated;// Generated from ObjectiveCParser.g4 by ANTLR 4.10.1
+package fr.insideapp.sonarqube.objc.antlr.generated;
+// Generated from ObjectiveCParser.g4 by ANTLR 4.13.0
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -26,6 +27,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
+@SuppressWarnings("CheckReturnValue")
 public class ObjectiveCParserBaseListener implements ObjectiveCParserListener {
 	/**
 	 * {@inheritDoc}
