@@ -62,4 +62,17 @@ public final class XcodeTestsMapperTest {
         assertThat(appleTestSummaries.get(0).groups.get(0).testCases).hasSize(2);
     }
 
+    @Test
+    public void map_none_testSummary() throws IOException {
+        // prepare
+        File actionTestableSummaryFile = new File(baseDir, "testSummary_noTest.json");
+        String actionTestableSummaryJSON = FileUtils.readFileToString(actionTestableSummaryFile, Charset.defaultCharset());
+        ActionTestableSummary actionTestableSummary = objectMapper.readValue(actionTestableSummaryJSON, ActionTestableSummary.class);
+        // test
+        final List<XcodeTestSummary> appleTestSummaries = new ArrayList<>(mapper.map(List.of(actionTestableSummary)));
+        // assert
+        assertThat(appleTestSummaries).hasSize(1);
+        assertThat(appleTestSummaries.get(0).groups).hasSize(0);
+    }
+
 }
