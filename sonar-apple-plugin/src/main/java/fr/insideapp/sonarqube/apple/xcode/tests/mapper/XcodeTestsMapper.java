@@ -55,10 +55,13 @@ public final class XcodeTestsMapper extends AbstractReportMapper<List<ActionTest
             ImmutablePair<ActionTestSummary, ActionTestGroup> pair = actionTestGroups.pop();
             // keeping a reference to the parent
             ActionTestSummary parent = pair.getKey();
+            List<ActionTestSummaryGroup> summaryGroups = pair.getValue().groups
+                .stream()
+                .filter(summaryGroup -> Objects.nonNull(summaryGroup.tests)) // remove null values
+                .collect(Collectors.toList());
             // we'll loop over each groups of the current group
             // to determine if this is the last "group" level
             // kind of flattening operation, since we can have an infinite level of nesting
-            List<ActionTestSummaryGroup> summaryGroups = pair.getValue().groups;
             summaryGroups.forEach(summaryGroup -> {
                 ActionTest summaryTests = summaryGroup.tests;
                 switch (summaryTests.getType()) {

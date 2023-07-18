@@ -1,0 +1,99 @@
+
+{
+    "_type" : {
+        "_name" : "ActionTestableSummary",
+        "_supertype" : {
+            "_name" : "ActionAbstractTestSummary"
+        }
+    },
+    "diagnosticsDirectoryName" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "TestProjectTests-FC7D240B-B238-4442-9937-B1DFEF42DF36-Configuration-Test Scheme Action-Iteration-1"
+    },
+    "identifierURL" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests"
+    },
+    "name" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "TestProjectTests"
+    },
+    "projectRelativePath" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "TestProject.xcodeproj"
+    },
+    "targetName" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "TestProjectTests"
+    },
+    "testKind" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : "app hosted"
+    },
+    "testLanguage" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : ""
+    },
+    "testRegion" : {
+        "_type" : {
+            "_name" : "String"
+        },
+        "_value" : ""
+    },
+    "tests" : {
+        "_type" : {
+            "_name" : "Array"
+        },
+        "_values" : [
+            {
+                "_type" : {
+                    "_name" : "ActionTestSummaryGroup",
+                    "_supertype" : {
+                        "_name" : "ActionTestSummaryIdentifiableObject",
+                        "_supertype" : {
+                            "_name" : "ActionAbstractTestSummary"
+                        }
+                    }
+                },
+                "duration" : {
+                    "_type" : {
+                        "_name" : "Double"
+                    },
+                    "_value" : "0.6080629825592041"
+                },
+                "identifier" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "All tests"
+                },
+                "identifierURL" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "test:\/\/com.apple.xcode\/TestProject\/TestProjectTests\/All%20tests"
+                },
+                "name" : {
+                    "_type" : {
+                        "_name" : "String"
+                    },
+                    "_value" : "All tests"
+                }
+            }
+        ]
+    }
+}
