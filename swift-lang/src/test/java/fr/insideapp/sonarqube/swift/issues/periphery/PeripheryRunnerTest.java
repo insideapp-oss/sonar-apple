@@ -127,13 +127,13 @@ public final class PeripheryRunnerTest {
         options.setAccessible(true);
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
-        mockSchemes(List.of("MyScheme"));
+        mockSchemes(List.of("MyScheme", "MyOtherScheme"));
         mockTargets(List.of());
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
                 "scan",
-                "--schemes", "MyScheme",
+                "--schemes", "MyScheme,MyOtherScheme",
                 "--skip-build",
                 "--format", "json", "--quiet"
         });
@@ -146,12 +146,12 @@ public final class PeripheryRunnerTest {
         mockWorkspace(Optional.empty());
         mockProject(Optional.empty());
         mockSchemes(List.of());
-        mockTargets(List.of("MyTarget"));
+        mockTargets(List.of("MyTarget", "MyOtherTarget"));
         mockIndexStorePath(Optional.empty());
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
                 "scan",
-                "--targets", "MyTarget",
+                "--targets", "MyTarget,MyOtherTarget",
                 "--skip-build",
                 "--format", "json", "--quiet"
         });

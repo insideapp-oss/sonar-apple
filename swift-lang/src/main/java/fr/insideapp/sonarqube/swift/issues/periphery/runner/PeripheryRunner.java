@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.swift.issues.periphery.runner;
 
 import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
+import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
 
@@ -74,7 +75,7 @@ public final class PeripheryRunner extends PeripheryRunnable {
         List<String> schemes = peripheryExtensionProvider.schemes(configuration);
         if (!schemes.isEmpty()) {
             options.add("--schemes");
-            options.addAll(schemes);
+            options.add(StringUtils.join(schemes, ","));
         }
         return options;
     }
@@ -84,7 +85,7 @@ public final class PeripheryRunner extends PeripheryRunnable {
         List<String> targets = peripheryExtensionProvider.targets(configuration);
         if (!targets.isEmpty()) {
             options.add("--targets");
-            options.addAll(targets);
+            options.add(StringUtils.join(targets, ","));
         }
         return options;
     }
