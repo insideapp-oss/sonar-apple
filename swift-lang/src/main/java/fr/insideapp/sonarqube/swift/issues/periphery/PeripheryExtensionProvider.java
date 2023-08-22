@@ -35,28 +35,6 @@ public class PeripheryExtensionProvider implements ExtensionProvider {
 
     private static final String CATEGORY = "Periphery";
 
-    private static final String SCHEMES_KEY = "sonar.apple.periphery.schemes";
-    private static final PropertyDefinition SCHEMES_PROPERTY = PropertyDefinition
-            .builder(SCHEMES_KEY)
-            .name("Xcode Schemes")
-            .description("Comma-separated list of Xcode Schemes used.")
-            .multiValues(true)
-            .onQualifiers(Qualifiers.PROJECT)
-            .category(APPLE_CATEGORY)
-            .subCategory(CATEGORY)
-            .build();
-
-    private static final String TARGETS_KEY = "sonar.apple.periphery.targets";
-    private static final PropertyDefinition TARGETS_PROPERTY = PropertyDefinition
-            .builder(TARGETS_KEY)
-            .name("Xcode Targets")
-            .description("Comma-separated list of Xcode Targets.")
-            .multiValues(true)
-            .onQualifiers(Qualifiers.PROJECT)
-            .category(APPLE_CATEGORY)
-            .subCategory(CATEGORY)
-            .build();
-
     private static final String INDEX_STORE_PATH_KEY = "sonar.apple.periphery.indexStorePath";
     private static final PropertyDefinition INDEX_STORE_PATH_PROPERTY = PropertyDefinition
             .builder(INDEX_STORE_PATH_KEY)
@@ -69,8 +47,6 @@ public class PeripheryExtensionProvider implements ExtensionProvider {
 
     public List<Object> extensions() {
         return Arrays.asList(
-                SCHEMES_PROPERTY,
-                TARGETS_PROPERTY,
                 INDEX_STORE_PATH_PROPERTY,
                 PeripheryRulesDefinition.class,
                 PeripheryRunner.class,
@@ -78,14 +54,6 @@ public class PeripheryExtensionProvider implements ExtensionProvider {
                 PeripheryReportMapper.class,
                 PeripherySensor.class
         );
-    }
-
-    public List<String> schemes(Configuration configuration) {
-        return Arrays.asList(configuration.getStringArray(SCHEMES_KEY));
-    }
-
-    public List<String> targets(Configuration configuration) {
-        return Arrays.asList(configuration.getStringArray(TARGETS_KEY));
     }
 
     public Optional<String> indexStorePath(Configuration configuration) {

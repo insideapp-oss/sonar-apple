@@ -41,49 +41,7 @@ public final class PeripheryExtensionProviderTest {
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(8);
-    }
-
-    @Test
-    public void schemes_notSpecified() {
-        // prepare
-        when(configuration.getStringArray("sonar.apple.periphery.schemes")).thenReturn(new String[]{});
-        // test
-        List<String> schemes = provider.schemes(configuration);
-        // assert
-        assertThat(schemes).isEmpty();
-    }
-
-    @Test
-    public void schemes_specified() {
-        // prepare
-        when(configuration.getStringArray("sonar.apple.periphery.schemes")).thenReturn(new String[]{"MyScheme"});
-        // test
-        List<String> schemes = provider.schemes(configuration);
-        // assert
-        assertThat(schemes).hasSize(1);
-        assertThat(schemes.get(0)).isEqualTo("MyScheme");
-    }
-
-    @Test
-    public void targets_notSpecified() {
-        // prepare
-        when(configuration.getStringArray("sonar.apple.periphery.targets")).thenReturn(new String[]{});
-        // test
-        List<String> targets = provider.targets(configuration);
-        // assert
-        assertThat(targets).isEmpty();
-    }
-
-    @Test
-    public void targets_specified() {
-        // prepare
-        when(configuration.getStringArray("sonar.apple.periphery.targets")).thenReturn(new String[]{"MyTarget"});
-        // test
-        List<String> targets = provider.targets(configuration);
-        // assert
-        assertThat(targets).hasSize(1);
-        assertThat(targets.get(0)).isEqualTo("MyTarget");
+        assertThat(provider.extensions()).hasSize(6);
     }
 
     @Test
