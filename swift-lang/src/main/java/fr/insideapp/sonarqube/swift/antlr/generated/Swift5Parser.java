@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-// Generated from Swift5Parser.g4 by ANTLR 4.10
+// Generated from Swift5Parser.g4 by ANTLR 4.13.0
 package fr.insideapp.sonarqube.swift.antlr.generated;
 
 import org.antlr.v4.runtime.atn.*;
@@ -24,10 +24,12 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class Swift5Parser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -394,6 +396,7 @@ public class Swift5Parser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Top_levelContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(Swift5Parser.EOF, 0); }
 		public StatementsContext statements() {
@@ -410,11 +413,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTop_level(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTop_level(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -449,6 +447,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementContext extends ParserRuleContext {
 		public Loop_statementContext loop_statement() {
 			return getRuleContext(Loop_statementContext.class,0);
@@ -489,11 +488,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStatement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -591,6 +585,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementsContext extends ParserRuleContext {
 		public int indexBefore = -1;
 		public List<StatementContext> statement() {
@@ -610,11 +605,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStatements(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStatements(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -662,6 +652,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Loop_statementContext extends ParserRuleContext {
 		public For_in_statementContext for_in_statement() {
 			return getRuleContext(For_in_statementContext.class,0);
@@ -683,11 +674,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLoop_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLoop_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -734,6 +720,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class For_in_statementContext extends ParserRuleContext {
 		public TerminalNode FOR() { return getToken(Swift5Parser.FOR, 0); }
 		public PatternContext pattern() {
@@ -761,11 +748,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFor_in_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFor_in_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -819,6 +801,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class While_statementContext extends ParserRuleContext {
 		public TerminalNode WHILE() { return getToken(Swift5Parser.WHILE, 0); }
 		public Condition_listContext condition_list() {
@@ -838,11 +821,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWhile_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWhile_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -871,6 +849,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Condition_listContext extends ParserRuleContext {
 		public List<ConditionContext> condition() {
 			return getRuleContexts(ConditionContext.class);
@@ -893,11 +872,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCondition_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCondition_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -939,6 +913,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ConditionContext extends ParserRuleContext {
 		public Availability_conditionContext availability_condition() {
 			return getRuleContext(Availability_conditionContext.class,0);
@@ -963,11 +938,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCondition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCondition(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1019,6 +989,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Case_conditionContext extends ParserRuleContext {
 		public TerminalNode CASE() { return getToken(Swift5Parser.CASE, 0); }
 		public PatternContext pattern() {
@@ -1038,11 +1009,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCase_condition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCase_condition(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1071,6 +1037,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Optional_binding_conditionContext extends ParserRuleContext {
 		public PatternContext pattern() {
 			return getRuleContext(PatternContext.class,0);
@@ -1091,11 +1058,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOptional_binding_condition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOptional_binding_condition(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1133,6 +1095,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Repeat_while_statementContext extends ParserRuleContext {
 		public TerminalNode REPEAT() { return getToken(Swift5Parser.REPEAT, 0); }
 		public Code_blockContext code_block() {
@@ -1153,11 +1116,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRepeat_while_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRepeat_while_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1188,6 +1146,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Branch_statementContext extends ParserRuleContext {
 		public If_statementContext if_statement() {
 			return getRuleContext(If_statementContext.class,0);
@@ -1209,11 +1168,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBranch_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBranch_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1260,6 +1214,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class If_statementContext extends ParserRuleContext {
 		public TerminalNode IF() { return getToken(Swift5Parser.IF, 0); }
 		public Condition_listContext condition_list() {
@@ -1282,11 +1237,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitIf_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitIf_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1325,6 +1275,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Else_clauseContext extends ParserRuleContext {
 		public TerminalNode ELSE() { return getToken(Swift5Parser.ELSE, 0); }
 		public Code_blockContext code_block() {
@@ -1344,11 +1295,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitElse_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitElse_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1390,6 +1336,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Guard_statementContext extends ParserRuleContext {
 		public TerminalNode GUARD() { return getToken(Swift5Parser.GUARD, 0); }
 		public Condition_listContext condition_list() {
@@ -1410,11 +1357,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGuard_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGuard_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1445,6 +1387,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_statementContext extends ParserRuleContext {
 		public TerminalNode SWITCH() { return getToken(Swift5Parser.SWITCH, 0); }
 		public ExpressionContext expression() {
@@ -1466,11 +1409,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1512,6 +1450,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_casesContext extends ParserRuleContext {
 		public Switch_caseContext switch_case() {
 			return getRuleContext(Switch_caseContext.class,0);
@@ -1530,11 +1469,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_cases(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_cases(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1570,6 +1504,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_caseContext extends ParserRuleContext {
 		public StatementsContext statements() {
 			return getRuleContext(StatementsContext.class,0);
@@ -1594,11 +1529,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_case(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_case(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1656,6 +1586,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Case_labelContext extends ParserRuleContext {
 		public TerminalNode CASE() { return getToken(Swift5Parser.CASE, 0); }
 		public Case_item_listContext case_item_list() {
@@ -1676,11 +1607,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCase_label(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCase_label(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1720,6 +1646,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Case_item_listContext extends ParserRuleContext {
 		public List<PatternContext> pattern() {
 			return getRuleContexts(PatternContext.class);
@@ -1748,11 +1675,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCase_item_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCase_item_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1814,6 +1736,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Default_labelContext extends ParserRuleContext {
 		public TerminalNode DEFAULT() { return getToken(Swift5Parser.DEFAULT, 0); }
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
@@ -1831,11 +1754,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDefault_label(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDefault_label(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1873,6 +1791,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Where_clauseContext extends ParserRuleContext {
 		public TerminalNode WHERE() { return getToken(Swift5Parser.WHERE, 0); }
 		public Where_expressionContext where_expression() {
@@ -1889,11 +1808,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWhere_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWhere_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1920,6 +1834,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Where_expressionContext extends ParserRuleContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -1935,11 +1850,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWhere_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWhere_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1964,6 +1874,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Conditional_switch_caseContext extends ParserRuleContext {
 		public Switch_if_directive_clauseContext switch_if_directive_clause() {
 			return getRuleContext(Switch_if_directive_clauseContext.class,0);
@@ -1986,11 +1897,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitConditional_switch_case(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitConditional_switch_case(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2038,6 +1944,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_if_directive_clauseContext extends ParserRuleContext {
 		public TerminalNode HASH_IF() { return getToken(Swift5Parser.HASH_IF, 0); }
 		public Compilation_conditionContext compilation_condition() {
@@ -2057,11 +1964,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_if_directive_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_if_directive_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2099,6 +2001,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_elseif_directive_clausesContext extends ParserRuleContext {
 		public Elseif_directive_clauseContext elseif_directive_clause() {
 			return getRuleContext(Elseif_directive_clauseContext.class,0);
@@ -2117,11 +2020,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_elseif_directive_clauses(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_elseif_directive_clauses(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2157,6 +2055,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_elseif_directive_clauseContext extends ParserRuleContext {
 		public TerminalNode HASH_ELSEIF() { return getToken(Swift5Parser.HASH_ELSEIF, 0); }
 		public Compilation_conditionContext compilation_condition() {
@@ -2176,11 +2075,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_elseif_directive_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_elseif_directive_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2218,6 +2112,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Switch_else_directive_clauseContext extends ParserRuleContext {
 		public TerminalNode HASH_ELSE() { return getToken(Swift5Parser.HASH_ELSE, 0); }
 		public Switch_casesContext switch_cases() {
@@ -2234,11 +2129,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwitch_else_directive_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwitch_else_directive_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2274,6 +2164,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Labeled_statementContext extends ParserRuleContext {
 		public Statement_labelContext statement_label() {
 			return getRuleContext(Statement_labelContext.class,0);
@@ -2301,11 +2192,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLabeled_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLabeled_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2362,6 +2248,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Statement_labelContext extends ParserRuleContext {
 		public Label_nameContext label_name() {
 			return getRuleContext(Label_nameContext.class,0);
@@ -2378,11 +2265,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStatement_label(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStatement_label(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2409,6 +2291,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Label_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -2424,11 +2307,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLabel_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLabel_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2453,6 +2331,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Control_transfer_statementContext extends ParserRuleContext {
 		public Break_statementContext break_statement() {
 			return getRuleContext(Break_statementContext.class,0);
@@ -2480,11 +2359,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitControl_transfer_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitControl_transfer_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2545,6 +2419,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Break_statementContext extends ParserRuleContext {
 		public TerminalNode BREAK() { return getToken(Swift5Parser.BREAK, 0); }
 		public Label_nameContext label_name() {
@@ -2561,11 +2436,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBreak_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBreak_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2600,6 +2470,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Continue_statementContext extends ParserRuleContext {
 		public TerminalNode CONTINUE() { return getToken(Swift5Parser.CONTINUE, 0); }
 		public Label_nameContext label_name() {
@@ -2616,11 +2487,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitContinue_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitContinue_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2655,6 +2521,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Fallthrough_statementContext extends ParserRuleContext {
 		public TerminalNode FALLTHROUGH() { return getToken(Swift5Parser.FALLTHROUGH, 0); }
 		public Fallthrough_statementContext(ParserRuleContext parent, int invokingState) {
@@ -2668,11 +2535,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFallthrough_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFallthrough_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2697,6 +2559,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Return_statementContext extends ParserRuleContext {
 		public TerminalNode RETURN() { return getToken(Swift5Parser.RETURN, 0); }
 		public ExpressionContext expression() {
@@ -2713,11 +2576,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitReturn_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitReturn_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2752,6 +2610,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Throw_statementContext extends ParserRuleContext {
 		public TerminalNode THROW() { return getToken(Swift5Parser.THROW, 0); }
 		public ExpressionContext expression() {
@@ -2768,11 +2627,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitThrow_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitThrow_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2799,6 +2653,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Defer_statementContext extends ParserRuleContext {
 		public TerminalNode DEFER() { return getToken(Swift5Parser.DEFER, 0); }
 		public Code_blockContext code_block() {
@@ -2815,11 +2670,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDefer_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDefer_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2846,6 +2696,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Do_statementContext extends ParserRuleContext {
 		public TerminalNode DO() { return getToken(Swift5Parser.DO, 0); }
 		public Code_blockContext code_block() {
@@ -2865,11 +2716,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDo_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDo_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2906,6 +2752,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Catch_clausesContext extends ParserRuleContext {
 		public List<Catch_clauseContext> catch_clause() {
 			return getRuleContexts(Catch_clauseContext.class);
@@ -2924,11 +2771,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCatch_clauses(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCatch_clauses(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2972,6 +2814,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Catch_clauseContext extends ParserRuleContext {
 		public TerminalNode CATCH() { return getToken(Swift5Parser.CATCH, 0); }
 		public Code_blockContext code_block() {
@@ -2991,11 +2834,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCatch_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCatch_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3032,6 +2870,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Catch_pattern_listContext extends ParserRuleContext {
 		public List<Catch_patternContext> catch_pattern() {
 			return getRuleContexts(Catch_patternContext.class);
@@ -3054,11 +2893,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCatch_pattern_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCatch_pattern_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3104,6 +2938,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Catch_patternContext extends ParserRuleContext {
 		public PatternContext pattern() {
 			return getRuleContext(PatternContext.class,0);
@@ -3122,11 +2957,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCatch_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCatch_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3161,6 +2991,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Compiler_control_statementContext extends ParserRuleContext {
 		public Conditional_compilation_blockContext conditional_compilation_block() {
 			return getRuleContext(Conditional_compilation_blockContext.class,0);
@@ -3182,11 +3013,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCompiler_control_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCompiler_control_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3234,6 +3060,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Conditional_compilation_blockContext extends ParserRuleContext {
 		public If_directive_clauseContext if_directive_clause() {
 			return getRuleContext(If_directive_clauseContext.class,0);
@@ -3256,11 +3083,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitConditional_compilation_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitConditional_compilation_block(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3308,6 +3130,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class If_directive_clauseContext extends ParserRuleContext {
 		public TerminalNode HASH_IF() { return getToken(Swift5Parser.HASH_IF, 0); }
 		public Compilation_conditionContext compilation_condition() {
@@ -3327,11 +3150,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitIf_directive_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitIf_directive_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3368,6 +3186,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Elseif_directive_clausesContext extends ParserRuleContext {
 		public List<Elseif_directive_clauseContext> elseif_directive_clause() {
 			return getRuleContexts(Elseif_directive_clauseContext.class);
@@ -3386,11 +3205,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitElseif_directive_clauses(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitElseif_directive_clauses(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3428,6 +3242,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Elseif_directive_clauseContext extends ParserRuleContext {
 		public TerminalNode HASH_ELSEIF() { return getToken(Swift5Parser.HASH_ELSEIF, 0); }
 		public Compilation_conditionContext compilation_condition() {
@@ -3447,11 +3262,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitElseif_directive_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitElseif_directive_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3488,6 +3298,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Else_directive_clauseContext extends ParserRuleContext {
 		public TerminalNode HASH_ELSE() { return getToken(Swift5Parser.HASH_ELSE, 0); }
 		public StatementsContext statements() {
@@ -3504,11 +3315,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitElse_directive_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitElse_directive_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3543,6 +3349,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Compilation_conditionContext extends ParserRuleContext {
 		public Platform_conditionContext platform_condition() {
 			return getRuleContext(Platform_conditionContext.class,0);
@@ -3579,11 +3386,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCompilation_condition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCompilation_condition(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3694,6 +3496,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Platform_conditionContext extends ParserRuleContext {
 		public TerminalNode OS() { return getToken(Swift5Parser.OS, 0); }
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
@@ -3735,11 +3538,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPlatform_condition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPlatform_condition(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3856,6 +3654,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Swift_versionContext extends ParserRuleContext {
 		public TerminalNode Decimal_digits() { return getToken(Swift5Parser.Decimal_digits, 0); }
 		public Swift_version_continuationContext swift_version_continuation() {
@@ -3872,11 +3671,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwift_version(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwift_version(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3912,6 +3706,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Swift_version_continuationContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public TerminalNode Decimal_digits() { return getToken(Swift5Parser.Decimal_digits, 0); }
@@ -3929,11 +3724,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSwift_version_continuation(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSwift_version_continuation(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3971,6 +3761,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Operating_systemContext extends ParserRuleContext {
 		public TerminalNode MAC_OS() { return getToken(Swift5Parser.MAC_OS, 0); }
 		public TerminalNode I_OS() { return getToken(Swift5Parser.I_OS, 0); }
@@ -3991,11 +3782,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOperating_system(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOperating_system(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Operating_systemContext operating_system() throws RecognitionException {
@@ -4007,7 +3793,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(973);
 			_la = _input.LA(1);
-			if ( !(((((_la - 97)) & ~0x3f) == 0 && ((1L << (_la - 97)) & ((1L << (MAC_OS - 97)) | (1L << (I_OS - 97)) | (1L << (OSX - 97)) | (1L << (WATCH_OS - 97)) | (1L << (TV_OS - 97)) | (1L << (LINUX - 97)) | (1L << (WINDOWS - 97)))) != 0)) ) {
+			if ( !(((((_la - 97)) & ~0x3f) == 0 && ((1L << (_la - 97)) & 127L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -4028,6 +3814,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ArchitectureContext extends ParserRuleContext {
 		public TerminalNode I386() { return getToken(Swift5Parser.I386, 0); }
 		public TerminalNode X86_64() { return getToken(Swift5Parser.X86_64, 0); }
@@ -4045,11 +3832,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArchitecture(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArchitecture(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ArchitectureContext architecture() throws RecognitionException {
@@ -4061,7 +3843,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(975);
 			_la = _input.LA(1);
-			if ( !(((((_la - 104)) & ~0x3f) == 0 && ((1L << (_la - 104)) & ((1L << (I386 - 104)) | (1L << (X86_64 - 104)) | (1L << (ARM - 104)) | (1L << (ARM64 - 104)))) != 0)) ) {
+			if ( !(((((_la - 104)) & ~0x3f) == 0 && ((1L << (_la - 104)) & 15L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -4082,6 +3864,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Module_nameContext extends ParserRuleContext {
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
@@ -4104,11 +3887,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitModule_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitModule_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4150,6 +3928,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class EnvironmentContext extends ParserRuleContext {
 		public TerminalNode SIMULATOR() { return getToken(Swift5Parser.SIMULATOR, 0); }
 		public TerminalNode MAC_CATALYST() { return getToken(Swift5Parser.MAC_CATALYST, 0); }
@@ -4164,11 +3943,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitEnvironment(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitEnvironment(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4202,6 +3976,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Line_control_statementContext extends ParserRuleContext {
 		public TerminalNode SOURCE_LOCATION() { return getToken(Swift5Parser.SOURCE_LOCATION, 0); }
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
@@ -4230,11 +4005,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLine_control_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLine_control_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4286,6 +4056,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Line_numberContext extends ParserRuleContext {
 		public TerminalNode Decimal_literal() { return getToken(Swift5Parser.Decimal_literal, 0); }
 		public Line_numberContext(ParserRuleContext parent, int invokingState) {
@@ -4299,11 +4070,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLine_number(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLine_number(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4328,6 +4094,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class File_nameContext extends ParserRuleContext {
 		public Static_string_literalContext static_string_literal() {
 			return getRuleContext(Static_string_literalContext.class,0);
@@ -4343,11 +4110,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFile_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFile_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4372,6 +4134,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Diagnostic_statementContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public Diagnostic_messageContext diagnostic_message() {
@@ -4391,11 +4154,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDiagnostic_statement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDiagnostic_statement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4435,6 +4193,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Diagnostic_messageContext extends ParserRuleContext {
 		public Static_string_literalContext static_string_literal() {
 			return getRuleContext(Static_string_literalContext.class,0);
@@ -4450,11 +4209,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDiagnostic_message(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDiagnostic_message(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4479,6 +4233,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Availability_conditionContext extends ParserRuleContext {
 		public TerminalNode AVAILABLE() { return getToken(Swift5Parser.AVAILABLE, 0); }
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
@@ -4497,11 +4252,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAvailability_condition(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAvailability_condition(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4532,6 +4282,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Availability_argumentsContext extends ParserRuleContext {
 		public List<Availability_argumentContext> availability_argument() {
 			return getRuleContexts(Availability_argumentContext.class);
@@ -4554,11 +4305,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAvailability_arguments(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAvailability_arguments(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4600,6 +4346,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Availability_argumentContext extends ParserRuleContext {
 		public Platform_nameContext platform_name() {
 			return getRuleContext(Platform_nameContext.class,0);
@@ -4619,11 +4366,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAvailability_argument(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAvailability_argument(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4673,6 +4415,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Platform_nameContext extends ParserRuleContext {
 		public TerminalNode I_OS() { return getToken(Swift5Parser.I_OS, 0); }
 		public TerminalNode OSX() { return getToken(Swift5Parser.OSX, 0); }
@@ -4695,11 +4438,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPlatform_name(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPlatform_name(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Platform_nameContext platform_name() throws RecognitionException {
@@ -4711,7 +4449,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(1031);
 			_la = _input.LA(1);
-			if ( !(((((_la - 97)) & ~0x3f) == 0 && ((1L << (_la - 97)) & ((1L << (MAC_OS - 97)) | (1L << (I_OS - 97)) | (1L << (OSX - 97)) | (1L << (WATCH_OS - 97)) | (1L << (TV_OS - 97)) | (1L << (MAC_CATALYST - 97)) | (1L << (I_OS_APPLICATION_EXTENSION - 97)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 97)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 97)))) != 0)) ) {
+			if ( !(((((_la - 97)) & ~0x3f) == 0 && ((1L << (_la - 97)) & 61471L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -4732,6 +4470,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Platform_versionContext extends ParserRuleContext {
 		public TerminalNode Decimal_literal() { return getToken(Swift5Parser.Decimal_literal, 0); }
 		public TerminalNode Decimal_digits() { return getToken(Swift5Parser.Decimal_digits, 0); }
@@ -4748,11 +4487,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPlatform_version(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPlatform_version(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4812,6 +4546,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_parameter_clauseContext extends ParserRuleContext {
 		public TerminalNode LT() { return getToken(Swift5Parser.LT, 0); }
 		public Generic_parameter_listContext generic_parameter_list() {
@@ -4829,11 +4564,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_parameter_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_parameter_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4862,6 +4592,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_parameter_listContext extends ParserRuleContext {
 		public List<Generic_parameterContext> generic_parameter() {
 			return getRuleContexts(Generic_parameterContext.class);
@@ -4884,11 +4615,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_parameter_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_parameter_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4930,6 +4656,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_parameterContext extends ParserRuleContext {
 		public Type_nameContext type_name() {
 			return getRuleContext(Type_nameContext.class,0);
@@ -4952,11 +4679,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_parameter(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_parameter(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5008,6 +4730,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_where_clauseContext extends ParserRuleContext {
 		public TerminalNode WHERE() { return getToken(Swift5Parser.WHERE, 0); }
 		public Requirement_listContext requirement_list() {
@@ -5024,11 +4747,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_where_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_where_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5055,6 +4773,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Requirement_listContext extends ParserRuleContext {
 		public List<RequirementContext> requirement() {
 			return getRuleContexts(RequirementContext.class);
@@ -5077,11 +4796,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRequirement_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRequirement_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5125,6 +4839,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class RequirementContext extends ParserRuleContext {
 		public Conformance_requirementContext conformance_requirement() {
 			return getRuleContext(Conformance_requirementContext.class,0);
@@ -5143,11 +4858,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRequirement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRequirement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5185,6 +4895,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Conformance_requirementContext extends ParserRuleContext {
 		public List<Type_identifierContext> type_identifier() {
 			return getRuleContexts(Type_identifierContext.class);
@@ -5207,11 +4918,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitConformance_requirement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitConformance_requirement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5254,6 +4960,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Same_type_requirementContext extends ParserRuleContext {
 		public List<Type_identifierContext> type_identifier() {
 			return getRuleContexts(Type_identifierContext.class);
@@ -5278,11 +4985,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSame_type_requirement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSame_type_requirement(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5325,6 +5027,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_argument_clauseContext extends ParserRuleContext {
 		public TerminalNode LT() { return getToken(Swift5Parser.LT, 0); }
 		public Generic_argument_listContext generic_argument_list() {
@@ -5342,11 +5045,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_argument_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_argument_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5375,6 +5073,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_argument_listContext extends ParserRuleContext {
 		public List<Generic_argumentContext> generic_argument() {
 			return getRuleContexts(Generic_argumentContext.class);
@@ -5397,11 +5096,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_argument_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_argument_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5443,6 +5137,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Generic_argumentContext extends ParserRuleContext {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
@@ -5458,11 +5153,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGeneric_argument(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGeneric_argument(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5487,6 +5177,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DeclarationContext extends ParserRuleContext {
 		public Import_declarationContext import_declaration() {
 			return getRuleContext(Import_declarationContext.class,0);
@@ -5545,11 +5236,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDeclaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDeclaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5676,6 +5362,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DeclarationsContext extends ParserRuleContext {
 		public List<DeclarationContext> declaration() {
 			return getRuleContexts(DeclarationContext.class);
@@ -5694,11 +5381,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDeclarations(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDeclarations(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5722,7 +5404,7 @@ public class Swift5Parser extends Parser {
 				setState(1126); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0) || _la==AT );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875968L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0) || _la==AT );
 			}
 		}
 		catch (RecognitionException re) {
@@ -5736,6 +5418,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Top_level_declarationContext extends ParserRuleContext {
 		public StatementsContext statements() {
 			return getRuleContext(StatementsContext.class,0);
@@ -5751,11 +5434,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTop_level_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTop_level_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5788,6 +5466,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Code_blockContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public TerminalNode RCURLY() { return getToken(Swift5Parser.RCURLY, 0); }
@@ -5805,11 +5484,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCode_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCode_block(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5846,6 +5520,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Import_declarationContext extends ParserRuleContext {
 		public TerminalNode IMPORT() { return getToken(Swift5Parser.IMPORT, 0); }
 		public Import_pathContext import_path() {
@@ -5868,11 +5543,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitImport_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitImport_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -5920,6 +5590,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Import_kindContext extends ParserRuleContext {
 		public TerminalNode TYPEALIAS() { return getToken(Swift5Parser.TYPEALIAS, 0); }
 		public TerminalNode STRUCT() { return getToken(Swift5Parser.STRUCT, 0); }
@@ -5941,11 +5612,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitImport_kind(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitImport_kind(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Import_kindContext import_kind() throws RecognitionException {
@@ -5957,7 +5623,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(1146);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << TYPEALIAS))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 576460821962498112L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -5978,6 +5644,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Import_pathContext extends ParserRuleContext {
 		public List<Import_path_identifierContext> import_path_identifier() {
 			return getRuleContexts(Import_path_identifierContext.class);
@@ -6000,11 +5667,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitImport_path(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitImport_path(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6048,6 +5710,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Import_path_identifierContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -6066,11 +5729,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitImport_path_identifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitImport_path_identifier(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6207,6 +5865,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Constant_declarationContext extends ParserRuleContext {
 		public TerminalNode LET() { return getToken(Swift5Parser.LET, 0); }
 		public Pattern_initializer_listContext pattern_initializer_list() {
@@ -6230,11 +5889,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitConstant_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitConstant_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Constant_declarationContext constant_declaration() throws RecognitionException {
@@ -6257,7 +5911,7 @@ public class Swift5Parser extends Parser {
 			setState(1164);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 144537400573427776L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0)) {
 				{
 				setState(1163);
 				declaration_modifiers();
@@ -6281,6 +5935,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Pattern_initializer_listContext extends ParserRuleContext {
 		public List<Pattern_initializerContext> pattern_initializer() {
 			return getRuleContexts(Pattern_initializerContext.class);
@@ -6303,11 +5958,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPattern_initializer_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPattern_initializer_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6351,6 +6001,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Pattern_initializerContext extends ParserRuleContext {
 		public PatternContext pattern() {
 			return getRuleContext(PatternContext.class,0);
@@ -6369,11 +6020,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPattern_initializer(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPattern_initializer(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6408,6 +6054,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class InitializerContext extends ParserRuleContext {
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
 		public ExpressionContext expression() {
@@ -6424,11 +6071,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInitializer(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInitializer(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6455,6 +6097,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Variable_declarationContext extends ParserRuleContext {
 		public Variable_declaration_headContext variable_declaration_head() {
 			return getRuleContext(Variable_declaration_headContext.class,0);
@@ -6491,11 +6134,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitVariable_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitVariable_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6535,30 +6173,30 @@ public class Swift5Parser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,80,_ctx) ) {
 					case 1:
 						{
-						setState(1190);
-						getter_setter_block();
-						}
-						break;
-					case 2:
-						{
 						setState(1191);
-						getter_setter_keyword_block();
-						}
-						break;
-					case 3:
-						{
-						setState(1193);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						if (_la==EQUAL) {
 							{
-							setState(1192);
+							setState(1190);
 							initializer();
 							}
 						}
 
-						setState(1195);
+						setState(1193);
 						willSet_didSet_block();
+						}
+						break;
+					case 2:
+						{
+						setState(1194);
+						getter_setter_block();
+						}
+						break;
+					case 3:
+						{
+						setState(1195);
+						getter_setter_keyword_block();
 						}
 						break;
 					}
@@ -6589,6 +6227,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Variable_declaration_headContext extends ParserRuleContext {
 		public TerminalNode VAR() { return getToken(Swift5Parser.VAR, 0); }
 		public AttributesContext attributes() {
@@ -6608,11 +6247,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitVariable_declaration_head(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitVariable_declaration_head(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6636,7 +6270,7 @@ public class Swift5Parser extends Parser {
 			setState(1207);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 144537400573427776L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0)) {
 				{
 				setState(1206);
 				declaration_modifiers();
@@ -6658,6 +6292,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Variable_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -6673,11 +6308,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitVariable_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitVariable_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6702,6 +6332,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Getter_setter_blockContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public TerminalNode RCURLY() { return getToken(Swift5Parser.RCURLY, 0); }
@@ -6725,11 +6356,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGetter_setter_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGetter_setter_block(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6756,7 +6382,7 @@ public class Swift5Parser extends Parser {
 					setState(1216);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-					if (((((_la - 31)) & ~0x3f) == 0 && ((1L << (_la - 31)) & ((1L << (SET - 31)) | (1L << (MUTATING - 31)) | (1L << (NONMUTATING - 31)))) != 0) || _la==AT) {
+					if (((((_la - 31)) & ~0x3f) == 0 && ((1L << (_la - 31)) & 211106232532993L) != 0) || _la==AT) {
 						{
 						setState(1215);
 						setter_clause();
@@ -6798,6 +6424,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Getter_clauseContext extends ParserRuleContext {
 		public TerminalNode GET() { return getToken(Swift5Parser.GET, 0); }
 		public AttributesContext attributes() {
@@ -6820,11 +6447,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGetter_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGetter_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6880,6 +6502,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Setter_clauseContext extends ParserRuleContext {
 		public TerminalNode SET() { return getToken(Swift5Parser.SET, 0); }
 		public AttributesContext attributes() {
@@ -6905,11 +6528,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSetter_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSetter_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -6975,6 +6593,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Setter_nameContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public IdentifierContext identifier() {
@@ -6992,11 +6611,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSetter_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSetter_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7025,6 +6639,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Getter_setter_keyword_blockContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public TerminalNode RCURLY() { return getToken(Swift5Parser.RCURLY, 0); }
@@ -7045,11 +6660,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGetter_setter_keyword_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGetter_setter_keyword_block(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7072,7 +6682,7 @@ public class Swift5Parser extends Parser {
 				setState(1258);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (((((_la - 31)) & ~0x3f) == 0 && ((1L << (_la - 31)) & ((1L << (SET - 31)) | (1L << (MUTATING - 31)) | (1L << (NONMUTATING - 31)))) != 0) || _la==AT) {
+				if (((((_la - 31)) & ~0x3f) == 0 && ((1L << (_la - 31)) & 211106232532993L) != 0) || _la==AT) {
 					{
 					setState(1257);
 					setter_keyword_clause();
@@ -7105,6 +6715,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Getter_keyword_clauseContext extends ParserRuleContext {
 		public TerminalNode GET() { return getToken(Swift5Parser.GET, 0); }
 		public AttributesContext attributes() {
@@ -7124,11 +6735,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitGetter_keyword_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitGetter_keyword_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7174,6 +6780,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Setter_keyword_clauseContext extends ParserRuleContext {
 		public TerminalNode SET() { return getToken(Swift5Parser.SET, 0); }
 		public AttributesContext attributes() {
@@ -7193,11 +6800,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSetter_keyword_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSetter_keyword_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7243,6 +6845,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class WillSet_didSet_blockContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public TerminalNode RCURLY() { return getToken(Swift5Parser.RCURLY, 0); }
@@ -7263,11 +6866,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWillSet_didSet_block(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWillSet_didSet_block(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7331,6 +6929,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class WillSet_clauseContext extends ParserRuleContext {
 		public TerminalNode WILL_SET() { return getToken(Swift5Parser.WILL_SET, 0); }
 		public Code_blockContext code_block() {
@@ -7353,11 +6952,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWillSet_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWillSet_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7405,6 +6999,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DidSet_clauseContext extends ParserRuleContext {
 		public TerminalNode DID_SET() { return getToken(Swift5Parser.DID_SET, 0); }
 		public Code_blockContext code_block() {
@@ -7427,11 +7022,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDidSet_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDidSet_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7479,6 +7069,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Typealias_declarationContext extends ParserRuleContext {
 		public TerminalNode TYPEALIAS() { return getToken(Swift5Parser.TYPEALIAS, 0); }
 		public Typealias_nameContext typealias_name() {
@@ -7508,11 +7099,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTypealias_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTypealias_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Typealias_declarationContext typealias_declaration() throws RecognitionException {
@@ -7535,7 +7121,7 @@ public class Swift5Parser extends Parser {
 			setState(1318);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 				{
 				setState(1317);
 				access_level_modifier();
@@ -7571,6 +7157,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Typealias_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -7586,11 +7173,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTypealias_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTypealias_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7615,6 +7197,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Typealias_assignmentContext extends ParserRuleContext {
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
 		public TypeContext type() {
@@ -7631,11 +7214,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTypealias_assignment(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTypealias_assignment(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7662,6 +7240,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_declarationContext extends ParserRuleContext {
 		public Function_headContext function_head() {
 			return getRuleContext(Function_headContext.class,0);
@@ -7692,11 +7271,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7756,6 +7330,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_headContext extends ParserRuleContext {
 		public TerminalNode FUNC() { return getToken(Swift5Parser.FUNC, 0); }
 		public AttributesContext attributes() {
@@ -7775,11 +7350,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_head(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_head(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7803,7 +7373,7 @@ public class Swift5Parser extends Parser {
 			setState(1348);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 144537400573427776L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0)) {
 				{
 				setState(1347);
 				declaration_modifiers();
@@ -7825,6 +7395,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -7843,11 +7414,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -7984,6 +7550,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_signatureContext extends ParserRuleContext {
 		public Parameter_clauseContext parameter_clause() {
 			return getRuleContext(Parameter_clauseContext.class,0);
@@ -8004,11 +7571,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_signature(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_signature(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8067,6 +7629,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_resultContext extends ParserRuleContext {
 		public Arrow_operatorContext arrow_operator() {
 			return getRuleContext(Arrow_operatorContext.class,0);
@@ -8088,11 +7651,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_result(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_result(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8129,6 +7687,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_bodyContext extends ParserRuleContext {
 		public Code_blockContext code_block() {
 			return getRuleContext(Code_blockContext.class,0);
@@ -8144,11 +7703,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_body(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8173,6 +7727,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Parameter_clauseContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -8191,11 +7746,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitParameter_clause(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitParameter_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Parameter_clauseContext parameter_clause() throws RecognitionException {
@@ -8210,7 +7760,7 @@ public class Swift5Parser extends Parser {
 			setState(1376);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (AT - 135)) | (1L << (BACKTICK - 135)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1074003975L) != 0)) {
 				{
 				setState(1375);
 				parameter_list();
@@ -8232,6 +7782,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Parameter_listContext extends ParserRuleContext {
 		public List<ParameterContext> parameter() {
 			return getRuleContexts(ParameterContext.class);
@@ -8254,11 +7805,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitParameter_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitParameter_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8300,6 +7846,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ParameterContext extends ParserRuleContext {
 		public Local_parameter_nameContext local_parameter_name() {
 			return getRuleContext(Local_parameter_nameContext.class,0);
@@ -8330,11 +7877,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitParameter(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitParameter(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8406,6 +7948,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class External_parameter_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -8421,11 +7964,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExternal_parameter_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExternal_parameter_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8450,6 +7988,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Local_parameter_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -8465,11 +8004,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLocal_parameter_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLocal_parameter_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8494,6 +8028,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Default_argument_clauseContext extends ParserRuleContext {
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
 		public ExpressionContext expression() {
@@ -8510,11 +8045,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDefault_argument_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDefault_argument_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8541,6 +8071,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Enum_declarationContext extends ParserRuleContext {
 		public Union_style_enumContext union_style_enum() {
 			return getRuleContext(Union_style_enumContext.class,0);
@@ -8566,11 +8097,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitEnum_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitEnum_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Enum_declarationContext enum_declaration() throws RecognitionException {
@@ -8593,7 +8119,7 @@ public class Swift5Parser extends Parser {
 			setState(1413);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 				{
 				setState(1412);
 				access_level_modifier();
@@ -8629,6 +8155,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Union_style_enumContext extends ParserRuleContext {
 		public TerminalNode ENUM() { return getToken(Swift5Parser.ENUM, 0); }
 		public Enum_nameContext enum_name() {
@@ -8660,11 +8187,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnion_style_enum(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnion_style_enum(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8724,7 +8246,7 @@ public class Swift5Parser extends Parser {
 			setState(1435);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CASE) | (1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875984L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT) {
 				{
 				setState(1434);
 				union_style_enum_members();
@@ -8746,6 +8268,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Union_style_enum_membersContext extends ParserRuleContext {
 		public List<Union_style_enum_memberContext> union_style_enum_member() {
 			return getRuleContexts(Union_style_enum_memberContext.class);
@@ -8764,11 +8287,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnion_style_enum_members(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnion_style_enum_members(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8792,7 +8310,7 @@ public class Swift5Parser extends Parser {
 				setState(1442); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CASE) | (1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875984L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT );
 			}
 		}
 		catch (RecognitionException re) {
@@ -8806,6 +8324,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Union_style_enum_memberContext extends ParserRuleContext {
 		public DeclarationContext declaration() {
 			return getRuleContext(DeclarationContext.class,0);
@@ -8827,11 +8346,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnion_style_enum_member(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnion_style_enum_member(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8876,6 +8390,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Union_style_enum_case_clauseContext extends ParserRuleContext {
 		public TerminalNode CASE() { return getToken(Swift5Parser.CASE, 0); }
 		public Union_style_enum_case_listContext union_style_enum_case_list() {
@@ -8896,11 +8411,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnion_style_enum_case_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnion_style_enum_case_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -8948,6 +8458,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Union_style_enum_case_listContext extends ParserRuleContext {
 		public List<Union_style_enum_caseContext> union_style_enum_case() {
 			return getRuleContexts(Union_style_enum_caseContext.class);
@@ -8970,11 +8481,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnion_style_enum_case_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnion_style_enum_case_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9016,6 +8522,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Union_style_enum_caseContext extends ParserRuleContext {
 		public Opaque_typeContext opaque_type() {
 			return getRuleContext(Opaque_typeContext.class,0);
@@ -9042,11 +8549,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnion_style_enum_case(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnion_style_enum_case(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9104,6 +8606,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Enum_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -9119,11 +8622,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitEnum_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitEnum_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9148,6 +8646,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Enum_case_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -9163,11 +8662,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitEnum_case_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitEnum_case_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9192,6 +8686,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_style_enumContext extends ParserRuleContext {
 		public TerminalNode ENUM() { return getToken(Swift5Parser.ENUM, 0); }
 		public Enum_nameContext enum_name() {
@@ -9222,11 +8717,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_style_enum(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_style_enum(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9282,6 +8772,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_style_enum_membersContext extends ParserRuleContext {
 		public List<Raw_value_style_enum_memberContext> raw_value_style_enum_member() {
 			return getRuleContexts(Raw_value_style_enum_memberContext.class);
@@ -9300,11 +8791,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_style_enum_members(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_style_enum_members(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9328,7 +8814,7 @@ public class Swift5Parser extends Parser {
 				setState(1497); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CASE) | (1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875984L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT );
 			}
 		}
 		catch (RecognitionException re) {
@@ -9342,6 +8828,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_style_enum_memberContext extends ParserRuleContext {
 		public DeclarationContext declaration() {
 			return getRuleContext(DeclarationContext.class,0);
@@ -9363,11 +8850,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_style_enum_member(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_style_enum_member(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9412,6 +8894,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_style_enum_case_clauseContext extends ParserRuleContext {
 		public TerminalNode CASE() { return getToken(Swift5Parser.CASE, 0); }
 		public Raw_value_style_enum_case_listContext raw_value_style_enum_case_list() {
@@ -9431,11 +8914,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_style_enum_case_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_style_enum_case_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9473,6 +8951,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_style_enum_case_listContext extends ParserRuleContext {
 		public List<Raw_value_style_enum_caseContext> raw_value_style_enum_case() {
 			return getRuleContexts(Raw_value_style_enum_caseContext.class);
@@ -9495,11 +8974,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_style_enum_case_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_style_enum_case_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9541,6 +9015,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_style_enum_caseContext extends ParserRuleContext {
 		public Enum_case_nameContext enum_case_name() {
 			return getRuleContext(Enum_case_nameContext.class,0);
@@ -9559,11 +9034,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_style_enum_case(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_style_enum_case(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9599,6 +9069,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_assignmentContext extends ParserRuleContext {
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
 		public Raw_value_literalContext raw_value_literal() {
@@ -9615,11 +9086,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_assignment(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_assignment(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9646,6 +9112,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Raw_value_literalContext extends ParserRuleContext {
 		public Numeric_literalContext numeric_literal() {
 			return getRuleContext(Numeric_literalContext.class,0);
@@ -9667,11 +9134,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRaw_value_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRaw_value_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9716,6 +9178,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Struct_declarationContext extends ParserRuleContext {
 		public TerminalNode STRUCT() { return getToken(Swift5Parser.STRUCT, 0); }
 		public Struct_nameContext struct_name() {
@@ -9751,11 +9214,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStruct_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStruct_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Struct_declarationContext struct_declaration() throws RecognitionException {
@@ -9778,7 +9236,7 @@ public class Swift5Parser extends Parser {
 			setState(1534);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 				{
 				setState(1533);
 				access_level_modifier();
@@ -9834,6 +9292,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Struct_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -9849,11 +9308,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStruct_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStruct_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9878,6 +9332,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Struct_bodyContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public Struct_membersContext struct_members() {
@@ -9895,11 +9350,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStruct_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStruct_body(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -9928,6 +9378,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Struct_membersContext extends ParserRuleContext {
 		public List<Struct_memberContext> struct_member() {
 			return getRuleContexts(Struct_memberContext.class);
@@ -9947,11 +9398,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStruct_members(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStruct_members(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Struct_membersContext struct_members() throws RecognitionException {
@@ -9964,7 +9410,7 @@ public class Swift5Parser extends Parser {
 			setState(1558);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875968L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT) {
 				{
 				{
 				setState(1555);
@@ -9988,6 +9434,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Struct_memberContext extends ParserRuleContext {
 		public DeclarationContext declaration() {
 			return getRuleContext(DeclarationContext.class,0);
@@ -10006,11 +9453,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStruct_member(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStruct_member(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10088,6 +9530,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Class_declarationContext extends ParserRuleContext {
 		public TerminalNode CLASS() { return getToken(Swift5Parser.CLASS, 0); }
 		public Class_nameContext class_name() {
@@ -10124,11 +9567,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClass_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClass_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Class_declarationContext class_declaration() throws RecognitionException {
@@ -10156,7 +9594,7 @@ public class Swift5Parser extends Parser {
 				setState(1569);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+				if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 					{
 					setState(1568);
 					access_level_modifier();
@@ -10182,7 +9620,7 @@ public class Swift5Parser extends Parser {
 				setState(1576);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+				if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 					{
 					setState(1575);
 					access_level_modifier();
@@ -10241,6 +9679,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Class_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -10256,11 +9695,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClass_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClass_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10285,6 +9719,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Class_bodyContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public Class_membersContext class_members() {
@@ -10302,11 +9737,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClass_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClass_body(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10335,6 +9765,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Class_membersContext extends ParserRuleContext {
 		public List<Class_memberContext> class_member() {
 			return getRuleContexts(Class_memberContext.class);
@@ -10354,11 +9785,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClass_members(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClass_members(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Class_membersContext class_members() throws RecognitionException {
@@ -10371,7 +9797,7 @@ public class Swift5Parser extends Parser {
 			setState(1602);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875968L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT) {
 				{
 				{
 				setState(1599);
@@ -10395,6 +9821,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Class_memberContext extends ParserRuleContext {
 		public DeclarationContext declaration() {
 			return getRuleContext(DeclarationContext.class,0);
@@ -10413,11 +9840,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClass_member(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClass_member(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10495,6 +9917,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_declarationContext extends ParserRuleContext {
 		public TerminalNode PROTOCOL() { return getToken(Swift5Parser.PROTOCOL, 0); }
 		public Protocol_nameContext protocol_name() {
@@ -10529,11 +9952,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Protocol_declarationContext protocol_declaration() throws RecognitionException {
@@ -10556,7 +9974,7 @@ public class Swift5Parser extends Parser {
 			setState(1613);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 				{
 				setState(1612);
 				access_level_modifier();
@@ -10610,6 +10028,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -10625,11 +10044,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10654,6 +10068,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_bodyContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public Protocol_membersContext protocol_members() {
@@ -10671,11 +10086,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_body(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10704,6 +10114,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_membersContext extends ParserRuleContext {
 		public List<Protocol_memberContext> protocol_member() {
 			return getRuleContexts(Protocol_memberContext.class);
@@ -10723,11 +10134,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_members(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_members(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Protocol_membersContext protocol_members() throws RecognitionException {
@@ -10740,7 +10146,7 @@ public class Swift5Parser extends Parser {
 			setState(1636);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << FUNC) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << VAR) | (1L << INIT) | (1L << ASSOCIATED_TYPE) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 721090512122085440L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT) {
 				{
 				{
 				setState(1633);
@@ -10764,6 +10170,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_memberContext extends ParserRuleContext {
 		public Protocol_member_declarationContext protocol_member_declaration() {
 			return getRuleContext(Protocol_member_declarationContext.class,0);
@@ -10782,11 +10189,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_member(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_member(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10856,6 +10258,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_member_declarationContext extends ParserRuleContext {
 		public Protocol_property_declarationContext protocol_property_declaration() {
 			return getRuleContext(Protocol_property_declarationContext.class,0);
@@ -10886,11 +10289,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_member_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_member_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -10956,6 +10354,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_property_declarationContext extends ParserRuleContext {
 		public Variable_declaration_headContext variable_declaration_head() {
 			return getRuleContext(Variable_declaration_headContext.class,0);
@@ -10980,11 +10379,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_property_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_property_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11015,6 +10409,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_method_declarationContext extends ParserRuleContext {
 		public Function_headContext function_head() {
 			return getRuleContext(Function_headContext.class,0);
@@ -11042,11 +10437,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_method_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_method_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11096,6 +10486,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_initializer_declarationContext extends ParserRuleContext {
 		public Initializer_headContext initializer_head() {
 			return getRuleContext(Initializer_headContext.class,0);
@@ -11122,11 +10513,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_initializer_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_initializer_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11234,6 +10620,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_subscript_declarationContext extends ParserRuleContext {
 		public Subscript_headContext subscript_head() {
 			return getRuleContext(Subscript_headContext.class,0);
@@ -11258,11 +10645,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_subscript_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_subscript_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11302,6 +10684,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_associated_type_declarationContext extends ParserRuleContext {
 		public TerminalNode ASSOCIATED_TYPE() { return getToken(Swift5Parser.ASSOCIATED_TYPE, 0); }
 		public Typealias_nameContext typealias_name() {
@@ -11334,11 +10717,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_associated_type_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_associated_type_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Protocol_associated_type_declarationContext protocol_associated_type_declaration() throws RecognitionException {
@@ -11361,7 +10739,7 @@ public class Swift5Parser extends Parser {
 			setState(1690);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 				{
 				setState(1689);
 				access_level_modifier();
@@ -11415,6 +10793,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Initializer_declarationContext extends ParserRuleContext {
 		public Initializer_headContext initializer_head() {
 			return getRuleContext(Initializer_headContext.class,0);
@@ -11444,11 +10823,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInitializer_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInitializer_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11516,6 +10890,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Initializer_headContext extends ParserRuleContext {
 		public TerminalNode INIT() { return getToken(Swift5Parser.INIT, 0); }
 		public AttributesContext attributes() {
@@ -11537,11 +10912,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInitializer_head(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInitializer_head(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11565,7 +10935,7 @@ public class Swift5Parser extends Parser {
 			setState(1720);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 144537400573427776L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0)) {
 				{
 				setState(1719);
 				declaration_modifiers();
@@ -11605,6 +10975,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Initializer_bodyContext extends ParserRuleContext {
 		public Code_blockContext code_block() {
 			return getRuleContext(Code_blockContext.class,0);
@@ -11620,11 +10991,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInitializer_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInitializer_body(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11649,6 +11015,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Deinitializer_declarationContext extends ParserRuleContext {
 		public TerminalNode DEINIT() { return getToken(Swift5Parser.DEINIT, 0); }
 		public Code_blockContext code_block() {
@@ -11668,11 +11035,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDeinitializer_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDeinitializer_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11710,6 +11072,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Extension_declarationContext extends ParserRuleContext {
 		public TerminalNode EXTENSION() { return getToken(Swift5Parser.EXTENSION, 0); }
 		public Type_identifierContext type_identifier() {
@@ -11742,11 +11105,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExtension_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExtension_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Extension_declarationContext extension_declaration() throws RecognitionException {
@@ -11769,7 +11127,7 @@ public class Swift5Parser extends Parser {
 			setState(1738);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) {
+			if (((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) {
 				{
 				setState(1737);
 				access_level_modifier();
@@ -11815,6 +11173,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Extension_bodyContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public Extension_membersContext extension_members() {
@@ -11832,11 +11191,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExtension_body(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExtension_body(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -11865,6 +11219,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Extension_membersContext extends ParserRuleContext {
 		public List<Extension_memberContext> extension_member() {
 			return getRuleContexts(Extension_memberContext.class);
@@ -11884,11 +11239,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExtension_members(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExtension_members(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Extension_membersContext extension_members() throws RecognitionException {
@@ -11901,7 +11251,7 @@ public class Swift5Parser extends Parser {
 			setState(1757);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << ENUM) | (1L << FUNC) | (1L << IMPORT) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << STRUCT) | (1L << INDIRECT) | (1L << INIT) | (1L << DEINIT) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << PREFIX) | (1L << INFIX) | (1L << PRECEDENCE_GROUP) | (1L << POSTFIX) | (1L << TYPEALIAS))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)) | (1L << (SOURCE_LOCATION - 66)) | (1L << (ERROR - 66)) | (1L << (WARNING - 66)) | (1L << (HASH_IF - 66)))) != 0) || _la==AT) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 725622768442875968L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 12525636463639039L) != 0) || _la==AT) {
 				{
 				{
 				setState(1754);
@@ -11925,6 +11275,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Extension_memberContext extends ParserRuleContext {
 		public DeclarationContext declaration() {
 			return getRuleContext(DeclarationContext.class,0);
@@ -11943,11 +11294,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExtension_member(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExtension_member(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12025,6 +11371,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Subscript_declarationContext extends ParserRuleContext {
 		public Subscript_headContext subscript_head() {
 			return getRuleContext(Subscript_headContext.class,0);
@@ -12055,11 +11402,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSubscript_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSubscript_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12119,6 +11461,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Subscript_headContext extends ParserRuleContext {
 		public TerminalNode SUBSCRIPT() { return getToken(Swift5Parser.SUBSCRIPT, 0); }
 		public Parameter_clauseContext parameter_clause() {
@@ -12145,11 +11488,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSubscript_head(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSubscript_head(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Subscript_headContext subscript_head() throws RecognitionException {
@@ -12172,7 +11510,7 @@ public class Swift5Parser extends Parser {
 			setState(1778);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 144537400573427776L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0)) {
 				{
 				setState(1777);
 				declaration_modifiers();
@@ -12206,6 +11544,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Subscript_resultContext extends ParserRuleContext {
 		public Arrow_operatorContext arrow_operator() {
 			return getRuleContext(Arrow_operatorContext.class,0);
@@ -12227,11 +11566,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSubscript_result(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSubscript_result(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12268,6 +11602,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Operator_declarationContext extends ParserRuleContext {
 		public Prefix_operator_declarationContext prefix_operator_declaration() {
 			return getRuleContext(Prefix_operator_declarationContext.class,0);
@@ -12289,11 +11624,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOperator_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOperator_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12340,6 +11670,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Prefix_operator_declarationContext extends ParserRuleContext {
 		public TerminalNode PREFIX() { return getToken(Swift5Parser.PREFIX, 0); }
 		public TerminalNode OPERATOR() { return getToken(Swift5Parser.OPERATOR, 0); }
@@ -12357,11 +11688,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrefix_operator_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrefix_operator_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12390,6 +11716,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Postfix_operator_declarationContext extends ParserRuleContext {
 		public TerminalNode POSTFIX() { return getToken(Swift5Parser.POSTFIX, 0); }
 		public TerminalNode OPERATOR() { return getToken(Swift5Parser.OPERATOR, 0); }
@@ -12407,11 +11734,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPostfix_operator_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPostfix_operator_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12440,6 +11762,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Infix_operator_declarationContext extends ParserRuleContext {
 		public TerminalNode INFIX() { return getToken(Swift5Parser.INFIX, 0); }
 		public TerminalNode OPERATOR() { return getToken(Swift5Parser.OPERATOR, 0); }
@@ -12460,11 +11783,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInfix_operator_declaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInfix_operator_declaration(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12503,6 +11821,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Infix_operator_groupContext extends ParserRuleContext {
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
 		public Precedence_group_nameContext precedence_group_name() {
@@ -12519,11 +11838,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInfix_operator_group(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInfix_operator_group(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12550,6 +11864,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_declarationContext extends ParserRuleContext {
 		public TerminalNode PRECEDENCE_GROUP() { return getToken(Swift5Parser.PRECEDENCE_GROUP, 0); }
 		public Precedence_group_nameContext precedence_group_name() {
@@ -12572,11 +11887,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_declaration(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_declaration(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Precedence_group_declarationContext precedence_group_declaration() throws RecognitionException {
@@ -12595,7 +11905,7 @@ public class Swift5Parser extends Parser {
 			setState(1818);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 135107988821114880L) != 0)) {
 				{
 				setState(1817);
 				precedence_group_attributes();
@@ -12617,6 +11927,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_attributesContext extends ParserRuleContext {
 		public List<Precedence_group_attributeContext> precedence_group_attribute() {
 			return getRuleContexts(Precedence_group_attributeContext.class);
@@ -12635,11 +11946,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_attributes(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_attributes(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12663,7 +11969,7 @@ public class Swift5Parser extends Parser {
 				setState(1825); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 135107988821114880L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -12677,6 +11983,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_attributeContext extends ParserRuleContext {
 		public Precedence_group_relationContext precedence_group_relation() {
 			return getRuleContext(Precedence_group_relationContext.class,0);
@@ -12698,11 +12005,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_attribute(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_attribute(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12750,6 +12052,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_relationContext extends ParserRuleContext {
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
 		public Precedence_group_namesContext precedence_group_names() {
@@ -12768,11 +12071,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_relation(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_relation(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12810,6 +12108,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_assignmentContext extends ParserRuleContext {
 		public TerminalNode ASSIGNMENT() { return getToken(Swift5Parser.ASSIGNMENT, 0); }
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
@@ -12827,11 +12126,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_assignment(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_assignment(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12860,6 +12154,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_associativityContext extends ParserRuleContext {
 		public TerminalNode ASSOCIATIVITY() { return getToken(Swift5Parser.ASSOCIATIVITY, 0); }
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
@@ -12878,11 +12173,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_associativity(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_associativity(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Precedence_group_associativityContext precedence_group_associativity() throws RecognitionException {
@@ -12898,7 +12188,7 @@ public class Swift5Parser extends Parser {
 			match(COLON);
 			setState(1842);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LEFT) | (1L << RIGHT) | (1L << NONE))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 3940649673949184L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -12919,6 +12209,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_namesContext extends ParserRuleContext {
 		public List<Precedence_group_nameContext> precedence_group_name() {
 			return getRuleContexts(Precedence_group_nameContext.class);
@@ -12941,11 +12232,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_names(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_names(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -12987,6 +12273,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Precedence_group_nameContext extends ParserRuleContext {
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
@@ -13009,11 +12296,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrecedence_group_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrecedence_group_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13057,6 +12339,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Declaration_modifierContext extends ParserRuleContext {
 		public TerminalNode CLASS() { return getToken(Swift5Parser.CLASS, 0); }
 		public TerminalNode CONVENIENCE() { return getToken(Swift5Parser.CONVENIENCE, 0); }
@@ -13093,11 +12376,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDeclaration_modifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDeclaration_modifier(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13263,6 +12541,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Declaration_modifiersContext extends ParserRuleContext {
 		public List<Declaration_modifierContext> declaration_modifier() {
 			return getRuleContexts(Declaration_modifierContext.class);
@@ -13281,11 +12560,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDeclaration_modifiers(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDeclaration_modifiers(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13309,7 +12583,7 @@ public class Swift5Parser extends Parser {
 				setState(1886); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASS) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << PREFIX) | (1L << INFIX) | (1L << POSTFIX))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (CONVENIENCE - 66)) | (1L << (DYNAMIC - 66)) | (1L << (LAZY - 66)) | (1L << (OPTIONAL - 66)) | (1L << (OVERRIDE - 66)) | (1L << (REQUIRED - 66)) | (1L << (STATIC - 66)) | (1L << (WEAK - 66)) | (1L << (UNOWNED - 66)) | (1L << (MUTATING - 66)) | (1L << (NONMUTATING - 66)) | (1L << (FILE_PRIVATE - 66)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 144537400573427776L) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & 14847L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -13323,6 +12597,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Access_level_modifierContext extends ParserRuleContext {
 		public TerminalNode PRIVATE() { return getToken(Swift5Parser.PRIVATE, 0); }
 		public TerminalNode FILE_PRIVATE() { return getToken(Swift5Parser.FILE_PRIVATE, 0); }
@@ -13344,11 +12619,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAccess_level_modifier(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAccess_level_modifier(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Access_level_modifierContext access_level_modifier() throws RecognitionException {
@@ -13360,7 +12630,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(1888);
 			_la = _input.LA(1);
-			if ( !(((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & ((1L << (INTERNAL - 20)) | (1L << (OPEN - 20)) | (1L << (PRIVATE - 20)) | (1L << (PUBLIC - 20)) | (1L << (FILE_PRIVATE - 20)))) != 0)) ) {
+			if ( !(((((_la - 20)) & ~0x3f) == 0 && ((1L << (_la - 20)) & 576460752303423517L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -13395,6 +12665,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Mutation_modifierContext extends ParserRuleContext {
 		public TerminalNode MUTATING() { return getToken(Swift5Parser.MUTATING, 0); }
 		public TerminalNode NONMUTATING() { return getToken(Swift5Parser.NONMUTATING, 0); }
@@ -13409,11 +12680,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitMutation_modifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitMutation_modifier(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13447,6 +12713,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class PatternContext extends ParserRuleContext {
 		public Wildcard_patternContext wildcard_pattern() {
 			return getRuleContext(Wildcard_patternContext.class,0);
@@ -13491,11 +12758,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13708,6 +12970,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Wildcard_patternContext extends ParserRuleContext {
 		public TerminalNode UNDERSCORE() { return getToken(Swift5Parser.UNDERSCORE, 0); }
 		public Wildcard_patternContext(ParserRuleContext parent, int invokingState) {
@@ -13721,11 +12984,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWildcard_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWildcard_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13750,6 +13008,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Identifier_patternContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -13765,11 +13024,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitIdentifier_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitIdentifier_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13794,6 +13048,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Value_binding_patternContext extends ParserRuleContext {
 		public TerminalNode VAR() { return getToken(Swift5Parser.VAR, 0); }
 		public PatternContext pattern() {
@@ -13811,11 +13066,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitValue_binding_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitValue_binding_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13859,6 +13109,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_patternContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -13876,11 +13127,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13917,6 +13163,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_pattern_element_listContext extends ParserRuleContext {
 		public List<Tuple_pattern_elementContext> tuple_pattern_element() {
 			return getRuleContexts(Tuple_pattern_elementContext.class);
@@ -13939,11 +13186,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_pattern_element_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_pattern_element_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -13985,6 +13227,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_pattern_elementContext extends ParserRuleContext {
 		public PatternContext pattern() {
 			return getRuleContext(PatternContext.class,0);
@@ -14004,11 +13247,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_pattern_element(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_pattern_element(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14045,6 +13283,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Enum_case_patternContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public Enum_case_nameContext enum_case_name() {
@@ -14068,11 +13307,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitEnum_case_pattern(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitEnum_case_pattern(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Enum_case_patternContext enum_case_pattern() throws RecognitionException {
@@ -14085,7 +13319,7 @@ public class Swift5Parser extends Parser {
 			setState(1953);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (BACKTICK - 135)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1073741831L) != 0)) {
 				{
 				setState(1952);
 				type_identifier();
@@ -14119,6 +13353,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Optional_patternContext extends ParserRuleContext {
 		public Identifier_patternContext identifier_pattern() {
 			return getRuleContext(Identifier_patternContext.class,0);
@@ -14135,11 +13370,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOptional_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOptional_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14166,6 +13396,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Expression_patternContext extends ParserRuleContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -14181,11 +13412,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExpression_pattern(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExpression_pattern(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14210,6 +13436,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class AttributeContext extends ParserRuleContext {
 		public TerminalNode AT() { return getToken(Swift5Parser.AT, 0); }
 		public Attribute_nameContext attribute_name() {
@@ -14229,11 +13456,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAttribute(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAttribute(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14270,6 +13492,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Attribute_nameContext extends ParserRuleContext {
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
@@ -14292,11 +13515,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAttribute_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAttribute_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14338,6 +13556,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Attribute_argument_clauseContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -14355,11 +13574,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAttribute_argument_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAttribute_argument_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14396,6 +13610,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class AttributesContext extends ParserRuleContext {
 		public List<AttributeContext> attribute() {
 			return getRuleContexts(AttributeContext.class);
@@ -14414,11 +13629,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAttributes(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAttributes(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14462,6 +13672,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Balanced_tokensContext extends ParserRuleContext {
 		public List<Balanced_tokenContext> balanced_token() {
 			return getRuleContexts(Balanced_tokenContext.class);
@@ -14480,11 +13691,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBalanced_tokens(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBalanced_tokens(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14528,6 +13734,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Balanced_tokenContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -14564,11 +13771,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBalanced_token(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBalanced_token(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14684,6 +13886,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Balanced_token_punctuationContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public TerminalNode COMMA() { return getToken(Swift5Parser.COMMA, 0); }
@@ -14711,11 +13914,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBalanced_token_punctuation(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBalanced_token_punctuation(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Balanced_token_punctuationContext balanced_token_punctuation() throws RecognitionException {
@@ -14731,7 +13929,7 @@ public class Swift5Parser extends Parser {
 				{
 				setState(2016);
 				_la = _input.LA(1);
-				if ( !(((((_la - 138)) & ~0x3f) == 0 && ((1L << (_la - 138)) & ((1L << (DOT - 138)) | (1L << (COMMA - 138)) | (1L << (COLON - 138)) | (1L << (SEMI - 138)) | (1L << (QUESTION - 138)) | (1L << (AT - 138)) | (1L << (EQUAL - 138)) | (1L << (HASH - 138)) | (1L << (BACKTICK - 138)))) != 0)) ) {
+				if ( !(((((_la - 138)) & ~0x3f) == 0 && ((1L << (_la - 138)) & 201638785L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -14779,6 +13977,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionContext extends ParserRuleContext {
 		public Prefix_expressionContext prefix_expression() {
 			return getRuleContext(Prefix_expressionContext.class,0);
@@ -14800,11 +13999,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExpression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14849,6 +14043,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Expression_listContext extends ParserRuleContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -14871,11 +14066,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExpression_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExpression_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14917,6 +14107,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Prefix_expressionContext extends ParserRuleContext {
 		public Postfix_expressionContext postfix_expression() {
 			return getRuleContext(Postfix_expressionContext.class,0);
@@ -14938,11 +14129,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrefix_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrefix_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -14990,6 +14176,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class In_out_expressionContext extends ParserRuleContext {
 		public TerminalNode AND() { return getToken(Swift5Parser.AND, 0); }
 		public IdentifierContext identifier() {
@@ -15006,11 +14193,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitIn_out_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitIn_out_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15037,6 +14219,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Try_operatorContext extends ParserRuleContext {
 		public TerminalNode TRY() { return getToken(Swift5Parser.TRY, 0); }
 		public TerminalNode QUESTION() { return getToken(Swift5Parser.QUESTION, 0); }
@@ -15052,11 +14235,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTry_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTry_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15100,6 +14278,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Binary_expressionContext extends ParserRuleContext {
 		public Binary_operatorContext binary_operator() {
 			return getRuleContext(Binary_operatorContext.class,0);
@@ -15130,11 +14309,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBinary_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBinary_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15207,6 +14381,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Binary_expressionsContext extends ParserRuleContext {
 		public List<Binary_expressionContext> binary_expression() {
 			return getRuleContexts(Binary_expressionContext.class);
@@ -15225,11 +14400,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBinary_expressions(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBinary_expressions(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15273,6 +14443,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Conditional_operatorContext extends ParserRuleContext {
 		public TerminalNode QUESTION() { return getToken(Swift5Parser.QUESTION, 0); }
 		public ExpressionContext expression() {
@@ -15290,11 +14461,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitConditional_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitConditional_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15323,6 +14489,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Type_casting_operatorContext extends ParserRuleContext {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
@@ -15342,11 +14509,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType_casting_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType_casting_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15408,6 +14570,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Primary_expressionContext extends ParserRuleContext {
 		public Unqualified_nameContext unqualified_name() {
 			return getRuleContext(Unqualified_nameContext.class,0);
@@ -15468,11 +14631,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrimary_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrimary_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15611,6 +14769,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Unqualified_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -15631,11 +14790,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitUnqualified_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitUnqualified_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15674,6 +14828,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Literal_expressionContext extends ParserRuleContext {
 		public LiteralContext literal() {
 			return getRuleContext(LiteralContext.class,0);
@@ -15705,11 +14860,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLiteral_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLiteral_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15810,6 +14960,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Array_literalContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
 		public TerminalNode RBRACK() { return getToken(Swift5Parser.RBRACK, 0); }
@@ -15827,11 +14978,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArray_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArray_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15868,6 +15014,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Array_literal_itemsContext extends ParserRuleContext {
 		public List<Array_literal_itemContext> array_literal_item() {
 			return getRuleContexts(Array_literal_itemContext.class);
@@ -15890,11 +15037,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArray_literal_items(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArray_literal_items(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15949,6 +15091,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Array_literal_itemContext extends ParserRuleContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -15964,11 +15107,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArray_literal_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArray_literal_item(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -15993,6 +15131,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dictionary_literalContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
 		public TerminalNode RBRACK() { return getToken(Swift5Parser.RBRACK, 0); }
@@ -16011,11 +15150,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDictionary_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDictionary_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16058,6 +15192,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dictionary_literal_itemsContext extends ParserRuleContext {
 		public List<Dictionary_literal_itemContext> dictionary_literal_item() {
 			return getRuleContexts(Dictionary_literal_itemContext.class);
@@ -16080,11 +15215,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDictionary_literal_items(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDictionary_literal_items(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16139,6 +15269,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dictionary_literal_itemContext extends ParserRuleContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -16158,11 +15289,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDictionary_literal_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDictionary_literal_item(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16191,6 +15317,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Playground_literalContext extends ParserRuleContext {
 		public TerminalNode HASH_COLOR_LITERAL() { return getToken(Swift5Parser.HASH_COLOR_LITERAL, 0); }
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
@@ -16227,11 +15354,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPlayground_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPlayground_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16332,6 +15454,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Self_expressionContext extends ParserRuleContext {
 		public Self_expressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -16343,6 +15466,7 @@ public class Swift5Parser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Self_initializer_expressionContext extends Self_expressionContext {
 		public TerminalNode SELF() { return getToken(Swift5Parser.SELF, 0); }
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
@@ -16356,12 +15480,8 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSelf_initializer_expression(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSelf_initializer_expression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Self_pure_expressionContext extends Self_expressionContext {
 		public TerminalNode SELF() { return getToken(Swift5Parser.SELF, 0); }
 		public Self_pure_expressionContext(Self_expressionContext ctx) { copyFrom(ctx); }
@@ -16373,12 +15493,8 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSelf_pure_expression(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSelf_pure_expression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Self_subscript_expressionContext extends Self_expressionContext {
 		public TerminalNode SELF() { return getToken(Swift5Parser.SELF, 0); }
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
@@ -16395,12 +15511,8 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSelf_subscript_expression(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSelf_subscript_expression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Self_method_expressionContext extends Self_expressionContext {
 		public TerminalNode SELF() { return getToken(Swift5Parser.SELF, 0); }
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
@@ -16415,11 +15527,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSelf_method_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSelf_method_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16489,6 +15596,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Superclass_expressionContext extends ParserRuleContext {
 		public Superclass_expressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -16500,6 +15608,7 @@ public class Swift5Parser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Superclass_subscript_expressionContext extends Superclass_expressionContext {
 		public TerminalNode SUPER() { return getToken(Swift5Parser.SUPER, 0); }
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
@@ -16516,12 +15625,8 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSuperclass_subscript_expression(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSuperclass_subscript_expression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Superclass_initializer_expressionContext extends Superclass_expressionContext {
 		public TerminalNode SUPER() { return getToken(Swift5Parser.SUPER, 0); }
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
@@ -16535,12 +15640,8 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSuperclass_initializer_expression(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSuperclass_initializer_expression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class Superclass_method_expressionContext extends Superclass_expressionContext {
 		public TerminalNode SUPER() { return getToken(Swift5Parser.SUPER, 0); }
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
@@ -16555,11 +15656,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSuperclass_method_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSuperclass_method_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16621,6 +15717,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Closure_expressionContext extends ParserRuleContext {
 		public TerminalNode LCURLY() { return getToken(Swift5Parser.LCURLY, 0); }
 		public TerminalNode RCURLY() { return getToken(Swift5Parser.RCURLY, 0); }
@@ -16641,11 +15738,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClosure_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClosure_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16692,6 +15784,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Closure_signatureContext extends ParserRuleContext {
 		public Closure_parameter_clauseContext closure_parameter_clause() {
 			return getRuleContext(Closure_parameter_clauseContext.class,0);
@@ -16715,11 +15808,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClosure_signature(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClosure_signature(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -16792,6 +15880,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Closure_parameter_clauseContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -16813,11 +15902,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClosure_parameter_clause(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClosure_parameter_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Closure_parameter_clauseContext closure_parameter_clause() throws RecognitionException {
@@ -16836,7 +15920,7 @@ public class Swift5Parser extends Parser {
 				setState(2257);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (BACKTICK - 135)))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1073741831L) != 0)) {
 					{
 					setState(2256);
 					closure_parameter_list();
@@ -16951,6 +16035,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Closure_parameter_listContext extends ParserRuleContext {
 		public List<Closure_parameterContext> closure_parameter() {
 			return getRuleContexts(Closure_parameterContext.class);
@@ -16973,11 +16058,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClosure_parameter_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClosure_parameter_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17019,6 +16099,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Closure_parameterContext extends ParserRuleContext {
 		public IdentifierContext closure_parameter_name;
 		public IdentifierContext identifier() {
@@ -17041,11 +16122,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitClosure_parameter(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitClosure_parameter(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17091,6 +16167,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Capture_listContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
 		public Capture_list_itemsContext capture_list_items() {
@@ -17108,11 +16185,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCapture_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCapture_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17141,6 +16213,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Capture_list_itemsContext extends ParserRuleContext {
 		public List<Capture_list_itemContext> capture_list_item() {
 			return getRuleContexts(Capture_list_itemContext.class);
@@ -17163,11 +16236,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCapture_list_items(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCapture_list_items(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17209,6 +16277,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Capture_list_itemContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -17234,11 +16303,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCapture_list_item(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCapture_list_item(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17299,6 +16363,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Capture_specifierContext extends ParserRuleContext {
 		public TerminalNode WEAK() { return getToken(Swift5Parser.WEAK, 0); }
 		public TerminalNode UNOWNED() { return getToken(Swift5Parser.UNOWNED, 0); }
@@ -17317,11 +16382,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCapture_specifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCapture_specifier(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17384,6 +16444,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Implicit_member_expressionContext extends ParserRuleContext {
 		public List<TerminalNode> DOT() { return getTokens(Swift5Parser.DOT); }
 		public TerminalNode DOT(int i) {
@@ -17409,11 +16470,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitImplicit_member_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitImplicit_member_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17466,6 +16522,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Parenthesized_operatorContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public OperatorContext operator() {
@@ -17483,11 +16540,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitParenthesized_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitParenthesized_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17516,6 +16568,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Parenthesized_expressionContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public ExpressionContext expression() {
@@ -17533,11 +16586,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitParenthesized_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitParenthesized_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17566,6 +16614,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_expressionContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -17587,11 +16636,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17639,6 +16683,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_element_listContext extends ParserRuleContext {
 		public List<Tuple_elementContext> tuple_element() {
 			return getRuleContexts(Tuple_elementContext.class);
@@ -17661,11 +16706,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_element_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_element_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17707,6 +16747,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_elementContext extends ParserRuleContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -17726,11 +16767,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_element(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_element(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17767,6 +16803,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Wildcard_expressionContext extends ParserRuleContext {
 		public TerminalNode UNDERSCORE() { return getToken(Swift5Parser.UNDERSCORE, 0); }
 		public Wildcard_expressionContext(ParserRuleContext parent, int invokingState) {
@@ -17780,11 +16817,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitWildcard_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitWildcard_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17809,6 +16841,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Key_path_expressionContext extends ParserRuleContext {
 		public TerminalNode BACKSLASH() { return getToken(Swift5Parser.BACKSLASH, 0); }
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
@@ -17830,11 +16863,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKey_path_expression(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKey_path_expression(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Key_path_expressionContext key_path_expression() throws RecognitionException {
@@ -17849,7 +16877,7 @@ public class Swift5Parser extends Parser {
 			setState(2357);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (ANY - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (LPAREN - 135)) | (1L << (LBRACK - 135)) | (1L << (AT - 135)) | (1L << (BACKTICK - 135)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437527807L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1074004071L) != 0)) {
 				{
 				setState(2356);
 				type(0);
@@ -17873,6 +16901,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Key_path_componentsContext extends ParserRuleContext {
 		public List<Key_path_componentContext> key_path_component() {
 			return getRuleContexts(Key_path_componentContext.class);
@@ -17895,11 +16924,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKey_path_components(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKey_path_components(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -17943,6 +16967,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Key_path_componentContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -17961,11 +16986,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKey_path_component(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKey_path_component(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18013,6 +17033,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Key_path_postfixesContext extends ParserRuleContext {
 		public List<Key_path_postfixContext> key_path_postfix() {
 			return getRuleContexts(Key_path_postfixContext.class);
@@ -18031,11 +17052,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKey_path_postfixes(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKey_path_postfixes(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18079,6 +17095,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Key_path_postfixContext extends ParserRuleContext {
 		public TerminalNode QUESTION() { return getToken(Swift5Parser.QUESTION, 0); }
 		public TerminalNode BANG() { return getToken(Swift5Parser.BANG, 0); }
@@ -18099,11 +17116,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKey_path_postfix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKey_path_postfix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18161,6 +17173,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Selector_expressionContext extends ParserRuleContext {
 		public TerminalNode HASH_SELECTOR() { return getToken(Swift5Parser.HASH_SELECTOR, 0); }
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
@@ -18182,11 +17195,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSelector_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSelector_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18238,6 +17246,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Key_path_string_expressionContext extends ParserRuleContext {
 		public TerminalNode HASH_KEYPATH() { return getToken(Swift5Parser.HASH_KEYPATH, 0); }
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
@@ -18256,11 +17265,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKey_path_string_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKey_path_string_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18291,6 +17295,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Postfix_expressionContext extends ParserRuleContext {
 		public Primary_expressionContext primary_expression() {
 			return getRuleContext(Primary_expressionContext.class,0);
@@ -18354,11 +17359,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPostfix_expression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPostfix_expression(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18458,6 +17458,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_call_suffixContext extends ParserRuleContext {
 		public Trailing_closuresContext trailing_closures() {
 			return getRuleContext(Trailing_closuresContext.class,0);
@@ -18476,11 +17477,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_call_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_call_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18529,6 +17525,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Initializer_suffixContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public TerminalNode INIT() { return getToken(Swift5Parser.INIT, 0); }
@@ -18548,11 +17545,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInitializer_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInitializer_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18593,6 +17585,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Explicit_member_suffixContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public TerminalNode Decimal_digits() { return getToken(Swift5Parser.Decimal_digits, 0); }
@@ -18618,11 +17611,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExplicit_member_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExplicit_member_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18767,6 +17755,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Postfix_self_suffixContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public TerminalNode SELF() { return getToken(Swift5Parser.SELF, 0); }
@@ -18781,11 +17770,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPostfix_self_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPostfix_self_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18812,6 +17796,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Subscript_suffixContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
 		public Function_call_argument_listContext function_call_argument_list() {
@@ -18829,11 +17814,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSubscript_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSubscript_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18862,6 +17842,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Forced_value_suffixContext extends ParserRuleContext {
 		public TerminalNode BANG() { return getToken(Swift5Parser.BANG, 0); }
 		public Forced_value_suffixContext(ParserRuleContext parent, int invokingState) {
@@ -18875,11 +17856,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitForced_value_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitForced_value_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18906,6 +17882,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Optional_chaining_suffixContext extends ParserRuleContext {
 		public TerminalNode QUESTION() { return getToken(Swift5Parser.QUESTION, 0); }
 		public Optional_chaining_suffixContext(ParserRuleContext parent, int invokingState) {
@@ -18919,11 +17896,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOptional_chaining_suffix(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOptional_chaining_suffix(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -18950,6 +17922,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_call_argument_clauseContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -18967,11 +17940,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_call_argument_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_call_argument_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19008,6 +17976,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_call_argument_listContext extends ParserRuleContext {
 		public List<Function_call_argumentContext> function_call_argument() {
 			return getRuleContexts(Function_call_argumentContext.class);
@@ -19030,11 +17999,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_call_argument_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_call_argument_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19076,6 +18040,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_call_argumentContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -19100,11 +18065,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_call_argument(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_call_argument(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19159,6 +18119,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Trailing_closuresContext extends ParserRuleContext {
 		public Closure_expressionContext closure_expression() {
 			return getRuleContext(Closure_expressionContext.class,0);
@@ -19177,11 +18138,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTrailing_closures(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTrailing_closures(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19216,6 +18172,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Labeled_trailing_closuresContext extends ParserRuleContext {
 		public List<Labeled_trailing_closureContext> labeled_trailing_closure() {
 			return getRuleContexts(Labeled_trailing_closureContext.class);
@@ -19234,11 +18191,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLabeled_trailing_closures(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLabeled_trailing_closures(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19282,6 +18234,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Labeled_trailing_closureContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -19301,11 +18254,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLabeled_trailing_closure(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLabeled_trailing_closure(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19334,6 +18282,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Argument_namesContext extends ParserRuleContext {
 		public List<Argument_nameContext> argument_name() {
 			return getRuleContexts(Argument_nameContext.class);
@@ -19352,11 +18301,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArgument_names(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArgument_names(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19380,7 +18324,7 @@ public class Swift5Parser extends Parser {
 				setState(2502); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (BACKTICK - 135)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1073741831L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -19394,6 +18338,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Argument_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -19410,11 +18355,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArgument_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArgument_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19441,6 +18381,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class TypeContext extends ParserRuleContext {
 		public Function_typeContext function_type() {
 			return getRuleContext(Function_typeContext.class,0);
@@ -19490,11 +18431,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19651,6 +18587,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Type_annotationContext extends ParserRuleContext {
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
 		public TypeContext type() {
@@ -19671,11 +18608,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType_annotation(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType_annotation(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19723,6 +18655,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Type_identifierContext extends ParserRuleContext {
 		public Type_nameContext type_name() {
 			return getRuleContext(Type_nameContext.class,0);
@@ -19745,11 +18678,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType_identifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType_identifier(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19796,6 +18724,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Type_nameContext extends ParserRuleContext {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
@@ -19811,11 +18740,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19840,6 +18764,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_typeContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -19858,11 +18783,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_type(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_type(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Tuple_typeContext tuple_type() throws RecognitionException {
@@ -19877,7 +18797,7 @@ public class Swift5Parser extends Parser {
 			setState(2560);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (ANY - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (LPAREN - 135)) | (1L << (LBRACK - 135)) | (1L << (AT - 135)) | (1L << (BACKTICK - 135)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437527807L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1074004071L) != 0)) {
 				{
 				setState(2559);
 				tuple_type_element_list();
@@ -19899,6 +18819,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_type_element_listContext extends ParserRuleContext {
 		public List<Tuple_type_elementContext> tuple_type_element() {
 			return getRuleContexts(Tuple_type_elementContext.class);
@@ -19921,11 +18842,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_type_element_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_type_element_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -19967,6 +18883,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Tuple_type_elementContext extends ParserRuleContext {
 		public Element_nameContext element_name() {
 			return getRuleContext(Element_nameContext.class,0);
@@ -19992,11 +18909,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTuple_type_element(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTuple_type_element(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20050,6 +18962,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Element_nameContext extends ParserRuleContext {
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
@@ -20068,11 +18981,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitElement_name(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitElement_name(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20096,7 +19004,7 @@ public class Swift5Parser extends Parser {
 				setState(2585); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (BACKTICK - 135)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1073741831L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -20110,6 +19018,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_typeContext extends ParserRuleContext {
 		public Function_type_argument_clauseContext function_type_argument_clause() {
 			return getRuleContext(Function_type_argument_clauseContext.class,0);
@@ -20135,11 +19044,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20189,6 +19093,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_type_argument_clauseContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(Swift5Parser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(Swift5Parser.RPAREN, 0); }
@@ -20210,11 +19115,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_type_argument_clause(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_type_argument_clause(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Function_type_argument_clauseContext function_type_argument_clause() throws RecognitionException {
@@ -20229,7 +19129,7 @@ public class Swift5Parser extends Parser {
 			setState(2602);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (ANY - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (INOUT - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (LPAREN - 135)) | (1L << (LBRACK - 135)) | (1L << (AT - 135)) | (1L << (BACKTICK - 135)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649571745535L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1074004071L) != 0)) {
 				{
 				setState(2598);
 				function_type_argument_list();
@@ -20261,6 +19161,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_type_argument_listContext extends ParserRuleContext {
 		public List<Function_type_argumentContext> function_type_argument() {
 			return getRuleContexts(Function_type_argumentContext.class);
@@ -20283,11 +19184,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_type_argument_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_type_argument_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20331,6 +19227,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Function_type_argumentContext extends ParserRuleContext {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
@@ -20356,11 +19253,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitFunction_type_argument(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitFunction_type_argument(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20421,6 +19313,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Argument_labelContext extends ParserRuleContext {
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
@@ -20439,11 +19332,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArgument_label(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArgument_label(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20467,7 +19355,7 @@ public class Swift5Parser extends Parser {
 				setState(2629); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & ((1L << (GETTER - 135)) | (1L << (SETTER - 135)) | (1L << (Identifier - 135)) | (1L << (BACKTICK - 135)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || ((((_la - 135)) & ~0x3f) == 0 && ((1L << (_la - 135)) & 1073741831L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -20481,6 +19369,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Array_typeContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
 		public TypeContext type() {
@@ -20498,11 +19387,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArray_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArray_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20531,6 +19415,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dictionary_typeContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(Swift5Parser.LBRACK, 0); }
 		public List<TypeContext> type() {
@@ -20552,11 +19437,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDictionary_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDictionary_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20589,6 +19469,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Protocol_composition_typeContext extends ParserRuleContext {
 		public List<Type_identifierContext> type_identifier() {
 			return getRuleContexts(Type_identifierContext.class);
@@ -20614,11 +19495,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitProtocol_composition_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitProtocol_composition_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20672,6 +19548,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Trailing_composition_andContext extends ParserRuleContext {
 		public TerminalNode AND() { return getToken(Swift5Parser.AND, 0); }
 		public Trailing_composition_andContext(ParserRuleContext parent, int invokingState) {
@@ -20685,11 +19562,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitTrailing_composition_and(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitTrailing_composition_and(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20716,6 +19588,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Opaque_typeContext extends ParserRuleContext {
 		public TerminalNode SOME() { return getToken(Swift5Parser.SOME, 0); }
 		public TypeContext type() {
@@ -20732,11 +19605,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOpaque_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOpaque_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20763,6 +19631,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Any_typeContext extends ParserRuleContext {
 		public TerminalNode ANY() { return getToken(Swift5Parser.ANY, 0); }
 		public Any_typeContext(ParserRuleContext parent, int invokingState) {
@@ -20776,11 +19645,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAny_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAny_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20805,6 +19669,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Self_typeContext extends ParserRuleContext {
 		public TerminalNode SELF_BIG() { return getToken(Swift5Parser.SELF_BIG, 0); }
 		public Self_typeContext(ParserRuleContext parent, int invokingState) {
@@ -20818,11 +19683,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSelf_type(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSelf_type(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20847,6 +19707,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Type_inheritance_clauseContext extends ParserRuleContext {
 		public TerminalNode COLON() { return getToken(Swift5Parser.COLON, 0); }
 		public Type_inheritance_listContext type_inheritance_list() {
@@ -20863,11 +19724,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType_inheritance_clause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType_inheritance_clause(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20894,6 +19750,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Type_inheritance_listContext extends ParserRuleContext {
 		public List<Type_identifierContext> type_identifier() {
 			return getRuleContexts(Type_identifierContext.class);
@@ -20916,11 +19773,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitType_inheritance_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitType_inheritance_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -20962,6 +19814,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class IdentifierContext extends ParserRuleContext {
 		public TerminalNode LINUX() { return getToken(Swift5Parser.LINUX, 0); }
 		public TerminalNode WINDOWS() { return getToken(Swift5Parser.WINDOWS, 0); }
@@ -21065,11 +19918,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitIdentifier(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitIdentifier(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IdentifierContext identifier() throws RecognitionException {
@@ -21165,7 +20013,7 @@ public class Swift5Parser extends Parser {
 				{
 				setState(2673);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << ALPHA) | (1L << CATCH) | (1L << CLASS) | (1L << DEFAULT) | (1L << DO) | (1L << GUARD) | (1L << FOR) | (1L << IN) | (1L << INTERNAL) | (1L << FINAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << PROTOCOL) | (1L << GET) | (1L << SET) | (1L << WILL_SET) | (1L << DID_SET) | (1L << INDIRECT) | (1L << PREFIX) | (1L << INFIX) | (1L << LEFT) | (1L << RIGHT) | (1L << NONE) | (1L << PRECEDENCE_GROUP) | (1L << HIGHER_THAN) | (1L << LOWER_THAN) | (1L << ASSIGNMENT) | (1L << ASSOCIATIVITY) | (1L << POSTFIX) | (1L << OPERATOR) | (1L << OS) | (1L << ARCH) | (1L << SWIFT) | (1L << COMPILER))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CAN_IMPORT - 64)) | (1L << (TARGET_ENVIRONMENT - 64)) | (1L << (CONVENIENCE - 64)) | (1L << (DYNAMIC - 64)) | (1L << (LAZY - 64)) | (1L << (OPTIONAL - 64)) | (1L << (OVERRIDE - 64)) | (1L << (REQUIRED - 64)) | (1L << (WEAK - 64)) | (1L << (UNOWNED - 64)) | (1L << (SAFE - 64)) | (1L << (UNSAFE - 64)) | (1L << (MUTATING - 64)) | (1L << (NONMUTATING - 64)) | (1L << (RED - 64)) | (1L << (BLUE - 64)) | (1L << (GREEN - 64)) | (1L << (RESOURCE_NAME - 64)) | (1L << (SOME - 64)) | (1L << (TYPE - 64)) | (1L << (PRECEDENCE - 64)) | (1L << (SELF - 64)) | (1L << (SELF_BIG - 64)) | (1L << (MAC_OS - 64)) | (1L << (I_OS - 64)) | (1L << (OSX - 64)) | (1L << (WATCH_OS - 64)) | (1L << (TV_OS - 64)) | (1L << (LINUX - 64)) | (1L << (WINDOWS - 64)) | (1L << (I386 - 64)) | (1L << (X86_64 - 64)) | (1L << (ARM - 64)) | (1L << (ARM64 - 64)) | (1L << (SIMULATOR - 64)) | (1L << (MAC_CATALYST - 64)) | (1L << (I_OS_APPLICATION_EXTENSION - 64)) | (1L << (MAC_CATALYST_APPLICATION_EXTENSION - 64)) | (1L << (MAC_OS_APPLICATION_EXTENSION - 64)) | (1L << (FILE - 64)) | (1L << (LINE - 64)))) != 0) || _la==GETTER || _la==SETTER) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & -576599273992204954L) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & 3940649437003519L) != 0) || _la==GETTER || _la==SETTER) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -21301,6 +20149,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Identifier_listContext extends ParserRuleContext {
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
@@ -21323,11 +20172,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitIdentifier_list(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitIdentifier_list(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21371,6 +20215,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class KeywordContext extends ParserRuleContext {
 		public TerminalNode ASSOCIATED_TYPE() { return getToken(Swift5Parser.ASSOCIATED_TYPE, 0); }
 		public TerminalNode CLASS() { return getToken(Swift5Parser.CLASS, 0); }
@@ -21456,11 +20301,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitKeyword(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitKeyword(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final KeywordContext keyword() throws RecognitionException {
@@ -21472,7 +20312,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(2692);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AS) | (1L << BREAK) | (1L << CASE) | (1L << CATCH) | (1L << CLASS) | (1L << CONTINUE) | (1L << DEFAULT) | (1L << DEFER) | (1L << DO) | (1L << GUARD) | (1L << ELSE) | (1L << ENUM) | (1L << FOR) | (1L << FALLTHROUGH) | (1L << FUNC) | (1L << IN) | (1L << IF) | (1L << IMPORT) | (1L << INTERNAL) | (1L << OPEN) | (1L << PRIVATE) | (1L << PUBLIC) | (1L << WHERE) | (1L << WHILE) | (1L << LET) | (1L << VAR) | (1L << PROTOCOL) | (1L << REPEAT) | (1L << SWITCH) | (1L << STRUCT) | (1L << RETURN) | (1L << THROW) | (1L << THROWS) | (1L << RETHROWS) | (1L << INIT) | (1L << DEINIT) | (1L << ASSOCIATED_TYPE) | (1L << EXTENSION) | (1L << SUBSCRIPT) | (1L << OPERATOR) | (1L << TYPEALIAS))) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (STATIC - 72)) | (1L << (FILE_PRIVATE - 72)) | (1L << (IS - 72)) | (1L << (TRY - 72)) | (1L << (SUPER - 72)) | (1L << (ANY - 72)) | (1L << (FALSE - 72)) | (1L << (TRUE - 72)) | (1L << (NIL - 72)) | (1L << (INOUT - 72)) | (1L << (SELF - 72)) | (1L << (SELF_BIG - 72)) | (1L << (SOURCE_LOCATION - 72)) | (1L << (ERROR - 72)) | (1L << (WARNING - 72)) | (1L << (AVAILABLE - 72)) | (1L << (HASH_IF - 72)) | (1L << (HASH_ELSEIF - 72)) | (1L << (HASH_ELSE - 72)) | (1L << (HASH_ENDIF - 72)) | (1L << (HASH_FILE - 72)) | (1L << (HASH_FILE_ID - 72)) | (1L << (HASH_FILE_PATH - 72)) | (1L << (HASH_LINE - 72)) | (1L << (HASH_COLUMN - 72)) | (1L << (HASH_FUNCTION - 72)) | (1L << (HASH_SELECTOR - 72)) | (1L << (HASH_COLOR_LITERAL - 72)) | (1L << (HASH_FILE_LITERAL - 72)) | (1L << (HASH_IMAGE_LITERAL - 72)))) != 0) || _la==UNDERSCORE) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 864829650812010490L) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & 8502780703338798977L) != 0) || _la==UNDERSCORE) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -21493,6 +20333,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Assignment_operatorContext extends ParserRuleContext {
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
 		public Assignment_operatorContext(ParserRuleContext parent, int invokingState) {
@@ -21506,11 +20347,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitAssignment_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitAssignment_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21537,6 +20373,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Negate_prefix_operatorContext extends ParserRuleContext {
 		public TerminalNode SUB() { return getToken(Swift5Parser.SUB, 0); }
 		public Negate_prefix_operatorContext(ParserRuleContext parent, int invokingState) {
@@ -21550,11 +20387,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitNegate_prefix_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitNegate_prefix_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21581,6 +20413,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Compilation_condition_ANDContext extends ParserRuleContext {
 		public List<TerminalNode> AND() { return getTokens(Swift5Parser.AND); }
 		public TerminalNode AND(int i) {
@@ -21597,11 +20430,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCompilation_condition_AND(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCompilation_condition_AND(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21630,6 +20458,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Compilation_condition_ORContext extends ParserRuleContext {
 		public List<TerminalNode> OR() { return getTokens(Swift5Parser.OR); }
 		public TerminalNode OR(int i) {
@@ -21646,11 +20475,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCompilation_condition_OR(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCompilation_condition_OR(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21679,6 +20503,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Compilation_condition_GEContext extends ParserRuleContext {
 		public TerminalNode GT() { return getToken(Swift5Parser.GT, 0); }
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
@@ -21693,11 +20518,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCompilation_condition_GE(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCompilation_condition_GE(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21726,6 +20546,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Compilation_condition_LContext extends ParserRuleContext {
 		public TerminalNode LT() { return getToken(Swift5Parser.LT, 0); }
 		public Compilation_condition_LContext(ParserRuleContext parent, int invokingState) {
@@ -21739,11 +20560,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitCompilation_condition_L(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitCompilation_condition_L(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21770,6 +20586,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Arrow_operatorContext extends ParserRuleContext {
 		public TerminalNode SUB() { return getToken(Swift5Parser.SUB, 0); }
 		public TerminalNode GT() { return getToken(Swift5Parser.GT, 0); }
@@ -21784,11 +20601,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitArrow_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitArrow_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21817,6 +20629,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Range_operatorContext extends ParserRuleContext {
 		public List<TerminalNode> DOT() { return getTokens(Swift5Parser.DOT); }
 		public TerminalNode DOT(int i) {
@@ -21833,11 +20646,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitRange_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitRange_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21868,6 +20676,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Same_type_equalsContext extends ParserRuleContext {
 		public List<TerminalNode> EQUAL() { return getTokens(Swift5Parser.EQUAL); }
 		public TerminalNode EQUAL(int i) {
@@ -21884,11 +20693,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitSame_type_equals(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitSame_type_equals(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21917,6 +20721,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Binary_operatorContext extends ParserRuleContext {
 		public OperatorContext operator() {
 			return getRuleContext(OperatorContext.class,0);
@@ -21932,11 +20737,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBinary_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBinary_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -21963,6 +20763,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Prefix_operatorContext extends ParserRuleContext {
 		public OperatorContext operator() {
 			return getRuleContext(OperatorContext.class,0);
@@ -21978,11 +20779,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPrefix_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPrefix_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22009,6 +20805,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Postfix_operatorContext extends ParserRuleContext {
 		public OperatorContext operator() {
 			return getRuleContext(OperatorContext.class,0);
@@ -22024,11 +20821,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitPostfix_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitPostfix_operator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22055,6 +20847,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class OperatorContext extends ParserRuleContext {
 		public Operator_headContext operator_head() {
 			return getRuleContext(Operator_headContext.class,0);
@@ -22079,11 +20872,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOperator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOperator(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22149,6 +20937,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Operator_headContext extends ParserRuleContext {
 		public TerminalNode DIV() { return getToken(Swift5Parser.DIV, 0); }
 		public TerminalNode EQUAL() { return getToken(Swift5Parser.EQUAL, 0); }
@@ -22176,11 +20965,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOperator_head(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOperator_head(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22210,7 +20994,7 @@ public class Swift5Parser extends Parser {
 				{
 				setState(2746);
 				_la = _input.LA(1);
-				if ( !(((((_la - 148)) & ~0x3f) == 0 && ((1L << (_la - 148)) & ((1L << (LT - 148)) | (1L << (GT - 148)) | (1L << (BANG - 148)) | (1L << (QUESTION - 148)) | (1L << (AND - 148)) | (1L << (SUB - 148)) | (1L << (EQUAL - 148)) | (1L << (OR - 148)) | (1L << (DIV - 148)) | (1L << (ADD - 148)) | (1L << (MUL - 148)) | (1L << (MOD - 148)) | (1L << (CARET - 148)) | (1L << (TILDE - 148)))) != 0)) ) {
+				if ( !(((((_la - 148)) & ~0x3f) == 0 && ((1L << (_la - 148)) & 65499L) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -22242,6 +21026,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Operator_characterContext extends ParserRuleContext {
 		public Operator_headContext operator_head() {
 			return getRuleContext(Operator_headContext.class,0);
@@ -22258,11 +21043,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOperator_character(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOperator_character(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22316,6 +21096,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Operator_charactersContext extends ParserRuleContext {
 		public List<Operator_characterContext> operator_character() {
 			return getRuleContexts(Operator_characterContext.class);
@@ -22334,11 +21115,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitOperator_characters(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitOperator_characters(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22384,6 +21160,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dot_operator_headContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public Dot_operator_headContext(ParserRuleContext parent, int invokingState) {
@@ -22397,11 +21174,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDot_operator_head(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDot_operator_head(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22426,6 +21198,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dot_operator_characterContext extends ParserRuleContext {
 		public TerminalNode DOT() { return getToken(Swift5Parser.DOT, 0); }
 		public Operator_characterContext operator_character() {
@@ -22442,11 +21215,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDot_operator_character(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDot_operator_character(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22501,6 +21269,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Dot_operator_charactersContext extends ParserRuleContext {
 		public List<Dot_operator_characterContext> dot_operator_character() {
 			return getRuleContexts(Dot_operator_characterContext.class);
@@ -22519,11 +21288,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitDot_operator_characters(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitDot_operator_characters(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22569,6 +21333,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class LiteralContext extends ParserRuleContext {
 		public Numeric_literalContext numeric_literal() {
 			return getRuleContext(Numeric_literalContext.class,0);
@@ -22593,11 +21358,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitLiteral(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitLiteral(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22649,6 +21409,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Numeric_literalContext extends ParserRuleContext {
 		public Integer_literalContext integer_literal() {
 			return getRuleContext(Integer_literalContext.class,0);
@@ -22668,11 +21429,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitNumeric_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitNumeric_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22730,6 +21486,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Boolean_literalContext extends ParserRuleContext {
 		public TerminalNode TRUE() { return getToken(Swift5Parser.TRUE, 0); }
 		public TerminalNode FALSE() { return getToken(Swift5Parser.FALSE, 0); }
@@ -22744,11 +21501,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitBoolean_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitBoolean_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22782,6 +21534,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Nil_literalContext extends ParserRuleContext {
 		public TerminalNode NIL() { return getToken(Swift5Parser.NIL, 0); }
 		public Nil_literalContext(ParserRuleContext parent, int invokingState) {
@@ -22795,11 +21548,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitNil_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitNil_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22824,6 +21572,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Integer_literalContext extends ParserRuleContext {
 		public TerminalNode Decimal_digits() { return getToken(Swift5Parser.Decimal_digits, 0); }
 		public TerminalNode Decimal_literal() { return getToken(Swift5Parser.Decimal_literal, 0); }
@@ -22842,11 +21591,6 @@ public class Swift5Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInteger_literal(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInteger_literal(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Integer_literalContext integer_literal() throws RecognitionException {
@@ -22858,7 +21602,7 @@ public class Swift5Parser extends Parser {
 			{
 			setState(2792);
 			_la = _input.LA(1);
-			if ( !(((((_la - 170)) & ~0x3f) == 0 && ((1L << (_la - 170)) & ((1L << (Binary_literal - 170)) | (1L << (Octal_literal - 170)) | (1L << (Decimal_digits - 170)) | (1L << (Decimal_literal - 170)) | (1L << (Hexadecimal_literal - 170)))) != 0)) ) {
+			if ( !(((((_la - 170)) & ~0x3f) == 0 && ((1L << (_la - 170)) & 31L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -22879,6 +21623,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class String_literalContext extends ParserRuleContext {
 		public Extended_string_literalContext extended_string_literal() {
 			return getRuleContext(Extended_string_literalContext.class,0);
@@ -22900,11 +21645,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitString_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitString_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -22949,6 +21689,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Extended_string_literalContext extends ParserRuleContext {
 		public TerminalNode Multi_line_extended_string_open() { return getToken(Swift5Parser.Multi_line_extended_string_open, 0); }
 		public TerminalNode Multi_line_extended_string_close() { return getToken(Swift5Parser.Multi_line_extended_string_close, 0); }
@@ -22973,11 +21714,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitExtended_string_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitExtended_string_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -23050,6 +21786,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Static_string_literalContext extends ParserRuleContext {
 		public TerminalNode Single_line_string_open() { return getToken(Swift5Parser.Single_line_string_open, 0); }
 		public TerminalNode Single_line_string_close() { return getToken(Swift5Parser.Single_line_string_close, 0); }
@@ -23074,11 +21811,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitStatic_string_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitStatic_string_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -23151,6 +21883,7 @@ public class Swift5Parser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Interpolated_string_literalContext extends ParserRuleContext {
 		public TerminalNode Single_line_string_open() { return getToken(Swift5Parser.Single_line_string_open, 0); }
 		public TerminalNode Single_line_string_close() { return getToken(Swift5Parser.Single_line_string_close, 0); }
@@ -23209,11 +21942,6 @@ public class Swift5Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof Swift5ParserListener ) ((Swift5ParserListener)listener).exitInterpolated_string_literal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof Swift5ParserVisitor ) return ((Swift5ParserVisitor<? extends T>)visitor).visitInterpolated_string_literal(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -23729,7 +22457,7 @@ public class Swift5Parser extends Parser {
 		"U\u0001U\u0003U\u0487\bU\u0001V\u0003V\u048a\bV\u0001V\u0003V\u048d\b"+
 		"V\u0001V\u0001V\u0001V\u0001W\u0001W\u0001W\u0005W\u0495\bW\nW\fW\u0498"+
 		"\tW\u0001X\u0001X\u0003X\u049c\bX\u0001Y\u0001Y\u0001Y\u0001Z\u0001Z\u0001"+
-		"Z\u0001Z\u0001Z\u0001Z\u0001Z\u0001Z\u0001Z\u0003Z\u04aa\bZ\u0001Z\u0003"+
+		"Z\u0001Z\u0001Z\u0001Z\u0001Z\u0003Z\u04a8\bZ\u0001Z\u0001Z\u0001Z\u0003"+
 		"Z\u04ad\bZ\u0003Z\u04af\bZ\u0001Z\u0003Z\u04b2\bZ\u0001[\u0003[\u04b5"+
 		"\b[\u0001[\u0003[\u04b8\b[\u0001[\u0001[\u0001\\\u0001\\\u0001]\u0001"+
 		"]\u0001]\u0003]\u04c1\b]\u0001]\u0001]\u0001]\u0003]\u04c6\b]\u0001]\u0001"+
@@ -24501,11 +23229,11 @@ public class Swift5Parser extends Parser {
 		"\u0000\u0000\u04a0\u04b1\u0003\u00b6[\u0000\u04a1\u04ae\u0003\u00b8\\"+
 		"\u0000\u04a2\u04a3\u0003\u00b2Y\u0000\u04a3\u04a4\u0003\u00c8d\u0000\u04a4"+
 		"\u04af\u0001\u0000\u0000\u0000\u04a5\u04ac\u0003\u020c\u0106\u0000\u04a6"+
-		"\u04ad\u0003\u00ba]\u0000\u04a7\u04ad\u0003\u00c2a\u0000\u04a8\u04aa\u0003"+
-		"\u00b2Y\u0000\u04a9\u04a8\u0001\u0000\u0000\u0000\u04a9\u04aa\u0001\u0000"+
-		"\u0000\u0000\u04aa\u04ab\u0001\u0000\u0000\u0000\u04ab\u04ad\u0003\u00c8"+
-		"d\u0000\u04ac\u04a6\u0001\u0000\u0000\u0000\u04ac\u04a7\u0001\u0000\u0000"+
-		"\u0000\u04ac\u04a9\u0001\u0000\u0000\u0000\u04ad\u04af\u0001\u0000\u0000"+
+		"\u04a8\u0003\u00b2Y\u0000\u04a7\u04a6\u0001\u0000\u0000\u0000\u04a7\u04a8"+
+		"\u0001\u0000\u0000\u0000\u04a8\u04a9\u0001\u0000\u0000\u0000\u04a9\u04ad"+
+		"\u0003\u00c8d\u0000\u04aa\u04ad\u0003\u00ba]\u0000\u04ab\u04ad\u0003\u00c2"+
+		"a\u0000\u04ac\u04a7\u0001\u0000\u0000\u0000\u04ac\u04aa\u0001\u0000\u0000"+
+		"\u0000\u04ac\u04ab\u0001\u0000\u0000\u0000\u04ad\u04af\u0001\u0000\u0000"+
 		"\u0000\u04ae\u04a2\u0001\u0000\u0000\u0000\u04ae\u04a5\u0001\u0000\u0000"+
 		"\u0000\u04af\u04b2\u0001\u0000\u0000\u0000\u04b0\u04b2\u0003\u00aeW\u0000"+
 		"\u04b1\u04a1\u0001\u0000\u0000\u0000\u04b1\u04b0\u0001\u0000\u0000\u0000"+
@@ -25518,7 +24246,7 @@ public class Swift5Parser extends Parser {
 		"\u0382\u0387\u038b\u0397\u039c\u03a2\u03b3\u03c2\u03c6\u03cb\u03d6\u03e5"+
 		"\u03fe\u0405\u040e\u0410\u041b\u0422\u0424\u042e\u0433\u0439\u043f\u044a"+
 		"\u045e\u0461\u0466\u0469\u046d\u0472\u0476\u0481\u0486\u0489\u048c\u0496"+
-		"\u049b\u04a9\u04ac\u04ae\u04b1\u04b4\u04b7\u04c0\u04c5\u04ca\u04cd\u04d0"+
+		"\u049b\u04a7\u04ac\u04ae\u04b1\u04b4\u04b7\u04c0\u04c5\u04ca\u04cd\u04d0"+
 		"\u04d4\u04d7\u04da\u04de\u04e1\u04ea\u04ef\u04f4\u04f7\u04fc\u04ff\u0506"+
 		"\u050a\u050c\u0511\u0515\u051a\u051e\u0523\u0526\u052b\u0537\u053b\u053e"+
 		"\u0541\u0544\u054a\u054e\u0551\u0554\u0558\u0560\u0569\u056d\u0570\u0575"+
