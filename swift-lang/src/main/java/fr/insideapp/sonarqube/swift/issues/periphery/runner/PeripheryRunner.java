@@ -17,9 +17,7 @@
  */
 package fr.insideapp.sonarqube.swift.issues.periphery.runner;
 
-import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.swift.issues.periphery.PeripheryExtensionProvider;
-import org.apache.commons.lang3.StringUtils;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
 
@@ -32,17 +30,14 @@ import java.util.Optional;
 public final class PeripheryRunner extends PeripheryRunnable {
 
     private final Configuration configuration;
-    private final ApplePluginExtensionProvider applePluginExtensionProvider;
     private final PeripheryExtensionProvider peripheryExtensionProvider;
 
     public PeripheryRunner(
             final Configuration configuration,
-            final ApplePluginExtensionProvider applePluginExtensionProvider,
             final PeripheryExtensionProvider peripheryExtensionProvider
     ) {
         super("periphery");
         this.configuration = configuration;
-        this.applePluginExtensionProvider = applePluginExtensionProvider;
         this.peripheryExtensionProvider = peripheryExtensionProvider;
     }
 
@@ -50,44 +45,11 @@ public final class PeripheryRunner extends PeripheryRunnable {
     protected String[] arguments() {
         List<String> options = new ArrayList<>();
         options.add("scan");
-        options.addAll(xcode());
-        options.addAll(schemes());
-        options.addAll(targets());
         options.add("--skip-build");
         options.addAll(indexStorePath());
         options.addAll(Arrays.asList("--format", "json"));
         options.add("--quiet");
         return options.stream().toArray(String[]::new);
-    }
-
-    private List<String> xcode() {
-        List<String> options = new ArrayList<>();
-        Optional<String> workspace = applePluginExtensionProvider.workspace(configuration);
-        Optional<String> project = applePluginExtensionProvider.project(configuration);
-        if (workspace.isPresent()) {
-            options.addAll(Arrays.asList("--workspace", workspace.get()));
-        } else project.ifPresent(s -> options.addAll(Arrays.asList("--project", s)));
-        return options;
-    }
-
-    private List<String> schemes() {
-        List<String> options = new ArrayList<>();
-        List<String> schemes = peripheryExtensionProvider.schemes(configuration);
-        if (!schemes.isEmpty()) {
-            options.add("--schemes");
-            options.add(StringUtils.join(schemes, ","));
-        }
-        return options;
-    }
-
-    private List<String> targets() {
-        List<String> options = new ArrayList<>();
-        List<String> targets = peripheryExtensionProvider.targets(configuration);
-        if (!targets.isEmpty()) {
-            options.add("--targets");
-            options.add(StringUtils.join(targets, ","));
-        }
-        return options;
     }
 
     private List<String> indexStorePath() {

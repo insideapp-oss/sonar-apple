@@ -49,7 +49,7 @@ The following tools are optional:
 - [mobsfscan](https://github.com/MobSF/mobsfscan)
 - [Periphery](https://github.com/peripheryapp/periphery)
 
-#### Configuration
+#### Sonar configuration
 
 Create a ``sonar-project.properties`` file at the root with this content:
 
@@ -68,16 +68,6 @@ sonar.sources=iOSApp
 # Use commas to specify more than one folder.
 sonar.tests=iOSAppTests
 
-## Apple ##
-
-# Xcode Workspace path.
-# Path to the project's .xcworkspace file.
-sonar.apple.workspace=iOSApp.xcworkspace
-
-# Xcode Project path.
-# Path to the project's .xcodeproj file.
-sonar.apple.project=iOSApp.xcodeproj
-
 ## Coverage & Tests ##
 
 # Path to the Xcode result bundle file. 
@@ -86,14 +76,6 @@ sonar.apple.project=iOSApp.xcodeproj
 #sonar.apple.resultBundlePath=custom/path/to/file.xcresult
 
 ## Periphery ##
-
-# Xcode Schemes.
-# Use commas to specify more than one scheme.
-sonar.apple.periphery.schemes=MyiOSAppScheme
-
-# Xcode Targets.
-# Use commas to specify more than one target.
-sonar.apple.periphery.targets=MyiOSAppTarget
 
 # Index Store folder path.
 # This matches the parameter "-derivedDataPath" in xcodebuild (see below).
@@ -140,7 +122,22 @@ xcrun xcodebuild \
 sonar-scanner
 ```
 
-### Miscellaneous
+### Advanced configuration
+
+#### Periphery
+
+The plugin assumes the Periphery configuration is properly settled for your project, in the [Periphery configuration file](https://github.com/peripheryapp/periphery#configuration).
+The required information are the project, the schemes and the targets. You also need to provide the workspace, if you have one.
+```yaml
+workspace: path/to/workspace.xcworkspace # optional
+project: path/to/project.xcodeproj
+schemes:
+  - MyScheme
+targets:
+  - MyTarget
+```
+
+#### OCLint
 
 On macOS, the system will block usage of OCLint. In order to get rid of the manual verification of each of them, use the following commands:
 
@@ -148,6 +145,13 @@ On macOS, the system will block usage of OCLint. In order to get rid of the manu
 sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/rules/lib*
 sudo xattr -dr com.apple.quarantine /usr/local/lib/oclint/reporters/lib*
 ```
+
+#### Sonar Scanner
+
+If you have trouble running the Sonar Scanner, you can run it in verbose mode, to get more logs and information.
+You can either:
+- add `sonar.verbose=true` to your `sonar-project.properties`
+- add the option `X` to the command, like so: `sonar-scanner -X ...`
 
 ## Contributing
 

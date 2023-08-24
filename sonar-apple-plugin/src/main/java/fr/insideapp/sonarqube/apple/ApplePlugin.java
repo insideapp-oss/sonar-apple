@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple;
 
-import fr.insideapp.sonarqube.apple.commons.ApplePluginExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssueRecorder;
@@ -54,7 +53,6 @@ public class ApplePlugin implements Plugin {
         register(context,
                 SwiftExtensionProvider.class, // Swift language
                 ObjectiveCExtensionProvider.class, // Objective-C language
-                ApplePluginExtensionProvider.class,
                 XcodeResultExtensionProvider.class, // Xcode
                 XcodeTestsExtensionProvider.class, // Tests
                 XcodeCoverageExtensionProvider.class, // Coverage

@@ -72,7 +72,7 @@ public final class XcodeTestsMapperTest {
         final List<XcodeTestSummary> appleTestSummaries = new ArrayList<>(mapper.map(List.of(actionTestableSummary)));
         // assert
         assertThat(appleTestSummaries).hasSize(1);
-        assertThat(appleTestSummaries.get(0).groups).hasSize(0);
+        assertThat(appleTestSummaries.get(0).groups).isEmpty();
     }
 
 }
