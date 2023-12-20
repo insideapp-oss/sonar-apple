@@ -48,7 +48,7 @@ public final class MobSFScanSwiftRulesDefinitionTest {
         assertThat(repository.key()).isEqualTo("MobSFScanSwift");
         assertThat(repository.name()).isEqualTo("MobSFScanSwift");
         assertThat(repository.language()).isEqualTo(language.getKey());
-        assertThat(repository.rules()).hasSize(18);
+        assertThat(repository.rules()).hasSize(22);
 
 
     }

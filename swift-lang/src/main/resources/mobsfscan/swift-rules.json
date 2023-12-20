@@ -142,5 +142,37 @@
         "description": "This app does not have Reverse engineering detection capabilities.",
         "type": "SECURITY_HOTSPOT",
         "debt": "0min"
+    },
+    {
+        "key": "ios_biometric_acl",
+        "name": "Weak biometric ACL flag",
+        "severity": "CRITICAL",
+        "description": "Weak biometric ACL flag is associated with a key stored in Keychain. With `.biometryAny/.userPresence/.touchIDAny` flag, an attacker with the ability to add a biometry to the device can authenticate as the user. Use `.biometryCurrentSet/.touchIDCurrentSet` instead.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
+    },
+    {
+        "key": "ios_keychain_weak_acl_device_passcode",
+        "name": "Keychain weak ACL",
+        "severity": "MAJOR",
+        "description": "A key stored in the Keychain is not making use of stronger biometric backed ACL. Use `.biometryCurrentSet` instead.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
+    },
+    {
+        "key": "ios_keychain_weak_accessibility_value",
+        "name": "Keychain weak accessibility",
+        "severity": "MAJOR",
+        "description": "A key stored in the Keychain is using a weak accessibility value. Use stronger ACLs like `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly/kSecAttrAccessibleWhenUnlocked/kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
+    },
+    {
+        "key": "ios_insecure_random_no_generator",
+        "name": "Insecure Random Number Generator",
+        "severity": "MAJOR",
+        "description": "The App uses an insecure Random Number Generator.",
+        "type": "VULNERABILITY",
+        "debt": "5min"
     }
 ]
