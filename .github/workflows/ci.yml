@@ -5,24 +5,24 @@ on: [push]
 jobs:
   build:
 
-    runs-on: macos-12
+    runs-on: macos-14
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - name: Set up JDK 1.11
-      uses: actions/setup-java@v3
+    - name: Set up Java 17
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '11'
+        java-version: '17'
 
     - name: Setup Xcode version
-      uses: maxim-lobanov/setup-xcode@v1.5.1
+      uses: maxim-lobanov/setup-xcode@v1.6.0
       with:
-        xcode-version: '13.4.1'
+        xcode-version: '15.2'
 
     - name: License Header Check
       run: mvn license:check
