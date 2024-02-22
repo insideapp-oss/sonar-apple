@@ -61,7 +61,7 @@ public final class SwiftProfileTest {
         assertThat(builtProfile).isNotNull();
         assertThat(builtProfile.language()).isEqualTo(swift.getKey());
         assertThat(builtProfile.name()).isEqualTo(swift.getName());
-        assertThat(builtProfile.rules()).hasSize(256);
+        assertThat(builtProfile.rules()).hasSize(260);
     }
 
 }

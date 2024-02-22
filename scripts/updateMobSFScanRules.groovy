@@ -33,7 +33,7 @@ String.mixin(ConsoleString)
         "INFO": Rule.Severity.INFO
 ] as LinkedHashMap<String, Rule.Severity>
 
-@Field def VERSION = "0.2.0"
+@Field def VERSION = "0.3.4"
 @Field def URL = "https://raw.githubusercontent.com/MobSF/mobsfscan/${VERSION}/mobsfscan/rules/patterns/ios/"
 
 private ArrayList<Rule> parseCategory(url) {
