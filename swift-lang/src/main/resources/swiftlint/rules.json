@@ -1838,5 +1838,29 @@
         "description": "Default or memberwise initializers that will be automatically synthesized do not need to be manually defined.",
         "type": "CODE_SMELL",
         "debt": "5min"
+    },
+    {
+        "key": "non_overridable_class_declaration",
+        "name": "Class Declaration in Final Class",
+        "severity": "MINOR",
+        "description": "Class methods and properties in final classes should themselves be final, just as if the declarations",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "private_swiftui_state",
+        "name": "Private SwiftUI State Properties",
+        "severity": "MAJOR",
+        "description": "SwiftUI state properties should be private",
+        "type": "CODE_SMELL",
+        "debt": "5min"
+    },
+    {
+        "key": "unneeded_override",
+        "name": "Unneeded Overridden Functions",
+        "severity": "MINOR",
+        "description": "Remove overridden functions that don't do anything except call their super",
+        "type": "CODE_SMELL",
+        "debt": "5min"
     }
 ]

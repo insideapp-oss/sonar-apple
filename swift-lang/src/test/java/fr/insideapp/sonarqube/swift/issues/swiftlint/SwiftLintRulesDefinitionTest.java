@@ -47,6 +47,6 @@ public class SwiftLintRulesDefinitionTest {
         assertThat(repository).isNotNull();
         assertThat(repository.name()).isEqualTo("SwiftLint");
         assertThat(repository.language()).isEqualTo(language.getKey());
-        assertThat(repository.rules()).hasSize(230);
+        assertThat(repository.rules()).hasSize(233);
     }
 }
