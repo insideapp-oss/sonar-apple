@@ -21,6 +21,7 @@ import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.mobsfscan.splitter.MobSFScanReportIssueSplitter;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.ObjectiveCExtensionProvider;
 import fr.insideapp.sonarqube.swift.Swift;
 import fr.insideapp.sonarqube.swift.SwiftExtensionProvider;
 import org.junit.Before;
@@ -58,7 +59,7 @@ public final class MobSFScanReportIssueSplitterTest {
     public void prepare() {
         configuration = mock(Configuration.class);
         swift = new Swift(configuration);
-        objc = new ObjectiveC();
+        objc = new ObjectiveC(configuration);
         swiftRulesDefinition = new MobSFScanRulesDefinition(swift) {};
         objcRulesDefinition = new MobSFScanRulesDefinition(objc) {};
         ActiveRulesBuilder builder = new ActiveRulesBuilder();
@@ -106,6 +107,8 @@ public final class MobSFScanReportIssueSplitterTest {
         ReportIssue reportIssue = new ReportIssue(buildRule(swiftRulesDefinition.getLanguage()), "message", "path/to/file.ext", 15);
         when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
             .thenReturn(Swift.FILE_SUFFIXES.stream().toArray(String[]::new));
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(ObjectiveC.FILE_SUFFIXES.stream().toArray(String[]::new));
         // test
         Map<MobSFScanRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(reportIssue), activeRules);
         // assert
@@ -135,6 +138,8 @@ public final class MobSFScanReportIssueSplitterTest {
         when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
             .thenReturn(Swift.FILE_SUFFIXES.stream().toArray(String[]::new));
         ReportIssue reportIssue2 = new ReportIssue(buildRule(objcRulesDefinition.getLanguage()), "message", "path/to/file.m", 15);
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(ObjectiveC.FILE_SUFFIXES.stream().toArray(String[]::new));
         // test
         Map<MobSFScanRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(reportIssue1, reportIssue2), activeRules);
         // assert

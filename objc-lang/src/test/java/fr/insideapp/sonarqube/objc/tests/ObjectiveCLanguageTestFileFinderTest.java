@@ -25,10 +25,12 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class ObjectiveCLanguageTestFileFinderTest {
 
@@ -37,12 +39,14 @@ public final class ObjectiveCLanguageTestFileFinderTest {
 
     private ObjectiveCLanguageTestFileFinder fileFinder;
     private DefaultFileSystem fileSystem;
+    private Configuration configuration;
 
     private ObjectiveC objectiveC;
 
     @Before
     public void prepare() {
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        objectiveC = new ObjectiveC(configuration);
         fileFinder = new ObjectiveCLanguageTestFileFinder(objectiveC);
         fileSystem = new DefaultFileSystem(baseDir);
     }

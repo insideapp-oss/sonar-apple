@@ -74,7 +74,7 @@ public final class MobSFScanSensorTest {
         rulesDefinition = mock(MobSFScanRulesDefinition.class);
         configuration = mock(Configuration.class);
         swift = new Swift(configuration);
-        objectiveC = new ObjectiveC();
+        objectiveC = new ObjectiveC(configuration);
         sensor = new MobSFScanSensor(
                 swift,
                 objectiveC,

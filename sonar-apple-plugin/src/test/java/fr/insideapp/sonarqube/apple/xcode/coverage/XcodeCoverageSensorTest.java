@@ -102,7 +102,7 @@ public class XcodeCoverageSensorTest {
         context = SensorContextTester.create(baseDir);
         configuration = mock(Configuration.class);
         swift = new Swift(configuration);
-        objectiveC = new ObjectiveC();
+        objectiveC = new ObjectiveC(configuration);
         runner = mock(XcodeCoverageReadRunnable.class);
         sensor = new XcodeCoverageSensor(
                 swift,

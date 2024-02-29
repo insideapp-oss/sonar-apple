@@ -73,7 +73,7 @@ public final class XcodeWarningsSensorTest {
         context = SensorContextTester.create(baseDir);
         configuration = mock(Configuration.class);
         swift = new Swift(configuration);
-        objectiveC = new ObjectiveC();
+        objectiveC = new ObjectiveC(configuration);
         runner = mock(XcodeResultReadRunnable.class);
         parser = mock(XcodeWarningParsable.class);
         converter = mock(XcodeWarningConvertible.class);

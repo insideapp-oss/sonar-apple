@@ -19,24 +19,66 @@ package fr.insideapp.sonarqube.objc;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.Language;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class ObjectiveCTest {
 
     private Language language;
+    private Configuration configuration;
 
     @Before
     public void prepare() {
-        language = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        language = new ObjectiveC(configuration);
     }
 
     @Test
-    public void definition() {
-        assertThat(language.getKey()).isEqualTo("objc");
-        assertThat(language.getName()).isEqualTo("Objective-C");
-        assertThat(language.getFileSuffixes()).containsOnly("h", "m", "mm");
+    public void fileSuffixes_default() {
+        // prepare
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(new String[]{});
+        // test
+        final String[] fileSuffixes = language.getFileSuffixes();
+        // prepare
+        assertThat(fileSuffixes).containsAll(ObjectiveC.FILE_SUFFIXES);
+    }
+
+    @Test
+    public void fileSuffixes_custom() {
+        // prepare
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(new String[]{"foo", "bar"});
+        // test
+        final String[] fileSuffixes = language.getFileSuffixes();
+        // prepare
+        assertThat(fileSuffixes).containsExactlyInAnyOrder("foo", "bar");
+    }
+
+    @Test
+    public void fileSuffixes_custom_but_not_good() {
+        // prepare
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(new String[]{"", "  "});
+        // test
+        final String[] fileSuffixes = language.getFileSuffixes();
+        // prepare
+        assertThat(fileSuffixes).containsAll(ObjectiveC.FILE_SUFFIXES);
+    }
+
+    @Test
+    public void fileSuffixes_custom_with_spaces() {
+        // prepare
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(new String[]{"foo  ", "  bar", "", "  "});
+        // test
+        final String[] fileSuffixes = language.getFileSuffixes();
+        // prepare
+        assertThat(fileSuffixes).containsExactlyInAnyOrder("foo", "bar");
     }
 
 }

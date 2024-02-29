@@ -26,6 +26,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 
 import java.io.File;
@@ -34,6 +35,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class ObjectiveCCyclomaticComplexityVisitorTest {
 
@@ -49,6 +51,8 @@ public class ObjectiveCCyclomaticComplexityVisitorTest {
 
     private static final String BASE_DIR = "src/test/resources/objc/cyclomatic_complexity";
     private SensorContextTester sensorContext;
+    private Configuration configuration;
+
     private ObjectiveC objectiveC;
     private ObjectiveCAntlrContext antlrContext;
     private CustomTreeVisitor customTreeVisitor;
@@ -56,7 +60,8 @@ public class ObjectiveCCyclomaticComplexityVisitorTest {
     @Before
     public void prepare() {
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        objectiveC = new ObjectiveC(configuration);
         antlrContext = new ObjectiveCAntlrContext();
         customTreeVisitor = new CustomTreeVisitor(new ObjectiveCCyclomaticComplexityVisitor());
     }

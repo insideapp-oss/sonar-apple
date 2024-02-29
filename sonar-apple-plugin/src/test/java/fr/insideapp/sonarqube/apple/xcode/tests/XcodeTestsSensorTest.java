@@ -100,7 +100,7 @@ public class XcodeTestsSensorTest {
         context = SensorContextTester.create(baseDir);
         configuration = mock(Configuration.class);
         swift = new Swift(configuration);
-        objectiveC = new ObjectiveC();
+        objectiveC = new ObjectiveC(configuration);
         resultRunner = mock(XcodeResultReadRunnable.class);
         resultObjectRunner = mock(XcodeResultReadObjectRunnable.class);
         sensor = new XcodeTestsSensor(

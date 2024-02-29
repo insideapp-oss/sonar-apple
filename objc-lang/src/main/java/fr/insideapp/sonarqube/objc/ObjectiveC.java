@@ -18,17 +18,34 @@
 package fr.insideapp.sonarqube.objc;
 
 import fr.insideapp.sonarqube.apple.commons.tests.LanguageTestFile;
+import org.apache.commons.lang3.StringUtils;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class ObjectiveC extends AbstractLanguage implements LanguageTestFile {
 
-    public ObjectiveC() {
+    public static final List<String> FILE_SUFFIXES = List.of("h", "m", "mm");
+
+    private Configuration configuration;
+
+    public ObjectiveC(final Configuration configuration) {
         super("objc", "Objective-C");
+        this.configuration = configuration;
     }
 
     @Override
     public String[] getFileSuffixes() {
-        return new String[]{"h", "m", "mm"};
+        final List<String> providedFilesSuffixes = Arrays.asList(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .stream()
+            .map(String::trim)
+            .filter(StringUtils::isNotBlank)
+            .collect(Collectors.toList());
+        final List<String> filesSuffixes = providedFilesSuffixes.isEmpty() ? FILE_SUFFIXES : providedFilesSuffixes;
+        return filesSuffixes.stream().toArray(String[]::new);
     }
 
     @Override
