@@ -32,6 +32,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,6 +90,8 @@ public class XcodeCoverageSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private XcodeCoverageSensor sensor;
+    private Configuration configuration;
+
     private Swift swift;
     private ObjectiveC objectiveC;
     private XcodeCoverageReadRunnable runner;
@@ -97,7 +100,8 @@ public class XcodeCoverageSensorTest {
     @Before
     public void prepare() {
         context = SensorContextTester.create(baseDir);
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         objectiveC = new ObjectiveC();
         runner = mock(XcodeCoverageReadRunnable.class);
         sensor = new XcodeCoverageSensor(

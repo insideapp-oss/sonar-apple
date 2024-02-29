@@ -35,6 +35,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +57,7 @@ public final class XcodeWarningsSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private XcodeWarningsSensor sensor;
+    private Configuration configuration;
     private Swift swift;
     private ObjectiveC objectiveC;
     private SensorContextTester context;
@@ -69,7 +71,8 @@ public final class XcodeWarningsSensorTest {
     @Before
     public void prepare() {
         context = SensorContextTester.create(baseDir);
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         objectiveC = new ObjectiveC();
         runner = mock(XcodeResultReadRunnable.class);
         parser = mock(XcodeWarningParsable.class);

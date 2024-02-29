@@ -21,19 +21,23 @@ import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class SwiftLintRulesDefinitionTest {
 
+    private Configuration configuration;
     private JSONRulesDefinition rulesDefinition;
     private Swift language;
     private RulesDefinition.Context context;
 
     @Before
     public void prepare() {
-        language = new Swift();
+        configuration = mock(Configuration.class);
+        language = new Swift(configuration);
         rulesDefinition = new SwiftLintRulesDefinition(language);
         context = new RulesDefinition.Context();
     }

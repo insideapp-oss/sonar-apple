@@ -31,6 +31,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -49,6 +50,7 @@ public class SwiftLintSensorTest {
     private static final String BASE_DIR = "/swift/swiftlint";
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
+    private Configuration configuration;
     private SwiftLintSensor sensor;
     private Swift swift;
     private SensorContextTester context;
@@ -64,7 +66,8 @@ public class SwiftLintSensorTest {
         parser = mock(SwiftLintReportParsable.class);
         mapper = mock(SwiftLintReportMappable.class);
         rulesDefinition = mock(SwiftLintRulesDefinition.class);
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         sensor = new SwiftLintSensor(
                 swift,
                 rulesDefinition,

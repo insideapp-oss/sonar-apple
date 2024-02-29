@@ -25,11 +25,14 @@ import fr.insideapp.sonarqube.swift.issues.swiftlint.SwiftLintRulesDefinition;
 import fr.insideapp.sonarqube.swift.issues.warnings.XcodeWarningSwiftRulesDefinition;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class SwiftProfileTest {
+    private Configuration configuration;
 
     private Swift swift;
 
@@ -39,7 +42,8 @@ public final class SwiftProfileTest {
 
     @Before
     public void prepare() {
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         context = new BuiltInQualityProfilesDefinition.Context();
         profile = new SwiftProfile(
                 swift,

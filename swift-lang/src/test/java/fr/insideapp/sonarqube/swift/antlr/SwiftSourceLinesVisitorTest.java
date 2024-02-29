@@ -25,6 +25,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 
 import java.io.File;
@@ -33,6 +34,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class SwiftSourceLinesVisitorTest {
 
@@ -53,6 +55,8 @@ public class SwiftSourceLinesVisitorTest {
     }
 
     private static final String BASE_DIR = "src/test/resources/swift/source_lines_visitor";
+    private Configuration configuration;
+
     private SensorContextTester sensorContext;
     private Swift swift;
     private SwiftAntlrContext antlrContext;
@@ -60,7 +64,8 @@ public class SwiftSourceLinesVisitorTest {
 
     @Before
     public void prepare() {
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
         antlrContext = new SwiftAntlrContext();
         visitor = new SwiftSourceLinesVisitor();
@@ -68,54 +73,51 @@ public class SwiftSourceLinesVisitorTest {
 
     @Test
     public void testNoComment() throws IOException {
-        assertContainer(new Container("NoComment", 1, 0, 0 ,0));
+        assertContainer(new Container("NoComment.swift", 1, 0, 0 ,0));
     }
 
     @Test
     public void testNoCode() throws IOException {
-        assertContainer(new Container("NoCode", 0, 1, 0 ,0));
+        assertContainer(new Container("NoCode.swift", 0, 1, 0 ,0));
     }
 
     @Test
     public void testEmpty() throws IOException {
-        assertContainer(new Container("Empty", 0, 0, 0, 0));
+        assertContainer(new Container("Empty.swift", 0, 0, 0, 0));
     }
 
     @Test
     public void testLineWithMixedCodeComment() throws IOException {
-        assertContainer(new Container("LineWithMixedCodeComment", 3, 0, 0, 0));
+        assertContainer(new Container("LineWithMixedCodeComment.swift", 3, 0, 0, 0));
     }
 
     @Test
     public void testQuotedMultilineText() throws IOException {
-        assertContainer(new Container("QuotedMultilineText", 12, 0, 0,0));
+        assertContainer(new Container("QuotedMultilineText.swift", 12, 0, 0,0));
     }
 
     @Test
     public void testWhiteLineIgnored() throws IOException {
-        assertContainer(new Container("WhiteLineIgnored", 3, 1,0,0));
+        assertContainer(new Container("WhiteLineIgnored.swift", 3, 1,0,0));
     }
 
     @Test
     public void testHasAClass() throws IOException {
-        assertContainer(new Container("Class", 1, 0, 1, 0));
+        assertContainer(new Container("Class.swift", 1, 0, 1, 0));
     }
 
     @Test
     public void testHasAFunction() throws IOException {
-        assertContainer(new Container("Function", 1, 0, 0, 1));
+        assertContainer(new Container("Function.swift", 1, 0, 0, 1));
     }
 
     private void assertContainer(Container container) throws IOException {
-
-        final String completeFileName = container.fileName + "." + swift.getFileSuffixes()[0];
-
         // Real file
-        File file = new File(BASE_DIR, completeFileName);
+        File file = new File(BASE_DIR, container.fileName);
 
         // Mock file for test purpose
         // Setting it up with the real file properties
-        InputFile inputFile = new TestInputFileBuilder("", completeFileName)
+        InputFile inputFile = new TestInputFileBuilder("", container.fileName)
                 .setLanguage(swift.getKey())
                 .setModuleBaseDir(Paths.get(BASE_DIR))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
