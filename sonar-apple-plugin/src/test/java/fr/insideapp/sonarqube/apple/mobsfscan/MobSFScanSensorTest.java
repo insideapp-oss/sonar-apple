@@ -34,6 +34,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -51,6 +52,8 @@ public final class MobSFScanSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private MobSFScanSensor sensor;
+    private Configuration configuration;
+
     private Swift swift;
     private ObjectiveC objectiveC;
     private SensorContextTester context;
@@ -69,8 +72,9 @@ public final class MobSFScanSensorTest {
         mapper = mock(MobSFScanReportMappable.class);
         splitter = mock(MobSFScanReportIssueSplittable.class);
         rulesDefinition = mock(MobSFScanRulesDefinition.class);
-        swift = new Swift();
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
+        objectiveC = new ObjectiveC(configuration);
         sensor = new MobSFScanSensor(
                 swift,
                 objectiveC,

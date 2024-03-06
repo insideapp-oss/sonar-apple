@@ -25,6 +25,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 
 import java.io.File;
@@ -33,6 +34,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class ObjectiveCSourceLinesVisitorTest {
 
@@ -51,6 +53,9 @@ public class ObjectiveCSourceLinesVisitorTest {
 
     private static final String BASE_DIR = "src/test/resources/objc/source_lines_visitor";
     private SensorContextTester sensorContext;
+
+    private Configuration configuration;
+
     private ObjectiveC objectiveC;
     private ObjectiveCAntlrContext antlrContext;
     private ObjectiveCSourceLinesVisitor visitor;
@@ -58,46 +63,44 @@ public class ObjectiveCSourceLinesVisitorTest {
     @Before
     public void prepare() {
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        objectiveC = new ObjectiveC(configuration);
         antlrContext = new ObjectiveCAntlrContext();
         visitor = new ObjectiveCSourceLinesVisitor();
     }
 
     @Test
     public void testNoComment() throws IOException {
-        assertContainer(new Container("NoComment", 7, 0));
+        assertContainer(new Container("NoComment.m", 7, 0));
     }
 
     @Test
     public void testNoCode() throws IOException {
-        assertContainer(new Container("NoCode", 0, 1));
+        assertContainer(new Container("NoCode.m", 0, 1));
     }
 
     @Test
     public void testEmpty() throws IOException {
-        assertContainer(new Container("Empty", 0, 0));
+        assertContainer(new Container("Empty.m", 0, 0));
     }
 
     @Test
     public void testLineWithMixedCodeComment() throws IOException {
-        assertContainer(new Container("LineWithMixedCodeComment", 3, 0));
+        assertContainer(new Container("LineWithMixedCodeComment.m", 3, 0));
     }
 
     @Test
     public void testWhiteLineIgnored() throws IOException {
-        assertContainer(new Container("WhiteLineIgnored", 7, 1));
+        assertContainer(new Container("WhiteLineIgnored.m", 7, 1));
     }
 
     private void assertContainer(Container container) throws IOException {
-
-        final String completeFileName = container.fileName + ".m";
-
         // Real file
-        File file = new File(BASE_DIR, completeFileName);
+        File file = new File(BASE_DIR, container.fileName);
 
         // Mock file for test purpose
         // Setting it up with the real file properties
-        InputFile inputFile = new TestInputFileBuilder("", completeFileName)
+        InputFile inputFile = new TestInputFileBuilder("", container.fileName)
                 .setLanguage(objectiveC.getKey())
                 .setModuleBaseDir(Paths.get(BASE_DIR))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))

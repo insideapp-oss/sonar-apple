@@ -24,12 +24,15 @@ import fr.insideapp.sonarqube.objc.issues.oclint.OCLintRulesDefinition;
 import fr.insideapp.sonarqube.objc.issues.warnings.XcodeWarningObjectiveCRulesDefinition;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class ObjectiveCProfileTest {
 
+    private Configuration configuration;
     private ObjectiveC objectiveC;
 
     private ObjectiveCProfile profile;
@@ -38,7 +41,8 @@ public final class ObjectiveCProfileTest {
 
     @Before
     public void prepare() {
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        objectiveC = new ObjectiveC(configuration);
         context = new BuiltInQualityProfilesDefinition.Context();
         profile = new ObjectiveCProfile(
                 objectiveC,

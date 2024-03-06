@@ -15,46 +15,45 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.objc;
+package fr.insideapp.sonarqube.swift;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.resources.Language;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public final class ObjectiveCTest {
+public final class SwiftTest {
 
-    private Language language;
+    private Swift swift;
     private Configuration configuration;
 
     @Before
     public void prepare() {
         configuration = mock(Configuration.class);
-        language = new ObjectiveC(configuration);
+        swift = new Swift(configuration);
     }
 
     @Test
     public void fileSuffixes_default() {
         // prepare
-        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
             .thenReturn(new String[]{});
         // test
-        final String[] fileSuffixes = language.getFileSuffixes();
+        final String[] fileSuffixes = swift.getFileSuffixes();
         // prepare
-        assertThat(fileSuffixes).containsAll(ObjectiveC.FILE_SUFFIXES);
+        assertThat(fileSuffixes).containsAll(Swift.FILE_SUFFIXES);
     }
 
     @Test
     public void fileSuffixes_custom() {
         // prepare
-        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
             .thenReturn(new String[]{"foo", "bar"});
         // test
-        final String[] fileSuffixes = language.getFileSuffixes();
+        final String[] fileSuffixes = swift.getFileSuffixes();
         // prepare
         assertThat(fileSuffixes).containsExactlyInAnyOrder("foo", "bar");
     }
@@ -62,21 +61,21 @@ public final class ObjectiveCTest {
     @Test
     public void fileSuffixes_custom_but_not_good() {
         // prepare
-        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
             .thenReturn(new String[]{"", "  "});
         // test
-        final String[] fileSuffixes = language.getFileSuffixes();
+        final String[] fileSuffixes = swift.getFileSuffixes();
         // prepare
-        assertThat(fileSuffixes).containsAll(ObjectiveC.FILE_SUFFIXES);
+        assertThat(fileSuffixes).containsAll(Swift.FILE_SUFFIXES);
     }
 
     @Test
     public void fileSuffixes_custom_with_spaces() {
         // prepare
-        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
             .thenReturn(new String[]{"foo  ", "  bar", "", "  "});
         // test
-        final String[] fileSuffixes = language.getFileSuffixes();
+        final String[] fileSuffixes = swift.getFileSuffixes();
         // prepare
         assertThat(fileSuffixes).containsExactlyInAnyOrder("foo", "bar");
     }

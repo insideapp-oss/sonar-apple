@@ -32,7 +32,7 @@ public final class ObjectiveCExtensionProviderTest {
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(7);
+        assertThat(provider.extensions()).hasSize(8);
     }
 
 }

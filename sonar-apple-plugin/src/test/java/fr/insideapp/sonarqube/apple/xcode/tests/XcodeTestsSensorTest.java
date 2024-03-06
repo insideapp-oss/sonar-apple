@@ -35,6 +35,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 
 import java.io.File;
@@ -81,6 +82,7 @@ public class XcodeTestsSensorTest {
     private static final String EXTENSION = "ext";
 
     private XcodeTestsSensor sensor;
+    private Configuration configuration;
     private Swift swift;
     private ObjectiveC objectiveC;
     private SensorContextTester context;
@@ -96,8 +98,9 @@ public class XcodeTestsSensorTest {
         };
         XcodeTestFileFinder testFileFinder = new XcodeTestFileFinder(fileFinders);
         context = SensorContextTester.create(baseDir);
-        swift = new Swift();
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
+        objectiveC = new ObjectiveC(configuration);
         resultRunner = mock(XcodeResultReadRunnable.class);
         resultObjectRunner = mock(XcodeResultReadObjectRunnable.class);
         sensor = new XcodeTestsSensor(

@@ -26,12 +26,15 @@ import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class SwiftSensorTest {
+    private Configuration configuration;
 
     private SwiftSensor sensor;
     private SensorContextTester context;
@@ -40,7 +43,8 @@ public final class SwiftSensorTest {
 
     @Before
     public void prepare() {
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         context = SensorContextTester.create(new File("."));
         sensor = new SwiftSensor(
                 swift,

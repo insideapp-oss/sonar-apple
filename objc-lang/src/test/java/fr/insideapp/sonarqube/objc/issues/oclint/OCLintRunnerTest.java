@@ -19,11 +19,13 @@ package fr.insideapp.sonarqube.objc.issues.oclint;
 
 import fr.insideapp.sonarqube.apple.commons.SonarProjectConfiguration;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.ObjectiveCExtensionProvider;
 import fr.insideapp.sonarqube.objc.issues.oclint.runner.OCLintRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -38,6 +40,7 @@ public final class OCLintRunnerTest {
 
     private static final String BASE_DIR = "/oclint/runner";
 
+    private Configuration configuration;
     private OCLintRunner runner;
     private SonarProjectConfiguration sonarProjectConfiguration;
     private OCLintExtensionProvider ocLintExtensionProvider;
@@ -50,7 +53,8 @@ public final class OCLintRunnerTest {
         sonarProjectConfiguration = mock(SonarProjectConfiguration.class);
         ocLintExtensionProvider = mock(OCLintExtensionProvider.class);
         fileSystem = new DefaultFileSystem(new File(BASE_DIR));
-        runner = new OCLintRunner(sonarProjectConfiguration, ocLintExtensionProvider, new ObjectiveC(), fileSystem);
+        configuration = mock(Configuration.class);
+        runner = new OCLintRunner(sonarProjectConfiguration, ocLintExtensionProvider, new ObjectiveC(configuration), fileSystem);
         clazz = runner.getClass();
     }
 
@@ -60,6 +64,8 @@ public final class OCLintRunnerTest {
         options.setAccessible(true);
         mockSources(List.of());
         mockJSONCompilationDatabase(new File("/a/path/to","database.json"));
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(ObjectiveC.FILE_SUFFIXES.stream().toArray(String[]::new));
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
                 "-p", "/a/path/to",
@@ -74,6 +80,8 @@ public final class OCLintRunnerTest {
         options.setAccessible(true);
         mockSources(List.of("source"));
         mockJSONCompilationDatabase(new File("/a/path/to","database.json"));
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(ObjectiveC.FILE_SUFFIXES.stream().toArray(String[]::new));
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
                 "--include", "/oclint/runner/source/.*\\.(h|m|mm)",
@@ -89,6 +97,8 @@ public final class OCLintRunnerTest {
         options.setAccessible(true);
         mockSources(List.of("source1", "source2"));
         mockJSONCompilationDatabase(new File("/a/path/to","database.json"));
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(ObjectiveC.FILE_SUFFIXES.stream().toArray(String[]::new));
         String[] optionsBuilt = (String[]) options.invoke(runner);
         assertThat(optionsBuilt).isEqualTo(new String[]{
                 "--include", "/oclint/runner/source1/.*\\.(h|m|mm)",

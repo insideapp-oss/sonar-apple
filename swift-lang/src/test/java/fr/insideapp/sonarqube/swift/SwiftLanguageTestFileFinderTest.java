@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.swift.tests;
+package fr.insideapp.sonarqube.swift;
 
-import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.tests.SwiftLanguageTestFileFinder;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,14 +25,18 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 public final class SwiftLanguageTestFileFinderTest {
 
     private static final String BASE_DIR = "/swift";
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
+    private Configuration configuration;
 
     private SwiftLanguageTestFileFinder fileFinder;
     private DefaultFileSystem fileSystem;
@@ -41,7 +45,8 @@ public final class SwiftLanguageTestFileFinderTest {
 
     @Before
     public void prepare() {
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         fileFinder = new SwiftLanguageTestFileFinder(swift);
         fileSystem = new DefaultFileSystem(baseDir);
     }

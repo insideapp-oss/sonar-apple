@@ -26,20 +26,24 @@ import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class ObjectiveCSensorTest {
 
     private ObjectiveCSensor sensor;
     private SensorContextTester context;
+    private Configuration configuration;
     private ObjectiveC objectiveC;
 
     @Before
     public void prepare() {
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        objectiveC = new ObjectiveC(configuration);
         context = SensorContextTester.create(new File("."));
         sensor = new ObjectiveCSensor(
                 objectiveC,

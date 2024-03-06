@@ -21,11 +21,14 @@ import fr.insideapp.sonarqube.apple.commons.rules.JSONRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class PeripheryRulesDefinitionTest {
+    private Configuration configuration;
 
     private JSONRulesDefinition rulesDefinition;
     private Swift language;
@@ -33,7 +36,8 @@ public class PeripheryRulesDefinitionTest {
 
     @Before
     public void prepare() {
-        language = new Swift();
+        configuration = mock(Configuration.class);
+        language = new Swift(configuration);
         rulesDefinition = new PeripheryRulesDefinition(language);
         context = new RulesDefinition.Context();
     }

@@ -36,6 +36,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue;
+import org.sonar.api.config.Configuration;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -53,6 +54,7 @@ public class OCLintSensorTest {
     private final File baseDir = FileUtils.toFile(getClass().getResource(BASE_DIR));
 
     private SensorContextTester context;
+    private Configuration configuration;
     private ObjectiveC objectiveC;
     private OCLintJSONCompilationDatabaseFolderRetrievable retriever;
     private OCLintJSONCompilationDatabaseBuildable builder;
@@ -73,7 +75,8 @@ public class OCLintSensorTest {
         mapper = mock(OCLintReportMappable.class);
         rulesDefinition = mock(OCLintRulesDefinition.class);
         context = SensorContextTester.create(baseDir);
-        objectiveC = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        objectiveC = new ObjectiveC(configuration);
         sensor = new OCLintSensor(objectiveC,
                 retriever, builder, writer,
                 runner, parser, mapper,

@@ -20,12 +20,15 @@ package fr.insideapp.sonarqube.apple.xcode.warnings.splitter;
 import fr.insideapp.sonarqube.apple.commons.issues.ReportIssue;
 import fr.insideapp.sonarqube.apple.commons.warnings.XcodeWarningRulesDefinition;
 import fr.insideapp.sonarqube.objc.ObjectiveC;
+import fr.insideapp.sonarqube.objc.ObjectiveCExtensionProvider;
 import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.SwiftExtensionProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.Language;
 import org.sonar.api.rule.RuleKey;
 
@@ -34,9 +37,12 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class XcodeWarningsReportIssueSplitterTest {
 
+    private Configuration configuration;
     private XcodeWarningsReportIssueSplitter splitter;
 
     private ActiveRules activeRules;
@@ -50,8 +56,9 @@ public final class XcodeWarningsReportIssueSplitterTest {
 
     @Before
     public void prepare() {
-        swift = new Swift();
-        objc = new ObjectiveC();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
+        objc = new ObjectiveC(configuration);
         swiftRulesDefinition = new XcodeWarningRulesDefinition(swift) {};
         objcRulesDefinition = new XcodeWarningRulesDefinition(objc) {};
         ActiveRulesBuilder builder = new ActiveRulesBuilder();
@@ -85,6 +92,8 @@ public final class XcodeWarningsReportIssueSplitterTest {
     public void one_issue_file_path_wrong_extension() {
         // prepare
         ReportIssue reportIssue = new ReportIssue(buildRule(swiftRulesDefinition.getLanguage()), "message", "path/to/file.ext", 15);
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(Swift.FILE_SUFFIXES.stream().toArray(String[]::new));
         // test
         Map<XcodeWarningRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(reportIssue), activeRules);
         // assert
@@ -97,6 +106,8 @@ public final class XcodeWarningsReportIssueSplitterTest {
     public void one_issue_file_path_valid_extension() {
         // prepare
         ReportIssue reportIssue = new ReportIssue(buildRule(swiftRulesDefinition.getLanguage()), "message", "path/to/file.swift", 15);
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(Swift.FILE_SUFFIXES.stream().toArray(String[]::new));
         // test
         Map<XcodeWarningRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(reportIssue), activeRules);
         // assert
@@ -109,7 +120,11 @@ public final class XcodeWarningsReportIssueSplitterTest {
     public void two_issue_file_path_valid_extension() {
         // prepare
         ReportIssue reportIssue1 = new ReportIssue(buildRule(swiftRulesDefinition.getLanguage()), "message", "path/to/file.swift", 15);
+        when(configuration.getStringArray(SwiftExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(Swift.FILE_SUFFIXES.stream().toArray(String[]::new));
         ReportIssue reportIssue2 = new ReportIssue(buildRule(objcRulesDefinition.getLanguage()), "message", "path/to/file.m", 15);
+        when(configuration.getStringArray(ObjectiveCExtensionProvider.FILE_SUFFIXES_KEY))
+            .thenReturn(ObjectiveC.FILE_SUFFIXES.stream().toArray(String[]::new));
         // test
         Map<XcodeWarningRulesDefinition, List<ReportIssue>> issuesSplit = splitter.split(List.of(reportIssue1, reportIssue2), activeRules);
         // assert

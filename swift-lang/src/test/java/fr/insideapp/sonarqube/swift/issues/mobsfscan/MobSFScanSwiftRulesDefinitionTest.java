@@ -21,11 +21,14 @@ import fr.insideapp.sonarqube.apple.commons.rules.MobSFScanRulesDefinition;
 import fr.insideapp.sonarqube.swift.Swift;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public final class MobSFScanSwiftRulesDefinitionTest {
+    private Configuration configuration;
 
     private MobSFScanRulesDefinition rulesDefinition;
     private Swift language;
@@ -33,7 +36,8 @@ public final class MobSFScanSwiftRulesDefinitionTest {
 
     @Before
     public void prepare() {
-        language = new Swift();
+        configuration = mock(Configuration.class);
+        language = new Swift(configuration);
         rulesDefinition = new MobSFScanSwiftRulesDefinition(language);
         context = new RulesDefinition.Context();
     }

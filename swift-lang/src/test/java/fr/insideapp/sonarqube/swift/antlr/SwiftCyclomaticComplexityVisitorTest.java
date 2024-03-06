@@ -19,6 +19,7 @@ package fr.insideapp.sonarqube.swift.antlr;
 
 import fr.insideapp.sonarqube.apple.commons.antlr.CustomTreeVisitor;
 import fr.insideapp.sonarqube.swift.Swift;
+import fr.insideapp.sonarqube.swift.SwiftExtensionProvider;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 
 import java.io.File;
@@ -34,6 +36,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SwiftCyclomaticComplexityVisitorTest {
 
@@ -49,6 +53,7 @@ public class SwiftCyclomaticComplexityVisitorTest {
 
     private static final String BASE_DIR = "src/test/resources/swift/cyclomatic_complexity";
     private SensorContextTester sensorContext;
+    private Configuration configuration;
 
     private Swift swift;
     private SwiftAntlrContext antlrContext;
@@ -57,7 +62,8 @@ public class SwiftCyclomaticComplexityVisitorTest {
 
     @Before
     public void prepare() {
-        swift = new Swift();
+        configuration = mock(Configuration.class);
+        swift = new Swift(configuration);
         sensorContext = SensorContextTester.create(new File(BASE_DIR));
         antlrContext = new SwiftAntlrContext();
         visitor = new SwiftCyclomaticComplexityVisitor();
@@ -66,54 +72,51 @@ public class SwiftCyclomaticComplexityVisitorTest {
 
     @Test
     public void testCase1() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase1", 4));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase1.swift", 4));
     }
 
     @Test
     public void testCase2() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase2", 10));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase2.swift", 10));
     }
 
     @Test
     public void testCase3() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase3", 13));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase3.swift", 13));
     }
 
     @Test
     public void testCase4() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase4", 11));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase4.swift", 11));
     }
 
     @Test
     public void testCase5() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase5", 8));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase5.swift", 8));
     }
 
     @Test
     public void testCase6() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase6", 3));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase6.swift", 3));
     }
 
     @Test
     public void testCase7() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase7", 2));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase7.swift", 2));
     }
 
     @Test
     public void testCase8() throws IOException {
-        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase8", 2));
+        assertContainer(new SwiftCyclomaticComplexityVisitorTest.Container("ComplexityCase8.swift", 2));
     }
 
     private void assertContainer(SwiftCyclomaticComplexityVisitorTest.Container container) throws IOException {
-
-        final String completeFileName = container.fileName + "." + swift.getFileSuffixes()[0];
-
         // Real file
-        File file = new File(BASE_DIR, completeFileName);
+        File file = new File(BASE_DIR, container.fileName);
 
         // Mock file for test purpose
         // Setting it up with the real file properties
-        InputFile inputFile = new TestInputFileBuilder("", completeFileName)
+        InputFile inputFile = new TestInputFileBuilder("", container.fileName)
                 .setLanguage(swift.getKey())
                 .setModuleBaseDir(Paths.get(BASE_DIR))
                 .setContents(FileUtils.readFileToString(file, Charset.defaultCharset()))
