@@ -118,7 +118,7 @@ xcrun xcodebuild \
   clean test
 
 # Run the analysis and publish to the SonarQube server
-# Don't forget to specify `sonar.host.url` and `sonar.login` in `sonar-project.properties` or supply it to the following command.
+# Don't forget to specify `sonar.host.url` and `sonar.token` in `sonar-project.properties` or supply it to the following command.
 sonar-scanner
 ```
 
