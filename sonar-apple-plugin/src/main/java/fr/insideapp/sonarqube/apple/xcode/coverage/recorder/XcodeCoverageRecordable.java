@@ -25,6 +25,6 @@ import java.util.List;
 @ScannerSide
 public interface XcodeCoverageRecordable {
 
-    void record(List<XcodeCodeCoverage> codeCoverages);
+    void save(List<XcodeCodeCoverage> codeCoverages);
 
 }
