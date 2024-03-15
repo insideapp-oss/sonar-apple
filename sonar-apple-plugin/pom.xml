@@ -24,7 +24,7 @@
     <parent>
         <artifactId>sonar-apple</artifactId>
         <groupId>fr.insideapp.sonarqube</groupId>
-        <version>0.4-SNAPSHOT</version>
+        <version>0.4.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -37,13 +37,13 @@
         <dependency>
             <groupId>fr.insideapp.sonarqube</groupId>
             <artifactId>swift-lang</artifactId>
-            <version>0.4-SNAPSHOT</version>
+            <version>0.4.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>fr.insideapp.sonarqube</groupId>
             <artifactId>objc-lang</artifactId>
-            <version>0.4-SNAPSHOT</version>
+            <version>0.4.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
