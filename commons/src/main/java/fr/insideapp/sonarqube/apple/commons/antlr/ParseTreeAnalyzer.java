@@ -17,7 +17,6 @@
  */
 package fr.insideapp.sonarqube.apple.commons.antlr;
 
-import fr.insideapp.sonarqube.apple.commons.SensorRuntimeException;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -27,13 +26,8 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class ParseTreeAnalyzer {
-
-    private static final int EXECUTOR_TIMEOUT = 10000;
 
     private static final Logger LOGGER = Loggers.get(ParseTreeAnalyzer.class);
 

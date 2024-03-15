@@ -57,8 +57,9 @@ public final class QueryParameterUtilsTest {
         // test
         final Map<String, String> parameters = QueryParameterUtils.parse("key=value");
         // assert
-        assertThat(parameters).hasSize(1);
-        assertThat(parameters).containsEntry("key", "value");
+        assertThat(parameters)
+            .hasSize(1)
+            .containsEntry("key", "value");
     }
 
     @Test
@@ -66,9 +67,10 @@ public final class QueryParameterUtilsTest {
         // test
         final Map<String, String> parameters = QueryParameterUtils.parse("key1=value1&key2=value2");
         // assert
-        assertThat(parameters).hasSize(2);
-        assertThat(parameters).containsEntry("key1", "value1");
-        assertThat(parameters).containsEntry("key2", "value2");
+        assertThat(parameters)
+            .hasSize(2)
+            .containsEntry("key1", "value1")
+            .containsEntry("key2", "value2");
     }
 
 }

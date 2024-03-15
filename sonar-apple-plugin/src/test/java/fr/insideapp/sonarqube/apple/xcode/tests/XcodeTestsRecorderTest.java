@@ -165,7 +165,7 @@ public final class XcodeTestsRecorderTest {
         Set<XcodeTestSummary> testSummaries = mapper.map(List.of(actionTestableSummary));
 
         // Running our code
-        recorder.record(new ArrayList<>(testSummaries), context);
+        recorder.save(new ArrayList<>(testSummaries), context);
 
         // Asserting
         if (container.nothingReported) {

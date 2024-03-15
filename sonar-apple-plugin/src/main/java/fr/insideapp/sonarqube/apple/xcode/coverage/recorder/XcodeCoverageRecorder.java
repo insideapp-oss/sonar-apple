@@ -41,7 +41,7 @@ public final class XcodeCoverageRecorder implements XcodeCoverageRecordable {
     }
 
     @Override
-    public void record(List<XcodeCodeCoverage> codeCoverages) {
+    public void save(List<XcodeCodeCoverage> codeCoverages) {
         LOGGER.info("{} code coverage data to handle", codeCoverages.size());
         for (XcodeCodeCoverage codeCoverage : codeCoverages) {
             LOGGER.debug("Collecting coverage data for {}", codeCoverage.filePath);

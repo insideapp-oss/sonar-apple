@@ -218,7 +218,7 @@ public final class XcodeCoverageRecorderTest {
         final Set<XcodeCodeCoverage> mapped = new XcodeCoverageMapper().map(parsed);
 
         // Running our code
-        recorder.record(new ArrayList<>(mapped));
+        recorder.save(new ArrayList<>(mapped));
 
         container.files.forEach(file -> {
             final String fileName = ":" + file.name;
