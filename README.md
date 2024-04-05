@@ -33,7 +33,7 @@ The plugin is designed to support Swift 5 syntax.
 
 ### Server-side
 
-SonarQube 7.9+ is required.
+SonarQube 9.9+ is required.
 
 - Download the plugin binary into the ``$SONARQUBE_HOME/extensions/plugins`` directory.
 - Restart the server.
