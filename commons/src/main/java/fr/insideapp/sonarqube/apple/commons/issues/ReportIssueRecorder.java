@@ -17,6 +17,8 @@
  */
 package fr.insideapp.sonarqube.apple.commons.issues;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
@@ -26,15 +28,13 @@ import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 import java.util.List;
 
 @ScannerSide
 public final class ReportIssueRecorder {
 
-    private static final Logger LOGGER = Loggers.get(ReportIssueRecorder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportIssueRecorder.class);
 
     public void recordIssues(List<ReportIssue> issues, String repository, SensorContext sensorContext) {
 
