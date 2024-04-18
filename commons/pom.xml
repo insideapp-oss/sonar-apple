@@ -28,25 +28,25 @@
 
     <artifactId>commons</artifactId>
 
-    <dependencies>
+    <properties>
+        <!-- versions -->
+        <antlr.version>4.13.0</antlr.version>
+        <jackson.version>2.17.0</jackson.version>
+    </properties>
 
-        <dependency>
-            <groupId>com.fasterxml.staxmate</groupId>
-            <artifactId>staxmate</artifactId>
-            <version>2.4.0</version>
-        </dependency>
+    <dependencies>
 
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.13.0</version>
+            <version>${antlr.version}</version>
         </dependency>
 
         <!--  Jackson: Java to JSON conversion -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.4</version>
+            <version>${jackson.version}</version>
         </dependency>
 
     </dependencies>

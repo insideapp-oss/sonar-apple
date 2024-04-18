@@ -32,6 +32,12 @@
 
     <packaging>sonar-plugin</packaging>
 
+    <properties>
+        <!-- versions -->
+        <sonar-maven-plugin.version>1.23.0.740</sonar-maven-plugin.version>
+        <maven-antrun.version>3.1.0</maven-antrun.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -55,18 +61,20 @@
             <plugin>
                 <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
                 <artifactId>sonar-packaging-maven-plugin</artifactId>
-                <version>1.21.0.505</version>
+                <version>${sonar-maven-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <pluginKey>sonar-apple</pluginKey>
                     <pluginClass>fr.insideapp.sonarqube.apple.ApplePlugin</pluginClass>
                     <pluginName>Swift/Objective-C Code Quality and Security</pluginName>
+                    <pluginApiMinVersion>${pluginApiMinVersion}</pluginApiMinVersion>
+                    <jreMinVersion>${jre.min.version}</jreMinVersion>
                 </configuration>
             </plugin>
 
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven-antrun.version}</version>
                 <executions>
                     <execution>
                         <id>deploy</id>
