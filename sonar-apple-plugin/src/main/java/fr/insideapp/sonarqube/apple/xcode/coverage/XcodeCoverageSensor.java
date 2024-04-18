@@ -81,7 +81,7 @@ public class XcodeCoverageSensor implements Sensor {
         final String xcodeCoverageReadOutput = runner.run(resultBundle);
         final Map<String, List<XcodeCodeCoverageMetadata>> coverageData = parser.parse(xcodeCoverageReadOutput);
         final List<XcodeCodeCoverage> codeCoverageData = new ArrayList<>(mapper.map(coverageData));
-        recorder.record(codeCoverageData);
+        recorder.save(codeCoverageData);
     }
 
 }

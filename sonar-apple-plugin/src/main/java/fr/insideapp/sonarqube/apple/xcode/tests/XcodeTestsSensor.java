@@ -98,7 +98,7 @@ public class XcodeTestsSensor implements Sensor {
                 .map(mapper::map)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-        recorder.record(testSummaries, sensorContext);
+        recorder.save(testSummaries, sensorContext);
     }
 
 }

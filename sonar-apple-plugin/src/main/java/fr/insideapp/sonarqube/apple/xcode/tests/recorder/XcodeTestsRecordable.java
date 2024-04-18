@@ -26,6 +26,6 @@ import java.util.List;
 @ScannerSide
 public interface XcodeTestsRecordable {
 
-    void record(List<XcodeTestSummary> testSummaries, SensorContext context);
+    void save(List<XcodeTestSummary> testSummaries, SensorContext context);
 
 }
