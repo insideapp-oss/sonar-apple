@@ -125,7 +125,7 @@ public class ReportIssueRecorderTest {
         recorder.recordIssues(List.of(reportIssue), "TestRepo", context);
         // assert
         final List<Issue> issues = new ArrayList<>(context.allIssues());
-        assertThat(issues).hasSize(0);
+        assertThat(issues).isEmpty();
     }
 
     @Test
