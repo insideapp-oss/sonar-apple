@@ -67,7 +67,7 @@
                     <pluginKey>sonar-apple</pluginKey>
                     <pluginClass>fr.insideapp.sonarqube.apple.ApplePlugin</pluginClass>
                     <pluginName>Swift/Objective-C Code Quality and Security</pluginName>
-                    <pluginApiMinVersion>${pluginApiMinVersion}</pluginApiMinVersion>
+                    <pluginApiMinVersion>${sonar.api.version}</pluginApiMinVersion>
                     <jreMinVersion>${jre.min.version}</jreMinVersion>
                 </configuration>
             </plugin>

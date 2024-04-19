@@ -21,13 +21,13 @@ import fr.insideapp.sonarqube.apple.xcode.tests.XcodeTestFileFindable;
 import fr.insideapp.sonarqube.apple.xcode.tests.models.XcodeTestSummary;
 import fr.insideapp.sonarqube.apple.xcode.tests.models.XcodeTestClassReport;
 import fr.insideapp.sonarqube.apple.xcode.tests.models.XcodeTestGroup;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.scanner.ScannerSide;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import javax.annotation.CheckForNull;
 import java.io.Serializable;
@@ -42,7 +42,7 @@ public final class XcodeTestsRecorder implements XcodeTestsRecordable {
         this.finder = finder;
     }
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(XcodeTestsRecorder.class);
+    private static final Logger LOGGER = Loggers.get(XcodeTestsRecorder.class);
 
     @Override
     public void save(List<XcodeTestSummary> testSummaries, SensorContext context) {

@@ -17,19 +17,19 @@
  */
 package fr.insideapp.sonarqube.apple.commons.antlr;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 
 public class ParseTreeAnalyzer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParseTreeAnalyzer.class);
+    private static final Logger LOGGER = Loggers.get(ParseTreeAnalyzer.class);
 
     private final String languageKey;
     private final Type type;
