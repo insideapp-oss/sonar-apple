@@ -58,7 +58,7 @@ public final class XcodeTestsMapper extends AbstractReportMapper<List<ActionTest
             List<ActionTestSummaryGroup> summaryGroups = pair.getValue().groups
                 .stream()
                 .filter(summaryGroup -> Objects.nonNull(summaryGroup.tests)) // remove null values
-                .collect(Collectors.toList());
+                .toList();
             // we'll loop over each groups of the current group
             // to determine if this is the last "group" level
             // kind of flattening operation, since we can have an infinite level of nesting

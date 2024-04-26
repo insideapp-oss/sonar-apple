@@ -31,7 +31,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SwiftLintSensor implements Sensor {
 
@@ -70,8 +69,8 @@ public class SwiftLintSensor implements Sensor {
         List<SwiftLintIssue> issues = outputs.stream()
                 .map(parser::parse)
                 .flatMap(List::stream)
-                .collect(Collectors.toList());
-        List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
+                .toList();
+        List<ReportIssue> reportIssues = mapper.map(issues).stream().toList();
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         issueRecorder.recordIssues(reportIssues, rulesDefinition.getRepositoryKey(), sensorContext);
     }

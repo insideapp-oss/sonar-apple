@@ -33,7 +33,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class PeripherySensor implements Sensor {
 
@@ -73,7 +72,7 @@ public class PeripherySensor implements Sensor {
                 .parse(output)
                 .stream()
                 .filter(issue -> Objects.nonNull(issue.location)) // remove null values
-                .collect(Collectors.toList());
+                .toList();
         List<ReportIssue> reportIssues = new ArrayList<>(mapper.map(issues));
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         issueRecorder.recordIssues(reportIssues, rulesDefinition.getRepositoryKey(), sensorContext);

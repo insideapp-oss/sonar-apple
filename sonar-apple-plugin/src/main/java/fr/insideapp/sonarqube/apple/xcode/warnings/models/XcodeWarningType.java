@@ -36,19 +36,19 @@ public enum XcodeWarningType {
         switch (type) {
             case "Swift Compiler Warning":
                 return SWIFT_COMPILER;
-            case "Format String Issue":
-            case "Semantic Issue":
-            case "Value Conversion Issue":
-            case "Lexical or Preprocessor Issue":
-            case "Nullability Issue":
+            case "Format String Issue",
+                 "Semantic Issue",
+                 "Value Conversion Issue",
+                 "Lexical or Preprocessor Issue",
+                 "Nullability Issue":
                 return CLANG_COMPILER;
-            case "Deprecations":
-            case "Deprecation":
+            case "Deprecations",
+                 "Deprecation":
                 return DEPRECATION;
             case "No-usage":
                 return UNUSED;
-            case "Warning":
-            case "Target Integrity":
+            case "Warning",
+                 "Target Integrity":
                 return PROJECT;
             default:
                 return NOTE;

@@ -22,6 +22,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -38,7 +39,7 @@ public class SourceLinesProvider {
         final List<SourceLine> sourceLines = new ArrayList<>();
 
         try (final BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(new BOMInputStream(inputStream, false), charset))) {
+                new InputStreamReader(bomInputStream(inputStream), charset))) {
             int totalLines = 1;
             int global = 0;
             int count = 0;
@@ -60,6 +61,13 @@ public class SourceLinesProvider {
         }
 
         return sourceLines.toArray(new SourceLine[0]);
+    }
+
+    public BOMInputStream bomInputStream(final InputStream inputStream) throws IOException {
+        return BOMInputStream.builder()
+            .setInputStream(inputStream)
+            .setInclude(false)
+            .get();
     }
 
 }
