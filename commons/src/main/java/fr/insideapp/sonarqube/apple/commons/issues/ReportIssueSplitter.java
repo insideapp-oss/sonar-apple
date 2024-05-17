@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public abstract class ReportIssueSplitter<T extends JSONRulesDefinition> implements ReportIssueSplittable<T> {
 
@@ -48,7 +47,7 @@ public abstract class ReportIssueSplitter<T extends JSONRulesDefinition> impleme
             List<String> rulesForRepo = rules.findByRepository(def.getRepositoryKey()).stream()
                 .map(ActiveRule::ruleKey)
                 .map(RuleKey::rule)
-                .collect(Collectors.toList());
+                .toList();
             activeRules.put(def, rulesForRepo);
         });
         for (ReportIssue issue : issues) {

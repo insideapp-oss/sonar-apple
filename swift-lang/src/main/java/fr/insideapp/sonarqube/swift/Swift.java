@@ -24,7 +24,6 @@ import org.sonar.api.resources.AbstractLanguage;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class Swift extends AbstractLanguage implements LanguageTestFile {
 
@@ -43,7 +42,7 @@ public final class Swift extends AbstractLanguage implements LanguageTestFile {
             .stream()
             .map(String::trim)
             .filter(StringUtils::isNotBlank)
-            .collect(Collectors.toList());
+            .toList();
         final List<String> filesSuffixes = providedFilesSuffixes.isEmpty() ? FILE_SUFFIXES : providedFilesSuffixes;
         return filesSuffixes.stream().toArray(String[]::new);
     }

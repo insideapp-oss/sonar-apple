@@ -25,7 +25,6 @@ import fr.insideapp.sonarqube.apple.mobsfscan.models.MobSFScanIssue;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
@@ -51,7 +50,7 @@ public final class MobSFScanReportParser extends ReportListParser<MobSFScanIssue
                 .entrySet()
                 .stream()
                 .map(MobSFScanIssue::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

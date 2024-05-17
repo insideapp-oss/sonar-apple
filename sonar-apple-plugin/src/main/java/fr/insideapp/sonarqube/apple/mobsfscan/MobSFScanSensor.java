@@ -34,7 +34,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class MobSFScanSensor implements Sensor {
 
@@ -74,7 +73,7 @@ public class MobSFScanSensor implements Sensor {
     public void execute(SensorContext sensorContext) {
         String output = runner.run();
         List<MobSFScanIssue> issues = parser.parse(output);
-        List<ReportIssue> reportIssues = mapper.map(issues).stream().collect(Collectors.toList());
+        List<ReportIssue> reportIssues = mapper.map(issues).stream().toList();
         Map<MobSFScanRulesDefinition, List<ReportIssue>> splitReportIssues = splitter.split(reportIssues, sensorContext.activeRules());
         ReportIssueRecorder issueRecorder = new ReportIssueRecorder();
         splitReportIssues.forEach((rulesDefinition, splitIssues) -> issueRecorder.recordIssues(splitIssues, rulesDefinition.getRepositoryKey(), sensorContext));

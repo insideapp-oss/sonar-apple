@@ -25,7 +25,6 @@ import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestableSumm
 import org.sonar.api.scanner.ScannerSide;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
@@ -50,7 +49,7 @@ public final class XcodeTestsParser extends ReportListParser<ActionTestableSumma
         return objectMapper.readValue(input, ActionTestPlanRunSummaries.class)
                 .summaries.stream()
                 .flatMap(testPlanRunSummary -> testPlanRunSummary.testableSummaries.stream())
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

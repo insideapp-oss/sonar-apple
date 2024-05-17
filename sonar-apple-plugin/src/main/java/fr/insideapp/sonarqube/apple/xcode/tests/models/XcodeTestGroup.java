@@ -22,8 +22,6 @@ import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestSummary;
 import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestSummaryGroup;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 public final class XcodeTestGroup {
 
@@ -41,7 +39,7 @@ public final class XcodeTestGroup {
         this.testCases = metadata
                 .stream()
                 .map(XcodeTestCase::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }
