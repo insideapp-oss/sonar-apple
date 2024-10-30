@@ -31,6 +31,7 @@ public final class XcodeResultReadRunner extends XcodeResultReadRunnable {
     protected String[] arguments(File resultBundle) {
         return new String[]{
                 "xcresulttool", "get",
+                "--legacy",
                 "--format", "json",
                 "--path", resultBundle.getAbsolutePath()
         };

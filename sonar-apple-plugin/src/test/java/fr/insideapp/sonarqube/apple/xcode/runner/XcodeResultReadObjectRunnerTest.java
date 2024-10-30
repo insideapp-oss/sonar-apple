@@ -42,6 +42,7 @@ public final class XcodeResultReadObjectRunnerTest {
         assertThat(options).isEqualTo(new String[]{
                 "xcresulttool",
                 "get",
+                "--legacy",
                 "--format", "json",
                 "--path", "/xcode",
                 "--id", "test"

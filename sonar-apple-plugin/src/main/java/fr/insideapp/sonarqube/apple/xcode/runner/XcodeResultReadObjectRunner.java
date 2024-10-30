@@ -32,6 +32,7 @@ public final class XcodeResultReadObjectRunner extends XcodeResultReadObjectRunn
     protected String[] arguments(File resultBundle, Reference reference) {
         return new String[]{
                 "xcresulttool", "get",
+                "--legacy",
                 "--format", "json",
                 "--path", resultBundle.getAbsolutePath(),
                 "--id", reference.id
