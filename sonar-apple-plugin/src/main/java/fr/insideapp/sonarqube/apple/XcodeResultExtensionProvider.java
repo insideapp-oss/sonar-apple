@@ -18,6 +18,7 @@
 package fr.insideapp.sonarqube.apple;
 
 import fr.insideapp.sonarqube.apple.commons.ExtensionProvider;
+import fr.insideapp.sonarqube.apple.xcode.legacy.XcodeResultLegacyRunner;
 import fr.insideapp.sonarqube.apple.xcode.runner.XcodeResultReadObjectRunner;
 import fr.insideapp.sonarqube.apple.xcode.parser.XcodeActionRecordParser;
 import fr.insideapp.sonarqube.apple.xcode.runner.XcodeResultReadRunner;
@@ -50,7 +51,8 @@ public class XcodeResultExtensionProvider implements ExtensionProvider {
                 RESULT_BUNDLE_PROPERTY,
                 XcodeResultReadRunner.class,
                 XcodeActionRecordParser.class,
-                XcodeResultReadObjectRunner.class
+                XcodeResultReadObjectRunner.class,
+                XcodeResultLegacyRunner.class
         );
     }
 

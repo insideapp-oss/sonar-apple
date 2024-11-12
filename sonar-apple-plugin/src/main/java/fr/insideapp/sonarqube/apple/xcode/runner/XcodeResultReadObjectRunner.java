@@ -18,25 +18,39 @@
 package fr.insideapp.sonarqube.apple.xcode.runner;
 
 import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
+import fr.insideapp.sonarqube.apple.xcode.legacy.XcodeResultLegacyRunnable;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @ScannerSide
 public final class XcodeResultReadObjectRunner extends XcodeResultReadObjectRunnable {
 
-    public XcodeResultReadObjectRunner() {
+    private final XcodeResultLegacyRunnable legacyRunner;
+
+    public XcodeResultReadObjectRunner(
+            final XcodeResultLegacyRunnable legacyRunner
+    ) {
         super("xcrun");
+        this.legacyRunner = legacyRunner;
     }
 
     protected String[] arguments(File resultBundle, Reference reference) {
-        return new String[]{
-                "xcresulttool", "get",
-                "--legacy",
-                "--format", "json",
-                "--path", resultBundle.getAbsolutePath(),
-                "--id", reference.id
-        };
+        List<String> arguments = new ArrayList<>();
+        arguments.add("xcresulttool");
+        arguments.add("get");
+        arguments.add("--format");
+        arguments.add("json");
+        arguments.add("--path");
+        arguments.add(resultBundle.getAbsolutePath());
+        arguments.add("--id");
+        arguments.add(reference.id);
+        if (legacyRunner.check()) {
+            arguments.add("--legacy");
+        }
+        return arguments.toArray(String[]::new);
     }
 
     public String run(File resultBundle, Reference reference) {

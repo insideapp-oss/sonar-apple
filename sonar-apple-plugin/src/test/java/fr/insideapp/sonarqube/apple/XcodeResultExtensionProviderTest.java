@@ -44,7 +44,7 @@ public final class XcodeResultExtensionProviderTest {
 
     @Test
     public void extensions() {
-        assertThat(provider.extensions()).hasSize(4);
+        assertThat(provider.extensions()).hasSize(5);
     }
 
     @Test

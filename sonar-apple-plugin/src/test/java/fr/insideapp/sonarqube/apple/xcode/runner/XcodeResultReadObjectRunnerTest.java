@@ -18,34 +18,59 @@
 package fr.insideapp.sonarqube.apple.xcode.runner;
 
 import fr.insideapp.sonarqube.apple.commons.result.models.Reference;
+import fr.insideapp.sonarqube.apple.xcode.legacy.XcodeResultLegacyRunnable;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class XcodeResultReadObjectRunnerTest {
 
     private static final String BASE_DIR = "/xcode";
 
+    private XcodeResultLegacyRunnable legacy;
     private XcodeResultReadObjectRunner runner;
 
     @Before
     public void prepare() {
-        runner = new XcodeResultReadObjectRunner();
+        legacy = mock(XcodeResultLegacyRunnable.class);
+        runner = new XcodeResultReadObjectRunner(legacy);
     }
 
     @Test
-    public void arguments() {
+    public void arguments_no_legacy() {
+        // When
+        when(legacy.check()).thenReturn(false);
+        // Then
         String[] options = runner.arguments(new File(BASE_DIR), new Reference("test"));
+        // Assert
         assertThat(options).isEqualTo(new String[]{
                 "xcresulttool",
                 "get",
-                "--legacy",
                 "--format", "json",
                 "--path", "/xcode",
                 "--id", "test"
+        });
+    }
+
+    @Test
+    public void arguments_legacy() {
+        // When
+        when(legacy.check()).thenReturn(true);
+        // Then
+        String[] options = runner.arguments(new File(BASE_DIR), new Reference("test"));
+        // Assert
+        assertThat(options).isEqualTo(new String[]{
+                "xcresulttool",
+                "get",
+                "--format", "json",
+                "--path", "/xcode",
+                "--id", "test",
+                "--legacy"
         });
     }
 
