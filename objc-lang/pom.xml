@@ -22,7 +22,7 @@
     <parent>
         <artifactId>sonar-apple</artifactId>
         <groupId>fr.insideapp.sonarqube</groupId>
-        <version>0.4.2-SNAPSHOT</version>
+        <version>0.5.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>fr.insideapp.sonarqube</groupId>
             <artifactId>commons</artifactId>
-            <version>0.4.2-SNAPSHOT</version>
+            <version>0.5.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
