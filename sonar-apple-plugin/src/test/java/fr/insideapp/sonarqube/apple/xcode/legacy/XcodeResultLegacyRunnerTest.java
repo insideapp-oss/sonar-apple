@@ -15,31 +15,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insideapp.sonarqube.apple;
+package fr.insideapp.sonarqube.apple.xcode.legacy;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.Plugin;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApplePluginTest {
+public final class XcodeResultLegacyRunnerTest {
+
+    private XcodeResultLegacyRunner runner;
+
+    @Before
+    public void prepare() {
+        runner = new XcodeResultLegacyRunner();
+    }
 
     @Test
-    public void define() {
-        SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-        Plugin.Context context = new Plugin.Context(sonarRuntime);
-
-        ApplePlugin plugin = new ApplePlugin();
-        plugin.define(context);
-
-        List<?> extensions = context.getExtensions();
-        assertThat(extensions).hasSize(80);
+    public void arguments() {
+        String[] options = runner.arguments();
+        assertThat(options).isEqualTo(new String[]{
+                "xcresulttool",
+                "version",
+        });
     }
+
 }

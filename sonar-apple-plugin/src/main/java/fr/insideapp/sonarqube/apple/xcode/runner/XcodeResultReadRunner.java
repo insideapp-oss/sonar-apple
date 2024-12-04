@@ -17,23 +17,36 @@
  */
 package fr.insideapp.sonarqube.apple.xcode.runner;
 
+import fr.insideapp.sonarqube.apple.xcode.legacy.XcodeResultLegacyRunnable;
 import org.sonar.api.scanner.ScannerSide;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @ScannerSide
 public final class XcodeResultReadRunner extends XcodeResultReadRunnable {
 
-    public XcodeResultReadRunner() {
-        super("xcrun");
-    }
+    private final XcodeResultLegacyRunnable legacyRunner;
 
+    public XcodeResultReadRunner(
+            final XcodeResultLegacyRunnable legacyRunner
+    ) {
+        super("xcrun");
+        this.legacyRunner = legacyRunner;
+    }
     protected String[] arguments(File resultBundle) {
-        return new String[]{
-                "xcresulttool", "get",
-                "--format", "json",
-                "--path", resultBundle.getAbsolutePath()
-        };
+        List<String> arguments = new ArrayList<>();
+        arguments.add("xcresulttool");
+        arguments.add("get");
+        arguments.add("--format");
+        arguments.add("json");
+        arguments.add("--path");
+        arguments.add(resultBundle.getAbsolutePath());
+        if (legacyRunner.check()) {
+            arguments.add("--legacy");
+        }
+        return arguments.toArray(String[]::new);
     }
 
     public String run(File resultBundle) {
