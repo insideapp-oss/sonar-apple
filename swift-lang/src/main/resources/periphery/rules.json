@@ -25,7 +25,7 @@
     },
     {
         "key": "redundantPublicAccessibility",
-        "name": "Redundant protocol",
+        "name": "Redundant Public Accessibility",
         "severity": "MINOR",
         "description": "This code is declared public, but not used outside of its module.",
         "type": "CODE_SMELL",
