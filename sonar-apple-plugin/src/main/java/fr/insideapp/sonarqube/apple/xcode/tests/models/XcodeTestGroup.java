@@ -22,6 +22,7 @@ import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestSummary;
 import fr.insideapp.sonarqube.apple.xcode.tests.parser.models.ActionTestSummaryGroup;
 
 import java.util.List;
+import java.util.Optional;
 
 public final class XcodeTestGroup {
 
@@ -35,7 +36,7 @@ public final class XcodeTestGroup {
     public XcodeTestGroup(final ActionTestSummary parent, final ActionTestSummaryGroup group, final List<ActionTestMetadata> metadata) {
         this.bundle = parent.name;
         this.name = group.name;
-        this.duration = group.duration;
+        this.duration = Optional.ofNullable(group.duration).orElse(0.0);
         this.testCases = metadata
                 .stream()
                 .map(XcodeTestCase::new)
